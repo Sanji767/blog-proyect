@@ -1,0 +1,249 @@
+/* =========================================
+   Tailwind base
+   ========================================= */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   Design tokens (CSS variables)
+   ========================================= */
+
+/* Modo claro por defecto */
+:root {
+  /* Colores base */
+  --background: #ffffff;
+  --foreground: #0f172a; /* slate-900 */
+
+  --primary: #22c55e; /* emerald-500 */
+  --primary-accent: #16a34a; /* emerald-600 */
+  --secondary: #0f172a; /* slate-900 */
+
+  --foreground-accent: #475569; /* slate-600 */
+  --hero-background: #f8fafc; /* slate-50 */
+
+  --border: #e2e8f0; /* slate-200 */
+  --input: #e2e8f0;
+  --ring: #22c55e;
+
+  /* Estados / fondos secundarios */
+  --muted: #f8fafc;
+  --muted-foreground: #6b7280; /* slate-500 */
+
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  --destructive: #ef4444; /* red-500 */
+  --destructive-foreground: #fef2f2; /* red-50 */
+
+  /* Radios y sombras base (por si los quieres usar en CSS puro) */
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 18px 60px rgba(15, 23, 42, 0.1);
+
+  /* Tipografía */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* Modo oscuro (cuando next-themes añade la clase .dark al html) */
+.dark {
+  --background: #020617; /* slate-900 */
+  --foreground: #e5e7eb; /* slate-200 */
+
+  --primary: #22c55e;
+  --primary-accent: #16a34a;
+  --secondary: #0f172a;
+
+  --foreground-accent: #cbd5f5;
+  --hero-background: #020617;
+
+  --border: #1f2937; /* gray-800 */
+  --input: #111827;
+  --ring: #4ade80;
+
+  --muted: #020617;
+  --muted-foreground: #9ca3af;
+
+  --card: #020617;
+  --card-foreground: #e5e7eb;
+
+  --popover: #020617;
+  --popover-foreground: #e5e7eb;
+
+  --destructive: #f97373;
+  --destructive-foreground: #111827;
+}
+
+/* =========================================
+   Global resets / defaults
+   (Tailwind ya trae preflight; esto es extra suave)
+   ========================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+/* Asegura que el main ocupe bien el alto con header/footer fijos */
+body > main {
+  min-height: calc(100vh - 6rem); /* aprox, no es crítico */
+}
+
+/* Imágenes responsivas por defecto */
+img,
+picture,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Quita decoraciones raras en enlaces */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration-thickness: 1px;
+}
+
+/* Listas más limpias por defecto */
+ul,
+ol {
+  padding-left: 1.25rem;
+}
+
+/* =========================================
+   Tipografía base
+   ========================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Texto “muted” reutilizable (además de text-muted-foreground) */
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+/* =========================================
+   Formularios base
+   ========================================= */
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+
+/* Puedes seguir usando las clases Tailwind,
+   pero esto da una base si un input sale “huérfano” sin clases */
+.form-control {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* =========================================
+   Componentes pequeños globales
+   (útiles si alguna vez no quieres usar Tailwind en cada línea)
+   ========================================= */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    var(--primary),
+    var(--primary-accent)
+  );
+  color: #000;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+.btn-primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card);
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+}
+
+/* =========================================
+   Detalles / FAQ
+   ========================================= */
+
+details {
+  border-radius: 1rem;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* =========================================
+   Utilidades extra suaves
+   ========================================= */
+
+/* Bordes para debug si alguna vez los necesitas:
+ * .debug { outline: 1px solid red; }
+ */
+.debug {
+  outline: 1px solid red !important;
+}
