@@ -73,12 +73,14 @@ function BankCard({ bank }: { bank: Bank }) {
     ibanCountry,
     category,
     tags,
-    monthlyFee,
+    fees,
     cardType,
     affiliateUrl,
   } = bank;
 
   const detailUrl = `/programas/${slug}`;
+  const logoSrc =
+    typeof logo === "string" ? logo : (logo as any);
 
   return (
     <article className="group flex flex-col rounded-3xl border border-border bg-background p-5 shadow-card hover:shadow-soft hover:-translate-y-1 transition-transform duration-200">
@@ -86,7 +88,7 @@ function BankCard({ bank }: { bank: Bank }) {
       <div className="flex items-center gap-3">
         <div className="relative h-10 w-10 md:h-12 md:w-12 rounded-xl bg-hero-background flex items-center justify-center">
           <Image
-            src={logo}
+            src={logoSrc}
             alt={name}
             fill
             className="object-contain p-1"
@@ -127,7 +129,7 @@ function BankCard({ bank }: { bank: Bank }) {
 
       {/* Info rápida */}
       <dl className="mt-4 grid grid-cols-1 gap-2 text-xs">
-        <InfoRow label="Cuota" value={monthlyFee} />
+        <InfoRow label="Cuota" value={fees.monthly} />
         <InfoRow label="Tarjeta" value={cardType} />
       </dl>
 
@@ -173,6 +175,7 @@ function CategoryBadge({ category }: { category: Bank["category"] }) {
     neobanco: "Neobanco",
     tradicional: "Banco tradicional",
     "cuenta-multidivisa": "Cuenta multidivisa",
+    fintech: "Fintech",
   };
 
   return (

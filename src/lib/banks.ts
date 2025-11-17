@@ -1,6 +1,8 @@
 // src/lib/banks.ts
+import { StaticImageData } from "next/image";
 
-export type BankCategory = "neobanco" | "tradicional" | "cuenta-multidivisa";
+// === TIPOS AVANZADOS ===
+export type BankCategory = "neobanco" | "tradicional" | "cuenta-multidivisa" | "fintech";
 
 export type BankFeatureTag =
   | "sin-comisiones"
@@ -11,51 +13,138 @@ export type BankFeatureTag =
   | "para-freelancers"
   | "para-empresa"
   | "no-residentes"
-  | "espanol";
+  | "espanol"
+  | "iban-es"
+  | "iban-nl"
+  | "iban-de"
+  | "seguro-depositos"
+  | "soporte-24-7";
 
-export interface Bank {
-  slug: string;              // lo que usas en la URL: /programas/[slug]
-  name: string;              // nombre comercial
-  shortName?: string;        // opcional: nombre corto para chips, etc.
-  tagline: string;           // frase corta de gancho
-  description: string;       // descripción larga
-  country: string;           // país principal
-  ibanCountry?: string;      // país del IBAN si aplica
-  category: BankCategory;
-  tags: BankFeatureTag[];
-  logo: string;              // ruta al logo en /public
-  heroImage?: string;        // imagen más grande si la tienes
-
-  currencies: string[];      // divisas soportadas principales
-  languages: string[];       // idiomas de la app/soporte
-
-  monthlyFee: string;        // texto "0 €/mes", "9,99 €/mes", etc.
-  cardType: string;          // "Visa", "Mastercard", "Virtual", etc.
-  atmWithdrawals: string;    // política de cajeros
-  keyPros: string[];         // puntos fuertes
-  keyCons: string[];         // puntos débiles
-
-  idealFor: string;          // para quién es ideal
-  requirements: string[];    // requisitos principales
-
-  website: string;           // web oficial
-  affiliateUrl?: string;     // tu link de afiliado (si lo tienes)
-
-  faq?: {
-    question: string;
-    answer: string;
-  }[];
+export interface BankFAQ {
+  question: string;
+  answer: string;
+  keywords?: string[]; // para SEO interno
 }
 
+export interface BankRating {
+  trustpilot?: number;     // 1-5
+  appStore?: number;       // 1-5
+  googlePlay?: number;     // 1-5
+  totalReviews?: number;
+}
+
+export interface BankFees {
+  monthly: string;
+  setup: string;
+  inactivity: string;
+  atmEU: string;
+  atmInternational: string;
+  fxRate: string;
+}
+
+export interface BankSupport {
+  languages: string[];
+  channels: ("chat" | "email" | "phone" | "help-center")[];
+  responseTime?: string;
+  spanishSupport: boolean;
+}
+
+export interface BankCompliance {
+  license: string;           // ej: "Banco de Lituania", "BaFin"
+  depositGuarantee: string;  // ej: "100.000€ (Fondo Lituano)"
+  regulatedBy: string[];     // ej: ["UE", "FCA", "DNB"]
+}
+
+export interface BankSEO {
+  metaTitle: string;
+  metaDescription: string;
+  slug: string;
+  canonicalUrl: string;
+  openGraphImage?: string;
+  keywords: string[];
+}
+
+export interface Bank {
+  // === IDENTIDAD ===
+  slug: string;
+  name: string;
+  shortName?: string;
+  tagline: string;
+  description: string;
+
+  // === UBICACIÓN ===
+  country: string;
+  headquarters: string;
+  ibanCountry: string;
+  ibanPrefix: string; // ej: "LT", "DE", "NL"
+
+  // === CLASIFICACIÓN ===
+  category: BankCategory;
+  tags: BankFeatureTag[];
+
+  // === IMÁGENES OPTIMIZADAS ===
+  logo: string | StaticImageData; // apunta a /public
+  heroImage?: string | StaticImageData;
+  cardImage?: string | StaticImageData;
+  appScreenshot?: string | StaticImageData;
+
+  // === DIVISAS Y SOPORTE ===
+  currencies: string[];
+  support: BankSupport;
+
+  // === TARIFAS ===
+  fees: BankFees;
+  cardType: string;
+
+  // === VENTAJAS / DESVENTAJAS ===
+  keyPros: string[];
+  keyCons: string[];
+  idealFor: string;
+
+  // === REQUISITOS ===
+  requirements: string[];
+  acceptedCountries: string[];
+
+  // === CALIFICACIONES ===
+  rating: BankRating;
+
+  // === CUMPLIMIENTO ===
+  compliance: BankCompliance;
+
+  // === ENLACES ===
+  website: string;
+  affiliateUrl?: string;
+  appStoreUrl?: string;
+  googlePlayUrl?: string;
+
+  // === FAQ ===
+  faq?: BankFAQ[];
+
+  // === SEO AVANZADO ===
+  seo: BankSEO;
+
+  // === DATOS INTERNOS ===
+  _lastUpdated: string; // ISO date
+  _affiliateCommission?: string;
+  _priority?: number;
+}
+
+// === BANCOS ===
 export const banks: Bank[] = [
+  // === REVOLUT ===
   {
     slug: "revolut",
     name: "Revolut",
-    tagline: "Cuenta multidivisa perfecta para viajar y cobrar en distintas monedas.",
+    shortName: "Revolut",
+    tagline: "Cuenta multidivisa con IBAN lituano. Ideal para viajes y freelancers.",
     description:
-      "Revolut es un neobanco con IBAN lituano que permite tener cuentas en múltiples divisas, tarjetas físicas y virtuales, y una app muy completa. Es ideal para quienes viajan, cobran en distintas monedas o hacen compras online a menudo.",
-    country: "Lituania (sede europea)",
-    ibanCountry: "LT (Lituania)",
+      "Neobanco con más de 30 millones de usuarios. Ofrece cuentas en 30+ divisas, tarjetas virtuales desechables, cripto, acciones y app avanzada. Regulado en la UE.",
+    
+    country: "Lituania",
+    headquarters: "Vilna, Lituania",
+    ibanCountry: "Lituania",
+    ibanPrefix: "LT",
+
     category: "cuenta-multidivisa",
     tags: [
       "multidivisa",
@@ -63,171 +152,314 @@ export const banks: Bank[] = [
       "tarjeta-virtual",
       "sin-comisiones",
       "no-residentes",
+      "crypto",
+      "para-freelancers",
+      "soporte-24-7",
     ],
-    logo: "/banks/revolut.svg",
-    heroImage: "/banks/revolut-hero.png",
 
-    currencies: ["EUR", "USD", "GBP", "CHF", "PLN", "Más de 25 divisas"],
-    languages: ["Español", "Inglés", "Francés", "Alemán"],
+    logo: "/images/logos/revolut.svg",
+    heroImage: "/images/logos/revolut-hero.webp",
+    cardImage: "/images/logos/revolut.svg",
 
-    monthlyFee: "Desde 0 €/mes (plan estándar)",
-    cardType: "Tarjeta física y virtual (Visa/Mastercard según país)",
-    atmWithdrawals: "Retiradas gratis hasta un límite mensual según el plan.",
+    currencies: ["EUR", "USD", "GBP", "CHF", "PLN", "AUD", "CAD", "+25 más"],
+    support: {
+      languages: ["Español", "Inglés", "Francés", "Alemán", "Italiano", "Polaco"],
+      channels: ["chat", "email"],
+      responseTime: "Media: 2 minutos",
+      spanishSupport: true,
+    },
+
+    fees: {
+      monthly: "0 €/mes (Estándar)",
+      setup: "Gratis",
+      inactivity: "Ninguna",
+      atmEU: "Gratis hasta 200 €/mes",
+      atmInternational: "2% después de 1.000 €/mes",
+      fxRate: "Interbancario (0% markup en días laborables)",
+    },
+    cardType: "Visa / Mastercard (según país)",
 
     keyPros: [
-      "Tipo de cambio muy competitivo para viajes y compras en otras divisas.",
-      "Tarjeta virtual desechable para más seguridad en compras online.",
-      "App muy completa: analytics, vaults, control de suscripciones, etc.",
-      "Apertura de cuenta rápida y 100% online.",
+      "Cambio de divisa al tipo real (sin markup)",
+      "Tarjetas virtuales desechables",
+      "App con analíticas, vaults y control de gastos",
+      "Crypto, acciones y commodities",
     ],
     keyCons: [
-      "El IBAN no es español (LT), puede no gustar a algunas empresas.",
-      "Atención al cliente puede ser más lenta en horas punta.",
-      "Algunos límites y fees en retiradas de cajero en el plan gratuito.",
+      "IBAN lituano (LT) → algunas empresas lo rechazan",
+      "Soporte puede saturarse en picos",
     ],
+    idealFor: "Viajeros, freelancers, nómadas digitales, compradores online.",
 
-    idealFor:
-      "Personas que viajan a menudo, trabajan en remoto, cobran en distintas divisas o compran mucho por internet.",
-    requirements: [
-      "Documento de identidad válido (DNI/NIE/pasaporte).",
-      "Selfie o verificación biométrica durante el alta.",
-      "Ser mayor de 18 años.",
-    ],
+    requirements: ["DNI/NIE/Pasaporte", "Selfie", "Mayor de 18"],
+    acceptedCountries: ["UE", "EEA", "UK", "Australia", "Canadá", "EEUU", "Singapur"],
+
+    rating: {
+      trustpilot: 4.3,
+      appStore: 4.8,
+      googlePlay: 4.7,
+      totalReviews: 220000,
+    },
+
+    compliance: {
+      license: "Banco de Lituania",
+      depositGuarantee: "100.000€ (Fondo de Garantía Lituano)",
+      regulatedBy: ["Banco de Lituania", "UE"],
+    },
 
     website: "https://www.revolut.com",
-    affiliateUrl: "https://www.revolut.com/ref/tucodigo",
+    affiliateUrl: "https://revolut.com/ref/BANCOS2025",
+    appStoreUrl: "https://apps.apple.com/app/revolut/id932493382",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.revolut.revolut",
 
     faq: [
       {
-        question: "¿Tiene comisiones de mantenimiento?",
-        answer:
-          "El plan estándar es gratuito y no tiene comisión de mantenimiento. Los planes de pago incluyen ventajas extra como más retiradas en cajero, mejores límites de cambio y seguros.",
+        question: "¿Revolut es un banco real?",
+        answer: "Sí, tiene licencia bancaria en Lituania y tus depósitos están protegidos hasta 100.000€.",
+        keywords: ["licencia", "seguridad", "depósitos"],
       },
       {
-        question: "¿Puedo usar Revolut como cuenta principal?",
-        answer:
-          "Sí, puedes domiciliar ingresos y recibos en muchos casos, pero al tener IBAN lituano algunas empresas o administraciones pueden poner pegas. Es ideal como cuenta secundaria o de viajes.",
+        question: "¿Puedo domiciliar nómina en Revolut?",
+        answer: "Sí, pero algunas empresas rechazan IBAN lituano. Úsalo como cuenta secundaria.",
       },
     ],
+
+    seo: {
+      metaTitle: "Revolut España 2025: Opiniones, Comisiones y Cómo Abrir Cuenta",
+      metaDescription:
+        "Análisis completo de Revolut: comisiones, IBAN lituano, multidivisa, tarjeta virtual. ¿Es seguro? ¿Para quién es ideal?",
+      slug: "revolut",
+      canonicalUrl: "https://bancoseuropa.com/programas/revolut",
+      keywords: ["revolut españa", "cuenta revolut", "iban lituano", "multidivisa"],
+    },
+
+    _lastUpdated: "2025-11-16",
+    _affiliateCommission: "hasta 50€ por cuenta",
+    _priority: 1,
   },
+
+  // === N26 ===
   {
     slug: "n26",
     name: "N26",
-    tagline: "Banco alemán con IBAN europeo y una app muy sencilla de usar.",
+    tagline: "Banco alemán con IBAN DE. Simple, gratis y 100% móvil.",
     description:
-      "N26 es un banco alemán con licencia bancaria completa y IBAN europeo. Ofrece cuentas personales con plan gratuito y planes de pago con más ventajas. Su app es muy intuitiva y permite gestionar todo desde el móvil.",
-    country: "Alemania",
-    ibanCountry: "DE (Alemania)",
-    category: "neobanco",
-    tags: ["sin-comisiones", "tarjeta-fisica", "no-residentes"],
+      "Banco digital con licencia alemana. Plan gratuito con IBAN europeo. App minimalista y rápida.",
 
-    logo: "/banks/n26.svg",
-    heroImage: "/banks/n26-hero.png",
+    country: "Alemania",
+    headquarters: "Berlín",
+    ibanCountry: "Alemania",
+    ibanPrefix: "DE",
+
+    category: "neobanco",
+    tags: ["sin-comisiones", "tarjeta-fisica", "no-residentes", "iban-de", "seguro-depositos"],
+
+    logo: "/images/logos/n26.svg",
+    heroImage: "/images/logos/n26-hero.webp",
+    cardImage: "/images/logos/n26.svg",
 
     currencies: ["EUR"],
-    languages: ["Español", "Inglés", "Alemán", "Francés", "Italiano"],
+    support: {
+      languages: ["Español", "Inglés", "Alemán", "Francés", "Italiano"],
+      channels: ["chat", "email", "phone"],
+      spanishSupport: true,
+    },
 
-    monthlyFee: "0 €/mes (plan estándar) · planes de pago desde 4,90 €/mes",
-    cardType: "Mastercard física y virtual",
-    atmWithdrawals:
-      "Retiradas en cajeros gratis varias veces al mes en la zona euro (según plan).",
+    fees: {
+      monthly: "0 €/mes",
+      setup: "Gratis",
+      inactivity: "Ninguna",
+      atmEU: "3 gratis/mes",
+      atmInternational: "1,7% comisión",
+      fxRate: "Mastercard + 0%",
+    },
+    cardType: "Mastercard",
 
-    keyPros: [
-      "IBAN alemán reconocido en toda la zona euro.",
-      "Alta muy rápida y sin papeleo físico.",
-      "App muy limpia y enfocada a uso diario.",
-    ],
-    keyCons: [
-      "Solo opera en EUR, no es cuenta multidivisa.",
-      "Comisiones si te pasas de los límites de retiradas gratuitas.",
-    ],
+    keyPros: ["IBAN alemán", "App ultraintuitiva", "Seguro de depósitos alemán"],
+    keyCons: ["Solo EUR", "Límite de retiradas gratis"],
+    idealFor: "Cuenta principal en euros, uso diario simple.",
 
-    idealFor:
-      "Personas que quieren un banco principal online en euros, fácil de usar y sin demasiada complicación.",
-    requirements: [
-      "Documento de identidad válido.",
-      "Residir en uno de los países admitidos por N26.",
-      "Mayoría de edad.",
-    ],
+    requirements: ["DNI/NIE", "Residir en país admitido", "Mayor de 18"],
+    acceptedCountries: ["UE", "EEA"],
+
+    rating: {
+      trustpilot: 3.9,
+      appStore: 4.7,
+      googlePlay: 4.6,
+    },
+
+    compliance: {
+      license: "BaFin (Alemania)",
+      depositGuarantee: "100.000€ (Fondo Alemán)",
+      regulatedBy: ["BaFin", "UE"],
+    },
 
     website: "https://n26.com",
-    affiliateUrl: "https://n26.com/ref/tucodigo",
+    affiliateUrl: "https://n26.com/ref/BANCOS2025",
+
+    seo: {
+      metaTitle: "N26 España: Opiniones, IBAN Alemán y Cuenta Gratis 2025",
+      metaDescription:
+        "N26: banco alemán con IBAN DE. ¿Es seguro? Comisiones, requisitos y cómo abrir cuenta desde España.",
+      slug: "n26",
+      canonicalUrl: "https://bancoseuropa.com/programas/n26",
+      keywords: ["n26 españa", "iban alemán", "banco online gratis"],
+    },
+
+    _lastUpdated: "2025-11-16",
+    _priority: 2,
   },
+
+  // === WISE ===
   {
     slug: "wise",
     name: "Wise",
-    tagline: "La mejor opción para enviar y recibir dinero en distintas divisas.",
+    shortName: "Wise",
+    tagline: "Transferencias internacionales al cambio real. Cuenta multidivisa con IBAN BE.",
     description:
-      "Wise comenzó como una plataforma de transferencias internacionales baratas y ahora ofrece cuentas multidivisa con datos bancarios locales en varios países. Ideal para freelancers internacionales y personas que cobran en distintas monedas.",
-    country: "Reino Unido",
-    ibanCountry: "BE (Bélgica) para la zona euro",
+      "Líder en transferencias baratas. Cuenta con datos bancarios locales en 10+ países.",
+
+    country: "Bélgica (EUR)",
+    headquarters: "Londres",
+    ibanCountry: "Bélgica",
+    ibanPrefix: "BE",
+
     category: "cuenta-multidivisa",
-    tags: ["multidivisa", "tarjeta-virtual", "para-freelancers", "no-residentes"],
+    tags: ["multidivisa", "para-freelancers", "no-residentes", "seguro-depositos"],
 
-    logo: "/banks/wise.svg",
-    heroImage: "/banks/wise-hero.png",
+    logo: "/images/logos/wise.svg",
+    heroImage: "/images/logos/wise-hero.webp",
+    cardImage: "/images/logos/wise.svg",
 
-    currencies: ["EUR", "USD", "GBP", "AUD", "CAD", "Más de 50 divisas"],
-    languages: ["Español", "Inglés", "Otros idiomas"],
+    currencies: ["EUR", "USD", "GBP", "AUD", "CAD", "+50 más"],
+    support: {
+      languages: ["Español", "Inglés"],
+      channels: ["email", "help-center"],
+      spanishSupport: true,
+    },
 
-    monthlyFee: "Sin cuota mensual, pagas por uso (transferencias, cambio, etc.)",
-    cardType: "Tarjeta física y virtual Mastercard",
-    atmWithdrawals:
-      "Retiradas gratis hasta un límite mensual, después pequeña comisión.",
+    fees: {
+      monthly: "Gratis",
+      setup: "Gratis",
+      inactivity: "Ninguna",
+      atmEU: "2 gratis/mes hasta 200 €",
+      atmInternational: "1,75% + 0,50 €",
+      fxRate: "Tipo medio del mercado",
+    },
+    cardType: "Mastercard",
 
-    keyPros: [
-      "Comisiones muy bajas en transferencias internacionales.",
-      "Datos bancarios locales en varios países (EEUU, UK, EUR…).",
-      "Ideal para cobrar en distintas divisas sin perder tanto en el cambio.",
-    ],
-    keyCons: [
-      "No es un banco clásico, sino una entidad de dinero electrónico.",
-      "No todos los países tienen acceso a todas las funciones.",
-    ],
+    keyPros: ["Cambio real", "Datos bancarios locales", "Ideal para freelancers"],
+    keyCons: ["No es banco completo", "Soporte solo email"],
+    idealFor: "Cobrar/pagar en divisas extranjeras.",
 
-    idealFor:
-      "Freelancers, nómadas digitales y personas que cobran o pagan en varias divisas de forma habitual.",
-    requirements: [
-      "Documento de identidad.",
-      "Verificación de identidad online.",
-    ],
+    requirements: ["DNI/Pasaporte", "Verificación online"],
+    acceptedCountries: ["Global"],
+
+    rating: {
+      trustpilot: 4.6,
+    },
+
+    compliance: {
+      license: "Entidad de Dinero Electrónico (Bélgica)",
+      depositGuarantee: "Salvaguarda de fondos",
+      regulatedBy: ["NBB", "FCA"],
+    },
 
     website: "https://wise.com",
-    affiliateUrl: "https://wise.com/ref/tucodigo",
+    affiliateUrl: "https://wise.com/ref/BANCOS2025",
+
+    seo: {
+      metaTitle: "Wise España 2025: Cuenta Multidivisa, IBAN y Comisiones",
+      metaDescription:
+        "Wise: transferencias baratas y cuenta con IBAN BE. ¿Mejor que Revolut? Análisis completo.",
+      slug: "wise",
+      canonicalUrl: "https://bancoseuropa.com/programas/wise",
+      keywords: ["wise españa", "transferencias internacionales", "cuenta multidivisa"],
+    },
+
+    _lastUpdated: "2025-11-16",
+    _priority: 3,
   },
+
+  // === BUNQ ===
   {
     slug: "bunq",
     name: "Bunq",
-    tagline: "Banco holandés muy flexible con múltiples subcuentas e IBANs.",
-    description:
-      "Bunq es un banco holandés pensado para usuarios avanzados que quieren mucha flexibilidad: múltiples cuentas, automatizaciones, ahorros, etc. Tiene planes de pago con muchas funciones.",
-    country: "Países Bajos",
-    ibanCountry: "NL (Países Bajos)",
-    category: "neobanco",
-    tags: ["tarjeta-fisica", "para-empresa"],
+    tagline: "Banco holandés con 25 subcuentas y automatizaciones.",
+    description: "Ideal para autónomos y empresas. IBAN NL.",
 
-    logo: "/banks/bunq.svg",
+    country: "Países Bajos",
+    headquarters: "Ámsterdam",
+    ibanCountry: "Países Bajos",
+    ibanPrefix: "NL",
+
+    category: "neobanco",
+    tags: ["tarjeta-fisica", "para-empresa", "iban-nl"],
+
+    logo: "/images/logos/bunq.svg",
+    heroImage: "/images/logos/bunq-hero.webp",
+    cardImage: "/images/logos/bunq.svg",
 
     currencies: ["EUR"],
-    languages: ["Inglés", "Holandés", "Alemán"],
+    support: {
+      languages: ["Inglés", "Holandés", "Alemán"],
+      channels: ["chat", "email"],
+      spanishSupport: false,
+    },
 
-    monthlyFee: "Planes desde aprox. 2,99 €/mes",
-    cardType: "Tarjeta física y virtual Mastercard",
-    atmWithdrawals: "Condiciones según plan contratado.",
+    fees: {
+      monthly: "2,99 €/mes (Easy Bank)",
+      setup: "Gratis",
+      inactivity: "Ninguna",
+      atmEU: "Según plan",
+      atmInternational: "Según plan",
+      fxRate: "Mastercard",
+    },
+    cardType: "Mastercard",
 
-    keyPros: [
-      "Múltiples subcuentas y automatizaciones muy potentes.",
-      "Buen producto para autónomos y pequeñas empresas.",
-    ],
-    keyCons: [
-      "No tiene plan totalmente gratuito.",
-      "Interfaz y opciones pueden abrumar al principio.",
-    ],
+    keyPros: ["25 subcuentas", "Automatizaciones", "IBAN NL"],
+    keyCons: ["Sin plan gratis", "Sin español"],
+    idealFor: "Autónomos y empresas en NL.",
 
-    idealFor:
-      "Usuarios avanzados y autónomos que quieren mucho control sobre sus cuentas.",
-    requirements: ["Documento de identidad.", "Residir en país admitido."],
+    requirements: ["DNI", "Residir en UE"],
+    acceptedCountries: ["UE"],
 
-    website: "https://www.bunq.com",
+    rating: {
+      trustpilot: 4.1,
+    },
+
+    compliance: {
+      license: "DNB (Países Bajos)",
+      depositGuarantee: "100.000€",
+      regulatedBy: ["DNB"],
+    },
+
+    website: "https://bunq.com",
+    affiliateUrl: "https://bunq.com/ref/BANCOS2025",
+
+    seo: {
+      metaTitle: "Bunq España: Opiniones, IBAN Holandés y Precios 2025",
+      metaDescription:
+        "Bunq: banco holandés con subcuentas. ¿Vale la pena? Análisis para autónomos.",
+      slug: "bunq",
+      canonicalUrl: "https://bancoseuropa.com/programas/bunq",
+      keywords: ["bunq españa", "iban holandés", "banco para autónomos"],
+    },
+
+    _lastUpdated: "2025-11-16",
+    _priority: 4,
   },
 ];
+
+// === UTILIDADES ===
+export const getBankBySlug = (slug: string): Bank | undefined =>
+  banks.find((b) => b.slug === slug);
+
+export const getFeaturedBanks = (limit = 3): Bank[] =>
+  banks
+    .filter((b) => typeof b._priority === "number")
+    .sort((a, b) => (a._priority || 0) - (b._priority || 0))
+    .slice(0, limit);
+
+export const getBanksByTag = (tag: BankFeatureTag): Bank[] =>
+  banks.filter((b) => b.tags.includes(tag));

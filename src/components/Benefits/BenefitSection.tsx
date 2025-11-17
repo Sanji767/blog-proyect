@@ -1,99 +1,125 @@
-"use client"
+"use client";
+
+import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
-import clsx from "clsx";
-import { motion, Variants } from "framer-motion"
+import Link from "next/link";
 
+import type { IBenefit } from "@/types/benefits";
 import BenefitBullet from "./BenefitBullet";
-import SectionTitle from "../SectionTitle";
-import { IBenefit } from "@/types";
 
-interface Props {
-    benefit: IBenefit;
-    imageAtRight?: boolean;
-}
-
-const containerVariants: Variants = {
-    offscreen: {
-        opacity: 0,
-        y: 100
-    },
-    onscreen: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            type: "spring",
-            bounce: 0.2,
-            duration: 0.9,
-            delayChildren: 0.2,
-            staggerChildren: 0.1,
-        }
-    }
+type BenefitSectionProps = {
+  benefit: IBenefit;
+  index: number;
 };
 
-export const childVariants = {
-    offscreen: {
-        opacity: 0,
-        x: -50,
+// Variantes para animación (padre)
+export const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.12,
+      duration: 0.5,
+      ease: "easeOut",
     },
-    onscreen: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            type: "spring",
-            bounce: 0.2,
-            duration: 1,
-        }
-    },
+  },
 };
 
-const BenefitSection: React.FC<Props> = ({ benefit, imageAtRight }: Props) => {
-    const { title, description, imageSrc, bullets } = benefit;
+// Variantes para cada hijo (Bullet)
+export const childVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35 } },
+};
 
-    return (
-        <section className="benefit-section">
-            <motion.div
-                className="flex flex-wrap flex-col items-center justify-center gap-2 lg:flex-row lg:gap-20 lg:flex-nowrap mb-24"
-                variants={containerVariants}
-                initial="offscreen"
-                whileInView="onscreen"
-                viewport={{ once: true }}
-            >
-                <div
-                    className={clsx("flex flex-wrap items-center w-full max-w-lg", { "justify-start": imageAtRight, "lg:order-1 justify-end": !imageAtRight })}
-                    
-                >
-                    <div className="w-full  text-center lg:text-left ">
-                        <motion.div
-                            className="flex flex-col w-full"
-                            variants={childVariants}
-                        >
-                            <SectionTitle>
-                                <h3 className="lg:max-w-2xl">
-                                    {title}
-                                </h3>
-                            </SectionTitle>
+const BenefitSection: React.FC<BenefitSectionProps> = ({ benefit, index }) => {
+  const {
+    eyebrow,
+    title,
+    description,
+    image,
+    bullets,
+    ctaHref,
+    ctaLabel,
+    align,
+  } = benefit;
 
-                            <p className="mt-1.5 mx-auto lg:ml-0 leading-normal text-foreground-accent">
-                                {description}
-                            </p>
-                        </motion.div>
+  // Alternar imagen izquierda/derecha
+  const isImageLeft =
+    align === "image-left" || (align === undefined && index % 2 === 0);
 
-                        <div className="mx-auto lg:ml-0 w-full">
-                            {bullets.map((item, index) => (
-                                <BenefitBullet key={index} title={item.title} icon={item.icon} description={item.description} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
+  const imageBlock = (
+    <div className="relative h-64 w-full overflow-hidden rounded-3xl border border-border bg-hero-background/50 shadow-card md:h-72">
+      <Image
+        src={image}
+        alt={title}
+        fill
+        sizes="(min-width: 1024px) 480px, 100vw"
+        className="object-cover"
+        priority={index === 0}
+      />
+    </div>
+  );
 
-                <div className={clsx("mt-5 lg:mt-0", { "lg:order-2": imageAtRight })}>
-                    <div className={clsx("w-fit flex", { "justify-start": imageAtRight, "justify-end": !imageAtRight })}>
-                        <Image src={imageSrc} alt="title" width="384" height="762" quality={100} className="lg:ml-0" />
-                    </div>
-                </div>
-            </motion.div>
-        </section>
-    );
-}
+  const contentBlock = (
+    <motion.div
+      className="space-y-4"
+      variants={containerVariants}
+      initial="hidden"
+      // 👇 OJO: aquí es **variants**, en plural
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.25 }}
+    >
+      {eyebrow && (
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+          {eyebrow}
+        </p>
+      )}
 
-export default BenefitSection
+      <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+        {title}
+      </h2>
+
+      {description && (
+        <p className="max-w-xl text-sm text-foreground-accent sm:text-base">
+          {description}
+        </p>
+      )}
+
+      <div className="mt-2 space-y-4">
+        {bullets.map((bullet, idx) => (
+          <BenefitBullet key={bullet.id ?? idx} {...bullet} />
+        ))}
+      </div>
+
+      {ctaHref && ctaLabel && (
+        <div className="pt-3">
+          <Link
+            href={ctaHref}
+            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-black shadow-soft transition hover:brightness-105"
+          >
+            {ctaLabel} →
+          </Link>
+        </div>
+      )}
+    </motion.div>
+  );
+
+  return (
+    <section className="grid items-center gap-8 py-10 md:grid-cols-2 md:py-14">
+      {isImageLeft ? (
+        <>
+          {imageBlock}
+          {contentBlock}
+        </>
+      ) : (
+        <>
+          {contentBlock}
+          {imageBlock}
+        </>
+      )}
+    </section>
+  );
+};
+
+export default BenefitSection;
