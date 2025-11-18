@@ -1,29 +1,89 @@
-"use client";
-
-import { benefits } from "@/components/benefits/data/benefits"; // ← CORREGIDO
-import BenefitSection from "@/components/benefits/BenefitSection";
+// src/components/sections/home/Benefits.tsx
+import { ShieldCheck, Clock3, Globe2, CreditCard, CheckCircle2 } from "lucide-react";
 import Container from "@/components/layout/Container";
+
+type Benefit = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  tag?: string;
+};
+
+const BENEFITS: Benefit[] = [
+  {
+    icon: <ShieldCheck className="h-6 w-6" />,
+    title: "Bancos regulados en Europa",
+    description:
+      "Solo analizamos bancos y fintech con licencia y supervisión en la UE o Reino Unido, con protección sobre tus depósitos.",
+    tag: "Seguridad",
+  },
+  {
+    icon: <CreditCard className="h-6 w-6" />,
+    title: "Tarjetas sin comisiones ocultas",
+    description:
+      "Seleccionamos cuentas con tarjetas competitivas para viajar, pagar online y sacar dinero sin sustos.",
+    tag: "Uso diario",
+  },
+  {
+    icon: <Globe2 className="h-6 w-6" />,
+    title: "Pensado para vivir y moverse por Europa",
+    description:
+      "IBAN europeo, multidivisa y soporte en varios idiomas para quienes viven, trabajan o viajan entre países.",
+    tag: "Movilidad",
+  },
+  {
+    icon: <Clock3 className="h-6 w-6" />,
+    title: "Te ahorra horas de búsqueda",
+    description:
+      "En lugar de comparar webs, foros y opiniones una por una, aquí tienes un resumen filtrado y actualizado.",
+    tag: "Ahorro de tiempo",
+  },
+];
 
 export default function Benefits() {
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-b from-background to-muted/30">
-      <Container>
-        {/* Título principal */}
-        <div className="mb-14 text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold md:text-4xl">
-            Beneficios de usar{" "}
-            <span className="text-primary">Bancos Europa</span>
+    <section className="py-16 md:py-20 bg-gradient-to-b from-background to-hero-background/40">
+      <Container className="space-y-10">
+        {/* Cabecera */}
+        <div className="max-w-2xl space-y-3">
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            <CheckCircle2 className="h-3 w-3" />
+            Por qué usar Finanzas EU
+          </span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+            Menos bancos, más claridad. Solo lo que te afecta de verdad.
           </h2>
-          <p className="mt-3 text-muted-foreground text-sm md:text-base">
-            Compara, entiende y elige el banco perfecto para tu vida en Europa:
-            freelancers, expatriados, expatriados, viajeros o empresas.
+          <p className="text-sm md:text-base text-muted-foreground">
+            En lugar de mostrarte 50 opciones y liarte aún más, filtramos por:
+            seguridad, comisiones reales, facilidad para abrir cuenta y uso
+            práctico en tu día a día.
           </p>
         </div>
 
-        {/* Render dinámico de secciones */}
-        <div className="space-y-24 md:space-y-32">
-          {benefits.map((section, index) => (
-            <BenefitSection key={section.id} benefit={section} index={index} />
+        {/* Grid de beneficios */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {BENEFITS.map((benefit) => (
+            <article
+              key={benefit.title}
+              className="flex flex-col gap-3 rounded-2xl border border-border bg-background/70 p-4 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md"
+            >
+              <div className="flex items-center gap-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  {benefit.icon}
+                </div>
+                {benefit.tag && (
+                  <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+                    {benefit.tag}
+                  </span>
+                )}
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-sm font-semibold">{benefit.title}</h3>
+                <p className="text-xs text-muted-foreground">
+                  {benefit.description}
+                </p>
+              </div>
+            </article>
           ))}
         </div>
       </Container>
