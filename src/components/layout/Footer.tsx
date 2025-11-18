@@ -25,20 +25,25 @@ const siteName = "Bancos Europa";
 const footerDetails = {
   description:
     "Guía independiente de banca digital en Europa. Análisis actualizados, comisiones reales y recomendaciones sin sesgos.",
+
+  // 🔥 YA CORREGIDO: todos los enlaces tienen highlight
   quickLinks: [
     { text: "Comparativa", url: "/comparativa", highlight: true },
-    { text: "Ventajas", url: "/ventajas" },
-    { text: "FAQ", url: "/faq" },
-    { text: "Contacto", url: "/contacto" },
+    { text: "Ventajas", url: "/ventajas", highlight: false },
+    { text: "FAQ", url: "/faq", highlight: false },
+    { text: "Contacto", url: "/contacto", highlight: false },
   ],
+
   legalLinks: [
     { text: "Aviso de Afiliados", url: "/aviso-afiliados" },
     { text: "Política de Privacidad", url: "/privacidad" },
     { text: "Términos de Uso", url: "/terminos" },
     { text: "Cookies", url: "/cookies" },
   ],
+
   email: "hola@bancoseuropa.com",
   phone: "+31 20 123 4567",
+
   socials: {
     Twitter: "https://twitter.com/bancoseuropa",
     Instagram: "https://instagram.com/bancoseuropa",
@@ -60,6 +65,7 @@ const socialIcons: Record<
 export default function Footer(): JSX.Element {
   const currentYear = new Date().getFullYear();
   const pathname = usePathname();
+
   const telHref = `tel:${footerDetails.phone.replace(/\s+/g, "")}`;
   const isComparativa = pathname === "/comparativa";
 
@@ -74,7 +80,8 @@ export default function Footer(): JSX.Element {
     >
       <div className="py-14">
         <Container className="grid w-full max-w-7xl grid-cols-1 gap-12 px-6 md:grid-cols-4 lg:px-0">
-          {/* Logo + descripción + badges */}
+          
+          {/* -------- LOGO + DESCRIPCIÓN -------- */}
           <div className="space-y-6 md:col-span-1">
             <Link
               href="/"
@@ -82,7 +89,6 @@ export default function Footer(): JSX.Element {
               aria-label={siteName}
             >
               <Logo className="h-10 w-10 transition-transform group-hover:scale-105" />
-              {/* Texto oculto visualmente, pero accesible */}
               <span className="sr-only">{siteName}</span>
             </Link>
 
@@ -101,7 +107,6 @@ export default function Footer(): JSX.Element {
               </span>
             </div>
 
-            {/* CTA suave hacia comparativa */}
             {!isComparativa && (
               <div className="mt-6 rounded-xl border border-primary/10 bg-gradient-to-r from-primary/5 to-primary/3 p-4 shadow-sm">
                 <p className="mb-2 text-sm font-medium text-foreground">
@@ -118,17 +123,16 @@ export default function Footer(): JSX.Element {
             )}
           </div>
 
-          {/* Enlaces rápidos */}
-          <nav
-            aria-label="Navegación principal"
-            className="space-y-3"
-          >
+          {/* -------- NAVEGACIÓN -------- */}
+          <nav aria-label="Navegación principal" className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
               Navegación
             </h4>
+
             <ul className="space-y-2.5">
               {footerDetails.quickLinks.map((link) => {
                 const active = isActivePath(link.url);
+
                 return (
                   <li key={link.text}>
                     <Link
@@ -145,7 +149,9 @@ export default function Footer(): JSX.Element {
                       {link.highlight && (
                         <Star className="h-3.5 w-3.5 fill-primary text-primary" />
                       )}
+
                       {link.text}
+
                       {link.highlight && (
                         <span className="text-xs opacity-0 transition-opacity group-hover:opacity-100">
                           →
@@ -158,14 +164,12 @@ export default function Footer(): JSX.Element {
             </ul>
           </nav>
 
-          {/* Legal */}
-          <nav
-            aria-label="Enlaces legales"
-            className="space-y-3"
-          >
+          {/* -------- LEGAL -------- */}
+          <nav aria-label="Enlaces legales" className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
               Legal
             </h4>
+
             <ul className="space-y-2">
               {footerDetails.legalLinks.map((link) => {
                 const active = isActivePath(link.url);
@@ -187,12 +191,13 @@ export default function Footer(): JSX.Element {
             </ul>
           </nav>
 
-          {/* Contacto + Redes */}
+          {/* -------- CONTACTO + REDES -------- */}
           <div className="space-y-7">
             <div>
               <h4 className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                 Contacto
               </h4>
+
               <address className="space-y-3 text-sm not-italic">
                 <a
                   href={`mailto:${footerDetails.email}`}
@@ -203,6 +208,7 @@ export default function Footer(): JSX.Element {
                   </span>
                   {footerDetails.email}
                 </a>
+
                 <a
                   href={telHref}
                   className="flex items-center gap-2.5 text-muted-foreground transition-colors hover:text-foreground"
@@ -219,27 +225,26 @@ export default function Footer(): JSX.Element {
               <h4 className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                 Síguenos
               </h4>
-              <div
-                className="flex gap-3"
-                aria-label="Redes sociales"
-              >
+
+              <div className="flex gap-3" aria-label="Redes sociales">
                 {Object.entries(footerDetails.socials).map(
                   ([platform, url]) => {
                     const Icon =
                       socialIcons[platform as SocialPlatform];
+
                     return (
                       <a
                         key={platform}
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group rounded-lg bg-primary/10 p-2 transition-all hover:scale-110 hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                        className="group rounded-lg bg-primary/10 p-2 transition-all hover:scale-110 hover:bg-primary/20"
                         aria-label={`Síguenos en ${platform}`}
                       >
                         <Icon className="h-5 w-5 text-primary transition-colors group-hover:text-primary-foreground" />
                       </a>
                     );
-                  },
+                  }
                 )}
               </div>
             </div>
@@ -247,7 +252,7 @@ export default function Footer(): JSX.Element {
         </Container>
       </div>
 
-      {/* Faja inferior */}
+      {/* -------- FOOTER INFERIOR -------- */}
       <div className="border-t border-border px-6 py-6">
         <Container className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground md:flex-row">
           <p className="text-center md:text-left">
@@ -264,6 +269,7 @@ export default function Footer(): JSX.Element {
             </Link>
             .
           </p>
+
           <div className="flex items-center gap-2">
             <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" />
             <span>Hecho con amor en Ámsterdam</span>
@@ -271,7 +277,7 @@ export default function Footer(): JSX.Element {
         </Container>
       </div>
 
-      {/* Schema.org */}
+      {/* -------- SCHEMA.ORG -------- */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

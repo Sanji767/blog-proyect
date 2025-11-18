@@ -13,14 +13,22 @@ import "./globals.css";
 const manrope = Manrope({ subsets: ["latin"] });
 const sourceSans = Source_Sans_3({ subsets: ["latin"] });
 
+// 👇 SEO GLOBAL MEJORADO
 export const metadata: Metadata = {
-  title: siteDetails.metadata.title,
+  title: {
+    default: siteDetails.metadata.title,
+    template: `%s | ${siteDetails.siteName}`,
+  },
   description: siteDetails.metadata.description,
+  metadataBase: new URL(siteDetails.siteUrl),
+
   openGraph: {
     title: siteDetails.metadata.title,
     description: siteDetails.metadata.description,
     url: siteDetails.siteUrl,
     type: "website",
+    siteName: siteDetails.siteName,
+    locale: "es_ES",
     images: [
       {
         url: "/images/og-image.jpg",
@@ -30,11 +38,16 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: siteDetails.metadata.title,
     description: siteDetails.metadata.description,
     images: ["/images/twitter-image.jpg"],
+  },
+
+  alternates: {
+    canonical: siteDetails.siteUrl,
   },
 };
 
@@ -52,10 +65,8 @@ export default function RootLayout({
           <GoogleAnalytics gaId={siteDetails.googleAnalyticsId} />
         )}
 
-        {/* Muy importante para que useTheme del Header funcione */}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
-          {/* padding para no quedar tapado por el header fijo */}
           <main className="pt-20 md:pt-24">{children}</main>
           <Footer />
         </ThemeProvider>

@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Check, ArrowRight, Shield, Zap, Globe } from 'lucide-react';
+import { ArrowRight, Shield, Zap, Globe } from "lucide-react";
+
 
 const heroDetails = {
   heading: 'Los mejores bancos digitales de Europa',

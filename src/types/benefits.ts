@@ -5,8 +5,8 @@ export interface IBenefitBullet {
   id?: number | string;
   title: string;
   description: string;
-  icon: ReactNode;
-  stat?: string; // ej: "24h", "100K€"
+  icon: ReactNode;   // necesario para <Zap />, <Bell />, etc.
+  stat?: string;
 }
 
 export interface IBenefit {
@@ -15,8 +15,7 @@ export interface IBenefit {
   title: string;
   description?: string;
 
-  // Ruta de la imagen en /public
-  image: string;
+  image: string; // ruta en /public/images/benefits
 
   bullets: IBenefitBullet[];
 
@@ -24,6 +23,6 @@ export interface IBenefit {
   ctaLabel?: string;
   ctaHref?: string;
 
-  // Layout opcional
+  // Layout (izquierda/derecha)
   align?: "image-left" | "image-right";
 }

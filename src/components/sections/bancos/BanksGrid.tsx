@@ -103,7 +103,9 @@ function BankCard({ bank }: { bank: Bank }) {
             />
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="truncate text-lg font-bold text-foreground">{bank.name}</h3>
+            <h3 className="truncate text-lg font-bold text-foreground">
+              {bank.name}
+            </h3>
             <p className="text-xs text-muted-foreground">
               {bank.country}
               {bank.ibanCountry && ` · IBAN ${bank.ibanCountry}`}
@@ -154,8 +156,9 @@ function BankCard({ bank }: { bank: Bank }) {
         </div>
 
         <dl className="mt-4 space-y-1.5 text-xs">
-          <InfoRow label="Cuota mensual" value={bank.monthlyFee} />
+          {/* Solo usamos campos que existen en Bank */}
           <InfoRow label="Tarjeta" value={bank.cardType} />
+          <InfoRow label="IBAN" value={bank.ibanCountry} />
         </dl>
 
         <div className="mt-auto space-y-2 pt-5">
@@ -177,7 +180,7 @@ function BankCard({ bank }: { bank: Bank }) {
               <Button
                 variant="outline"
                 size="sm"
-                className="w-full rounded-full text-xs flex items-center justify-center gap-1"
+                className="flex w-full items-center justify-center gap-1 rounded-full text-xs"
               >
                 Ir a {bank.name}
                 <span className="text-xs">External link</span>

@@ -1,7 +1,7 @@
+// src/app/contacto/page.tsx
 "use client";
 
 import { useState } from "react";
-import Container from "@/components/layout/Container"; // si no lo necesitas aquí, puedes quitarlo
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -38,9 +38,12 @@ export default function ContactForm() {
 
       setFormState("success");
       (e.currentTarget as HTMLFormElement).reset();
-    } catch (err) {
+    } catch (error) {
+      console.error(error);
       setFormState("error");
-      setErrorMessage("Ha ocurrido un error al enviar el mensaje. Inténtalo de nuevo.");
+      setErrorMessage(
+        "Ha ocurrido un error al enviar el mensaje. Inténtalo de nuevo.",
+      );
     }
   }
 
@@ -49,11 +52,11 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-border bg-background p-5 md:p-6 shadow-card space-y-4"
+      className="space-y-4 rounded-3xl border border-border bg-background p-5 shadow-card md:p-6"
     >
       <div className="space-y-1">
-        <h2 className="text-lg md:text-xl font-semibold">Envíame tu consulta</h2>
-        <p className="text-xs md:text-sm text-muted-foreground">
+        <h2 className="text-lg font-semibold md:text-xl">Envíame tu consulta</h2>
+        <p className="text-xs text-muted-foreground md:text-sm">
           Cuanta más información me des sobre tu situación, mejor podré
           orientarte con el banco o cuenta que más encaje contigo.
         </p>
@@ -169,7 +172,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-black shadow-soft disabled:opacity-70 disabled:cursor-not-allowed"
+        className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-black shadow-soft disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isSubmitting ? "Enviando..." : "Enviar mensaje"}
       </button>

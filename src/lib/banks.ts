@@ -2,7 +2,11 @@
 import { StaticImageData } from "next/image";
 
 // === TIPOS AVANZADOS ===
-export type BankCategory = "neobanco" | "tradicional" | "cuenta-multidivisa" | "fintech";
+export type BankCategory =
+  | "neobanco"
+  | "tradicional"
+  | "cuenta-multidivisa"
+  | "fintech";
 
 export type BankFeatureTag =
   | "sin-comisiones"
@@ -23,13 +27,13 @@ export type BankFeatureTag =
 export interface BankFAQ {
   question: string;
   answer: string;
-  keywords?: string[]; // para SEO interno
+  keywords?: string[];
 }
 
 export interface BankRating {
-  trustpilot?: number;     // 1-5
-  appStore?: number;       // 1-5
-  googlePlay?: number;     // 1-5
+  trustpilot?: number;
+  appStore?: number;
+  googlePlay?: number;
   totalReviews?: number;
 }
 
@@ -50,9 +54,9 @@ export interface BankSupport {
 }
 
 export interface BankCompliance {
-  license: string;           // ej: "Banco de Lituania", "BaFin"
-  depositGuarantee: string;  // ej: "100.000€ (Fondo Lituano)"
-  regulatedBy: string[];     // ej: ["UE", "FCA", "DNB"]
+  license: string;
+  depositGuarantee: string;
+  regulatedBy: string[];
 }
 
 export interface BankSEO {
@@ -76,14 +80,14 @@ export interface Bank {
   country: string;
   headquarters: string;
   ibanCountry: string;
-  ibanPrefix: string; // ej: "LT", "DE", "NL"
+  ibanPrefix: string;
 
   // === CLASIFICACIÓN ===
   category: BankCategory;
   tags: BankFeatureTag[];
 
-  // === IMÁGENES OPTIMIZADAS ===
-  logo: string | StaticImageData; // apunta a /public
+  // === IMÁGENES ===
+  logo: string | StaticImageData;
   heroImage?: string | StaticImageData;
   cardImage?: string | StaticImageData;
   appScreenshot?: string | StaticImageData;
@@ -120,26 +124,26 @@ export interface Bank {
   // === FAQ ===
   faq?: BankFAQ[];
 
-  // === SEO AVANZADO ===
+  // === SEO ===
   seo: BankSEO;
 
   // === DATOS INTERNOS ===
-  _lastUpdated: string; // ISO date
+  _lastUpdated: string;
   _affiliateCommission?: string;
   _priority?: number;
 }
 
 // === BANCOS ===
 export const banks: Bank[] = [
-  // === REVOLUT ===
   {
     slug: "revolut",
     name: "Revolut",
     shortName: "Revolut",
-    tagline: "Cuenta multidivisa con IBAN lituano. Ideal para viajes y freelancers.",
+    tagline:
+      "Cuenta multidivisa con IBAN lituano. Ideal para viajes y freelancers.",
     description:
       "Neobanco con más de 30 millones de usuarios. Ofrece cuentas en 30+ divisas, tarjetas virtuales desechables, cripto, acciones y app avanzada. Regulado en la UE.",
-    
+
     country: "Lituania",
     headquarters: "Vilna, Lituania",
     ibanCountry: "Lituania",
@@ -163,7 +167,14 @@ export const banks: Bank[] = [
 
     currencies: ["EUR", "USD", "GBP", "CHF", "PLN", "AUD", "CAD", "+25 más"],
     support: {
-      languages: ["Español", "Inglés", "Francés", "Alemán", "Italiano", "Polaco"],
+      languages: [
+        "Español",
+        "Inglés",
+        "Francés",
+        "Alemán",
+        "Italiano",
+        "Polaco",
+      ],
       channels: ["chat", "email"],
       responseTime: "Media: 2 minutos",
       spanishSupport: true,
@@ -210,17 +221,20 @@ export const banks: Bank[] = [
     website: "https://www.revolut.com",
     affiliateUrl: "https://revolut.com/ref/BANCOS2025",
     appStoreUrl: "https://apps.apple.com/app/revolut/id932493382",
-    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.revolut.revolut",
+    googlePlayUrl:
+      "https://play.google.com/store/apps/details?id=com.revolut.revolut",
 
     faq: [
       {
         question: "¿Revolut es un banco real?",
-        answer: "Sí, tiene licencia bancaria en Lituania y tus depósitos están protegidos hasta 100.000€.",
+        answer:
+          "Sí, tiene licencia bancaria en Lituania y tus depósitos están protegidos hasta 100.000€.",
         keywords: ["licencia", "seguridad", "depósitos"],
       },
       {
         question: "¿Puedo domiciliar nómina en Revolut?",
-        answer: "Sí, pero algunas empresas rechazan IBAN lituano. Úsalo como cuenta secundaria.",
+        answer:
+          "Sí, pero algunas empresas rechazan IBAN lituano. Úsalo como cuenta secundaria.",
       },
     ],
 
@@ -238,7 +252,6 @@ export const banks: Bank[] = [
     _priority: 1,
   },
 
-  // === N26 ===
   {
     slug: "n26",
     name: "N26",
@@ -252,7 +265,13 @@ export const banks: Bank[] = [
     ibanPrefix: "DE",
 
     category: "neobanco",
-    tags: ["sin-comisiones", "tarjeta-fisica", "no-residentes", "iban-de", "seguro-depositos"],
+    tags: [
+      "sin-comisiones",
+      "tarjeta-fisica",
+      "no-residentes",
+      "iban-de",
+      "seguro-depositos",
+    ],
 
     logo: "/images/logos/n26.svg",
     heroImage: "/images/logos/n26-hero.webp",
@@ -310,12 +329,12 @@ export const banks: Bank[] = [
     _priority: 2,
   },
 
-  // === WISE ===
   {
     slug: "wise",
     name: "Wise",
     shortName: "Wise",
-    tagline: "Transferencias internacionales al cambio real. Cuenta multidivisa con IBAN BE.",
+    tagline:
+      "Transferencias internacionales al cambio real. Cuenta multidivisa con IBAN BE.",
     description:
       "Líder en transferencias baratas. Cuenta con datos bancarios locales en 10+ países.",
 
@@ -381,7 +400,6 @@ export const banks: Bank[] = [
     _priority: 3,
   },
 
-  // === BUNQ ===
   {
     slug: "bunq",
     name: "Bunq",

@@ -37,8 +37,9 @@ function formatTag(tag: Bank["tags"][number]): string {
   return map[tag] ?? tag;
 }
 
-function getLogoSrc(logo: Bank["logo"]) {
-  return typeof logo === "string" ? logo : (logo as any);
+function getLogoSrc(logo: Bank["logo"]): string {
+  // Si en tu tipo Bank["logo"] ya es string, esto es básicamente un cast seguro
+  return logo as string;
 }
 
 export default function BankCard({

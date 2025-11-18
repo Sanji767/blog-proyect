@@ -1,4 +1,4 @@
-// src/components/benefits/data/benefits.ts
+// src/components/benefits/data/benefits.tsx
 import { Zap, Bell, Building2, Euro, Eye, Scale } from "lucide-react";
 import type { IBenefit } from "@/types/benefits";
 

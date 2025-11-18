@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Container from "@/components/layout/Container";
-import { vlogs, type Vlog } from "@/lib/vlogs";
+import { vlogs } from "@/lib/vlogs";
 
 type VlogPageProps = {
   params: { slug: string };

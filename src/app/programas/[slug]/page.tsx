@@ -1,13 +1,19 @@
-// src/app/programas/[slug]/page.tsx
-
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-import { banks } from "@/lib/banks";
-import type { Bank } from "@/lib/banks";
+import { banks, type Bank } from "@/lib/banks";
 import Container from "@/components/layout/Container";
+
+import {
+  Globe2,
+  ShieldCheck,
+  CreditCard,
+  ArrowRight,
+  Info,
+  CheckCircle2,
+} from "lucide-react";
 
 /* -----------------------------------------
    1) Rutas estáticas: /programas/revolut, etc.
@@ -19,7 +25,7 @@ export function generateStaticParams() {
 }
 
 /* -----------------------------------------
-   2) Metadata dinámica por banco
+   2) Metadata dinámica por banco (SEO)
 ------------------------------------------ */
 export function generateMetadata({
   params,
@@ -36,16 +42,36 @@ export function generateMetadata({
     };
   }
 
+  const { seo, name, tagline } = bank;
+
   return {
-    title: `${bank.name} – Opinión, detalles y cómo abrir tu cuenta | Finanzas Eu`,
-    description: bank.tagline,
+    title:
+      seo?.metaTitle ??
+      `${name} – Opiniones, comisiones y cómo abrir tu cuenta | Finanzas Eu`,
+    description: seo?.metaDescription ?? tagline,
+    alternates: seo?.canonicalUrl
+      ? { canonical: seo.canonicalUrl }
+      : undefined,
+    openGraph: {
+      title:
+        seo?.metaTitle ??
+        `${name} – Opiniones, comisiones y cómo abrir tu cuenta`,
+      description: seo?.metaDescription ?? tagline,
+      images: seo?.openGraphImage
+        ? [{ url: seo.openGraphImage }]
+        : undefined,
+    },
   };
 }
 
 /* -----------------------------------------
    3) Página principal
 ------------------------------------------ */
-export default function ProgramaPage({ params }: { params: { slug: string } }) {
+export default function ProgramaPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const bank = banks.find((b) => b.slug === params.slug);
 
   if (!bank) return notFound();
@@ -70,11 +96,13 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
     fees,
     cardType,
     support,
+    rating,
+    compliance,
+    acceptedCountries,
   } = bank as Bank;
 
-  // Adaptamos a la estructura nueva:
   const monthlyFee = fees.monthly;
-  const atmWithdrawals = `${fees.atmEU} / Intl: ${fees.atmInternational}`;
+  const atmWithdrawals = `${fees.atmEU} · Intl: ${fees.atmInternational}`;
   const languages = support?.languages ?? [];
   const channels = support?.channels ?? [];
 
@@ -83,13 +111,11 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
 
   const relatedBanks = getRelatedBanks(bank);
 
-  const logoSrc =
-    typeof logo === "string" ? logo : (logo as any);
+  const logoSrc = logo; // string | StaticImageData
+  const heroSrc = heroImage || null;
 
-  const heroSrc =
-    heroImage && typeof heroImage === "string"
-      ? heroImage
-      : (heroImage as any);
+  const isFree =
+    !!monthlyFee && (/gratis/i.test(monthlyFee) || /0\s*€/.test(monthlyFee));
 
   return (
     <section className="py-10 md:py-14">
@@ -111,18 +137,21 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
           </div>
         </nav>
 
-        {/* HERO */}
-        <header className="grid items-start gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)]">
-          <div className="space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
-              <span>Programa bancario analizado por Finanzas Eu</span>
+        {/* HERO PRINCIPAL */}
+        <header className="grid items-start gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)]">
+          {/* Columna izquierda */}
+          <div className="space-y-6">
+            {/* Etiquetas superiores */}
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
+              <span>Banco analizado por Finanzas Eu</span>
               {hasAffiliate && (
-                <span className="rounded-full bg-primary text-black px-2 py-0.5 text-[10px]">
-                  Enlace recomendado
+                <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-black">
+                  Enlace recomendado (sin coste extra)
                 </span>
               )}
             </div>
 
+            {/* Logo + nombre + país */}
             <div className="flex flex-wrap items-center gap-3">
               <div className="relative h-10 w-10 md:h-12 md:w-12">
                 <Image
@@ -134,7 +163,9 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
                 />
               </div>
               <div>
-                <h1 className="text-3xl font-bold md:text-4xl">{name}</h1>
+                <h1 className="text-3xl font-bold md:text-4xl">
+                  {name}
+                </h1>
                 <p className="text-xs text-muted-foreground">
                   {country}
                   {ibanCountry ? ` · IBAN ${ibanCountry}` : ""}
@@ -142,16 +173,16 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
               </div>
             </div>
 
+            {/* Frase corta + descripción */}
             <p className="text-base text-muted-foreground md:text-lg">
               {tagline}
             </p>
-
             <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
               {description}
             </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex flex-wrap gap-2 pt-1">
               {tags.map((tag) => (
                 <span
                   key={tag}
@@ -168,9 +199,10 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
                 href={primaryCtaUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-black shadow-soft transition hover:brightness-105"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-black shadow-md transition hover:brightness-105"
               >
-                Abrir cuenta en {name} →
+                Abrir cuenta en {name}
+                <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href={website}
@@ -182,9 +214,9 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
               </a>
             </div>
 
-            {/* Barra de stats rápidos */}
+            {/* Stats rápidos */}
             <div className="mt-4 grid gap-2 rounded-2xl border border-border bg-background p-3 text-xs md:grid-cols-4">
-              <StatPill label="Cuota mensual" value={monthlyFee} />
+              <StatPill label="Cuota mensual" value={monthlyFee} highlight={isFree ? "success" : undefined} />
               <StatPill label="Tarjeta" value={cardType} />
               <StatPill label="Cajeros" value={atmWithdrawals} />
               <StatPill
@@ -200,8 +232,8 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
 
-          {/* Imagen / tarjeta lateral */}
-          <aside className="rounded-3xl border border-border bg-hero-background/60 p-5 shadow-card">
+          {/* Columna derecha: tarjeta resumen */}
+          <aside className="rounded-3xl border border-border bg-hero-background/70 p-5 shadow-md">
             {heroSrc ? (
               <div className="relative mb-4 h-40 w-full overflow-hidden rounded-2xl">
                 <Image
@@ -237,22 +269,45 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
                     : "No disponible"
                 }
               />
+              {rating?.trustpilot && (
+                <InfoRow
+                  label="Trustpilot"
+                  value={`${rating.trustpilot.toFixed(1)} / 5${
+                    rating.totalReviews
+                      ? ` · ${rating.totalReviews.toLocaleString()} opiniones`
+                      : ""
+                  }`}
+                />
+              )}
             </dl>
+
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+              <span className="inline-flex items-center gap-1">
+                <Globe2 className="h-3 w-3" />
+                Apertura 100% online
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <ShieldCheck className="h-3 w-3" />
+                Depósitos protegidos en la UE
+              </span>
+            </div>
           </aside>
         </header>
 
-        {/* DETALLES PRINCIPALES */}
+        {/* BLOQUE PROS / CONTRAS / IDEAL PARA */}
         <section className="grid items-start gap-8 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1.4fr)]">
-          {/* Columna izquierda: pros/cons */}
+          {/* Izquierda: Pros / Contras */}
           <div className="space-y-6">
-            <div className="rounded-3xl border border-border bg-background p-5 shadow-card">
+            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
               <h2 className="mb-3 text-xl font-semibold">
                 Lo mejor de {name}
               </h2>
               <ul className="space-y-2 text-sm md:text-base">
                 {keyPros.map((item) => (
                   <li key={item} className="flex gap-2">
-                    <span className="mt-1 text-green-500">●</span>
+                    <span className="mt-1 text-green-500">
+                      <CheckCircle2 className="h-4 w-4" />
+                    </span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -260,9 +315,9 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
             </div>
 
             {keyCons.length > 0 && (
-              <div className="rounded-3xl border border-border bg-background p-5 shadow-card">
+              <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
                 <h2 className="mb-3 text-xl font-semibold">
-                  Cosas a tener en cuenta
+                  Puntos a tener en cuenta
                 </h2>
                 <ul className="space-y-2 text-sm md:text-base">
                   {keyCons.map((item) => (
@@ -274,11 +329,20 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
                 </ul>
               </div>
             )}
+
+            {/* Ideal para */}
+            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
+              <h2 className="mb-3 text-lg font-semibold">
+                ¿Para quién es ideal?
+              </h2>
+              <p className="text-sm md:text-base">{idealFor}</p>
+            </div>
           </div>
 
-          {/* Columna derecha: características + requisitos */}
+          {/* Derecha: características, requisitos, países, seguridad */}
           <aside className="space-y-5">
-            <div className="rounded-3xl border border-border bg-background p-5 shadow-card">
+            {/* Características principales */}
+            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
               <h2 className="mb-3 text-lg font-semibold">
                 Características principales
               </h2>
@@ -296,13 +360,23 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
                   }
                 />
                 <InfoRow
-                  label="Ideal para"
-                  value={idealFor}
+                  label="Canales de soporte"
+                  value={
+                    channels.length
+                      ? channels.join(" · ")
+                      : "No disponible"
+                  }
+                />
+                <InfoRow
+                  label="Tipo de tarjeta"
+                  value={cardType}
+                  icon={<CreditCard className="h-3 w-3" />}
                 />
               </dl>
             </div>
 
-            <div className="rounded-3xl border border-border bg-background p-5">
+            {/* Requisitos */}
+            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
               <h2 className="mb-3 text-lg font-semibold">
                 Requisitos para abrir la cuenta
               </h2>
@@ -314,6 +388,48 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* Países aceptados + Seguridad */}
+            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm space-y-4">
+              {acceptedCountries?.length > 0 && (
+                <div>
+                  <h2 className="mb-2 text-lg font-semibold">
+                    Países desde los que puedes abrir la cuenta
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    {acceptedCountries.length > 8
+                      ? `${acceptedCountries
+                          .slice(0, 8)
+                          .join(", ")} y ${
+                          acceptedCountries.length - 8
+                        } más`
+                      : acceptedCountries.join(", ")}
+                  </p>
+                </div>
+              )}
+
+              {compliance && (
+                <div className="border-t border-border pt-3">
+                  <h2 className="mb-2 text-lg font-semibold flex items-center gap-2">
+                    <ShieldCheck className="h-4 w-4 text-emerald-500" />
+                    Seguridad y regulación
+                  </h2>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                    <li>
+                      <strong>Licencia:</strong> {compliance.license}
+                    </li>
+                    <li>
+                      <strong>Depósitos:</strong>{" "}
+                      {compliance.depositGuarantee}
+                    </li>
+                    <li>
+                      <strong>Regulado por:</strong>{" "}
+                      {compliance.regulatedBy.join(" · ")}
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </aside>
         </section>
@@ -332,11 +448,14 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
                 >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-medium">
                     <span>{item.question}</span>
-                    <span className="text-xs text-muted-foreground group-open:hidden">
-                      Ver respuesta
-                    </span>
-                    <span className="hidden text-xs text-muted-foreground group-open:inline">
-                      Ocultar
+                    <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <Info className="h-3 w-3" />
+                      <span className="group-open:hidden">
+                        Ver respuesta
+                      </span>
+                      <span className="hidden group-open:inline">
+                        Ocultar
+                      </span>
                     </span>
                   </summary>
                   <p className="mt-2 text-sm text-muted-foreground">
@@ -352,24 +471,21 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
         {relatedBanks.length > 0 && (
           <section className="border-t border-border pt-8">
             <h2 className="mb-3 text-xl font-semibold">
-              Otros bancos que también te pueden encajar
+              Bancos similares que te pueden interesar
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
-              Estos bancos son similares por tipo o por cómo funcionan. Pueden
-              ser una alternativa interesante si quieres comparar antes de
-              decidirte.
+              Estos bancos se parecen a {name} por tipo de cuenta o por
+              cómo funcionan. Revísalos si quieres comparar antes de
+              decidir.
             </p>
             <div className="grid gap-6 md:grid-cols-3">
               {relatedBanks.map((related) => {
-                const relatedLogo =
-                  typeof related.logo === "string"
-                    ? related.logo
-                    : (related.logo as any);
+                const relatedLogo = related.logo;
 
                 return (
                   <article
                     key={related.slug}
-                    className="flex flex-col rounded-2xl border border-border bg-background p-4 shadow-card"
+                    className="flex flex-col rounded-2xl border border-border bg-background p-4 shadow-sm"
                   >
                     <div className="mb-3 flex items-center gap-2">
                       <div className="relative h-8 w-8">
@@ -410,24 +526,25 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
 
         {/* CTA final */}
         <section className="border-t border-border pt-8">
-          <div className="flex flex-col gap-4 rounded-3xl border border-border bg-hero-background/80 p-6 shadow-card md:flex-row md:items-center md:justify-between md:p-8">
+          <div className="flex flex-col gap-4 rounded-3xl border border-border bg-hero-background/80 p-6 shadow-md md:flex-row md:items-center md:justify-between md:p-8">
             <div>
               <h2 className="mb-2 text-xl font-bold md:text-2xl">
                 ¿Listo para abrir tu cuenta en {name}?
               </h2>
               <p className="max-w-xl text-sm text-muted-foreground md:text-base">
-                El alta suele tardar solo unos minutos y puedes hacerlo 100%
-                online. Ten tu documento de identidad a mano y sigue los pasos
-                que verás en la app o en la web oficial.
+                El alta suele tardar solo unos minutos y puedes hacerlo
+                100% online. Ten tu documento de identidad a mano y
+                sigue los pasos que verás en la app o en la web oficial.
               </p>
             </div>
             <a
               href={primaryCtaUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-black shadow-soft transition hover:brightness-105"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-black shadow-md transition hover:brightness-105"
             >
-              Empezar ahora →
+              Empezar ahora
+              <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </section>
@@ -437,25 +554,47 @@ export default function ProgramaPage({ params }: { params: { slug: string } }) {
 }
 
 /* -----------------------------------------
-   Componentes pequeños de apoyo
+   Componentes de apoyo
 ------------------------------------------ */
 
-function InfoRow({ label, value }: { label: string; value: string }) {
+function InfoRow({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: string;
+  icon?: React.ReactNode;
+}) {
   return (
-    <div className="flex flex-col gap-0.5">
-      <dt className="text-[11px] uppercase tracking-wide text-muted-foreground">
-        {label}
+    <div className="flex flex-col gap-1">
+      <dt className="flex items-center gap-1 text-[11px] uppercase tracking-wide text-muted-foreground">
+        {icon && <span>{icon}</span>}
+        <span>{label}</span>
       </dt>
       <dd className="text-sm">{value}</dd>
     </div>
   );
 }
 
-function StatPill({ label, value }: { label: string; value: string }) {
+function StatPill({
+  label,
+  value,
+  highlight,
+}: {
+  label: string;
+  value: string;
+  highlight?: "success";
+}) {
+  const valueClasses =
+    highlight === "success"
+      ? "text-emerald-600 dark:text-emerald-400 font-semibold"
+      : "text-foreground";
+
   return (
     <div className="rounded-xl bg-background px-3 py-2 shadow-sm">
       <p className="text-[11px] text-muted-foreground">{label}</p>
-      <p className="text-sm font-semibold">{value}</p>
+      <p className={`text-sm ${valueClasses}`}>{value}</p>
     </div>
   );
 }
@@ -471,6 +610,11 @@ function formatTag(tag: string): string {
     "para-empresa": "Para empresa",
     "no-residentes": "Acepta no residentes",
     espanol: "App/soporte en español",
+    "iban-es": "IBAN ES",
+    "iban-nl": "IBAN NL",
+    "iban-de": "IBAN DE",
+    "seguro-depositos": "Depósitos protegidos",
+    "soporte-24-7": "Soporte 24/7",
   };
   return map[tag] ?? tag;
 }

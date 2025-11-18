@@ -4,7 +4,7 @@
 import { banks, type Bank } from "@/lib/banks";
 
 export default function BanksComparativa() {
-  // si quieres, aquí puedes ordenar por algo (opcional)
+  // Si quieres, aquí puedes ordenar por afiliación
   const sortedBanks: Bank[] = [...banks].sort((a, b) => {
     const aAff = a.affiliateUrl ? 1 : 0;
     const bAff = b.affiliateUrl ? 1 : 0;
@@ -21,8 +21,8 @@ export default function BanksComparativa() {
           Comparativa de bancos
         </h2>
         <p className="text-sm text-muted-foreground max-w-2xl">
-          Compara de un vistazo las cuotas, tipos de tarjeta y características
-          clave de cada banco para elegir la opción que mejor encaja contigo.
+          Compara de un vistazo el país, tipo de IBAN, tipo de tarjeta y 
+          las principales ventajas de cada banco para elegir la opción que mejor se adapte a ti.
         </p>
       </header>
 
@@ -33,11 +33,11 @@ export default function BanksComparativa() {
               <Th>Banco</Th>
               <Th>País</Th>
               <Th>IBAN</Th>
-              <Th>Cuota mensual</Th>
               <Th>Tarjeta</Th>
               <Th>Principales ventajas</Th>
             </tr>
           </thead>
+
           <tbody>
             {sortedBanks.map((bank) => (
               <tr
@@ -47,8 +47,8 @@ export default function BanksComparativa() {
                 <Td className="font-medium">{bank.name}</Td>
                 <Td>{bank.country}</Td>
                 <Td>{bank.ibanCountry ?? "-"}</Td>
-                <Td>{bank.monthlyFee ?? "-"}</Td>
                 <Td>{bank.cardType ?? "-"}</Td>
+
                 <Td className="max-w-xs">
                   <ul className="list-disc pl-4 space-y-0.5 text-xs text-muted-foreground">
                     {bank.tags.slice(0, 3).map((tag) => (
