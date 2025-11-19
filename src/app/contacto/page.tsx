@@ -63,7 +63,7 @@ export default function ContactoPage() {
       setFormState("success");
       (e.target as HTMLFormElement).reset();
       setSelectedGoal("");
-    } catch (err) {
+    } catch {
       setFormState("error");
       setErrorMessage("Error al enviar. Inténtalo de nuevo.");
     }

@@ -3,220 +3,314 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
 
 import Container from "@/components/layout/Container";
 import { vlogs } from "@/lib/vlogs";
+import VlogCard from "@/components/vlogs/VlogCard";
 
-type VlogPageProps = {
+type Props = {
   params: { slug: string };
 };
 
-/* --- Rutas estáticas --- */
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return vlogs.map((vlog) => ({ slug: vlog.slug }));
 }
 
-/* --- Metadata dinámica --- */
-export function generateMetadata({ params }: VlogPageProps): Metadata {
+export async function generateMetadata(
+  { params }: Props,
+): Promise<Metadata> {
   const vlog = vlogs.find((v) => v.slug === params.slug);
-
-  if (!vlog) {
-    return {
-      title: "Artículo no encontrado | Finanzas EU",
-      description: "No hemos encontrado el contenido que estabas buscando.",
-    };
-  }
+  if (!vlog) return {};
 
   return {
-    title: `${vlog.title} | Finanzas EU`,
+    title: `${vlog.title} | Blog`,
     description: vlog.description,
+    openGraph: {
+      title: vlog.title,
+      description: vlog.description,
+      images: vlog.image ? [{ url: vlog.image }] : [],
+      type: "article",
+      publishedTime: vlog.date,
+    },
   };
 }
 
-export default function VlogPage({ params }: VlogPageProps) {
-  const vlog = vlogs.find((v) => v.slug === params.slug);
+// util para IDs de headings
+function slugifyHeading(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s\-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
 
+export default function VlogPage({ params }: Props) {
+  const vlog = vlogs.find((v) => v.slug === params.slug);
   if (!vlog) return notFound();
 
-  const { title, description, date, image, tags, readingTime, content } = vlog;
+  const {
+    title,
+    description,
+    date,
+    image,
+    tags = [],
+    readingTime,
+    content,
+  } = vlog;
 
   const formattedDate = new Date(date).toLocaleDateString("es-ES", {
-    day: "2-digit",
-    month: "short",
+    day: "numeric",
+    month: "long",
     year: "numeric",
   });
 
-  const blocks = content.split(/\n\s*\n/); // separa por líneas en blanco
+  // Split en bloques separados por línea en blanco
+  const blocks = content
+    .split(/\n\s*\n/)
+    .map((b: string) => b.trim())
+    .filter(Boolean);
+
+  // TOC simple a partir de headings ## 
+  const toc = blocks
+    .filter((b: string) => b.startsWith("## "))
+    .map((b: string) => {
+      const label = b.replace(/^##\s*/, "");
+      return { id: slugifyHeading(label), label };
+    });
+
+  // Artículos relacionados (por tags)
+  const related = vlogs
+    .filter((v) => v.slug !== vlog.slug)
+    .filter((v) =>
+      v.tags?.some((t: string) => tags.includes(t)),
+    )
+    .slice(0, 3);
+
+  const fallbackRelated =
+    related.length > 0
+      ? related
+      : vlogs
+          .filter((v) => v.slug !== vlog.slug)
+          .slice(0, 3);
 
   return (
-    <Container className="max-w-3xl space-y-8">
+    <Container className="max-w-3xl py-12 md:py-20">
       {/* Breadcrumb */}
-      <nav className="text-[11px] text-muted-foreground md:text-xs">
-        <div className="mb-2 flex flex-wrap items-center gap-1">
-          <Link href="/vlogs" className="hover:text-primary hover:underline">
-            Vlogs
+      <nav className="mb-10 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="transition-colors hover:text-foreground"
+          >
+            Inicio
           </Link>
           <span>/</span>
-          <span className="text-foreground line-clamp-1">{title}</span>
+          <Link
+            href="/vlogs"
+            className="transition-colors hover:text-foreground"
+          >
+            Blog
+          </Link>
+          <span>/</span>
+          <span className="font-medium text-foreground">{title}</span>
         </div>
       </nav>
 
-      {/* Cabecera del artículo */}
-      <header className="space-y-4">
-        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary md:text-xs">
-          <span>Guía práctica</span>
-          <span className="text-muted-foreground">·</span>
-          <span className="text-muted-foreground">
-            Pensado para gente normal, no para banqueros
-          </span>
+      {/* HEADER */}
+      <header className="space-y-6">
+        <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-200">
+          Guía actualizada 2025
         </div>
 
-        <h1 className="text-3xl font-black tracking-tight md:text-4xl">
+        <h1 className="text-balance text-3xl font-black tracking-tight text-foreground md:text-4xl">
           {title}
         </h1>
 
-        <p className="text-sm text-muted-foreground md:text-base">
-          {description}
-        </p>
+        {description && (
+          <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
+            {description}
+          </p>
+        )}
 
-        <div className="flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground md:text-xs">
-          <span>{formattedDate}</span>
+        <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+          <span className="inline-flex items-center gap-1">
+            <Calendar className="h-3.5 w-3.5" />
+            <span>{formattedDate}</span>
+          </span>
           {readingTime && (
-            <>
-              <span>·</span>
-              <span>{readingTime} de lectura</span>
-            </>
+            <span className="inline-flex items-center gap-1">
+              <Clock className="h-3.5 w-3.5" />
+              <span>{readingTime}</span>
+            </span>
           )}
-          {tags && tags.length > 0 && (
-            <>
-              <span>·</span>
-              <div className="flex flex-wrap gap-2">
-                {tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-background px-2 py-0.5 text-[11px] font-medium"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </>
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/vlogs?tag=${encodeURIComponent(tag)}`}
+                  className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-medium text-emerald-700 transition hover:bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-200 dark:hover:bg-emerald-800/60"
+                >
+                  #{tag}
+                </Link>
+              ))}
+            </div>
           )}
         </div>
       </header>
 
-      {/* Imagen de portada */}
+      {/* Imagen destacada */}
       {image && (
-        <div className="relative h-56 w-full overflow-hidden rounded-3xl border border-border/70 bg-muted md:h-72">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover"
-            sizes="(min-width: 768px) 768px, 100vw"
-          />
+        <div className="relative mt-8 overflow-hidden rounded-3xl border border-border/40 bg-muted">
+          <div className="relative h-56 w-full md:h-80">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       )}
 
-      {/* Contenido: estilo neobanco, sin prose */}
-      <article className="space-y-5 text-sm leading-relaxed text-muted-foreground md:text-base">
-        {blocks.map((block, index) => {
-          const trimmed = block.trim();
+      {/* TOC opcional */}
+      {toc.length > 0 && (
+        <aside className="mt-8 rounded-2xl border border-border/40 bg-background/70 p-4 text-sm shadow-sm">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            En este artículo
+          </p>
+          <ul className="space-y-1.5 text-sm">
+            {toc.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  className="text-emerald-700 hover:underline dark:text-emerald-300"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
 
-          if (!trimmed) return null;
-
-          // Línea separadora '---'
-          if (trimmed === "---") {
-            return (
-              <hr
-                key={index}
-                className="my-6 border-border/60"
-              />
-            );
-          }
-
-          // Títulos H2 markdown: "## Título"
-          if (trimmed.startsWith("## ")) {
-            const text = trimmed.replace(/^##\s*/, "");
-            return (
-              <h2
-                key={index}
-                className="pt-4 text-lg font-semibold text-foreground md:text-xl"
-              >
-                {text}
-              </h2>
-            );
-          }
-
-          // Título H1 markdown (por si acaso): "# Título"
-          if (trimmed.startsWith("# ")) {
-            const text = trimmed.replace(/^#\s*/, "");
-            return (
-              <h1
-                key={index}
-                className="pt-4 text-xl font-bold text-foreground md:text-2xl"
-              >
-                {text}
-              </h1>
-            );
-          }
-
-          // Bullets simulados con "• "
-          if (trimmed.startsWith("• ")) {
-            // Si hay varios bullets seguidos, ya los tienes en el mismo bloque con saltos de línea
-            const lines = trimmed.split("\n").map((line) => line.trim());
-            const bulletLines = lines.filter((l) => l.startsWith("• "));
-
-            if (bulletLines.length > 1) {
+      {/* CONTENIDO */}
+      <article className="prose prose-neutral mt-8 max-w-none rounded-3xl border border-border/40 bg-background/80 p-5 text-sm leading-relaxed shadow-sm dark:prose-invert md:p-8 md:text-base">
+        <div className="space-y-6">
+          {blocks.map((text: string, index: number) => {
+            // Separador
+            if (/^(-{3,}|_{3,}|\*{3,})$/.test(text)) {
               return (
-                <ul key={index} className="space-y-1 pl-4">
-                  {bulletLines.map((line, i) => (
-                    <li key={i} className="list-none before:mr-2 before:text-primary before:content-['•']">
-                      {line.replace(/^•\s*/, "")}
-                    </li>
+                <div
+                  key={index}
+                  className="flex items-center gap-3 text-muted-foreground"
+                >
+                  <div className="h-px flex-1 bg-border" />
+                  <span className="text-xs">✦</span>
+                  <div className="h-px flex-1 bg-border" />
+                </div>
+              );
+            }
+
+            // Heading H2
+            if (text.startsWith("## ")) {
+              const headingText = text.replace(/^##\s*/, "");
+              const id = slugifyHeading(headingText);
+              return (
+                <h2
+                  key={index}
+                  id={id}
+                  className="scroll-mt-24 text-xl font-semibold text-foreground md:text-2xl"
+                >
+                  {headingText}
+                </h2>
+              );
+            }
+
+            // Cita
+            if (text.startsWith(">")) {
+              return (
+                <blockquote
+                  key={index}
+                  className="border-l-4 border-emerald-500 bg-emerald-500/5 pl-6 pr-4 py-4 italic text-foreground/90 md:text-lg dark:border-emerald-400 dark:bg-emerald-400/10"
+                >
+                  {text.replace(/^>\s*/, "")}
+                </blockquote>
+              );
+            }
+
+            // Lista con bullets •
+            if (text.startsWith("•")) {
+              const items = text
+                .split("\n")
+                .map((line) => line.trim())
+                .filter((line) => line.startsWith("•"))
+                .map((line) => line.replace(/^•\s*/, ""))
+                .filter(Boolean);
+
+              return (
+                <ul
+                  key={index}
+                  className="list-disc space-y-2 pl-5 text-foreground"
+                >
+                  {items.map((item, i) => (
+                    <li key={i}>{item}</li>
                   ))}
                 </ul>
               );
             }
 
-            // Un solo bullet
+            // Párrafo normal
             return (
-              <p key={index} className="pl-4">
-                {trimmed}
+              <p key={index} className="text-foreground">
+                {text}
               </p>
             );
-          }
-
-          // Párrafo normal
-          return <p key={index}>{trimmed}</p>;
-        })}
+          })}
+        </div>
       </article>
 
-      {/* CTA final suave */}
-      <section className="mt-6 rounded-3xl border border-border bg-gradient-to-r from-background via-background/80 to-background p-5 shadow-sm md:p-6">
-        <h2 className="mb-2 text-lg font-semibold md:text-xl">
-          ¿Quieres bajar esto a tu caso concreto?
-        </h2>
-        <p className="mb-4 text-sm text-muted-foreground md:text-base">
-          Cada banco se comporta distinto según tu país, tus ingresos y cómo mueves
-          el dinero: nómina, viajes, clientes fuera de España, etc. Puedes ver la
-          comparativa general o escribirme y te digo qué usar como cuenta principal
-          y qué dejar solo como apoyo.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            href="/bancos"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-xs font-semibold text-black hover:brightness-105 md:px-6 md:py-2.5 md:text-sm"
-          >
-            Ver comparativa de bancos →
-          </Link>
-          <Link
-            href="/contacto"
-            className="inline-flex items-center justify-center rounded-full border border-border px-5 py-2 text-xs font-semibold md:px-6 md:py-2.5 md:text-sm"
-          >
-            Analizar mi caso contigo
-          </Link>
+      {/* CTA / RELACIONADOS */}
+      <section className="mt-10 space-y-8">
+        {/* Relacionados */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-foreground md:text-xl">
+            También te puede interesar
+          </h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {fallbackRelated.map((relatedVlog) => (
+              <VlogCard
+                key={relatedVlog.slug}
+                vlog={relatedVlog}
+                variant="default"
+              />
+            ))}
+          </div>
         </div>
+
+        {/* CTA final */}
+        <footer className="rounded-3xl border border-border/40 bg-background/80 p-5 text-sm shadow-sm md:p-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-1.5">
+              <h2 className="text-base font-semibold md:text-lg">
+                ¿Quieres que miremos tu caso concreto?
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Escríbeme 2–3 frases con tu situación y te digo qué
+                bancos miraría yo primero.
+              </p>
+            </div>
+            <Link
+              href="/contacto"
+              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:brightness-110"
+            >
+              Hablar conmigo
+              <ArrowRight className="ml-1.5 h-4 w-4" />
+            </Link>
+          </div>
+        </footer>
       </section>
     </Container>
   );

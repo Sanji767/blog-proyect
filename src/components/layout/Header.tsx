@@ -1,22 +1,28 @@
+// src/components/layout/Header.tsx
 "use client";
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { memo, useCallback, useEffect, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+  KeyboardEvent,
+} from "react";
 import { HiBars3, HiOutlineXMark, HiChevronDown } from "react-icons/hi2";
 import { Sun, Moon } from "lucide-react";
 import Logo from "@/components/ui/logo";
 import Container from "./Container";
 import { useTheme } from "next-themes";
 
-// Lazy load del MegaMenu
+// Lazy load del MegaMenu (solo cliente)
 const MegaMenu = dynamic(() => import("./MegaMenu"), {
   ssr: false,
   loading: () => null,
 });
 
-// Tipo para los items de menú
 type MenuItem = {
   text: string;
   url: string;
@@ -35,22 +41,29 @@ const ctaText = "Abrir cuenta recomendada";
 const ctaUrl = "/programas/revolut";
 
 const Header = memo(function Header() {
-  const [isOpen, setIsOpen] = useState(false);      // menú móvil
-  const [scrolled, setScrolled] = useState(false);  // efecto scroll
-  const [megaOpen, setMegaOpen] = useState(false);  // mega menú Bancos
+  const [isOpen, setIsOpen] = useState(false); // Menú móvil
+  const [scrolled, setScrolled] = useState(false); // Efecto scroll
+  const [megaOpen, setMegaOpen] = useState(false); // Mega menú "Bancos"
+  const [mounted, setMounted] = useState(false); // Para evitar mismatch de tema
 
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const isDark = theme === "dark";
 
-  // Cambia estilos al hacer scroll
+  const isDark = mounted && theme === "dark";
+
+  // Montado (para next-themes)
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Scroll effect
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Cierra menús al cambiar de ruta
+  // Cerrar menús al cambiar de ruta
   useEffect(() => {
     setIsOpen(false);
     setMegaOpen(false);
@@ -58,46 +71,53 @@ const Header = memo(function Header() {
 
   const toggleMobileMenu = useCallback(
     () => setIsOpen((prev) => !prev),
-    [],
+    []
   );
+
+  const handleMegaKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Escape") {
+      setMegaOpen(false);
+    }
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setMegaOpen((prev) => !prev);
+    }
+  };
 
   return (
     <header
-      className={`
-        fixed inset-x-0 top-0 z-50 w-full transition-all duration-500
-        ${
-          scrolled
-            ? "bg-white/90 dark:bg-black/90 backdrop-blur-xl shadow-md border-b border-border/40 py-3"
-            : "bg-transparent py-6"
-        }
-      `}
+      className={`fixed inset-x-0 top-0 z-50 w-full transition-all duration-500 ${
+        scrolled
+          ? "bg-white/90 dark:bg-black/90 backdrop-blur-xl shadow-md border-b border-border/40 py-3"
+          : "bg-transparent py-6"
+      }`}
     >
-      <Container className="px-4 md:px-8">
-        <nav className="flex items-center justify-between">
+      <Container className="px-4 md:px-8" as="div">
+        <nav
+          className="flex items-center justify-between"
+          aria-label="Navegación principal"
+        >
           {/* LOGO */}
-          <Link href="/" className="group -ml-3">
+          <Link href="/" className="group -ml-3" aria-label="Inicio">
             <Logo className="h-12 w-auto md:h-14 transition-transform group-hover:scale-110" />
           </Link>
 
           {/* DESKTOP NAV */}
           <ul className="hidden lg:flex items-center gap-1">
             {menuItems.map((item) => (
-              <li
-                key={item.text}
-                className="relative"
-                // Cierra el mega menú cuando sales del bloque completo
-                onMouseLeave={() => setMegaOpen(false)}
-              >
+              <li key={item.text} className="relative">
                 {item.hasMega ? (
-                  <>
+                  /* ==== ITEM CON MEGA MENÚ (BANCOS) ==== */
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setMegaOpen(true)}
+                    onMouseLeave={() => setMegaOpen(false)}
+                  >
+                    {/* Botón */}
                     <button
                       type="button"
-                      // Abre al hacer hover (desktop)
-                      onMouseEnter={() => setMegaOpen(true)}
-                      // Toggle al hacer click (móvil / accesible)
-                      onClick={() =>
-                        setMegaOpen((prev) => !prev)
-                      }
+                      onClick={() => setMegaOpen((prev) => !prev)}
+                      onKeyDown={handleMegaKeyDown}
                       className={`
                         flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-semibold transition-all
                         hover:bg-black/5 dark:hover:bg-white/10
@@ -107,22 +127,39 @@ const Header = memo(function Header() {
                             : "text-foreground"
                         }
                       `}
+                      aria-expanded={megaOpen}
+                      aria-haspopup="menu"
+                      aria-controls="mega-bancos"
                     >
                       {item.text}
                       <HiChevronDown
-                        className={`h-4 w-4 transition-transform ${
+                        className={`h-4 w-4 transition-transform duration-200 ${
                           megaOpen ? "rotate-180" : ""
                         }`}
                       />
                     </button>
 
-                    {megaOpen && (
-                      // Mientras el cursor esté sobre el menú, sigue abierto
-                      <div onMouseEnter={() => setMegaOpen(true)}>
+                    {/* Mega menú */}
+                    <div
+                      id="mega-bancos"
+                      className={`
+                        absolute left-1/2 top-full z-40 -translate-x-1/2 pt-3
+                        transition-all duration-200 ease-out
+                        ${
+                          megaOpen
+                            ? "opacity-100 visible pointer-events-auto"
+                            : "opacity-0 invisible pointer-events-none"
+                        }
+                      `}
+                    >
+                      {/* Flecha */}
+                      <div className="mx-auto h-3 w-3 rotate-45 rounded-sm bg-background shadow-[0_-4px_12px_rgba(0,0,0,0.06)]" />
+
+                      <div className="-mt-1.5">
                         <MegaMenu onClose={() => setMegaOpen(false)} />
                       </div>
-                    )}
-                  </>
+                    </div>
+                  </div>
                 ) : (
                   <Link
                     href={item.url}
@@ -153,26 +190,28 @@ const Header = memo(function Header() {
             </li>
           </ul>
 
-          {/* ACCIONES MÓVIL */}
+          {/* BOTONES MÓVIL */}
           <div className="lg:hidden flex items-center gap-4">
-            {/* Theme toggle */}
+            {/* Botón tema */}
             <button
               onClick={() => setTheme(isDark ? "light" : "dark")}
-              className="p-3 rounded-full hover:bg-muted/50"
+              className="p-3 rounded-full hover:bg-muted/50 transition-colors"
               aria-label="Cambiar tema"
             >
-              {isDark ? (
+              {mounted && (isDark ? (
                 <Sun className="h-5 w-5" />
               ) : (
                 <Moon className="h-5 w-5" />
-              )}
+              ))}
             </button>
 
             {/* Botón menú móvil */}
             <button
               onClick={toggleMobileMenu}
-              className="p-3 rounded-full bg-muted/50 hover:bg-muted"
+              className="p-3 rounded-full bg-muted/50 hover:bg-muted transition-colors"
               aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               {isOpen ? (
                 <HiOutlineXMark className="h-6 w-6" />
@@ -186,9 +225,11 @@ const Header = memo(function Header() {
 
       {/* MENÚ MÓVIL */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-500 ${
+        id="mobile-menu"
+        className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
           isOpen ? "max-h-screen border-t border-border/40" : "max-h-0"
         }`}
+        aria-hidden={!isOpen}
       >
         <nav className="px-6 py-8 space-y-6 bg-background/95 backdrop-blur-xl">
           {menuItems.map((item) => (
@@ -196,7 +237,7 @@ const Header = memo(function Header() {
               key={item.text}
               href={item.url}
               onClick={toggleMobileMenu}
-              className="block text-2xl font-bold text-foreground hover:text-primary"
+              className="block text-2xl font-bold text-foreground hover:text-primary transition-colors"
             >
               {item.text}
             </Link>

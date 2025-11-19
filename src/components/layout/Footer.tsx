@@ -1,3 +1,4 @@
+// src/components/layout/Footer.tsx
 "use client";
 
 import React from "react";
@@ -18,142 +19,143 @@ import {
   Heart,
   Star,
   ArrowRight,
+  CheckCircle2,
 } from "lucide-react";
 
-const siteName = "Bancos Europa";
+const siteName = "Finanzas EU";
 
 const footerDetails = {
   description:
-    "Guía independiente de banca digital en Europa. Análisis actualizados, comisiones reales y recomendaciones sin sesgos.",
+    "Guía independiente de bancos digitales en Europa. Análisis reales, comisiones actualizadas al 2025 y recomendaciones sin filtros.",
 
-  // 🔥 YA CORREGIDO: todos los enlaces tienen highlight
   quickLinks: [
-    { text: "Comparativa", url: "/comparativa", highlight: true },
+    { text: "Comparativa bancos", url: "/comparativa", highlight: true },
+    { text: "Blog", url: "/vlogs", highlight: false },
     { text: "Ventajas", url: "/ventajas", highlight: false },
     { text: "FAQ", url: "/faq", highlight: false },
     { text: "Contacto", url: "/contacto", highlight: false },
   ],
 
   legalLinks: [
-    { text: "Aviso de Afiliados", url: "/aviso-afiliados" },
-    { text: "Política de Privacidad", url: "/privacidad" },
-    { text: "Términos de Uso", url: "/terminos" },
+    { text: "Aviso de afiliados", url: "/aviso-afiliados" },
+    { text: "Privacidad", url: "/privacidad" },
+    { text: "Términos", url: "/terminos" },
     { text: "Cookies", url: "/cookies" },
   ],
 
-  email: "hola@bancoseuropa.com",
-  phone: "+31 20 123 4567",
+  email: "hola@finanzaseu.com",
+  phone: "+34 623 456 789",
 
   socials: {
-    Twitter: "https://twitter.com/bancoseuropa",
-    Instagram: "https://instagram.com/bancoseuropa",
-    LinkedIn: "https://linkedin.com/company/bancoseuropa",
+    Twitter: "https://twitter.com/finanzaseu",
+    Instagram: "https://instagram.com/finanzaseu",
+    LinkedIn: "https://linkedin.com/company/finanzaseu",
   },
 } as const;
 
-type SocialPlatform = keyof typeof footerDetails.socials;
-
-const socialIcons: Record<
-  SocialPlatform,
-  React.ComponentType<React.SVGProps<SVGSVGElement>>
-> = {
-  Twitter,
-  Instagram,
-  LinkedIn: Linkedin,
-};
-
-export default function Footer(): JSX.Element {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
   const pathname = usePathname();
-
-  const telHref = `tel:${footerDetails.phone.replace(/\s+/g, "")}`;
-  const isComparativa = pathname === "/comparativa";
+  const isBancos =
+    pathname.startsWith("/bancos") || pathname === "/comparativa";
 
   const isActivePath = (url: string) =>
     pathname === url || pathname.startsWith(`${url}/`);
 
+  const socialIcons = {
+    Twitter,
+    Instagram,
+    LinkedIn: Linkedin,
+  } as const;
+
   return (
     <footer
-      className="border-t bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-muted/10"
-      aria-label="Pie de página"
-      role="contentinfo"
+      className="border-t bg-white dark:bg-black"
+      aria-labelledby="footer-heading"
     >
-      <div className="py-14">
-        <Container className="grid w-full max-w-7xl grid-cols-1 gap-12 px-6 md:grid-cols-4 lg:px-0">
-          
-          {/* -------- LOGO + DESCRIPCIÓN -------- */}
-          <div className="space-y-6 md:col-span-1">
+      <span id="footer-heading" className="sr-only">
+        Pie de página del sitio Finanzas EU
+      </span>
+
+      <div className="py-16 md:py-20">
+        <Container className="grid grid-cols-1 gap-12 md:grid-cols-12 lg:gap-16">
+          {/* COLUMNA 1 – LOGO + DESCRIPCIÓN + CTA */}
+          <div className="md:col-span-5 lg:col-span-4 space-y-8">
             <Link
               href="/"
-              className="group inline-flex items-center gap-3 rounded-lg p-1 outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              aria-label={siteName}
+              className="group inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+              aria-label="Volver al inicio"
             >
-              <Logo className="h-10 w-10 transition-transform group-hover:scale-105" />
-              <span className="sr-only">{siteName}</span>
+              <Logo className="h-11 md:h-12" showText={false} />
+              <div className="leading-none">
+                <span className="text-2xl font-black tracking-tight text-foreground">
+                  Finanzas{" "}
+                  <span className="bg-gradient-to-r from-sky-500 via-cyan-500 to-emerald-500 bg-clip-text text-transparent">
+                    EU
+                  </span>
+                </span>
+              </div>
             </Link>
 
-            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
               {footerDetails.description}
             </p>
 
-            <div className="flex flex-wrap gap-3">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300">
+            <div className="flex flex-wrap gap-3" aria-label="Garantías y seguridad">
+              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 dark:bg-emerald-900/30 px-4 py-2 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
                 <Shield className="h-4 w-4" />
-                Regulados UE
+                Fondos garantizados UE
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
+              <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-900/30 px-4 py-2 text-xs font-semibold text-blue-700 dark:text-blue-400">
                 <Lock className="h-4 w-4" />
-                GDPR
+                GDPR + IBAN europeo
               </span>
             </div>
 
-            {!isComparativa && (
-              <div className="mt-6 rounded-xl border border-primary/10 bg-gradient-to-r from-primary/5 to-primary/3 p-4 shadow-sm">
-                <p className="mb-2 text-sm font-medium text-foreground">
-                  ¿No sabes cuál elegir?
+            {/* CTA solo si NO está en bancos */}
+            {!isBancos && (
+              <div className="rounded-2xl bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 p-6 border border-primary/10">
+                <p className="mb-3 text-foreground font-semibold">
+                  ¿No sabes por dónde empezar?
                 </p>
                 <Link
                   href="/comparativa"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary-foreground"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-foreground transition-colors"
                 >
-                  Ver comparativa completa
-                  <ArrowRight className="h-4 w-4" />
+                  Ver comparativa actualizada 2025
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             )}
           </div>
 
-          {/* -------- NAVEGACIÓN -------- */}
-          <nav aria-label="Navegación principal" className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+          {/* COLUMNA 2 – NAVEGACIÓN */}
+          <div className="md:col-span-3 lg:col-span-2">
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
               Navegación
-            </h4>
-
-            <ul className="space-y-2.5">
+            </h3>
+            <ul className="space-y-3">
               {footerDetails.quickLinks.map((link) => {
                 const active = isActivePath(link.url);
-
                 return (
                   <li key={link.text}>
                     <Link
                       href={link.url}
-                      aria-current={active ? "page" : undefined}
-                      className={[
-                        "group flex items-center gap-2 text-sm transition-all hover:translate-x-1",
+                      className={`group flex items-center gap-2 text-sm transition-all hover:text-primary ${
                         link.highlight
-                          ? "font-semibold text-primary hover:text-primary-foreground"
-                          : "text-muted-foreground hover:text-foreground",
-                        active ? "underline underline-offset-4" : "",
-                      ].join(" ")}
+                          ? "font-semibold text-foreground"
+                          : "text-muted-foreground"
+                      } ${active ? "text-primary" : ""}`}
                     >
                       {link.highlight && (
-                        <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+                        <Star
+                          className="h-3.5 w-3.5 fill-primary text-primary"
+                          aria-hidden="true"
+                        />
                       )}
-
                       {link.text}
-
                       {link.highlight && (
-                        <span className="text-xs opacity-0 transition-opacity group-hover:opacity-100">
+                        <span className="ml-1 opacity-0 transition-opacity group-hover:opacity-100">
                           →
                         </span>
                       )}
@@ -162,147 +164,121 @@ export default function Footer(): JSX.Element {
                 );
               })}
             </ul>
-          </nav>
+          </div>
 
-          {/* -------- LEGAL -------- */}
-          <nav aria-label="Enlaces legales" className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+          {/* COLUMNA 3 – LEGAL */}
+          <div className="md:col-span-3 lg:col-span-2">
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
               Legal
-            </h4>
-
-            <ul className="space-y-2">
-              {footerDetails.legalLinks.map((link) => {
-                const active = isActivePath(link.url);
-                return (
-                  <li key={link.text}>
-                    <Link
-                      href={link.url}
-                      aria-current={active ? "page" : undefined}
-                      className={[
-                        "text-sm text-muted-foreground transition-colors hover:text-foreground",
-                        active ? "underline underline-offset-4" : "",
-                      ].join(" ")}
-                    >
-                      {link.text}
-                    </Link>
-                  </li>
-                );
-              })}
+            </h3>
+            <ul className="space-y-3">
+              {footerDetails.legalLinks.map((link) => (
+                <li key={link.text}>
+                  <Link
+                    href={link.url}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </nav>
+          </div>
 
-          {/* -------- CONTACTO + REDES -------- */}
-          <div className="space-y-7">
+          {/* COLUMNA 4 – CONTACTO + SOCIAL + ESTADÍSTICA */}
+          <div className="md:col-span-12 lg:col-span-4 space-y-8">
             <div>
-              <h4 className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                Contacto
-              </h4>
-
-              <address className="space-y-3 text-sm not-italic">
+              <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                Contacto directo
+              </h3>
+              <div className="space-y-4">
                 <a
                   href={`mailto:${footerDetails.email}`}
-                  className="flex items-center gap-2.5 text-muted-foreground transition-colors hover:text-foreground"
+                  className="flex items-center gap-3 text-foreground hover:text-primary transition-colors"
                 >
-                  <span className="rounded-lg bg-primary/10 p-1.5">
+                  <div className="rounded-lg bg-primary/10 p-2">
                     <Mail className="h-4 w-4 text-primary" />
-                  </span>
-                  {footerDetails.email}
+                  </div>
+                  <span className="text-sm">{footerDetails.email}</span>
                 </a>
-
                 <a
-                  href={telHref}
-                  className="flex items-center gap-2.5 text-muted-foreground transition-colors hover:text-foreground"
+                  href={`tel:${footerDetails.phone.replace(/\s/g, "")}`}
+                  className="flex items-center gap-3 text-foreground hover:text-primary transition-colors"
                 >
-                  <span className="rounded-lg bg-primary/10 p-1.5">
+                  <div className="rounded-lg bg-primary/10 p-2">
                     <Phone className="h-4 w-4 text-primary" />
-                  </span>
-                  {footerDetails.phone}
+                  </div>
+                  <span className="text-sm">{footerDetails.phone}</span>
                 </a>
-              </address>
+              </div>
             </div>
 
+            {/* Redes sociales */}
             <div>
-              <h4 className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+              <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                 Síguenos
-              </h4>
-
-              <div className="flex gap-3" aria-label="Redes sociales">
+              </h3>
+              <div className="flex gap-4" aria-label="Redes sociales">
                 {Object.entries(footerDetails.socials).map(
                   ([platform, url]) => {
                     const Icon =
-                      socialIcons[platform as SocialPlatform];
-
+                      socialIcons[platform as keyof typeof socialIcons];
                     return (
                       <a
                         key={platform}
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group rounded-lg bg-primary/10 p-2 transition-all hover:scale-110 hover:bg-primary/20"
-                        aria-label={`Síguenos en ${platform}`}
+                        className="group rounded-xl bg-muted/50 p-3 transition-all hover:scale-110 hover:bg-primary/10"
+                        aria-label={`Abrir ${platform} de ${siteName} en una nueva pestaña`}
                       >
-                        <Icon className="h-5 w-5 text-primary transition-colors group-hover:text-primary-foreground" />
+                        <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                       </a>
                     );
                   }
                 )}
               </div>
             </div>
+
+            {/* Prueba social */}
+            <div className="rounded-2xl bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-emerald-900/20 dark:to-cyan-900/20 p-5 border border-emerald-200/50 dark:border-emerald-800/30">
+              <div className="flex items-center gap-3">
+                <CheckCircle2 className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+                <div>
+                  <p className="text-2xl font-black text-foreground">
+                    +3.847
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    personas ayudadas en 2025
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </Container>
       </div>
 
-      {/* -------- FOOTER INFERIOR -------- */}
-      <div className="border-t border-border px-6 py-6">
-        <Container className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground md:flex-row">
-          <p className="text-center md:text-left">
+      {/* LÍNEA FINAL */}
+      <div className="border-t border-border/50 py-8">
+        <Container className="flex flex-col items-center justify-between gap-4 text-center text-xs text-muted-foreground md:flex-row">
+          <p>
             © {currentYear}{" "}
-            <span className="font-semibold text-foreground">
-              {siteName}
-            </span>
-            . Guía independiente.
+            <span className="font-bold text-foreground">{siteName}</span>. Guía
+            independiente desde 2023.
             <Link
               href="/aviso-afiliados"
-              className="ml-1 underline transition-colors hover:text-foreground"
+              className="underline hover:text-foreground ml-1"
             >
               Algunos enlaces son de afiliados
             </Link>
             .
           </p>
-
-          <div className="flex items-center gap-2">
-            <Heart className="h-3.5 w-3.5 fill-red-500 text-red-500" />
-            <span>Hecho con amor en Ámsterdam</span>
+          <div className="flex items-center gap-2" aria-label="Créditos">
+            <Heart className="h-4 w-4 fill-red-500 text-red-500" />
+            <span>Hecho con amor en Europa</span>
           </div>
         </Container>
       </div>
-
-      {/* -------- SCHEMA.ORG -------- */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: siteName,
-            url: "https://bancoseuropa.com",
-            logo: "https://bancoseuropa.com/logo-bancos-europa.svg",
-            contactPoint: {
-              "@type": "ContactPoint",
-              email: footerDetails.email,
-              telephone: footerDetails.phone,
-              contactType: "customer service",
-              areaServed: "EU",
-              availableLanguage: "Spanish",
-            },
-            sameAs: Object.values(footerDetails.socials),
-            address: {
-              "@type": "PostalAddress",
-              addressCountry: "NL",
-            },
-          }),
-        }}
-      />
     </footer>
   );
 }

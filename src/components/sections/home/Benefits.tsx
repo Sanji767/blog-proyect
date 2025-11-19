@@ -26,7 +26,7 @@ const BENEFITS: Benefit[] = [
   },
   {
     icon: <Globe2 className="h-6 w-6" />,
-    title: "Pensado para vivir y moverse por Europa",
+    title: "Pensado para moverte por Europa",
     description:
       "IBAN europeo, multidivisa y soporte en varios idiomas para quienes viven, trabajan o viajan entre países.",
     tag: "Movilidad",
@@ -42,19 +42,19 @@ const BENEFITS: Benefit[] = [
 
 export default function Benefits() {
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-b from-background to-hero-background/40">
+    <section className="bg-gradient-to-b from-background to-hero-background/40 py-16 md:py-20">
       <Container className="space-y-10">
         {/* Cabecera */}
         <div className="max-w-2xl space-y-3">
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+          <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-200">
             <CheckCircle2 className="h-3 w-3" />
-            Por qué usar Finanzas EU
+            Por qué usar Finanzas Eu
           </span>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+          <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
             Menos bancos, más claridad. Solo lo que te afecta de verdad.
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground">
-            En lugar de mostrarte 50 opciones y liarte aún más, filtramos por:
+          <p className="text-sm text-muted-foreground md:text-base">
+            En lugar de mostrarte 50 opciones y liarte aún más, filtramos por
             seguridad, comisiones reales, facilidad para abrir cuenta y uso
             práctico en tu día a día.
           </p>
@@ -65,10 +65,10 @@ export default function Benefits() {
           {BENEFITS.map((benefit) => (
             <article
               key={benefit.title}
-              className="flex flex-col gap-3 rounded-2xl border border-border bg-background/70 p-4 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md"
+              className="flex flex-col gap-3 rounded-2xl border border-border bg-background/75 p-4 shadow-sm backdrop-blur transition-all hover:-translate-y-0.5 hover:border-emerald-500/40 hover:shadow-md"
             >
-              <div className="flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-200">
                   {benefit.icon}
                 </div>
                 {benefit.tag && (

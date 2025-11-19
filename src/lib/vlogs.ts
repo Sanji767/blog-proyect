@@ -1,3 +1,6 @@
+// src/lib/vlogs.ts
+
+// Tipo principal de cada entrada del blog / vlog
 export type Vlog = {
   slug: string;
   title: string;
@@ -7,10 +10,16 @@ export type Vlog = {
   tags?: string[];
   readingTime?: string;  // "5 min", "8 min", etc.
   featured?: boolean;    // para destacar algunos
-  content: string;       // de momento texto plano
+  content: string;       // de momento texto plano con mini-marcado (##, •, >, ---)
 };
 
-export const vlogs: Vlog[] = [
+/**
+ * vlogsBase:
+ * - Aquí defines todos los artículos.
+ * - NO la exportamos directamente para poder aplicar transformaciones
+ *   (orden por fecha, normalizar tags, etc.) antes de exponer `vlogs`.
+ */
+const vlogsBase: Vlog[] = [
   {
     slug: "mejores-bancos-digitales-europa-2025",
     title: "Mejores bancos digitales en Europa 2025",
@@ -174,3 +183,32 @@ El dinero fluye como debería.
 
   // Añade más artículos aquí si quieres seguir ampliando tu blog
 ];
+
+/**
+ * Export público:
+ * - vlogs siempre viene:
+ *   - ordenado por fecha descendente (más nuevo primero)
+ *   - con tags normalizados en minúsculas para facilitar filtros
+ *
+ * Así, aunque tengas MUCHOS vlogs:
+ * - Evitas tener que ordenar en cada render
+ * - Puedes hacer búsquedas / filtros más fáciles y consistentes
+ */
+export const vlogs: Vlog[] = [...vlogsBase]
+  .map((v) => ({
+    ...v,
+    tags: v.tags?.map((t) => t.trim().toLowerCase()) ?? [],
+  }))
+  .sort((a, b) => {
+    const da = new Date(a.date).getTime();
+    const db = new Date(b.date).getTime();
+    return db - da; // más recientes primero
+  });
+
+/**
+ * Helper opcional: obtener un vlog por slug
+ * (por si más adelante quieres centralizar esta lógica).
+ */
+export function getVlogBySlug(slug: string): Vlog | undefined {
+  return vlogs.find((v) => v.slug === slug);
+}
