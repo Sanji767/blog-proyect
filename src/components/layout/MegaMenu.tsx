@@ -8,7 +8,7 @@ import { memo } from "react";
 const featuredBanks = [
   {
     name: "Revolut",
-    logo: "/banks/revolut.png",
+    logo: "/images/logos/revolut.svg",
     url: "/programas/revolut",
     tag: "Recomendado",
     tagColor:
@@ -16,7 +16,7 @@ const featuredBanks = [
   },
   {
     name: "N26",
-    logo: "/banks/n26.png",
+    logo: "/images/logos/n26.svg",
     url: "/programas/n26",
     tag: "Cuenta gratis",
     tagColor:
@@ -24,7 +24,7 @@ const featuredBanks = [
   },
   {
     name: "Wise",
-    logo: "/banks/wise.png",
+    logo: "/images/logos/wise.svg",
     url: "/programas/wise",
     tag: "Multidivisa",
     tagColor:
@@ -32,13 +32,14 @@ const featuredBanks = [
   },
   {
     name: "Bunq",
-    logo: "/banks/bunq.png",
+    logo: "/images/logos/bunq.svg",
     url: "/programas/bunq",
     tag: "IBAN NL",
     tagColor:
       "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
   },
 ] as const;
+
 
 type Props = {
   onClose: () => void;

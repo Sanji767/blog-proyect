@@ -99,6 +99,11 @@ export default function ProgramaPage({
     rating,
     compliance,
     acceptedCountries,
+    expertOpinion,
+    openingSteps,
+    history,
+    videoUrl,
+    reviews,
   } = bank as Bank;
 
   const monthlyFee = fees.monthly;
@@ -117,9 +122,54 @@ export default function ProgramaPage({
   const isFree =
     !!monthlyFee && (/gratis/i.test(monthlyFee) || /0\s*€/.test(monthlyFee));
 
+  const defaultOpeningSteps = [
+    "Entra a la web oficial.",
+    "Regístrate con tu email y número de teléfono.",
+    "Verifica tu identidad subiendo tu documento.",
+    "Confirma tu dirección y datos personales.",
+    "Activa tu tarjeta y empieza a usar la cuenta.",
+  ];
+
+  const stepsToShow = openingSteps?.length ? openingSteps : defaultOpeningSteps;
+
+  const siteUrl = "https://finanzaseu.com"; // ⚠️ Ajusta a tu dominio real
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Bancos",
+        item: `${siteUrl}/bancos`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name,
+        item: `${siteUrl}/programas/${params.slug}`,
+      },
+    ],
+  };
+
   return (
     <section className="py-10 md:py-14">
       <Container className="space-y-10">
+        {/* Schema.org Breadcrumbs */}
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(breadcrumbJsonLd),
+  }}
+/>
+
         {/* BREADCRUMB */}
         <nav
           aria-label="Ruta de navegación"
@@ -216,7 +266,11 @@ export default function ProgramaPage({
 
             {/* Stats rápidos */}
             <div className="mt-4 grid gap-2 rounded-2xl border border-border bg-background p-3 text-xs md:grid-cols-4">
-              <StatPill label="Cuota mensual" value={monthlyFee} highlight={isFree ? "success" : undefined} />
+              <StatPill
+                label="Cuota mensual"
+                value={monthlyFee}
+                highlight={isFree ? "success" : undefined}
+              />
               <StatPill label="Tarjeta" value={cardType} />
               <StatPill label="Cajeros" value={atmWithdrawals} />
               <StatPill
@@ -391,7 +445,7 @@ export default function ProgramaPage({
             </div>
 
             {/* Países aceptados + Seguridad */}
-            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm space-y-4">
+            <div className="space-y-4 rounded-3xl border border-border bg-background p-5 shadow-sm">
               {acceptedCountries?.length > 0 && (
                 <div>
                   <h2 className="mb-2 text-lg font-semibold">
@@ -411,7 +465,7 @@ export default function ProgramaPage({
 
               {compliance && (
                 <div className="border-t border-border pt-3">
-                  <h2 className="mb-2 text-lg font-semibold flex items-center gap-2">
+                  <h2 className="mb-2 flex items-center gap-2 text-lg font-semibold">
                     <ShieldCheck className="h-4 w-4 text-emerald-500" />
                     Seguridad y regulación
                   </h2>
@@ -433,6 +487,221 @@ export default function ProgramaPage({
             </div>
           </aside>
         </section>
+
+        {/* Opinión experta */}
+        <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+          <h2 className="mb-3 text-xl font-semibold">
+            Opinión de nuestro experto sobre {name}
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {expertOpinion?.summary ??
+              `En nuestra opinión, ${name} es una buena opción si buscas una cuenta moderna, 100% online y con buenas condiciones para tu día a día. Destaca especialmente para perfiles que necesitan gestionar su dinero desde varios países o divisas.`}
+          </p>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-muted/40 p-4">
+              <h3 className="mb-2 text-sm font-semibold">
+                Lo recomendamos especialmente si…
+              </h3>
+              <ul className="space-y-1 text-sm">
+                {(expertOpinion?.recommendedFor ?? [
+                  "Buscas una cuenta online sin demasiadas comisiones.",
+                  "Quieres gestionar tu dinero desde el móvil.",
+                  "Te interesa una tarjeta fácil de usar para viajar.",
+                ]).map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="mt-1 text-emerald-500">●</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-muted/10 p-4">
+              <h3 className="mb-2 text-sm font-semibold">
+                Puede no ser para ti si…
+              </h3>
+              <ul className="space-y-1 text-sm">
+                {(expertOpinion?.notFor ?? [
+                  "Buscas una cuenta tradicional con oficina física.",
+                  "Necesitas servicios muy avanzados de inversión o empresa.",
+                ]).map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="mt-1 text-red-500">●</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Guía paso a paso */}
+        <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+          <h2 className="mb-3 text-xl font-semibold">
+            Cómo abrir una cuenta en {name} paso a paso
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            El proceso suele tardar solo unos minutos y se hace 100% online.
+          </p>
+          <ol className="space-y-3 text-sm">
+            {stepsToShow.map((step, index) => (
+              <li
+                key={step}
+                className="flex gap-3 rounded-2xl bg-muted/40 p-3"
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-black">
+                  {index + 1}
+                </span>
+                <p>{step}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* Tabla de tarifas detallada */}
+        <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+          <h2 className="mb-3 text-xl font-semibold">
+            Tarifas y comisiones de {name}
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            Resumen de las principales comisiones. Consulta siempre la web
+            oficial para ver las condiciones actualizadas.
+          </p>
+
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-border text-xs uppercase text-muted-foreground">
+                  <th className="py-2 pr-4">Concepto</th>
+                  <th className="py-2">Detalle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-muted/40">
+                  <td className="py-2 pr-4 align-top">Cuota mensual</td>
+                  <td className="py-2">{fees.monthly}</td>
+                </tr>
+                <tr className="border-b border-muted/40">
+                  <td className="py-2 pr-4 align-top">
+                    Retiros en cajeros (zona euro)
+                  </td>
+                  <td className="py-2">{fees.atmEU}</td>
+                </tr>
+                <tr className="border-b border-muted/40">
+                  <td className="py-2 pr-4 align-top">
+                    Retiros en cajeros internacionales
+                  </td>
+                  <td className="py-2">{fees.atmInternational}</td>
+                </tr>
+                      {fees.fxRate && (
+                        <tr className="border-b border-muted/40">
+                          <td className="py-2 pr-4 align-top">
+                            Cambio de divisa
+                          </td>
+                          <td className="py-2">{fees.fxRate}</td>
+                        </tr>
+                      )}
+
+                {fees.transfer && (
+                  <tr className="border-b border-muted/40">
+                    <td className="py-2 pr-4 align-top">
+                      Transferencias
+                    </td>
+                    <td className="py-2">{fees.transfer}</td>
+                  </tr>
+                )}
+                {fees.cardReplacement && (
+                  <tr>
+                    <td className="py-2 pr-4 align-top">
+                      Reemplazo de tarjeta
+                    </td>
+                    <td className="py-2">{fees.cardReplacement}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Reseñas de usuarios */}
+        {reviews && reviews.length > 0 && (
+          <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+            <h2 className="mb-3 text-xl font-semibold">
+              Opiniones de usuarios sobre {name}
+            </h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Estas opiniones son un resumen de valoraciones reales de
+              clientes. Pueden no representar la experiencia de todos los
+              usuarios.
+            </p>
+            <div className="grid gap-4 md:grid-cols-3">
+              {reviews.slice(0, 3).map((review) => (
+                <article
+                  key={review.author + review.text.slice(0, 10)}
+                  className="flex flex-col rounded-2xl border border-border bg-muted/20 p-4 text-sm"
+                >
+                  <div className="mb-1 flex items-center justify-between gap-2">
+                    <span className="font-semibold">{review.author}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {"★".repeat(review.rating).padEnd(5, "☆")}
+                    </span>
+                  </div>
+                  <p className="mb-2 text-muted-foreground">
+                    {review.text}
+                  </p>
+                  {review.source && (
+                    <span className="mt-auto text-xs text-muted-foreground">
+                      Fuente: {review.source}
+                    </span>
+                  )}
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Historia y evolución del banco */}
+        {history && history.length > 0 && (
+          <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+            <h2 className="mb-3 text-xl font-semibold">
+              Evolución de {name} en los últimos años
+            </h2>
+            <div className="space-y-3 text-sm">
+              {[...history]
+                .sort((a, b) => a.year - b.year)
+                .map((item) => (
+                  <div key={item.year} className="flex gap-3">
+                    <div className="mt-1 w-16 text-xs font-semibold text-primary">
+                      {item.year}
+                    </div>
+                    <p>{item.event}</p>
+                  </div>
+                ))}
+            </div>
+          </section>
+        )}
+
+        {/* Vídeo resumen */}
+        {videoUrl && (
+          <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+            <h2 className="mb-3 text-xl font-semibold">
+              Vídeo resumen sobre {name}
+            </h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Si prefieres, aquí tienes un resumen en vídeo con los puntos
+              clave de este banco.
+            </p>
+            <div className="aspect-video overflow-hidden rounded-2xl border border-border bg-black">
+              <iframe
+                src={videoUrl}
+                title={`Vídeo sobre ${name}`}
+                className="h-full w-full"
+                allowFullScreen
+              />
+            </div>
+          </section>
+        )}
 
         {/* FAQ específica del banco */}
         {faq && faq.length > 0 && (
@@ -547,6 +816,13 @@ export default function ProgramaPage({
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
+          <p className="mt-3 max-w-xl text-[11px] text-muted-foreground">
+            Algunos enlaces de esta página son enlaces de afiliado. Esto
+            significa que Finanzas Eu puede recibir una comisión si abres
+            tu cuenta a través de ellos. No pagarás nada extra y esta
+            comisión no afecta a nuestra opinión ni a nuestra valoración
+            del producto.
+          </p>
         </section>
       </Container>
     </section>

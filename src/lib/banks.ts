@@ -44,6 +44,9 @@ export interface BankFees {
   atmEU: string;
   atmInternational: string;
   fxRate: string;
+  // Opcionales extra para tabla de tarifas
+  transfer?: string;
+  cardReplacement?: string;
 }
 
 export interface BankSupport {
@@ -66,6 +69,25 @@ export interface BankSEO {
   canonicalUrl: string;
   openGraphImage?: string;
   keywords: string[];
+}
+
+// Bloques de contenido extra / EEAT
+export interface BankExpertOpinion {
+  summary: string;
+  recommendedFor: string[];
+  notFor?: string[];
+}
+
+export interface BankHistoryItem {
+  year: number;
+  event: string;
+}
+
+export interface BankReview {
+  author: string;
+  rating: number; // 1-5
+  text: string;
+  source?: string;
 }
 
 export interface Bank {
@@ -127,6 +149,13 @@ export interface Bank {
   // === SEO ===
   seo: BankSEO;
 
+  // === BLOQUES EXTRA PARA CONTENIDO (opcionales) ===
+  expertOpinion?: BankExpertOpinion;
+  openingSteps?: string[];
+  history?: BankHistoryItem[];
+  videoUrl?: string;
+  reviews?: BankReview[];
+
   // === DATOS INTERNOS ===
   _lastUpdated: string;
   _affiliateCommission?: string;
@@ -187,6 +216,8 @@ export const banks: Bank[] = [
       atmEU: "Gratis hasta 200 €/mes",
       atmInternational: "2% después de 1.000 €/mes",
       fxRate: "Interbancario (0% markup en días laborables)",
+      transfer: "SEPA gratis; internacionales con pequeña comisión",
+      cardReplacement: "Coste según tipo de tarjeta y país",
     },
     cardType: "Visa / Mastercard (según país)",
 
@@ -203,7 +234,15 @@ export const banks: Bank[] = [
     idealFor: "Viajeros, freelancers, nómadas digitales, compradores online.",
 
     requirements: ["DNI/NIE/Pasaporte", "Selfie", "Mayor de 18"],
-    acceptedCountries: ["UE", "EEA", "UK", "Australia", "Canadá", "EEUU", "Singapur"],
+    acceptedCountries: [
+      "UE",
+      "EEA",
+      "UK",
+      "Australia",
+      "Canadá",
+      "EEUU",
+      "Singapur",
+    ],
 
     rating: {
       trustpilot: 4.3,
@@ -235,6 +274,74 @@ export const banks: Bank[] = [
         question: "¿Puedo domiciliar nómina en Revolut?",
         answer:
           "Sí, pero algunas empresas rechazan IBAN lituano. Úsalo como cuenta secundaria.",
+      },
+    ],
+
+    // === NUEVOS BLOQUES DE CONTENIDO ===
+    expertOpinion: {
+      summary:
+        "Revolut es especialmente interesante si viajas a menudo, operas en varias divisas o quieres concentrar en una sola app muchas funciones financieras.",
+      recommendedFor: [
+        "Viajeros frecuentes dentro y fuera de la zona euro.",
+        "Freelancers que cobran en distintas divisas.",
+        "Personas que quieren una app potente para controlar gastos y ahorros.",
+      ],
+      notFor: [
+        "Quien prefiere una cuenta tradicional con oficina física.",
+        "Quien solo necesita una cuenta muy básica en euros sin extras.",
+      ],
+    },
+
+    openingSteps: [
+      "Entra a la web oficial.",
+      "Regístrate con tu número de teléfono y crea tu perfil.",
+      "Verifica tu identidad subiendo tu documento y realizando un selfie.",
+      "Ingresa dinero en la cuenta con tarjeta o transferencia bancaria.",
+      "Solicita tu tarjeta física (si la quieres) y empieza a usarla.",
+    ],
+
+    history: [
+      {
+        year: 2015,
+        event:
+          "Lanzamiento de Revolut como app de pagos y cambio de divisa en Reino Unido.",
+      },
+      {
+        year: 2018,
+        event:
+          "Expansión a gran parte de Europa y mejora de las cuentas multidivisa.",
+      },
+      {
+        year: 2020,
+        event:
+          "Obtención de licencia bancaria completa en la UE y nuevos planes de suscripción.",
+      },
+      {
+        year: 2023,
+        event:
+          "Refuerzo de funciones de inversión, seguridad y herramientas de presupuesto.",
+      },
+    ],
+
+    // Puedes poner aquí un vídeo tuyo o de YouTube
+  
+
+    reviews: [
+      {
+        author: "Lucía",
+        rating: 5,
+        text: "Perfecta para viajar y pagar en el extranjero sin preocuparte por las comisiones.",
+        source: "Resumen de opiniones de usuarios",
+      },
+      {
+        author: "Carlos",
+        rating: 4,
+        text: "La app es muy completa. A veces tiene tantas funciones que abruma un poco si solo quieres algo sencillo.",
+      },
+      {
+        author: "María",
+        rating: 4,
+        text: "Me va muy bien para dividir gastos con amigos y pagar en otras divisas.",
       },
     ],
 

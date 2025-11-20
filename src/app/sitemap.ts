@@ -1,24 +1,12 @@
-// src/app/sitemap.ts
-import { banks } from "@/lib/banks";
+import { MetadataRoute } from "next";
 
-export default function sitemap() {
-  const baseUrl = "https://bancoseuropa.com"; // cambia cuando tengas dominio
-
-  const staticRoutes = [
-    "/",
-    "/bancos",
-    "/comparativa",
-    "/faq",
-    "/ventajas",
-  ].map((path) => ({
-    url: `${baseUrl}${path}`,
-    lastModified: new Date(),
-  }));
-
-  const bankRoutes = banks.map((bank) => ({
-    url: `${baseUrl}/programas/${bank.slug}`,
-    lastModified: new Date(bank._lastUpdated ?? new Date()),
-  }));
-
-  return [...staticRoutes, ...bankRoutes];
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    { url: "https://finanzaseu.com" },
+    { url: "https://finanzaseu.com/bancos" },
+    { url: "https://finanzaseu.com/ventajas" },
+    { url: "https://finanzaseu.com/faq" },
+    { url: "https://finanzaseu.com/contacto" },
+    { url: "https://finanzaseu.com/vlogs" },
+  ];
 }

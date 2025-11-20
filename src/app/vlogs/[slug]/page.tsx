@@ -9,6 +9,9 @@ import Container from "@/components/layout/Container";
 import { vlogs } from "@/lib/vlogs";
 import VlogCard from "@/components/vlogs/VlogCard";
 
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 type Props = {
   params: { slug: string };
 };
@@ -65,17 +68,12 @@ export default function VlogPage({ params }: Props) {
     year: "numeric",
   });
 
-  // Split en bloques separados por línea en blanco
-  const blocks = content
-    .split(/\n\s*\n/)
-    .map((b: string) => b.trim())
-    .filter(Boolean);
-
-  // TOC simple a partir de headings ## 
-  const toc = blocks
-    .filter((b: string) => b.startsWith("## "))
-    .map((b: string) => {
-      const label = b.replace(/^##\s*/, "");
+  // TOC simple a partir de headings "## "
+  const toc = content
+    .split("\n")
+    .filter((line) => line.startsWith("## "))
+    .map((line) => {
+      const label = line.replace(/^##\s*/, "");
       return { id: slugifyHeading(label), label };
     });
 
@@ -196,80 +194,86 @@ export default function VlogPage({ params }: Props) {
         </aside>
       )}
 
-      {/* CONTENIDO */}
+      {/* CONTENIDO: MARKDOWN REAL */}
       <article className="prose prose-neutral mt-8 max-w-none rounded-3xl border border-border/40 bg-background/80 p-5 text-sm leading-relaxed shadow-sm dark:prose-invert md:p-8 md:text-base">
-        <div className="space-y-6">
-          {blocks.map((text: string, index: number) => {
-            // Separador
-            if (/^(-{3,}|_{3,}|\*{3,})$/.test(text)) {
-              return (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 text-muted-foreground"
-                >
-                  <div className="h-px flex-1 bg-border" />
-                  <span className="text-xs">✦</span>
-                  <div className="h-px flex-1 bg-border" />
-                </div>
-              );
-            }
-
-            // Heading H2
-            if (text.startsWith("## ")) {
-              const headingText = text.replace(/^##\s*/, "");
-              const id = slugifyHeading(headingText);
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            h1: (props) => (
+              <h1
+                className="mt-8 text-3xl font-bold"
+                {...props}
+              />
+            ),
+            h2: (props) => {
+              const text = String(props.children ?? "");
+              const id = slugifyHeading(text);
               return (
                 <h2
-                  key={index}
                   id={id}
-                  className="scroll-mt-24 text-xl font-semibold text-foreground md:text-2xl"
-                >
-                  {headingText}
-                </h2>
+                  className="mt-8 scroll-mt-24 text-2xl font-semibold"
+                  {...props}
+                />
               );
-            }
-
-            // Cita
-            if (text.startsWith(">")) {
-              return (
-                <blockquote
-                  key={index}
-                  className="border-l-4 border-emerald-500 bg-emerald-500/5 pl-6 pr-4 py-4 italic text-foreground/90 md:text-lg dark:border-emerald-400 dark:bg-emerald-400/10"
-                >
-                  {text.replace(/^>\s*/, "")}
-                </blockquote>
-              );
-            }
-
-            // Lista con bullets •
-            if (text.startsWith("•")) {
-              const items = text
-                .split("\n")
-                .map((line) => line.trim())
-                .filter((line) => line.startsWith("•"))
-                .map((line) => line.replace(/^•\s*/, ""))
-                .filter(Boolean);
-
-              return (
-                <ul
-                  key={index}
-                  className="list-disc space-y-2 pl-5 text-foreground"
-                >
-                  {items.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              );
-            }
-
-            // Párrafo normal
-            return (
-              <p key={index} className="text-foreground">
-                {text}
-              </p>
-            );
-          })}
-        </div>
+            },
+            h3: (props) => (
+              <h3
+                className="mt-6 text-xl font-semibold"
+                {...props}
+              />
+            ),
+            h4: (props) => (
+              <h4
+                className="mt-4 text-lg font-semibold"
+                {...props}
+              />
+            ),
+            p: (props) => (
+              <p className="my-4 leading-relaxed" {...props} />
+            ),
+            ul: (props) => (
+              <ul className="my-4 list-disc pl-6" {...props} />
+            ),
+            ol: (props) => (
+              <ol className="my-4 list-decimal pl-6" {...props} />
+            ),
+            li: (props) => <li className="mb-1" {...props} />,
+            blockquote: (props) => (
+              <blockquote
+                className="border-l-4 border-emerald-500 bg-emerald-500/5 pl-6 pr-4 py-4 italic dark:border-emerald-400 dark:bg-emerald-400/10"
+                {...props}
+              />
+            ),
+            table: (props) => (
+              <div className="my-6 overflow-x-auto">
+                <table
+                  className="min-w-full border-collapse text-sm"
+                  {...props}
+                />
+              </div>
+            ),
+            th: (props) => (
+              <th
+                className="border border-border bg-muted px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide"
+                {...props}
+              />
+            ),
+            td: (props) => (
+              <td
+                className="border border-border px-3 py-2 align-top"
+                {...props}
+              />
+            ),
+            code: (props) => (
+              <code
+                className="rounded bg-muted px-1 py-0.5 text-[13px]"
+                {...props}
+              />
+            ),
+          }}
+        >
+          {content}
+        </ReactMarkdown>
       </article>
 
       {/* CTA / RELACIONADOS */}
