@@ -102,7 +102,6 @@ export default function ProgramaPage({
     expertOpinion,
     openingSteps,
     history,
-    videoUrl,
     reviews,
   } = bank as Bank;
 
@@ -683,25 +682,7 @@ export default function ProgramaPage({
         )}
 
         {/* Vídeo resumen */}
-        {videoUrl && (
-          <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
-            <h2 className="mb-3 text-xl font-semibold">
-              Vídeo resumen sobre {name}
-            </h2>
-            <p className="mb-4 text-sm text-muted-foreground">
-              Si prefieres, aquí tienes un resumen en vídeo con los puntos
-              clave de este banco.
-            </p>
-            <div className="aspect-video overflow-hidden rounded-2xl border border-border bg-black">
-              <iframe
-                src={videoUrl}
-                title={`Vídeo sobre ${name}`}
-                className="h-full w-full"
-                allowFullScreen
-              />
-            </div>
-          </section>
-        )}
+
 
         {/* FAQ específica del banco */}
         {faq && faq.length > 0 && (

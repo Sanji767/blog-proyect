@@ -1,12 +1,16 @@
 // next.config.mjs
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,        // ← Esto desactiva el optimizador que está rompiendo tus logos
+    // Con las imágenes en /public ya no necesitas esto, pero por si usas externas algún día
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+    // unoptimized: true ← ya NO hace falta si usas /public correctamente
   },
-  // Si usas App Router y exportas estático (no lo creo, pero por si acaso)
-  // output: "export",   ← NO pongas esto si tienes "use client" y localStorage
 };
 
 export default nextConfig;
