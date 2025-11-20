@@ -92,8 +92,7 @@ export default function RootLayout({
         {/* Cambia G-XXXXXXX por tu ID real de GA4 */}
         <GoogleAnalytics gaId="G-XXXXXXX" />
 
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <p>Impact-Site-Verification: f4890842-9da1-4ae0-9912-9770c5fc667f</p>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>        
           <Header />
           <main className="pt-20 md:pt-24">{children}</main>
           <Footer />
