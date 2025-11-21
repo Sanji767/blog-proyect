@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import type React from "react";
 
 import { banks, type Bank } from "@/lib/banks";
 import Container from "@/components/layout/Container";
@@ -14,6 +15,41 @@ import {
   Info,
   CheckCircle2,
 } from "lucide-react";
+
+/* =========================================
+   Tipos extra para el contenido dinámico
+========================================= */
+
+type Review = {
+  author: string;
+  text: string;
+  rating: number;
+  source?: string;
+};
+
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+type HistoryItem = {
+  year: number;
+  event: string;
+};
+
+type ExpertOpinion = {
+  summary?: string;
+  recommendedFor?: string[];
+  notFor?: string[];
+};
+
+type BankContent = Bank & {
+  faq?: FAQItem[];
+  reviews?: Review[];
+  history?: HistoryItem[];
+  openingSteps?: string[];
+  expertOpinion?: ExpertOpinion;
+};
 
 /* -----------------------------------------
    1) Rutas estáticas: /programas/revolut, etc.
@@ -92,7 +128,7 @@ export default function ProgramaPage({
     affiliateUrl,
     website,
     tags,
-    faq,
+    faq = [],
     fees,
     cardType,
     support,
@@ -101,9 +137,9 @@ export default function ProgramaPage({
     acceptedCountries,
     expertOpinion,
     openingSteps,
-    history,
-    reviews,
-  } = bank as Bank;
+    history = [],
+    reviews = [],
+  } = bank as BankContent;
 
   const monthlyFee = fees.monthly;
   const atmWithdrawals = `${fees.atmEU} · Intl: ${fees.atmInternational}`;
@@ -113,15 +149,15 @@ export default function ProgramaPage({
   const primaryCtaUrl = affiliateUrl ?? website;
   const hasAffiliate = Boolean(affiliateUrl);
 
-  const relatedBanks = getRelatedBanks(bank);
+  const relatedBanks = getRelatedBanks(bank as BankContent);
 
   const logoSrc = logo; // string | StaticImageData
   const heroSrc = heroImage || null;
 
   const isFree =
-    !!monthlyFee && (/gratis/i.test(monthlyFee) || /0\s*€/.test(monthlyFee));
+    /gratis/i.test(monthlyFee) || /0\s*€/.test(monthlyFee);
 
-  const defaultOpeningSteps = [
+  const defaultOpeningSteps: string[] = [
     "Entra a la web oficial.",
     "Regístrate con tu email y número de teléfono.",
     "Verifica tu identidad subiendo tu documento.",
@@ -129,7 +165,10 @@ export default function ProgramaPage({
     "Activa tu tarjeta y empieza a usar la cuenta.",
   ];
 
-  const stepsToShow = openingSteps?.length ? openingSteps : defaultOpeningSteps;
+  const stepsToShow: string[] =
+    openingSteps && openingSteps.length > 0
+      ? openingSteps
+      : defaultOpeningSteps;
 
   const siteUrl = "https://finanzaseu.com"; // ⚠️ Ajusta a tu dominio real
 
@@ -162,12 +201,12 @@ export default function ProgramaPage({
     <section className="py-10 md:py-14">
       <Container className="space-y-10">
         {/* Schema.org Breadcrumbs */}
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify(breadcrumbJsonLd),
-  }}
-/>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbJsonLd),
+          }}
+        />
 
         {/* BREADCRUMB */}
         <nav
@@ -247,7 +286,7 @@ export default function ProgramaPage({
               <a
                 href={primaryCtaUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer noopener"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-black shadow-md transition hover:brightness-105"
               >
                 Abrir cuenta en {name}
@@ -256,7 +295,7 @@ export default function ProgramaPage({
               <a
                 href={website}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer noopener"
                 className="inline-flex items-center justify-center rounded-full border border-border px-5 py-2 text-sm font-medium hover:bg-background/60"
               >
                 Ver web oficial
@@ -356,7 +395,7 @@ export default function ProgramaPage({
                 Lo mejor de {name}
               </h2>
               <ul className="space-y-2 text-sm md:text-base">
-                {keyPros.map((item) => (
+                {keyPros.map((item: string) => (
                   <li key={item} className="flex gap-2">
                     <span className="mt-1 text-green-500">
                       <CheckCircle2 className="h-4 w-4" />
@@ -373,7 +412,7 @@ export default function ProgramaPage({
                   Puntos a tener en cuenta
                 </h2>
                 <ul className="space-y-2 text-sm md:text-base">
-                  {keyCons.map((item) => (
+                  {keyCons.map((item: string) => (
                     <li key={item} className="flex gap-2">
                       <span className="mt-1 text-red-500">●</span>
                       <span>{item}</span>
@@ -434,7 +473,7 @@ export default function ProgramaPage({
                 Requisitos para abrir la cuenta
               </h2>
               <ul className="space-y-2 text-sm">
-                {requirements.map((req) => (
+                {requirements.map((req: string) => (
                   <li key={req} className="flex gap-2">
                     <span className="mt-1 text-primary">●</span>
                     <span>{req}</span>
@@ -507,7 +546,7 @@ export default function ProgramaPage({
                   "Buscas una cuenta online sin demasiadas comisiones.",
                   "Quieres gestionar tu dinero desde el móvil.",
                   "Te interesa una tarjeta fácil de usar para viajar.",
-                ]).map((item) => (
+                ]).map((item: string) => (
                   <li key={item} className="flex gap-2">
                     <span className="mt-1 text-emerald-500">●</span>
                     <span>{item}</span>
@@ -524,7 +563,7 @@ export default function ProgramaPage({
                 {(expertOpinion?.notFor ?? [
                   "Buscas una cuenta tradicional con oficina física.",
                   "Necesitas servicios muy avanzados de inversión o empresa.",
-                ]).map((item) => (
+                ]).map((item: string) => (
                   <li key={item} className="flex gap-2">
                     <span className="mt-1 text-red-500">●</span>
                     <span>{item}</span>
@@ -544,7 +583,7 @@ export default function ProgramaPage({
             El proceso suele tardar solo unos minutos y se hace 100% online.
           </p>
           <ol className="space-y-3 text-sm">
-            {stepsToShow.map((step, index) => (
+            {stepsToShow.map((step: string, index: number) => (
               <li
                 key={step}
                 className="flex gap-3 rounded-2xl bg-muted/40 p-3"
@@ -593,14 +632,14 @@ export default function ProgramaPage({
                   </td>
                   <td className="py-2">{fees.atmInternational}</td>
                 </tr>
-                      {fees.fxRate && (
-                        <tr className="border-b border-muted/40">
-                          <td className="py-2 pr-4 align-top">
-                            Cambio de divisa
-                          </td>
-                          <td className="py-2">{fees.fxRate}</td>
-                        </tr>
-                      )}
+                {fees.fxRate && (
+                  <tr className="border-b border-muted/40">
+                    <td className="py-2 pr-4 align-top">
+                      Cambio de divisa
+                    </td>
+                    <td className="py-2">{fees.fxRate}</td>
+                  </tr>
+                )}
 
                 {fees.transfer && (
                   <tr className="border-b border-muted/40">
@@ -635,7 +674,7 @@ export default function ProgramaPage({
               usuarios.
             </p>
             <div className="grid gap-4 md:grid-cols-3">
-              {reviews.slice(0, 3).map((review) => (
+              {reviews.slice(0, 3).map((review: Review) => (
                 <article
                   key={review.author + review.text.slice(0, 10)}
                   className="flex flex-col rounded-2xl border border-border bg-muted/20 p-4 text-sm"
@@ -668,8 +707,10 @@ export default function ProgramaPage({
             </h2>
             <div className="space-y-3 text-sm">
               {[...history]
-                .sort((a, b) => a.year - b.year)
-                .map((item) => (
+                .sort(
+                  (a: HistoryItem, b: HistoryItem) => a.year - b.year,
+                )
+                .map((item: HistoryItem) => (
                   <div key={item.year} className="flex gap-3">
                     <div className="mt-1 w-16 text-xs font-semibold text-primary">
                       {item.year}
@@ -681,9 +722,6 @@ export default function ProgramaPage({
           </section>
         )}
 
-        {/* Vídeo resumen */}
-
-
         {/* FAQ específica del banco */}
         {faq && faq.length > 0 && (
           <section className="border-t border-border pt-8">
@@ -691,7 +729,7 @@ export default function ProgramaPage({
               Preguntas frecuentes sobre {name}
             </h2>
             <div className="space-y-3">
-              {faq.map((item) => (
+              {faq.map((item: FAQItem) => (
                 <details
                   key={item.question}
                   className="group rounded-2xl border border-border bg-background p-4 text-sm"
@@ -729,7 +767,7 @@ export default function ProgramaPage({
               decidir.
             </p>
             <div className="grid gap-6 md:grid-cols-3">
-              {relatedBanks.map((related) => {
+              {relatedBanks.map((related: BankContent) => {
                 const relatedLogo = related.logo;
 
                 return (
@@ -790,7 +828,7 @@ export default function ProgramaPage({
             <a
               href={primaryCtaUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-black shadow-md transition hover:brightness-105"
             >
               Empezar ahora
@@ -820,7 +858,7 @@ function InfoRow({
   icon,
 }: {
   label: string;
-  value: string;
+  value?: React.ReactNode;
   icon?: React.ReactNode;
 }) {
   return (
@@ -829,7 +867,7 @@ function InfoRow({
         {icon && <span>{icon}</span>}
         <span>{label}</span>
       </dt>
-      <dd className="text-sm">{value}</dd>
+      <dd className="text-sm">{value ?? "No disponible"}</dd>
     </div>
   );
 }
@@ -840,7 +878,7 @@ function StatPill({
   highlight,
 }: {
   label: string;
-  value: string;
+  value?: string;
   highlight?: "success";
 }) {
   const valueClasses =
@@ -851,7 +889,9 @@ function StatPill({
   return (
     <div className="rounded-xl bg-background px-3 py-2 shadow-sm">
       <p className="text-[11px] text-muted-foreground">{label}</p>
-      <p className={`text-sm ${valueClasses}`}>{value}</p>
+      <p className={`text-sm ${valueClasses}`}>
+        {value ?? "No disponible"}
+      </p>
     </div>
   );
 }
@@ -879,7 +919,7 @@ function formatTag(tag: string): string {
 /**
  * Devuelve bancos relacionados según categoría y tags en común.
  */
-function getRelatedBanks(current: Bank): Bank[] {
+function getRelatedBanks(current: BankContent): BankContent[] {
   return banks
     .filter((b) => b.slug !== current.slug)
     .map((b) => {
@@ -888,12 +928,19 @@ function getRelatedBanks(current: Bank): Bank[] {
         current.tags.includes(tag),
       ).length;
       return {
-        bank: b,
+        bank: b as BankContent,
         score: sameCategoryScore + commonTags,
       };
     })
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score)
+    .filter(
+      (item: { bank: BankContent; score: number }) => item.score > 0,
+    )
+    .sort(
+      (
+        a: { bank: BankContent; score: number },
+        b: { bank: BankContent; score: number },
+      ) => b.score - a.score,
+    )
     .slice(0, 3)
-    .map((item) => item.bank);
+    .map((item: { bank: BankContent; score: number }) => item.bank);
 }

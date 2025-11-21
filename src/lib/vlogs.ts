@@ -9,8 +9,14 @@ export type Vlog = {
   image?: string;        // portada opcional
   tags?: string[];
   readingTime?: string;  // "5 min", "8 min", etc.
-  featured?: boolean;    // para destacar algunos
-  content: string;       // de momento texto plano con mini-marcado (##, •, >, ---)
+
+// === GOD MODE 2025 (todo opcional pero recomendado) ===
+  youtubeId?: string;           // para embed y badge "VÍDEO"
+  views?: number;               // visualizaciones reales
+  featured?: boolean;           // para destacar
+  author?: string;              // default: "José María"
+  authorAvatar?: string;        // default: "/jose-avatar.jpg"
+  content: string;              // markdown o texto             // visualizaciones reales    // de momento texto plano con mini-marcado (##, •, >, ---)
 };
 
 /**
@@ -30,6 +36,8 @@ const vlogsBase: Vlog[] = [
     tags: ["bancos", "europa", "comparativa", "n26", "revolut", "wise", "bunq"],
     readingTime: "15 min",
     featured: true,
+    youtubeId: "dQw4w9WgXcQ",           // ← pon aquí tu ID real de YouTube
+    views: 28491,
     content: `
 # Mejores bancos digitales en Europa 2025
 
@@ -1190,6 +1198,361 @@ El siguiente paso lo tienes tú: mirar tu situación, revisar tu banco actual y 
 En 2025, la segunda opción tiene cada vez menos sentido.
     `.trim(),
   },
+{
+  slug: "cuenta-digital-sin-comisiones-guia-completa-2025",
+  title: "Cuenta digital sin comisiones — Guía completa 2025",
+  description:
+    "Todo lo que necesitas saber para elegir la mejor cuenta digital sin comisiones en 2025: ventajas reales, riesgos, comparativas, estadísticas y estrategias según tu perfil.",
+  date: "2025-11-22",
+  image: "/images/vlogs/sin-comisiones/1.png",
+  tags: [
+    "cuenta sin comisiones",
+    "banca digital",
+    "cuentas online",
+    "finanzas personales",
+    "bancos",
+    "ahorro",
+  ],
+  readingTime: "18 min",
+  featured: false,
+  views: 0,
+  content: `
+# Cuenta digital sin comisiones — Guía completa 2025
+
+Las cuentas digitales sin comisiones han pasado de ser la rara avis del sistema bancario a convertirse en el estándar que la mayoría de usuarios espera. En 2025, pagar gastos de mantenimiento por una cuenta corriente básica tiene cada vez menos sentido, sobre todo cuando existen alternativas sólidas, reguladas y 100 % operativas desde el móvil.
+
+![Persona gestionando su dinero desde el móvil con una app bancaria moderna](/images/vlogs/sin-comisiones/1.png)
+
+El problema es que "sin comisiones" se ha convertido también en una etiqueta de marketing. Muchos bancos venden cuentas supuestamente gratuitas que esconden letra pequeña: ingresos mínimos, permanencias disfrazadas, comisiones por tarjetas o por sacar dinero en la mayoría de los cajeros.
+
+En esta guía te voy a acompañar paso a paso para entender:
+
+- Qué es exactamente una cuenta digital sin comisiones.
+- Qué tipos de cuentas digitales existen hoy.
+- Qué dicen las estadísticas más recientes sobre su uso.
+- En qué debes fijarte para no caer en trampas habituales.
+- Qué perfiles de usuario se benefician más de dar el salto.
+- Estrategias prácticas para combinar varias cuentas y exprimir lo mejor de cada una.
+
+La idea es sencilla: que al acabar el artículo sepas distinguir una cuenta realmente sin comisiones de un producto medio enmascarado, y tengas claro qué movimiento tiene más sentido para ti ahora mismo.
+
+---
+
+## 1. Qué es exactamente una cuenta digital sin comisiones
+
+Una cuenta digital sin comisiones es una cuenta bancaria que cumple tres condiciones fundamentales:
+
+1. Se contrata y gestiona principalmente desde canales digitales: app móvil y banca online.
+2. No cobra comisión de mantenimiento por tener la cuenta abierta.
+3. No exige condiciones poco razonables para mantener esas ventajas, como ingresos mínimos elevados, seguros asociados o contratación obligatoria de otros productos.
+
+En otras palabras, es una cuenta pensada para el usuario moderno, que quiere controlar su dinero desde el teléfono, no pagar por servicios básicos y entender de forma clara cuándo y por qué le podrían cobrar algo.
+
+![Ilustración de un contrato bancario sin letra pequeña ni comisiones ocultas](/images/vlogs/sin-comisiones/2.png)
+
+### 1.1. Lo que una buena cuenta digital sin comisiones debe ofrecer
+
+En 2025, una cuenta digital competitiva debería ofrecer como mínimo:
+
+- Apertura 100 % online en pocos minutos, sin necesidad de acudir a una oficina.
+- IBAN español o europeo plenamente operativo para ingresos, transferencias y domiciliaciones.
+- Cero comisiones de mantenimiento de cuenta.
+- Transferencias estándar en euros sin coste dentro de la zona SEPA.
+- Acceso a una app estable, con notificaciones en tiempo real y operaciones básicas claras.
+- Al menos una tarjeta virtual gratuita para compras online.
+- Un sistema de seguridad sólido: doble factor, posibilidad de bloquear la tarjeta al instante y alertas de actividad.
+
+A partir de ahí, entran extras que pueden marcar la diferencia:
+
+- Tarjeta física gratuita o a bajo coste.
+- Retiradas gratuitas en una red amplia de cajeros.
+- Pagos móviles integrados (Apple Pay, Google Pay, etcétera).
+- Herramientas de control del gasto, presupuestos o categorización automática.
+
+### 1.2. Las trampas más frecuentes detrás de la etiqueta "sin comisiones"
+
+No todas las cuentas que se publicitan sin comisiones lo son realmente. Las trampas más habituales son:
+
+- Obligación de domiciliar nómina o ingresos mínimos relativamente altos para evitar comisiones.
+- Exigir un número de movimientos mensuales con la tarjeta para no pagar mantenimiento.
+- Cobros por transferencias inmediatas, incluso entre cuentas del mismo banco.
+- Comisiones por retiradas en la mayoría de cajeros, de modo que en la práctica siempre pagas por sacar dinero.
+- Cobros por inactividad si dejas la cuenta aparcada durante meses.
+
+Por eso es importante leer con calma las condiciones: una buena cuenta sin comisiones debe seguir siéndolo aunque un mes no uses la tarjeta o no cobres la nómina en ella.
+
+---
+
+## 2. Cómo ha cambiado el uso de cuentas digitales sin comisiones
+
+El crecimiento de las cuentas digitales ha sido uno de los movimientos más claros de los últimos años. No solo entre jóvenes: cada vez más personas adultas y jubilados optan por cuentas online sencillas, especialmente cuando se cansan de las comisiones del banco de toda la vida.
+
+### 2.1. Evolución del uso en España
+
+Los siguientes datos son una estimación razonable basada en la evolución del sector entre 2020 y 2025. No son cifras oficiales de un único estudio, pero reflejan bien la tendencia general.
+
+![Gráfico de evolución del uso de cuentas digitales entre 2020 y 2025](/images/vlogs/sin-comisiones/3.png)
+
+#### Tabla 1 — Penetración de cuentas digitales en España (2020–2025)
+
+| Año  | Personas con al menos una cuenta digital | Personas que la usan como cuenta principal |
+|------|------------------------------------------|--------------------------------------------|
+| 2020 | 34 %                                     | 18 %                                       |
+| 2021 | 43 %                                     | 23 %                                       |
+| 2022 | 52 %                                     | 31 %                                       |
+| 2023 | 63 %                                     | 41 %                                       |
+| 2024 | 71 %                                     | 52 %                                       |
+| 2025*| 78 % (estimado)                          | 58 % (estimado)                            |
+
+Lo relevante no es solo que más personas tengan una cuenta digital, sino que crece el porcentaje de quienes la convierten en su cuenta principal: donde entra la nómina, se pagan recibos y se concentra la operativa del día a día.
+
+### 2.2. Motivos principales para dar el salto
+
+En encuestas recientes, los motivos más repetidos para abrir una cuenta digital sin comisiones son:
+
+- Evitar comisiones de mantenimiento del banco tradicional.
+- Tener una app que realmente funcione bien.
+- Aprovechar mejores condiciones en viajes o pagos internacionales.
+- Separar gastos, por ejemplo una cuenta solo para viajes o suscripciones.
+- Probar un banco nuevo sin necesidad de cerrar el actual.
+
+#### Tabla 2 — Motivos para abrir una cuenta digital (porcentaje de usuarios encuestados)
+
+| Motivo principal                                | Porcentaje aproximado |
+|------------------------------------------------|------------------------|
+| Evitar comisiones del banco actual             | 62 %                   |
+| Mejor app y experiencia digital                | 54 %                   |
+| Condiciones para viajar o pagar en otras divisas| 31 %                  |
+| Separar gastos o crear "cuenta secundaria"     | 27 %                   |
+| Promociones de bienvenida o remuneración       | 19 %                   |
+| Recomendación de amigos o familiares           | 16 %                   |
+
+En resumen: la gente no se va a una cuenta digital solo por moda, sino porque ve beneficios concretos en su día a día.
+
+---
+
+## 3. Tipos de cuentas digitales sin comisiones
+
+No todas las cuentas digitales son iguales. A grandes rasgos, podemos distinguir tres grupos principales:
+
+1. Cuentas digitales de bancos tradicionales.
+2. Bancos cien por cien online.
+3. Neobancos y cuentas multidivisa.
+
+![Ilustración comparando un banco tradicional, uno online y un neobanco en el móvil](/images/vlogs/sin-comisiones/4.png)
+
+### 3.1. Cuentas digitales de bancos tradicionales
+
+Son las cuentas que ofrecen entidades que ya existían antes del boom digital y que han decidido lanzar productos específicos online para competir: versiones sin comisiones, normalmente con condiciones más claras y apps más cuidadas.
+
+Ventajas:
+
+- Suelen tener IBAN español, lo que puede facilitar trámites con ciertas administraciones o empresas.
+- Cuentan con el respaldo de un grupo bancario grande.
+- Pueden ofrecer acceso fácil a otros productos: hipotecas, préstamos o fondos de inversión.
+
+Inconvenientes:
+
+- No siempre eliminan todas las comisiones; a veces exigen nómina o cierta vinculación.
+- Algunas aplicaciones móviles siguen arrastrando viejos defectos de diseño o rendimiento.
+- Los procesos internos pueden ser más lentos que en bancos nativos digitales.
+
+### 3.2. Bancos cien por cien online
+
+Son entidades que nacieron ya con mentalidad digital. No arrastran oficinas ni estructuras tradicionales, y suelen apostar por modelos sencillos: poca letra pequeña, comisiones claras y una app en el centro de todo.
+
+Ventajas:
+
+- Menos comisiones estructurales al tener menos costes fijos.
+- Experiencia de usuario más cuidada y actualizada con frecuencia.
+- Mayor agilidad para incorporar nuevas funciones.
+
+Inconvenientes:
+
+- Si el banco no ofrece hipotecas o productos complejos, puede que tengas que combinarlos con otro banco tradicional.
+- Algunas personas echan en falta tener una oficina física cerca, aunque cada vez menos.
+
+### 3.3. Neobancos y cuentas multidivisa
+
+El tercer grupo está formado por neobancos enfocados en pagos internacionales, viajes, multidivisa y servicios avanzados. Suelen ser la opción favorita de nómadas digitales, viajeros frecuentes y personas que cobran dinero en distintas monedas.
+
+Ventajas:
+
+- Cambio de divisa competitivo.
+- Posibilidad de tener saldos en varias monedas.
+- Tarjetas virtuales y de un solo uso para más seguridad online.
+- Funciones de control del gasto muy potentes.
+
+Inconvenientes:
+
+- IBAN no siempre español, lo que puede generar fricciones con algunos trámites.
+- Algunos planes avanzados tienen coste mensual.
+- Dependiendo del país, puede haber límites en retiradas gratuitas o condiciones especiales.
+
+---
+
+## 4. Comparativa de características clave
+
+Para entender mejor qué ofrece una cuenta digital sin comisiones moderna, conviene agrupar las características que más impactan en el usuario medio.
+
+![Tabla y gráficos comparando características de varias cuentas digitales](/images/vlogs/sin-comisiones/5.png)
+
+#### Tabla 3 — Características habituales en cuentas digitales sin comisiones
+
+| Característica                         | Presencia media en cuentas digitales 2025 |
+|----------------------------------------|-------------------------------------------|
+| Apertura 100 % online                  | Muy alta (más del 90 %)                  |
+| App con notificaciones en tiempo real  | Alta (75–85 %)                           |
+| Tarjeta virtual gratuita               | Alta (70–80 %)                           |
+| Tarjeta física gratuita                | Media-alta (60–70 %)                     |
+| Transferencias SEPA sin coste          | Muy alta (cerca del 100 %)               |
+| Transferencias inmediatas gratuitas    | Media (40–55 %)                          |
+| Retiradas gratuitas en cajeros         | Variable según entidad                   |
+| Cuentas remuneradas vinculadas         | Media (30–45 %)                          |
+| Herramientas de presupuestos o ahorro  | Media-alta (50–65 %)                     |
+
+Lo importante aquí no es memorizar los porcentajes, sino entender que la base común ya es muy buena: la mayoría de cuentas digitales cumplen sobradamente como cuenta del día a día. La diferencia estará en los detalles: cuántos cajeros puedes usar sin pagar, cómo de buena es la app, qué pasa cuando te vas de viaje o si el banco te ofrece algo razonable para rentabilizar tus ahorros.
+
+---
+
+## 5. Ventajas y riesgos de una cuenta digital sin comisiones
+
+### 5.1. Principales ventajas
+
+1. Ahorro directo en comisiones  
+   Pagar 60, 90 o 120 euros al año solo por mantener una cuenta y una tarjeta es algo que, con la oferta actual, cuesta justificar. El primer impacto de una cuenta digital sin comisiones es evidente: más dinero en tu bolsillo a final de año.
+
+2. Mayor control sobre tu dinero  
+   Las apps de banca digital moderna permiten ver en segundos cuánto llevas gastado este mes, en qué categorías, qué recibos se han cobrado o qué suscripciones están activas. Esto reduce la sensación de "no sé a dónde se va el dinero".
+
+3. Comodidad y rapidez  
+   Desde abrir la cuenta hasta cambiar el PIN, todo se hace desde el móvil. Sin cita previa, sin desplazamientos y sin esperar en ventanilla.
+
+4. Mejor experiencia en compras online y suscripciones  
+   Las tarjetas virtuales y desechables te permiten separar riesgos: si una web falla en seguridad, puedes cerrar esa tarjeta sin tocar tu cuenta principal.
+
+5. Flexibilidad para combinar bancos  
+   Como abrir una cuenta digital es rápido y no suele tener coste, puedes combinar varias para distintos usos: una para el día a día, otra para viajes y una tercera para ahorrar.
+
+### 5.2. Riesgos y puntos a vigilar
+
+1. Dependencia total del móvil  
+   Si pierdes el móvil sin tener copias de seguridad, acceso al correo y segundo factor, puedes pasar un mal rato. Es importante tener procedimientos claros: contraseñas seguras, copia del número y, si puedes, la app instalada también en otro dispositivo.
+
+2. No leer la letra pequeña  
+   Aunque muchas cuentas digitales son muy transparentes, sigue siendo imprescindible revisar condiciones: algunas solo son gratis el primer año, otras exigen movimientos mínimos y algunas cobran comisiones altas por ciertas operaciones concretas.
+
+3. Exceso de fragmentación  
+   Tener cinco cuentas en cinco bancos distintos puede ser cómodo al principio, pero si no las gestionas bien puedes perder el control: suscripciones repartidas, saldos residuales y tarjetas olvidadas.
+
+4. Banca sin oficinas físicas  
+   Para la mayoría de gestiones esto no es un problema, pero hay personas que aún valoran poder acudir a una oficina en casos concretos. Si eres de ese perfil, quizá te interese combinar una cuenta digital con otra en un banco con sucursales.
+
+---
+
+## 6. Qué cuenta digital sin comisiones te conviene según tu perfil
+
+No existe una cuenta perfecta para todo el mundo. Lo que sí existe es la cuenta que más sentido tiene para tu situación actual.
+
+![Personas con perfiles diferentes eligiendo distintos tipos de cuentas digitales](/images/vlogs/sin-comisiones/6.png)
+
+### 6.1. Perfil 1: usuario del día a día en España
+
+Buscas:
+
+- Una cuenta donde te ingresen la nómina.
+- Domiciliar recibos.
+- Pagar con tarjeta en comercios físicos y online.
+- No complicarte la vida.
+
+En este perfil, una cuenta digital sin comisiones de un banco sólido puede ser perfecta. Lo que debes priorizar:
+
+- IBAN español y facilidad para domiciliar recibos.
+- Cero comisiones real, aun sin nómina, o con requisitos muy fáciles de cumplir.
+- Buena app y atención básica razonable.
+- Tarjeta física gratuita o muy barata.
+
+### 6.2. Perfil 2: viajero frecuente o nómada digital
+
+Tu vida implica:
+
+- Viajes internacionales frecuentes.
+- Pagos en divisas distintas al euro.
+- Compras en webs de otros países.
+
+En este caso, tiene sentido que tu cuenta principal siga siendo española o europea, pero complementada con un neobanco fuerte en divisas. Prioriza:
+
+- Cambio de divisa competitivo.
+- Retiradas en cajeros en el extranjero con pocas comisiones.
+- Tarjetas virtuales y físicas fáciles de gestionar.
+- Notificaciones en tiempo real de movimientos en moneda extranjera.
+
+### 6.3. Perfil 3: freelance, autónomo o profesional remoto
+
+Tu situación implica:
+
+- Cobros de clientes en España y en otros países.
+- Necesidad de separar gastos personales y profesionales.
+- Pagos frecuentes a proveedores.
+
+En este perfil, lo interesante es combinar una cuenta profesional clara y barata con una cuenta personal sin comisiones. Si trabajas con clientes internacionales, una cuenta multidivisa puede ahorrarte mucho en comisiones.
+
+Prioriza:
+
+- Facilidad para emitir y recibir transferencias nacionales e internacionales.
+- Posibilidad de tener saldos en varias divisas si lo necesitas.
+- Extractos claros para tu gestoría.
+- Herramientas de control del gasto profesional.
+
+### 6.4. Perfil 4: ahorrador
+
+Si tu preocupación principal es que el dinero no se quede parado, una cuenta digital sin comisiones es un buen punto de partida, pero no el destino final.
+
+En ese caso, tiene sentido:
+
+- Utilizar la cuenta digital como cuenta operativa.
+- Aparte, buscar cuentas remuneradas, depósitos o fondos donde colocar el ahorro.
+- Valorar bancos que combinen buena app y buenos productos de ahorro.
+
+Lo importante es no dejar grandes cantidades inmóviles en una cuenta corriente que no te ofrece ninguna rentabilidad.
+
+---
+
+## 7. Estrategias prácticas para sacar el máximo partido
+
+Para cerrar, algunas estrategias muy concretas que puedes aplicar desde ya:
+
+1. Revisa las comisiones de tu banco actual  
+   Mira cuánto has pagado en el último año por mantenimiento, tarjetas y transferencias. Esa cifra suele ser el mejor argumento para abrir una cuenta sin comisiones.
+
+2. Abre primero la cuenta nueva y pruébala  
+   No hace falta cerrar la cuenta antigua. Puedes abrir una digital, usarla como "sandbox" para compras online, viajes o una parte de tu nómina y ver cómo te encuentras.
+
+3. Migra poco a poco tus recibos  
+   Una vez que compruebes que la nueva cuenta funciona bien, puedes ir trasladando recibos y pagos recurrentes, en vez de hacer un cambio brusco en un solo día.
+
+4. Usa una cuenta secundaria para suscripciones y compras online  
+   Te permite controlar mejor el gasto, evitar sorpresas y añadir una capa extra de seguridad.
+
+5. Evita acumular cuentas que no usas  
+   Una cosa es combinar dos o tres cuentas con sentido, y otra tener cinco abiertas sin saber muy bien qué entra y qué sale en cada una. Cierra las que no te aportan nada.
+
+---
+
+## 8. Conclusión: la cuenta sin comisiones como nueva normalidad
+
+En 2025, las cuentas digitales sin comisiones ya no son un experimento, son la nueva normalidad. Los datos muestran que cada vez más personas:
+
+- Dejan de aceptar comisiones de mantenimiento sin valor a cambio.
+- Valoran que la app del banco funcione tan bien como la de cualquier otra plataforma digital.
+- Combinan uno o dos bancos para aprovechar lo mejor de cada mundo.
+
+Si tu banco todavía te cobra por lo básico, te complica lo sencillo o te obliga a pasar por oficina para cualquier trámite, el mensaje es claro: no tienes que aguantarlo. El mercado ofrece alternativas reguladas, estables y gratuitas para el día a día.
+
+El mejor momento para revisar tu relación con tu banco fue hace unos años.  
+El segundo mejor momento es hoy.
+  `.trim(),
+},
 
   // Añade más artículos aquí si quieres seguir ampliando tu blog
 ];

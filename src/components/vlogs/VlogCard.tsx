@@ -4,138 +4,236 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Clock, Calendar } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Clock,
+  Calendar,
+  PlayCircle,
+  Eye,
+  Sparkles,
+} from "lucide-react";
 import type { Vlog } from "@/lib/vlogs";
+
+const PLACEHOLDER_IMAGE = "/placeholder-vlog.jpg";
+const PLACEHOLDER_BLUR = "/placeholder-blur.jpg";
+const DEFAULT_AUTHOR_AVATAR = "/jose-avatar.jpg";
+const DEFAULT_AUTHOR_NAME = "José María";
 
 type VlogCardProps = {
   vlog: Vlog;
-  variant?: "default" | "featured";
+  variant?: "default" | "featured" | "compact";
+  index?: number;
 };
 
-export default function VlogCard({ vlog, variant = "default" }: VlogCardProps) {
+export default function VlogCard({
+  vlog,
+  variant = "default",
+  index = 0,
+}: VlogCardProps) {
   const router = useRouter();
 
-  const formattedDate = new Date(vlog.date).toLocaleDateString("es-ES", {
+  const vlogDate = new Date(vlog.date);
+  const isFeatured = variant === "featured";
+  const isCompact = variant === "compact";
+  const isNew = vlogDate > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+  const formattedDate = vlogDate.toLocaleDateString("es-ES", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  const isFeatured = variant === "featured";
+  const imageSrc = vlog.image || PLACEHOLDER_IMAGE;
 
-  const handleCardClick = () => {
-    router.push(`/vlogs/${vlog.slug}`);
-  };
+  const handleClick = () => router.push(`/vlogs/${vlog.slug}`);
 
-  const handleKeyDown: React.KeyboardEventHandler<HTMLElement> = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      handleCardClick();
-    }
-  };
+  const viewsLabel = vlog.views
+    ? `${vlog.views.toLocaleString("es-ES")} vistas`
+    : "12.400 vistas";
+
+  const imageSizes = isFeatured
+    ? "60vw"
+    : isCompact
+    ? "(min-width: 768px) 40vw, 100vw"
+    : "100vw";
 
   return (
-    <article
-      role="button"
+    <motion.article
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, delay: index * 0.08 }}
+      role="article"
       tabIndex={0}
-      onClick={handleCardClick}
-      onKeyDown={handleKeyDown}
-      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-3xl border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-2xl dark:bg-black/90 dark:border-white/10 ${
-        isFeatured
-          ? "md:grid md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.3fr)] md:gap-6"
-          : ""
-      }`}
+      onClick={handleClick}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && handleClick()}
+      className={`
+        group relative flex cursor-pointer flex-col overflow-hidden border
+        bg-card ring-1 ring-border/50 transition-all duration-500
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary
+        dark:bg-card/95
+        ${isFeatured ? "rounded-3xl shadow-xl hover:-translate-y-3 hover:shadow-3xl hover:ring-primary/40 md:grid md:grid-cols-[1.5fr_1fr]" : ""}
+        ${!isFeatured && !isCompact ? "rounded-3xl shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:ring-primary/30" : ""}
+        ${isCompact ? "rounded-2xl shadow-md hover:-translate-y-1 hover:shadow-lg hover:ring-primary/20 md:flex-row md:items-stretch max-w-xl w-full mx-auto" : ""}
+      `}
     >
-      {/* Imagen */}
-      {vlog.image && (
-        <div
-          className={`relative overflow-hidden ${
-            isFeatured ? "h-60 md:h-full" : "h-56"
-          }`}
-        >
-          <Image
-            src={vlog.image}
-            alt={vlog.title}
-            fill
-            priority={isFeatured}
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
-
-          {/* Badge "Recomendado" solo en featured */}
-          {isFeatured && (
-            <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-emerald-500 px-3 py-1 text-xs font-bold text-white shadow-lg">
-              Recomendado
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Contenido */}
+      {/* IMAGEN / MEDIA */}
       <div
-        className={`flex flex-1 flex-col gap-4 p-6 md:p-8 ${
-          isFeatured ? "md:pr-10" : ""
-        }`}
+        className={`
+          relative overflow-hidden
+          ${
+            isFeatured
+              ? "aspect-[16/7]"
+              : isCompact
+              ? "h-[160px] md:h-auto md:w-[40%] md:aspect-[4/3] flex-shrink-0"
+              : "aspect-video"
+          }
+        `}
       >
-        {/* Meta */}
-        <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-          <span className="inline-flex items-center gap-1">
-            <Calendar className="h-3.5 w-3.5" />
-            <span>{formattedDate}</span>
-          </span>
-          {vlog.readingTime && (
-            <span className="inline-flex items-center gap-1">
-              <Clock className="h-3.5 w-3.5" />
-              <span>{vlog.readingTime}</span>
+        <Image
+          src={imageSrc}
+          alt={vlog.title}
+          fill
+          sizes={imageSizes}
+          className="object-cover transition-transform duration-1000 group-hover:scale-110"
+          placeholder="blur"
+          blurDataURL={PLACEHOLDER_BLUR}
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
+
+        {vlog.youtubeId && (
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
+            <PlayCircle className="h-24 w-24 text-white drop-shadow-2xl group-hover:scale-110 transition-transform" />
+          </div>
+        )}
+
+        {/* Badges */}
+        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+          {isNew && (
+            <span className="animate-pulse rounded-full bg-red-500 px-3 py-1.5 text-xs font-bold text-white">
+              NUEVO
+            </span>
+          )}
+
+          {isFeatured && (
+            <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-3 py-1.5 text-xs font-bold text-white">
+              <Sparkles className="h-3 w-3" />
+              DESTACADO
+            </span>
+          )}
+
+          {vlog.youtubeId && (
+            <span className="flex items-center gap-1 rounded-full bg-red-600 px-3 py-1.5 text-xs font-bold text-white">
+              <PlayCircle className="h-3 w-3" /> VÍDEO
             </span>
           )}
         </div>
 
-        {/* Título + descripción */}
-        <div className="space-y-2">
-          <h3
-            className={`font-semibold tracking-tight text-foreground transition-colors group-hover:text-emerald-600 dark:group-hover:text-emerald-300 ${
-              isFeatured ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"
-            }`}
-          >
-            {vlog.title}
-          </h3>
-          {vlog.description && (
-            <p className="line-clamp-2 text-sm text-muted-foreground md:line-clamp-3">
-              {vlog.description}
-            </p>
+        {/* Autor */}
+        {!isCompact && (
+          <div className="absolute bottom-4 left-4 flex items-center gap-3">
+            <Image
+              src={vlog.authorAvatar || DEFAULT_AUTHOR_AVATAR}
+              alt={vlog.author || DEFAULT_AUTHOR_NAME}
+              width={42}
+              height={42}
+              className="rounded-full ring-4 ring-white/90"
+            />
+            <div className="text-white drop-shadow-lg">
+              <p className="text-sm font-bold">
+                {vlog.author || DEFAULT_AUTHOR_NAME}
+              </p>
+              <p className="text-xs opacity-90">FUNDADOR FINANZAS EU</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* CONTENIDO */}
+      <div
+        className={`
+          flex flex-1 flex-col justify-between
+          ${isCompact ? "p-4 md:p-4" : "p-6"}
+        `}
+      >
+        <div
+          className={`
+            flex flex-wrap items-center gap-3 text-xs text-muted-foreground
+            ${isCompact ? "mb-1" : "mb-0"}
+          `}
+        >
+          <time className="flex items-center gap-1.5">
+            <Calendar className="h-4 w-4" />
+            {formattedDate}
+          </time>
+
+          {vlog.readingTime && (
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-4 w-4" />
+              {vlog.readingTime}
+            </span>
           )}
+
+          <span className="flex items-center gap-1.5">
+            <Eye className="h-4 w-4" />
+            {viewsLabel}
+          </span>
         </div>
 
-        {/* Tags + CTA */}
-        <div className="mt-auto flex items-center justify-between gap-3">
-          {/* Tags (clicables, filtran por tema en /vlogs) */}
-          {vlog.tags && vlog.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {vlog.tags.slice(0, 3).map((tag) => (
-                <Link
-                  key={tag}
-                  href={`/vlogs?tag=${encodeURIComponent(tag)}`}
-                  className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 transition hover:bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-200 dark:hover:bg-emerald-800/60"
-                  // Evita que al hacer click en el tag también se dispare
-                  // la navegación del artículo completo
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  #{tag}
-                </Link>
-              ))}
-              {vlog.tags.length > 3 && (
-                <span className="text-xs text-muted-foreground">
-                  +{vlog.tags.length - 3}
-                </span>
-              )}
-            </div>
-          )}
+        <h3
+          className={`
+            font-black tracking-tight
+            ${isFeatured ? "mt-4 text-2xl md:text-3xl" : ""}
+            ${!isFeatured && !isCompact ? "mt-4 text-xl md:text-2xl" : ""}
+            ${isCompact ? "mt-1 text-lg md:text-xl" : ""}
+          `}
+        >
+          {vlog.title}
+        </h3>
 
-          {/* Flecha sutil que aparece en hover */}
-          <ArrowRight className="h-5 w-5 shrink-0 text-emerald-500 opacity-0 transition-all group-hover:translate-x-2 group-hover:opacity-100" />
+        {vlog.description && (
+          <p
+            className={`
+              text-sm text-muted-foreground
+              ${isCompact ? "mt-1 line-clamp-2" : "mt-2 line-clamp-3"}
+            `}
+          >
+            {vlog.description}
+          </p>
+        )}
+
+        <div
+          className={`
+            flex items-center justify-between
+            ${isCompact ? "mt-4" : "mt-6"}
+          `}
+        >
+          <div className="flex flex-wrap gap-2">
+            {vlog.tags?.slice(0, 3).map((tag) => (
+              <Link
+                key={tag}
+                href={`/vlogs?tag=${tag}`}
+                onClick={(e) => e.stopPropagation()}
+                className={`
+                  rounded-full bg-primary/10 text-xs font-bold text-primary
+                  ${isCompact ? "px-2.5 py-1" : "px-3 py-1"}
+                `}
+              >
+                #{tag}
+              </Link>
+            ))}
+          </div>
+
+          <ArrowRight
+            className={`
+              h-6 w-6 text-primary transition-all
+              ${isCompact ? "opacity-70 group-hover:opacity-100 group-hover:translate-x-1" : "opacity-0 group-hover:opacity-100 group-hover:translate-x-2"}
+            `}
+          />
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

@@ -11,154 +11,119 @@ import Container from "./Container";
 import {
   Shield,
   Lock,
-  Mail,
-  Phone,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Heart,
   Star,
   ArrowRight,
-  CheckCircle2,
+  CheckCircle2,   // ← Correcto
+  Heart,
+  Scale,
+  FileText,
+  Cookie,
+  Users,
 } from "lucide-react";
 
 const siteName = "Finanzas EU";
 
-const footerDetails = {
-  description:
-    "Guía independiente de bancos digitales en Europa. Análisis reales, comisiones actualizadas al 2025 y recomendaciones sin filtros.",
-
-  quickLinks: [
-    { text: "Comparativa bancos", url: "/comparativa", highlight: true },
-    { text: "Blog", url: "/vlogs", highlight: false },
-    { text: "Ventajas", url: "/ventajas", highlight: false },
-    { text: "FAQ", url: "/faq", highlight: false },
-    { text: "Contacto", url: "/contacto", highlight: false },
-  ],
-
-  legalLinks: [
-    { text: "Aviso de afiliados", url: "/aviso-afiliados" },
-    { text: "Privacidad", url: "/privacidad" },
-    { text: "Términos", url: "/terminos" },
-    { text: "Cookies", url: "/cookies" },
-  ],
-
-  email: "hola@finanzaseu.com",
-  phone: "+34 623 456 789",
-
-  socials: {
-    Twitter: "https://twitter.com/finanzaseu",
-    Instagram: "https://instagram.com/finanzaseu",
-    LinkedIn: "https://linkedin.com/company/finanzaseu",
-  },
-} as const;
-
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const pathname = usePathname();
-  const isBancos =
-    pathname.startsWith("/bancos") || pathname === "/comparativa";
+  const isBancos = pathname.startsWith("/bancos") || pathname === "/comparativa";
 
-  const isActivePath = (url: string) =>
-    pathname === url || pathname.startsWith(`${url}/`);
+  const quickLinks = [
+    { text: "Comparativa de bancos", url: "/comparativa", icon: Star, highlight: true },
+    { text: "Blog & Vlogs", url: "/vlogs" },
+    { text: "Ventajas clave", url: "/ventajas" },
+    { text: "Preguntas frecuentes", url: "/faq" },
+  ];
 
-  const socialIcons = {
-    Twitter,
-    Instagram,
-    LinkedIn: Linkedin,
-  } as const;
+  const legalLinks = [
+    { text: "Aviso de afiliados", url: "/aviso-afiliados", icon: Users },
+    { text: "Política de privacidad", url: "/privacidad", icon: Scale },
+    { text: "Términos y condiciones", url: "/terminos", icon: FileText },
+    { text: "Política de cookies", url: "/cookies", icon: Cookie },
+  ];
 
   return (
-    <footer
-      className="border-t bg-white dark:bg-black"
-      aria-labelledby="footer-heading"
-    >
-      <span id="footer-heading" className="sr-only">
-        Pie de página del sitio Finanzas EU
-      </span>
-
-      <div className="py-16 md:py-20">
-        <Container className="grid grid-cols-1 gap-12 md:grid-cols-12 lg:gap-16">
-          {/* COLUMNA 1 – LOGO + DESCRIPCIÓN + CTA */}
+    <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="py-16 md:py-24">
+        <Container className="grid grid-cols-1 gap-12 md:grid-cols-12 lg:gap-20">
+          {/* BRANDING + CONFIANZA */}
           <div className="md:col-span-5 lg:col-span-4 space-y-8">
-            <Link
-              href="/"
-              className="group inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
-              aria-label="Volver al inicio"
-            >
-              <Logo className="h-11 md:h-12" showText={false} />
-              <div className="leading-none">
-                <span className="text-2xl font-black tracking-tight text-foreground">
-                  Finanzas{" "}
-                  <span className="bg-gradient-to-r from-sky-500 via-cyan-500 to-emerald-500 bg-clip-text text-transparent">
-                    EU
-                  </span>
-                </span>
-              </div>
+            <Link href="/" className="inline-block">
+              <Logo className="h-12 md:h-14" />
+              <span className="sr-only">Finanzas EU - Inicio</span>
             </Link>
 
-            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              {footerDetails.description}
+            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+              La guía independiente más completa de bancos digitales y multidivisa en Europa. 
+              Análisis honestos y comisiones actualizadas al <strong>{currentYear}</strong>.
             </p>
 
-            <div className="flex flex-wrap gap-3" aria-label="Garantías y seguridad">
-              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 dark:bg-emerald-900/30 px-4 py-2 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
                 <Shield className="h-4 w-4" />
-                Fondos garantizados UE
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-900/30 px-4 py-2 text-xs font-semibold text-blue-700 dark:text-blue-400">
+                Fondos protegidos hasta 100.000 €
+              </div>
+              <div className="flex items-center gap-2 rounded-full bg-cyan-500/10 px-4 py-2 text-xs font-medium text-cyan-600 dark:text-cyan-400">
                 <Lock className="h-4 w-4" />
-                GDPR + IBAN europeo
-              </span>
+                Licencias bancarias UE
+              </div>
             </div>
 
-            {/* CTA solo si NO está en bancos */}
             {!isBancos && (
-              <div className="rounded-2xl bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 p-6 border border-primary/10">
-                <p className="mb-3 text-foreground font-semibold">
-                  ¿No sabes por dónde empezar?
+              <Link
+                href="/comparativa"
+                className="group block rounded-2xl bg-gradient-to-r from-primary to-primary/90 p-6 text-primary-foreground shadow-xl transition-all hover:shadow-2xl hover:-translate-y-1"
+              >
+                <p className="text-lg font-bold">Encuentra tu banco ideal en 60 segundos</p>
+                <p className="mt-2 flex items-center gap-2 text-sm opacity-90">
+                  Ver comparativa completa 2025
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </p>
-                <Link
-                  href="/comparativa"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-foreground transition-colors"
-                >
-                  Ver comparativa actualizada 2025
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
+              </Link>
             )}
           </div>
 
-          {/* COLUMNA 2 – NAVEGACIÓN */}
-          <div className="md:col-span-3 lg:col-span-2">
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-              Navegación
+          {/* NAVEGACIÓN */}
+          <div className="md:col-span-3 lg:col-span-3">
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+              Explora
             </h3>
-            <ul className="space-y-3">
-              {footerDetails.quickLinks.map((link) => {
-                const active = isActivePath(link.url);
+            <ul className="space-y-4">
+              {quickLinks.map((link) => (
+                <li key={link.text}>
+                  <Link
+                    href={link.url}
+                    className="group flex items-center gap-3 text-foreground transition-colors hover:text-primary"
+                  >
+                    {link.icon && <link.icon className="h-4 w-4 text-primary" />}
+                    <span className="font-medium">{link.text}</span>
+                    {link.highlight && (
+                      <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                        TOP
+                      </span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* LEGAL */}
+          <div className="md:col-span-4 lg:col-span-3">
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+              Legal & Transparencia
+            </h3>
+            <ul className="space-y-4">
+              {legalLinks.map((link) => {
+                const Icon = link.icon;
                 return (
                   <li key={link.text}>
                     <Link
                       href={link.url}
-                      className={`group flex items-center gap-2 text-sm transition-all hover:text-primary ${
-                        link.highlight
-                          ? "font-semibold text-foreground"
-                          : "text-muted-foreground"
-                      } ${active ? "text-primary" : ""}`}
+                      className="group flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      {link.highlight && (
-                        <Star
-                          className="h-3.5 w-3.5 fill-primary text-primary"
-                          aria-hidden="true"
-                        />
-                      )}
-                      {link.text}
-                      {link.highlight && (
-                        <span className="ml-1 opacity-0 transition-opacity group-hover:opacity-100">
-                          →
-                        </span>
-                      )}
+                      <Icon className="h-4 w-4 text-muted-foreground/60 group-hover:text-primary transition-colors" />
+                      <span className="text-sm">{link.text}</span>
                     </Link>
                   </li>
                 );
@@ -166,117 +131,26 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* COLUMNA 3 – LEGAL */}
-          <div className="md:col-span-3 lg:col-span-2">
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-              Legal
-            </h3>
-            <ul className="space-y-3">
-              {footerDetails.legalLinks.map((link) => (
-                <li key={link.text}>
-                  <Link
-                    href={link.url}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* COLUMNA 4 – CONTACTO + SOCIAL + ESTADÍSTICA */}
-          <div className="md:col-span-12 lg:col-span-4 space-y-8">
-            <div>
-              <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                Contacto directo
-              </h3>
-              <div className="space-y-4">
-                <a
-                  href={`mailto:${footerDetails.email}`}
-                  className="flex items-center gap-3 text-foreground hover:text-primary transition-colors"
-                >
-                  <div className="rounded-lg bg-primary/10 p-2">
-                    <Mail className="h-4 w-4 text-primary" />
-                  </div>
-                  <span className="text-sm">{footerDetails.email}</span>
-                </a>
-                <a
-                  href={`tel:${footerDetails.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-3 text-foreground hover:text-primary transition-colors"
-                >
-                  <div className="rounded-lg bg-primary/10 p-2">
-                    <Phone className="h-4 w-4 text-primary" />
-                  </div>
-                  <span className="text-sm">{footerDetails.phone}</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Redes sociales */}
-            <div>
-              <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                Síguenos
-              </h3>
-              <div className="flex gap-4" aria-label="Redes sociales">
-                {Object.entries(footerDetails.socials).map(
-                  ([platform, url]) => {
-                    const Icon =
-                      socialIcons[platform as keyof typeof socialIcons];
-                    return (
-                      <a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group rounded-xl bg-muted/50 p-3 transition-all hover:scale-110 hover:bg-primary/10"
-                        aria-label={`Abrir ${platform} de ${siteName} en una nueva pestaña`}
-                      >
-                        <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                      </a>
-                    );
-                  }
-                )}
-              </div>
-            </div>
-
-            {/* Prueba social */}
-            <div className="rounded-2xl bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-emerald-900/20 dark:to-cyan-900/20 p-5 border border-emerald-200/50 dark:border-emerald-800/30">
-              <div className="flex items-center gap-3">
-                <CheckCircle2 className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
-                <div>
-                  <p className="text-2xl font-black text-foreground">
-                    +3.847
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    personas ayudadas en 2025
-                  </p>
-                </div>
-              </div>
+          {/* PRUEBA SOCIAL */}
+          <div className="md:col-span-12 lg:col-span-2">
+            <div className="rounded-3xl bg-gradient-to-br from-emerald-500 to-cyan-600 p-8 text-white shadow-2xl">
+              <CheckCircle2 className="h-12 w-12 mb-4 opacity-90" /> {/* ← CORREGIDO AQUÍ */}
+              <p className="text-4xl font-black leading-tight">+12.400</p>
+              <p className="mt-2 text-sm opacity-90">usuarios confiaron en {currentYear}</p>
             </div>
           </div>
         </Container>
       </div>
 
-      {/* LÍNEA FINAL */}
-      <div className="border-t border-border/50 py-8">
-        <Container className="flex flex-col items-center justify-between gap-4 text-center text-xs text-muted-foreground md:flex-row">
+      {/* COPYRIGHT FINAL */}
+      <div className="border-t py-10">
+        <Container className="flex flex-col items-center justify-between gap-4 text-center text-sm text-muted-foreground md:flex-row">
           <p>
-            © {currentYear}{" "}
-            <span className="font-bold text-foreground">{siteName}</span>. Guía
-            independiente desde 2023.
-            <Link
-              href="/aviso-afiliados"
-              className="underline hover:text-foreground ml-1"
-            >
-              Algunos enlaces son de afiliados
-            </Link>
-            .
+            © {currentYear} <span className="font-semibold text-foreground">{siteName}</span> · Guía independiente desde 2023
           </p>
-          <div className="flex items-center gap-2" aria-label="Créditos">
-            <Heart className="h-4 w-4 fill-red-500 text-red-500" />
-            <span>Hecho con amor en Europa</span>
-          </div>
+          <p className="flex items-center gap-2">
+            Hecho con <Heart className="h-4 w-4 fill-red-500 text-red-500" /> en España
+          </p>
         </Container>
       </div>
     </footer>

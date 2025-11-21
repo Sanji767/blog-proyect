@@ -3,11 +3,7 @@
 
 import { useMemo, useState } from "react";
 import { Search, XCircle, Globe2, Filter } from "lucide-react";
-import {
-  banks,
-  type Bank,
-  type BankFeatureTag,
-} from "@/lib/banks";
+import { banks, type Bank, type BankFeatureTag } from "@/lib/banks";
 import BankCard from "@/components/bancos/BankCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,13 +18,8 @@ import { Badge } from "@/components/ui/badge";
 
 type CategoryFilter = Bank["category"] | "all";
 
-// Ahora usamos BankFeatureTag, no string
-type QuickFilter = {
-  label: string;
-  value: BankFeatureTag;
-};
-
-const quickFilters: QuickFilter[] = [
+// ← ¡LA CLAVE! Ahora tagFilter solo puede ser uno de estos valores o null
+const quickFilters: { label: string; value: BankFeatureTag }[] = [
   { label: "Sin comisiones", value: "sin-comisiones" },
   { label: "Multidivisa", value: "multidivisa" },
   { label: "Para freelancers", value: "para-freelancers" },
@@ -39,11 +30,7 @@ export default function BanksFilters() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<CategoryFilter>("all");
   const [nonResidentsOnly, setNonResidentsOnly] = useState(false);
-
-  // Aquí también tipamos como BankFeatureTag | null
-  const [tagFilter, setTagFilter] = useState<BankFeatureTag | null>(
-    null,
-  );
+  const [tagFilter, setTagFilter] = useState<BankFeatureTag | null>(null); // ← CORREGIDO
 
   const filteredBanks = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -62,23 +49,13 @@ export default function BanksFilters() {
         bank.tagline.toLowerCase().includes(query) ||
         bank.country.toLowerCase().includes(query);
 
-      const matchesCategory =
-        category === "all" ? true : bank.category === category;
+      const matchesCategory = category === "all" || bank.category === category;
 
-      const matchesNonResidents = !nonResidentsOnly
-        ? true
-        : bank.tags.includes("no-residentes");
+      const matchesNonResidents = !nonResidentsOnly || bank.tags.includes("no-residentes");
 
-      const matchesTag = tagFilter
-        ? bank.tags.includes(tagFilter) // aquí ya no hay error
-        : true;
+      const matchesTag = !tagFilter || bank.tags.includes(tagFilter);
 
-      return (
-        matchesSearch &&
-        matchesCategory &&
-        matchesNonResidents &&
-        matchesTag
-      );
+      return matchesSearch && matchesCategory && matchesNonResidents && matchesTag;
     });
   }, [search, category, nonResidentsOnly, tagFilter]);
 
@@ -102,17 +79,9 @@ export default function BanksFilters() {
             <span>Filtra bancos según lo que buscas</span>
           </div>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Badge
-              variant="outline"
-              className="rounded-full border-emerald-500/30 bg-emerald-500/5 text-[11px] text-emerald-700 dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-200"
-            >
+            <Badge variant="outline" className="rounded-full border-emerald-500/30 bg-emerald-500/5 text-[11px] text-emerald-700 dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-200">
               {current} de {total} bancos
             </Badge>
-            {tagFilter && (
-              <span className="hidden text-[11px] text-muted-foreground sm:inline">
-                Filtro rápido activo: {quickFilters.find(q => q.value === tagFilter)?.label}
-              </span>
-            )}
           </div>
         </div>
 
@@ -148,24 +117,15 @@ export default function BanksFilters() {
             <label className="text-xs font-medium text-muted-foreground">
               Tipo de banco
             </label>
-            <Select
-              value={category}
-              onValueChange={(value) =>
-                setCategory(value as CategoryFilter)
-              }
-            >
-              <SelectTrigger className="h-10 rounded-full border-border bg-background text-sm">
+            <Select value={category} onValueChange={(value) => setCategory(value as CategoryFilter)}>
+              <SelectTrigger className="h-full rounded-full border-border bg-background text-sm">
                 <SelectValue placeholder="Todos los tipos" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Todos</SelectItem>
                 <SelectItem value="neobanco">Neobancos</SelectItem>
-                <SelectItem value="cuenta-multidivisa">
-                  Cuentas multidivisa
-                </SelectItem>
-                <SelectItem value="tradicional">
-                  Bancos tradicionales
-                </SelectItem>
+                <SelectItem value="cuenta-multidivisa">Cuentas multidivisa</SelectItem>
+                <SelectItem value="tradicional">Bancos tradicionales</SelectItem>
                 <SelectItem value="fintech">Fintech</SelectItem>
               </SelectContent>
             </Select>
@@ -181,14 +141,12 @@ export default function BanksFilters() {
                 <input
                   type="checkbox"
                   checked={nonResidentsOnly}
-                  onChange={(e) =>
-                    setNonResidentsOnly(e.target.checked)
-                  }
+                  onChange={(e) => setNonResidentsOnly(e.target.checked)}
                   className="h-4 w-4 rounded border-border text-emerald-600 focus:ring-emerald-500"
                 />
                 <span className="flex items-center gap-1">
                   <Globe2 className="h-3.5 w-3.5 text-emerald-500" />
-                  Mostrar solo bancos que acepten no residentes
+                  Solo bancos que aceptan no residentes
                 </span>
               </label>
             </div>
@@ -213,11 +171,7 @@ export default function BanksFilters() {
               <button
                 key={f.value}
                 type="button"
-                onClick={() =>
-                  setTagFilter((prev) =>
-                    prev === f.value ? null : f.value,
-                  )
-                }
+                onClick={() => setTagFilter(prev => prev === f.value ? null : f.value)}
                 className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium transition ${
                   active
                     ? "bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-sm"
@@ -234,9 +188,7 @@ export default function BanksFilters() {
       {/* Resultado */}
       {filteredBanks.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-border bg-muted/40 p-4 text-sm text-muted-foreground">
-          No he encontrado bancos que encajen con esos filtros. Prueba a
-          quitar alguno (por ejemplo, el de no residentes) o buscar por
-          un nombre más general.
+          No he encontrado bancos que encajen con esos filtros. Prueba a quitar alguno.
         </p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
