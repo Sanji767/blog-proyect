@@ -1,16 +1,25 @@
 // next.config.mjs
+import nextMDX from "@next/mdx";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+
   images: {
-    // Con las imágenes en /public ya no necesitas esto, pero por si usas externas algún día
     remotePatterns: [
       {
         protocol: "https",
         hostname: "**",
       },
     ],
-    // unoptimized: true ← ya NO hace falta si usas /public correctamente
   },
+
+  // Opcional: mejora compatibilidad con algunos paquetes
+  transpilePackages: ["react-markdown", "rehype-*", "remark-*"],
 };
 
-export default nextConfig;
+const withMDX = nextMDX({
+  extension: /\.mdx?$/,
+});
+
+export default withMDX(nextConfig);

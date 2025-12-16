@@ -30,6 +30,9 @@ function formatTag(tag: Bank["tags"][number]): string {
     "iban-es": "IBAN ES",
     "iban-de": "IBAN DE",
     "iban-nl": "IBAN NL",
+    // ✅ nuevos tags soportados
+    "iban-lt": "IBAN LT",
+    "iban-be": "IBAN BE",
     "seguro-depositos": "Garantía de depósitos",
     "soporte-24-7": "Soporte 24/7",
   };
@@ -72,7 +75,8 @@ export default function BankCard({
           <h3 className="truncate text-lg font-semibold">{bank.name}</h3>
           <p className="text-xs text-muted-foreground">
             {bank.country}
-            {bank.ibanCountry && ` · IBAN ${bank.ibanCountry}`}
+            {/* ✅ mostramos prefijo real del IBAN */}
+            {bank.ibanPrefix && ` · IBAN ${bank.ibanPrefix}`}
           </p>
         </div>
       </header>
@@ -148,4 +152,3 @@ function InfoRow({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-

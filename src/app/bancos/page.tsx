@@ -132,7 +132,6 @@ function BankCard({ bank }: { bank: Bank }) {
     tagline,
     logo,
     country,
-    ibanCountry,
     category,
     tags,
     fees,
@@ -173,10 +172,11 @@ function BankCard({ bank }: { bank: Bank }) {
           </div>
           <p className="mt-0.5 text-[11px] text-muted-foreground md:text-xs">
             {country}
-            {ibanCountry && (
+            {/* ✅ mostramos prefijo real del IBAN */}
+            {bank.ibanPrefix && (
               <span className="text-muted-foreground">
                 {" "}
-                · IBAN {ibanCountry}
+                · IBAN {bank.ibanPrefix}
               </span>
             )}
           </p>
@@ -291,9 +291,7 @@ function InfoRow({
         {icon && <span>{icon}</span>}
         <span>{label}</span>
       </dt>
-      <dd
-        className={`text-[11px] text-right md:text-xs ${valueClasses}`}
-      >
+      <dd className={`text-[11px] text-right md:text-xs ${valueClasses}`}>
         {value}
       </dd>
     </div>
@@ -329,6 +327,9 @@ function formatTag(tag: Bank["tags"][number]): string {
     "iban-es": "IBAN ES",
     "iban-nl": "IBAN NL",
     "iban-de": "IBAN DE",
+    // ✅ nuevos tags soportados
+    "iban-lt": "IBAN LT",
+    "iban-be": "IBAN BE",
     "seguro-depositos": "Depósitos protegidos",
     "soporte-24-7": "Soporte 24/7",
   };

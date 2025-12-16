@@ -20,6 +20,8 @@ export type BankFeatureTag =
   | "iban-es"
   | "iban-nl"
   | "iban-de"
+  | "iban-lt"
+  | "iban-be"
   | "seguro-depositos"
   | "soporte-24-7";
 
@@ -95,7 +97,7 @@ export interface Bank {
     slug: string;
     canonicalUrl: string;
     keywords: string[];
-    openGraphImage?: string;   // ← AÑADIDO Y TIPADO
+    openGraphImage?: string;
   };
 
   _lastUpdated: string;
@@ -111,9 +113,9 @@ export const banks: Bank[] = [
     slug: "revolut",
     name: "Revolut",
     shortName: "Revolut",
-    tagline: "La cuenta multidivisa más usada en España en 2025",
+    tagline: "Cuenta multidivisa líder con IBAN LT y app top en 2025",
     description:
-      "Más de 45 millones de usuarios. Cambio al tipo real, cripto, acciones, tarjetas virtuales desechables y la mejor app del mercado.",
+      "Neobanco con licencia europea y más de 45M usuarios. Cambio al tipo real, tarjetas virtuales desechables, inversión en acciones y cripto, y una de las mejores apps bancarias.",
 
     country: "Lituania",
     headquarters: "Vilna",
@@ -131,10 +133,11 @@ export const banks: Bank[] = [
       "para-freelancers",
       "soporte-24-7",
       "espanol",
+      "iban-lt",
     ],
 
     logo: "/logos/revolut.svg",
-    heroImage: "/heroes/revolut.webp",
+    heroImage: "/images/logos/revolut-p.webp",
     cardImage: "/logos/revolut.svg",
 
     currencies: ["EUR", "USD", "GBP", "CHF", "PLN", "AUD", "CAD", "+25 más"],
@@ -165,14 +168,14 @@ export const banks: Bank[] = [
     cardType: "Visa o Mastercard",
 
     keyPros: [
-      "Cambio de divisa sin comisiones",
-      "Tarjetas virtuales ilimitadas",
-      "Inversión en cripto y acciones",
-      "App brutal con analíticas",
+      "Cambio de divisa sin comisiones en días laborables",
+      "Tarjetas virtuales ilimitadas y desechables",
+      "Cuenta multidivisa con +25 monedas",
+      "App completa con analíticas y control de gastos",
     ],
     keyCons: [
-      "IBAN lituano (algunas nóminas lo rechazan)",
-      "Soporte puede saturarse",
+      "IBAN LT: algunas empresas antiguas aún ponen pegas",
+      "El soporte puede saturarse en horas punta",
     ],
     idealFor: "Viajeros, freelancers, nómadas digitales y compras online",
 
@@ -180,7 +183,7 @@ export const banks: Bank[] = [
     acceptedCountries: [
       "España",
       "UE",
-      "UK",
+      "Reino Unido",
       "EEUU",
       "Australia",
       "Canadá",
@@ -196,29 +199,30 @@ export const banks: Bank[] = [
 
     compliance: {
       license: "Licencia bancaria lituana",
-      depositGuarantee: "100.000 €",
+      depositGuarantee: "100.000 € (Fondo lituano, SEPA)",
       regulatedBy: ["Banco de Lituania", "BCE"],
     },
 
     website: "https://www.revolut.com/es-ES/",
-    affiliateUrl: undefined,
-
     appStoreUrl: "https://apps.apple.com/es/app/revolut/id932493382",
     googlePlayUrl:
       "https://play.google.com/store/apps/details?id=com.revolut.revolut&hl=es",
 
     seo: {
-      metaTitle: "Revolut España 2025: Opiniones reales y comisiones",
+      metaTitle: "Revolut España 2025: comisiones, IBAN LT y opinión real",
       metaDescription:
-        "Análisis completo Revolut 2025: IBAN lituano, cambio real, cripto y todo lo que necesitas saber.",
+        "Revolut en España 2025: cuenta gratis con IBAN LT, tarjetas físicas/virtuales, cambio real y app potente. Pros, contras y para quién merece la pena.",
       slug: "revolut",
-      canonicalUrl: `${DOMAIN}/revolut`,
+      canonicalUrl: `${DOMAIN}/programas/revolut`,
       keywords: [
-        "revolut españa",
-        "revolut 2025",
-        "cuenta revolut",
-        "iban lituano",
+        "revolut españa 2025",
+        "revolut iban lituano LT",
+        "cuenta revolut gratis",
+        "revolut comisiones cambio divisa",
+        "tarjeta revolut virtual desechable",
+        "revolut para viajar",
         "revolut opiniones",
+        "revolut vs wise",
       ],
       openGraphImage: "/og/revolut.webp",
     },
@@ -230,9 +234,9 @@ export const banks: Bank[] = [
   {
     slug: "n26",
     name: "N26",
-    tagline: "Banco alemán con IBAN DE · 100% gratis y seguro alemán",
+    tagline: "Banco alemán con IBAN DE, cuenta gratis y seguro BaFin",
     description:
-      "Licencia bancaria alemana, app minimalista y seguro de depósitos hasta 100.000 €.",
+      "Banco 100% digital con licencia alemana. IBAN DE para todos los clientes, app sencilla, pagos móviles y depósitos protegidos hasta 100.000 €.",
 
     country: "Alemania",
     headquarters: "Berlín",
@@ -265,16 +269,24 @@ export const banks: Bank[] = [
       monthly: "0 €",
       setup: "Gratis",
       inactivity: "Ninguna",
-      atmEU: "3 gratis/mes",
+      atmEU: "3 retiradas gratis/mes",
       atmInternational: "1,7%",
       fxRate: "Tipo Mastercard",
     },
 
     cardType: "Mastercard",
 
-    keyPros: ["IBAN alemán aceptado en todos lados", "Seguro alemán", "App limpia"],
-    keyCons: ["Solo euros", "Límite retiradas gratis"],
-    idealFor: "Cuenta principal en euros",
+    keyPros: [
+      "IBAN DE aceptado en nóminas y domiciliaciones",
+      "Cuenta sin cuota mensual",
+      "Seguro de depósitos alemán (100.000 €)",
+      "App directa y fácil de usar",
+    ],
+    keyCons: [
+      "Solo permite operar en euros",
+      "Retiradas gratis limitadas según plan",
+    ],
+    idealFor: "Cuenta principal en euros y nómina",
 
     requirements: ["DNI/NIE", "Residir en país admitido"],
     acceptedCountries: ["España", "Alemania", "Francia", "Italia", "+10 países UE"],
@@ -282,7 +294,7 @@ export const banks: Bank[] = [
     rating: { trustpilot: 3.9, appStore: 4.7, googlePlay: 4.6 },
 
     compliance: {
-      license: "BaFin Alemania",
+      license: "Licencia bancaria alemana (BaFin)",
       depositGuarantee: "100.000 €",
       regulatedBy: ["BaFin", "BCE"],
     },
@@ -290,12 +302,20 @@ export const banks: Bank[] = [
     website: "https://n26.com/es-es/",
 
     seo: {
-      metaTitle: "N26 España 2025: Opiniones, IBAN Alemán y Cuenta Gratis",
+      metaTitle: "N26 España 2025: IBAN DE, cuenta gratis y condiciones",
       metaDescription:
-        "Todo sobre N26 en España: ventajas del IBAN alemán y cómo abrir cuenta gratis.",
+        "N26 en España 2025: cuenta online sin comisiones con IBAN alemán DE, tarjeta Mastercard y depósitos protegidos. Ventajas, límites y opinión.",
       slug: "n26",
-      canonicalUrl: `${DOMAIN}/n26`,
-      keywords: ["n26 españa", "n26 2025", "iban alemán", "n26 opiniones"],
+      canonicalUrl: `${DOMAIN}/programas/n26`,
+      keywords: [
+        "n26 españa 2025",
+        "n26 iban alemán DE",
+        "cuenta n26 gratis",
+        "n26 nómina españa",
+        "tarjeta n26 mastercard",
+        "n26 opiniones",
+        "n26 vs revolut",
+      ],
       openGraphImage: "/og/n26.webp",
     },
 
@@ -306,10 +326,9 @@ export const banks: Bank[] = [
   {
     slug: "wise",
     name: "Wise",
-    tagline:
-      "Transferencias internacionales al cambio real · Cuenta multidivisa GRATIS",
+    tagline: "Cuenta multidivisa barata con IBAN BE y cambio real",
     description:
-      "La forma más barata de enviar dinero al extranjero. +16M clientes.",
+      "Fintech especializada en transferencias internacionales y cuentas multidivisa. Ofrece tipo de cambio real, datos bancarios locales en varios países y tarjeta para viajes.",
 
     country: "Bélgica",
     headquarters: "Londres",
@@ -317,7 +336,7 @@ export const banks: Bank[] = [
     ibanPrefix: "BE",
 
     category: "cuenta-multidivisa",
-    tags: ["multidivisa", "para-freelancers", "no-residentes"],
+    tags: ["multidivisa", "para-freelancers", "no-residentes", "iban-be"],
 
     logo: "/logos/wise.svg",
     heroImage: "/heroes/wise.webp",
@@ -335,41 +354,53 @@ export const banks: Bank[] = [
       monthly: "Gratis",
       setup: "Gratis",
       inactivity: "Ninguna",
-      atmEU: "2 gratis/mes hasta 200€",
+      atmEU: "2 retiradas gratis/mes hasta 200 €",
       atmInternational: "1,75% + 0,50€",
-      fxRate: "Tipo medio mercado",
+      fxRate: "Tipo medio de mercado",
     },
 
     cardType: "Mastercard",
 
     keyPros: [
-      "Cambio real siempre",
-      "Datos bancarios en 10 países",
-      "Transparencia total",
+      "Comisiones muy bajas en transferencias",
+      "Tipo de cambio real sin margen oculto",
+      "Datos bancarios locales en 10 países",
+      "Muy útil para cobrar y pagar en varias divisas",
     ],
-    keyCons: ["No es banco completo", "Soporte solo escrito"],
-    idealFor: "Freelancers, emigrantes, compras internacionales",
+    keyCons: [
+      "No es un banco completo para nómina",
+      "Soporte principalmente por email",
+    ],
+    idealFor: "Freelancers, expatriados y pagos internacionales",
 
     requirements: ["DNI o pasaporte"],
-    acceptedCountries: ["Todo el mundo"],
+    acceptedCountries: ["La mayoría del mundo (excepto países restringidos)"],
 
     rating: { trustpilot: 4.6 },
 
     compliance: {
-      license: "Entidad de Dinero Electrónico",
+      license: "Entidad de Dinero Electrónico (EMI)",
       depositGuarantee: "Fondos salvaguardados",
-      regulatedBy: ["NBB Bélgica", "FCA"],
+      regulatedBy: ["NBB Bélgica", "FCA Reino Unido"],
     },
 
     website: "https://wise.com/es/",
 
     seo: {
-      metaTitle: "Wise España 2025: Cuenta Multidivisa y Transferencias Baratas",
+      metaTitle: "Wise España 2025: comisiones, IBAN BE y cuenta multidivisa",
       metaDescription:
-        "Comparativa Wise vs Revolut 2025. Comisiones reales y cómo abrir cuenta multidivisa gratis.",
+        "Wise 2025 en España: cuenta multidivisa gratis con IBAN belga BE, cambio real y transferencias baratas. Pros, contras y para quién es ideal.",
       slug: "wise",
-      canonicalUrl: `${DOMAIN}/wise`,
-      keywords: ["wise españa", "wise 2025", "transferencias baratas", "cuenta wise"],
+      canonicalUrl: `${DOMAIN}/programas/wise`,
+      keywords: [
+        "wise españa 2025",
+        "wise iban belga BE",
+        "cuenta wise multidivisa",
+        "wise comisiones transferencias",
+        "wise tarjeta para viajar",
+        "wise opiniones",
+        "wise vs revolut",
+      ],
       openGraphImage: "/og/wise.webp",
     },
 
@@ -380,9 +411,9 @@ export const banks: Bank[] = [
   {
     slug: "bunq",
     name: "Bunq",
-    tagline: "25 subcuentas con IBAN propio · Ideal autónomos",
+    tagline: "Banco holandés con IBAN NL y subcuentas para autónomos",
     description:
-      "Banco holandés con licencia completa. Automatizaciones y herramientas premium.",
+      "Banco digital neerlandés con licencia completa. Permite subcuentas con IBAN propio, automatizaciones y herramientas para gestionar gastos personales o de empresa.",
 
     country: "Países Bajos",
     headquarters: "Ámsterdam",
@@ -416,12 +447,15 @@ export const banks: Bank[] = [
     cardType: "Mastercard",
 
     keyPros: [
-      "25 subcuentas con IBAN",
-      "Automatizaciones",
-      "Ideal separar gastos",
+      "Hasta 25 subcuentas con IBAN (según plan)",
+      "Automatizaciones y reglas inteligentes",
+      "Ideal para separar gastos y presupuestos",
     ],
-    keyCons: ["Sin plan gratis", "App solo inglés"],
-    idealFor: "Autónomos, PYMEs, separación de finanzas",
+    keyCons: [
+      "No tiene plan completamente gratis",
+      "App y soporte principalmente en inglés",
+    ],
+    idealFor: "Autónomos, PYMEs y gestión por subcuentas",
 
     requirements: ["DNI/NIE", "Residir en UE"],
     acceptedCountries: ["Toda la UE"],
@@ -429,20 +463,27 @@ export const banks: Bank[] = [
     rating: { trustpilot: 4.1 },
 
     compliance: {
-      license: "Banco de Países Bajos",
+      license: "Licencia bancaria neerlandesa",
       depositGuarantee: "100.000 €",
-      regulatedBy: ["DNB"],
+      regulatedBy: ["DNB", "BCE"],
     },
 
     website: "https://www.bunq.com/es-es",
 
     seo: {
-      metaTitle: "Bunq España 2025: Opiniones y 25 IBAN diferentes",
+      metaTitle: "Bunq España 2025: precio, IBAN NL y subcuentas",
       metaDescription:
-        "Análisis Bunq para autónomos en España: precios 2025 y subcuentas.",
+        "Bunq en España 2025: banco holandés con IBAN NL, subcuentas con IBAN propio y automatizaciones. Precios, ventajas y opinión.",
       slug: "bunq",
-      canonicalUrl: `${DOMAIN}/bunq`,
-      keywords: ["bunq españa", "bunq 2025", "iban holandés", "bunq autónomos"],
+      canonicalUrl: `${DOMAIN}/programas/bunq`,
+      keywords: [
+        "bunq españa 2025",
+        "bunq iban holandés NL",
+        "bunq subcuentas con iban",
+        "bunq para autónomos",
+        "bunq precios 2025",
+        "bunq opiniones",
+      ],
       openGraphImage: "/og/bunq.webp",
     },
 

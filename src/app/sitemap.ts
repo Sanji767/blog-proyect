@@ -8,5 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://finanzaseu.com/faq" },
     { url: "https://finanzaseu.com/contacto" },
     { url: "https://finanzaseu.com/vlogs" },
+    { url: "https://finanzaseu.com/comparativa" },
   ];
 }

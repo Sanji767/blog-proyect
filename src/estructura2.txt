@@ -1,0 +1,318 @@
+Folder PATH listing for volume Windows
+Volume serial number is C005-1AD4
+C:.
+¦   estructura2.txt
+¦   types.ts
+¦   utils.tsx
+¦   
++---app
+¦   ¦   favicon.ico
+¦   ¦   globals.css
+¦   ¦   layout.tsx
+¦   ¦   page.tsx
+¦   ¦   robots.ts
+¦   ¦   sitemap.ts
+¦   ¦   
+¦   +---aviso-afiliados
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---bancos
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---blog
+¦   ¦   ¦   layout.tsx
+¦   ¦   ¦   loading.tsx
+¦   ¦   ¦   page.tsx
+¦   ¦   ¦   
+¦   ¦   +---categoria
+¦   ¦   ¦   +---[categoria]
+¦   ¦   ¦           page.tsx
+¦   ¦   ¦           
+¦   ¦   +---tag
+¦   ¦   ¦   +---[tag]
+¦   ¦   ¦           page.tsx
+¦   ¦   ¦           
+¦   ¦   +---[slug]
+¦   ¦           page.tsx
+¦   ¦           
+¦   +---comparativa
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---contacto
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---cookies
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---faq
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---privacidad
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---programas
+¦   ¦   ¦   RelatedBanks.tsx
+¦   ¦   ¦   
+¦   ¦   +---[slug]
+¦   ¦           page.tsx
+¦   ¦           
+¦   +---terminos
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---ventajas
+¦   ¦       page.tsx
+¦   ¦       
+¦   +---vlogs
+¦       ¦   layout.tsx
+¦       ¦   page.tsx
+¦       ¦   
+¦       +---[slug]
+¦               page.tsx
+¦               
++---components
+¦   ¦   AppStoreButton.tsx
+¦   ¦   CTA.tsx
+¦   ¦   FAQ.tsx
+¦   ¦   Hero.tsx
+¦   ¦   Logos.tsx
+¦   ¦   PlayStoreButton.tsx
+¦   ¦   SectionTitle.tsx
+¦   ¦   Stats.tsx
+¦   ¦   Testimonials.tsx
+¦   ¦   
+¦   +---bancos
+¦   ¦       BankCard.tsx
+¦   ¦       
+¦   +---benefits
+¦   ¦   ¦   BenefitBullet.tsx
+¦   ¦   ¦   Benefits.tsx
+¦   ¦   ¦   BenefitSection.tsx
+¦   ¦   ¦   
+¦   ¦   +---data
+¦   ¦           benefits.tsx
+¦   ¦           
+¦   +---blog
+¦   ¦       BlogCard.tsx
+¦   ¦       BlogContent.tsx
+¦   ¦       BlogHeader.tsx
+¦   ¦       BlogList.tsx
+¦   ¦       BlogSidebar.tsx
+¦   ¦       CategoryBadge.tsx
+¦   ¦       TagBadge.tsx
+¦   ¦       
+¦   +---data
+¦   +---layout
+¦   ¦       Container.tsx
+¦   ¦       Footer.tsx
+¦   ¦       Header.tsx
+¦   ¦       MaxWidthWrapper.tsx
+¦   ¦       MegaMenu.tsx
+¦   ¦       Section.tsx
+¦   ¦       
+¦   +---Pricing
+¦   ¦       Pricing.tsx
+¦   ¦       PricingColumn.tsx
+¦   ¦       
+¦   +---sections
+¦   ¦   +---bancos
+¦   ¦   ¦       BanksComparativa.tsx
+¦   ¦   ¦       BanksFilters.tsx
+¦   ¦   ¦       BanksGrid.tsx
+¦   ¦   ¦       
+¦   ¦   +---comunes
+¦   ¦   ¦       CtaSection.tsx
+¦   ¦   ¦       
+¦   ¦   +---home
+¦   ¦           Benefits.tsx
+¦   ¦           Features.tsx
+¦   ¦           Hero.tsx
+¦   ¦           HomeBanksPreview.tsx
+¦   ¦           HomeFaqPreview.tsx
+¦   ¦           HomeHowItWorks.tsx
+¦   ¦           HomeVlogsPreview.tsx
+¦   ¦           
+¦   +---styles
+¦   ¦       global.css
+¦   ¦       
+¦   +---ui
+¦   ¦       badge.tsx
+¦   ¦       button.tsx
+¦   ¦       card.tsx
+¦   ¦       input.tsx
+¦   ¦       label.tsx
+¦   ¦       logo.tsx
+¦   ¦       logofooter.tsx
+¦   ¦       select.tsx
+¦   ¦       textarea.tsx
+¦   ¦       
+¦   +---vlogs
+¦           VlogCard.tsx
+¦           
++---content
+¦   +---blog
+¦   ¦   +---2024
+¦   ¦   +---2025
+¦   ¦   +---_drafts
+¦   +---categories
+¦   ¦       index.ts
+¦   ¦       
+¦   +---tags
+¦           index.ts
+¦           
++---data
+¦       cta.ts
+¦       faq.ts
+¦       footer.ts
+¦       hero.ts
+¦       menuItems.ts
+¦       pricing.ts
+¦       siteDetails.ts
+¦       stats.tsx
+¦       testimonials.ts
+¦       
++---lib
+¦   ¦   banks.ts
+¦   ¦   utils.ts
+¦   ¦   vlogs.ts
+¦   ¦   
+¦   +---blog
+¦           getBlogPostBySlug.ts
+¦           getBlogPosts.ts
+¦           getBlogsByCategory.ts
+¦           getBlogsByTag.ts
+¦           getCategories.ts
+¦           getTags.ts
+¦           markdown.ts
+¦           types.ts
+¦           
++---types
+        benefits.ts
+        index.ts
+
+
+
+estructura final: 
+/src
+¦
++-- app
+¦   +-- layout.tsx                  # Header + Footer + Providers + Theme
+¦   +-- globals.css                 # @layer base, components, utilities
+¦   +-- page.tsx                    # Home (Hero + Secciones)
+¦   +-- favicon.ico
+¦   +-- sitemap.ts                  # sitemap.xml dinámico
+¦   +-- robots.ts                   # robots.txt dinámico
+¦   ¦
+¦   +-- bancos
+¦   ¦   +-- page.tsx                # Listado completo + filtros avanzados
+¦   ¦   +-- loading.tsx
+¦   ¦
+¦   +-- comparativa
+¦   ¦   +-- page.tsx                # Tabla épica + export PDF + top 3 cards
+¦   ¦   +-- loading.tsx
+¦   ¦
+¦   +-- programas
+¦   ¦   +-- [slug]
+¦   ¦       +-- page.tsx            # Página individual banco (SEO brutal)
+¦   ¦       +-- loading.tsx
+¦   ¦
+¦   +-- blog
+¦   ¦   +-- layout.tsx              # Sidebar + categorías
+¦   ¦   +-- page.tsx                # Listado blog + paginación
+¦   ¦   +-- loading.tsx
+¦   ¦   ¦
+¦   ¦   +-- categoria
+¦   ¦   ¦   +-- page.tsx            # Artículo individual (MDX + schema)
+¦   ¦   ¦
+¦   ¦   +-- categoria
+¦   ¦   ¦   +-- [category]
+¦   ¦   ¦       +-- page.tsx
+¦   ¦   ¦
+¦   ¦   +-- tag
+¦   ¦       +-- [tag]
+¦   ¦           +-- page.tsx
+¦   ¦
+¦   +-- faq, ventajas, contacto, etc.
+¦   ¦   +-- page.tsx
+¦   ¦
+¦   +-- legal
+¦       +-- aviso-afiliados
+¦       +-- privacidad
+¦       +-- cookies
+¦       +-- terminos
+¦           +-- page.tsx
+¦
++-- components
+¦   +-- layout
+¦   ¦   +-- Header.tsx
+¦   ¦   +-- Footer.tsx
+¦   ¦   +-- MobileMenu.tsx
+¦   ¦   +-- Container.tsx
+¦   ¦
+¦   +-- sections
+¦   ¦   +-- home/
+¦   ¦   +-- bancos/
+¦   ¦   +-- programas/
+¦   ¦   +-- shared/
+¦   ¦
+¦   +-- bancos
+¦   ¦   +-- BankCard.tsx
+¦   ¦   +-- BankBadge.tsx
+¦   ¦   +-- BankFilters.tsx
+¦   ¦
+¦   +-- blog
+¦   ¦   +-- BlogCard.tsx
+¦   ¦   +-- BlogPost.tsx
+¦   ¦   +-- BlogSidebar.tsx
+¦   ¦   +-- CategoryBadge.tsx
+¦   ¦   +-- Pagination.tsx
+¦   ¦
+¦   +-- ui                  # shadcn/ui + componentes custom
+¦       +-- button.tsx
+¦       +-- badge.tsx
+¦       +-- card.tsx
+¦       +-- table.tsx
+¦       +-- ...
+¦
++-- lib
+¦   +-- banks.ts                # tipo Bank + lista completa
+¦   +-- blog.ts                 # funciones: getAllPosts, getPostBySlug, etc.
+¦   +-- seo.ts                  # helpers para metadata
+¦   +-- utils.ts                # cn(), formatDate, etc.
+¦   +-- analytics.ts            # optional: posthog / umami
+¦
++-- content
+¦   +-- blog                    # TU CMS ESTÁTICO (MDX)
+¦       +-- posts
+¦       ¦   +-- 2025
+¦       ¦   ¦   +-- mejores-bancos-digitales-2025.mdx
+¦       ¦   ¦   +-- como-abrir-cuenta-wise.mdx
+¦       ¦   +-- 2024
+¦       ¦       +-- ...
+¦       ¦
+¦       +-- authors
+¦           +-- jose.yaml           # foto, bio, redes
+¦
++-- public
+¦   +-- logos/
+¦   ¦   +-- revolut.svg
+¦   ¦   +-- n26.svg
+¦   ¦   +-- ...
+¦   ¦
+¦   +-- images/
+¦   ¦   +-- hero/
+¦   ¦   +-- blog/
+¦   ¦   +-- icons/
+¦   ¦
+¦   +-- avatars/
+¦   ¦   +-- jose.jpg
+¦   ¦
+¦   +-- placeholder.jpg
+¦   +-- favicon/
+¦
++-- config (raíz del proyecto)
+    +-- tailwind.config.ts
+    +-- next.config.mjs
+    +-- tsconfig.json
+    +-- components.json        # shadcn config
+    +-- middleware.ts         # opcional: redirecciones, analytics
+        

@@ -247,3 +247,75 @@ details > summary::-webkit-details-marker {
 .debug {
   outline: 1px solid red !important;
 }
+/* Controlar imágenes del contenido de los vlogs */
+.vlog-content img {
+  width: 100%;
+  max-width: 650px;         /* tamaño razonable para lectura */
+  height: auto;
+  margin: 1.5rem auto;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);
+}
+/* Mejora general de lectura + ritmo vertical */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--primary);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-captions: var(--muted-foreground);
+}
+
+/* Separación más editorial */
+.prose p {
+  margin-top: 1.1em;
+  margin-bottom: 1.1em;
+}
+
+/* Títulos más “revista” */
+.prose h2 {
+  margin-top: 2.2em;
+  margin-bottom: 0.8em;
+  font-size: 1.6em;
+}
+.prose h3 {
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  font-size: 1.25em;
+}
+
+/* Listas más limpias */
+.prose ul li,
+.prose ol li {
+  margin-top: 0.35em;
+  margin-bottom: 0.35em;
+}
+/* Fallback pro para tablas MDX */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.98rem;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose thead th {
+  background: color-mix(in srgb, var(--muted) 60%, transparent);
+  font-weight: 600;
+}
+
+.prose tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--muted) 25%, transparent);
+}

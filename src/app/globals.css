@@ -247,3 +247,163 @@ details > summary::-webkit-details-marker {
 .debug {
   outline: 1px solid red !important;
 }
+/* Controlar imágenes del contenido de los vlogs */
+.vlog-content img {
+  width: 100%;
+  max-width: 650px;         /* tamaño razonable para lectura */
+  height: auto;
+  margin: 1.5rem auto;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);
+}
+/* Mejora general de lectura + ritmo vertical */
+/* =========================================
+   Prose (MDX / Markdown)
+   ========================================= */
+
+/* Tokens para typography */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--primary);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-captions: var(--muted-foreground);
+}
+
+/* Ritmo editorial */
+.prose p {
+  margin-top: 1.1em;
+  margin-bottom: 1.1em;
+}
+
+/* Títulos estilo “revista” */
+.prose h2 {
+  margin-top: 2.2em;
+  margin-bottom: 0.8em;
+  font-size: 1.6em;
+}
+.prose h3 {
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  font-size: 1.25em;
+}
+
+/* Listas limpias */
+.prose ul li,
+.prose ol li {
+  margin-top: 0.35em;
+  margin-bottom: 0.35em;
+}
+
+/* =========================================
+   Tablas MDX (fallback pro)
+   ========================================= */
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.98rem;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border) !important;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose thead th {
+  background: color-mix(in srgb, var(--muted) 60%, transparent);
+  font-weight: 600;
+}
+
+.prose tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--muted) 25%, transparent);
+}
+
+/* =========================================
+   Colores por enlace (según banco)
+   ========================================= */
+
+/* Estilo base de links dentro de artículos */
+.prose a {
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+.prose a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Revolut → Azul */
+.prose a[href*="revolut"] {
+  color: #3b82f6 !important;
+}
+.prose a[href*="revolut"]:hover {
+  color: #2563eb !important;
+}
+
+/* Wise → Verde */
+.prose a[href*="wise"] {
+  color: #22c55e !important;
+}
+.prose a[href*="wise"]:hover {
+  color: #16a34a !important;
+}
+
+/* N26 → Negro/Slate */
+.prose a[href*="n26"] {
+  color: #0f172a !important;
+}
+.dark .prose a[href*="n26"] {
+  color: #e5e7eb !important;
+}
+.prose a[href*="n26"]:hover {
+  color: #111827 !important;
+}
+.dark .prose a[href*="n26"]:hover {
+  color: #ffffff !important;
+}
+
+/* Bunq → Morado */
+.prose a[href*="bunq"] {
+  color: #8b5cf6 !important;
+}
+.prose a[href*="bunq"]:hover {
+  color: #7c3aed !important;
+}
+
+/* Trade Republic → Ámbar */
+.prose a[href*="trade"] {
+  color: #f59e0b !important;
+}
+.prose a[href*="trade"]:hover {
+  color: #d97706 !important;
+}
+
+/* Vivid → Rosa */
+.prose a[href*="vivid"] {
+  color: #ec4899 !important;
+}
+.prose a[href*="vivid"]:hover {
+  color: #db2777 !important;
+}
+
+/* Bó / Caixa → Naranja */
+.prose a[href*="bo"],
+.prose a[href*="caixa"] {
+  color: #fb923c !important;
+}
+.prose a[href*="bo"]:hover,
+.prose a[href*="caixa"]:hover {
+  color: #f97316 !important;
+}
