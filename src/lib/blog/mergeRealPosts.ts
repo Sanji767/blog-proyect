@@ -3,7 +3,8 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { blogPosts } from "./posts";
-import type { BlogPost } from "./types";
+import type { BlogPost } from "@/lib/blog/types";
+
 
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
 
@@ -35,19 +36,22 @@ function mergePostsFromFilesystem() {
       if (alreadyExists) continue;
 
       // Añadimos el post real al array global
-      const newPost: BlogPost = {
-        slug,
-        title: data.title ?? "Sin título",
-        description: data.description ?? "",
-        date: data.date ?? `${year}-01-01`,
-        image: data.image ?? undefined,
-        tags: Array.isArray(data.tags) ? data.tags : [],
-        readingTime: data.readingTime,
-        youtubeId: data.youtubeId,
-        views: data.views,
-        featured: !!data.featured,
-        content,
-      };
+const newPost: BlogPost = {
+  slug,
+  title: data.title ?? "Sin título",
+  description: data.description ?? "",
+  date: data.date ?? `${year}-01-01`,
+  category: (data.category ?? "general").toLowerCase(), // <-- añadido
+  image: data.image ?? undefined,
+  tags: Array.isArray(data.tags)
+    ? data.tags.map((t: unknown) => String(t).toLowerCase().trim())
+    : [],
+  readingTime: data.readingTime,
+  youtubeId: data.youtubeId,
+  views: data.views,
+  featured: !!data.featured,
+  content,
+};
 
       // @ts-ignore – estamos modificando el array importado (funciona en Next.js)
       blogPosts.push(newPost);

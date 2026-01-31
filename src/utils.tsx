@@ -1,6 +1,9 @@
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaThreads, FaTwitter, FaXTwitter, FaYoutube } from "react-icons/fa6";
 
-export const getPlatformIconByName = (platformName: string): JSX.Element | null => {
+import type { ReactNode } from "react";
+
+export const getPlatformIconByName = (platformName: string): ReactNode => {
+
     switch (platformName) {
         case 'facebook': {
             return <FaFacebook size={24} className='min-w-fit' />;

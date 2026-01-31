@@ -3,10 +3,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Calendar, PlayCircle, Eye, Sparkles, Flame } from "lucide-react";
-import type { BlogPost } from "@/lib/blog/posts";
+import type { BlogPost } from "@/lib/blog/types";
 
 const PLACEHOLDER = "/placeholder-blog.jpg";
 
@@ -17,7 +16,6 @@ type Props = {
 };
 
 export default function BlogCard({ post, variant = "default", index = 0 }: Props) {
-  const router = useRouter();
   const isFeatured = variant === "featured" || post.featured;
   const isCompact = variant === "compact";
 
@@ -33,11 +31,11 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
 
   const imageSrc = post.image || PLACEHOLDER;
 
-  // Formateo profesional de vistas
-  const formatViews = (views: any): string => {
-    const num = Number(String(views || 0).replace(/\D/g, ""));
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${Math.round(num / 1000)}k`;
+  // Formateo profesional de vistas – tipado correcto (number | undefined)
+  const formatViews = (views: number | undefined): string => {
+    const num = views ?? 0;
+    if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1)}M`;
+    if (num >= 1_000) return `${Math.round(num / 1_000)}k`;
     return num.toString();
   };
 
@@ -133,7 +131,7 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
 
           {/* Descripción */}
           <p className="text-muted-foreground line-clamp-3 leading-relaxed text-sm md:text-base">
-            {post.description}
+            {post.description ?? post.excerpt ?? "Sin descripción disponible"}
           </p>
 
           {/* Tags + Flecha */}

@@ -1,11 +1,11 @@
 // src/components/blog/CategoryBadge.tsx
 import Link from "next/link";
-import { getCategories } from "@/lib/blog/getCategories";
-import type { Category } from "@/content/categories";
+import { getCategories } from "@/lib/blog";              // ← corrige la ruta si es necesario
+import type { Category } from "@/lib/blog/types";        // ← este es el tipo correcto
 
 export default function CategoryBadge({ slug }: { slug: string }) {
   const categories: Category[] = getCategories();
-  const cat = categories.find((c: Category) => c.slug === slug);
+  const cat = categories.find((c) => c.slug === slug);
 
   if (!cat) return null;
 

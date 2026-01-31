@@ -1,11 +1,11 @@
 // src/components/blog/TagBadge.tsx
 import Link from "next/link";
-import { getTags } from "@/lib/blog/getTags";
-import type { Tag } from "@/content/tags";
+import { getTags } from "@/lib/blog";          // ← ruta correcta (o "@/lib/blog/getTags" si está separado)
+import type { Tag } from "@/lib/blog/types";  // ← el tipo centralizado (el mismo que BlogPost y Category)
 
 export default function TagBadge({ slug }: { slug: string }) {
   const tags: Tag[] = getTags();
-  const tag = tags.find((t: Tag) => t.slug === slug);
+  const tag = tags.find((t) => t.slug === slug);
 
   const label = tag?.title ?? slug;
 

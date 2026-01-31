@@ -3,23 +3,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const POSTS_DIR = path.join(process.cwd(), "src/content/blog/posts");
+import type { BlogPost, Category, Tag } from "./blog/types";
 
-// Tipo compatible con tu BlogCard actual (importante: image nunca es null)
-export type BlogPost = {
-  slug: string;
-  title: string;
-  description: string;
-  date: string; // "2025-11-22"
-  category: string;
-  tags: string[];
-  image?: string | undefined;     // ← FIX: undefined, NO null
-  featured?: boolean;
-  readingTime?: string;
-  youtubeId?: string;
-  views?: number;
-  content: string;
-};
+const POSTS_DIR = path.join(process.cwd(), "src/content/blog/posts");
 
 // ---------------------------------------------------------------------
 // 1. Todos los posts
@@ -54,14 +40,17 @@ export function getAllPosts(): BlogPost[] {
         date: data.date ?? `${year}-01-01`,
         category: (data.category ?? "general").toLowerCase(),
         tags: Array.isArray(data.tags)
-          ? data.tags.map((t: any) => String(t).toLowerCase().trim())
-          : [],
-        image: typeof data.image === "string" ? data.image : undefined, // ← FIX definitivo
+          ? data.tags.map((t: unknown) => String(t).toLowerCase().trim())
+          : [], // Siempre string[]
+        image: typeof data.image === "string" ? data.image : undefined,
         featured: !!data.featured,
         readingTime: data.readingTime,
         youtubeId: data.youtubeId,
         views: data.views ?? 0,
         content,
+        excerpt: data.excerpt ?? data.description ?? "",
+        coverImage: typeof data.coverImage === "string" ? data.coverImage : undefined,
+        author: data.author,
       });
     }
   }
@@ -70,25 +59,32 @@ export function getAllPosts(): BlogPost[] {
 }
 
 // ---------------------------------------------------------------------
-// 2–7. El resto de funciones (sin cambios, pero con el fix aplicado)
+// 2. Obtener post por slug
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return getAllPosts().find((post) => post.slug === slug);
 }
 
+// ---------------------------------------------------------------------
+// 3. Obtener posts por categoría
 export function getPostsByCategory(category: string): BlogPost[] {
   return getAllPosts().filter((post) => post.category === category.toLowerCase());
 }
 
+// ---------------------------------------------------------------------
+// 4. Obtener posts por tag
 export function getPostsByTag(tag: string): BlogPost[] {
   const lowerTag = tag.toLowerCase();
   return getAllPosts().filter((post) => post.tags.includes(lowerTag));
 }
 
+// ---------------------------------------------------------------------
+// 5. Posts destacados
 export function getFeaturedPosts(): BlogPost[] {
   return getAllPosts().filter((post) => post.featured);
 }
 
-export type Category = { slug: string; title: string; count: number };
+// ---------------------------------------------------------------------
+// 6. Categorías
 export function getCategories(): Category[] {
   const map = new Map<string, number>();
 
@@ -106,12 +102,14 @@ export function getCategories(): Category[] {
     .sort((a, b) => b.count - a.count);
 }
 
-export type Tag = { slug: string; title: string; count: number };
+// ---------------------------------------------------------------------
+// 7. Tags
 export function getTags(): Tag[] {
   const map = new Map<string, number>();
 
   getAllPosts().forEach((post) => {
-    post.tags.forEach((tag) => {
+    // Tipado explícito para 'tag'
+    post.tags.forEach((tag: string) => {
       map.set(tag, (map.get(tag) || 0) + 1);
     });
   });
@@ -126,7 +124,7 @@ export function getTags(): Tag[] {
 }
 
 // ---------------------------------------------------------------------
-// CTA FINAL que tanto te mola 😎
+// Mensaje de inicio (opcional)
 console.log(`
 ╔══════════════════════════════════════════════════╗
 ║                                                  ║
@@ -134,7 +132,7 @@ console.log(`
 ║                                                  ║
 ║   → Crea un .mdx en src/content/blog/posts/      ║
 ║   → Aparece solo en todo el sitio                ║
-║   → Sin tocar posts.ts nunca más                 ║
+║   → Sin tocar blog.ts nunca más                  ║
 ║                                                  ║
 ╚══════════════════════════════════════════════════╝
 `);
