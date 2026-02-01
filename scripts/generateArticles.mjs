@@ -42,13 +42,15 @@ const topics = [
 // Función para generar contenido MDX usando OpenAI
 async function generateMDX(topic) {
   const prompt = `
-Eres un experto en finanzas y banca digital. Genera un artículo profesional para un blog sobre "${topic.title}".
-- Extensión: 400-600 palabras
-- Estilo: profesional, cercano, lenguaje claro, orientado a usuarios
-- Estructura: títulos H1/H2/H3, listas, ejemplos prácticos
-- Incluye un enlace interno al final como CTA: [¡Abre una cuenta recomendada aquí!](${topic.linkCTA})
-- No inventes información falsa, usa ejemplos genéricos si es necesario
+Eres un experto en finanzas, inversiones y banca digital. Genera un artículo profesional para un blog sobre "${topic.title}".
+- Contenido enfocado en las últimas noticias del mercado de inversiones y novedades en bancos.
+- Extensión: 600-900 palabras
+- Estilo: profesional, cercano, lenguaje claro y útil para usuarios interesados en finanzas
+- Estructura: títulos H1/H2/H3, listas, ejemplos prácticos genéricos (no inventes información específica que no sea pública)
+- Incluye consejos prácticos para los usuarios y menciona tendencias recientes del sector financiero
+- Añade un enlace interno al final como CTA: [¡Abre una cuenta recomendada aquí!](${topic.linkCTA})
 - No incluyas frontmatter, solo el contenido en Markdown
+- No uses imágenes ni links externos innecesarios
 `;
 
   const response = await client.chat.completions.create({
