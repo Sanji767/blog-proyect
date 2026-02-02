@@ -1,122 +1,126 @@
 // src/components/sections/home/Hero.tsx
+"use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { ShieldCheck, Globe2, ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, ShieldCheck, Globe2 } from "lucide-react";
 import Container from "@/components/layout/Container";
 
 export default function Hero() {
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 }
+  };
+
   return (
-    <section className="relative overflow-hidden bg-hero-background py-16 md:py-24">
-      {/* Degradado sutil de fondo */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.18)_0,_transparent_55%),radial-gradient(circle_at_bottom,_rgba(56,189,248,0.18)_0,_transparent_55%)]" />
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background py-20 md:py-32">
+      {/* Background Decoración Avanzada */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 h-96 w-96 bg-emerald-500/10 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 h-96 w-96 bg-cyan-500/10 blur-[120px] rounded-full animate-pulse delay-700" />
+      </div>
 
-      <Container className="grid items-center gap-10 md:grid-cols-2">
-        {/* Columna texto */}
-        <div className="space-y-6 animate-fade-in-up">
-          <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-200">
-            <Sparkles className="h-3.5 w-3.5" />
-            Finanzas Eu · Bancos para vivir en Europa
-          </span>
+      <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <motion.div 
+          initial="initial"
+          animate="animate"
+          className="space-y-8"
+        >
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+            <Sparkles className="h-4 w-4" />
+            Finanzas Eu · Expertos en Neobancos
+          </motion.div>
 
-          <h1 className="text-balance text-3xl font-black leading-tight md:text-5xl">
-            Abre tu cuenta en Europa{" "}
+          <motion.h1 variants={fadeInUp} className="text-4xl font-black tracking-tight sm:text-6xl text-balance">
+            Abre tu cuenta en Europa <br />
             <span className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-emerald-400 bg-clip-text text-transparent">
-              sin líos ni letra pequeña
-            </span>
-            .
-          </h1>
+              sin fronteras mentales
+            </span>.
+          </motion.h1>
 
-          <p className="max-w-xl text-sm text-muted-foreground md:text-base">
-            Comparo bancos como <strong>Revolut, N26, Wise o Bunq</strong> para
-            que sepas cuál encaja mejor contigo según dónde vives, si trabajas
-            en remoto, viajas o necesitas cuenta multidivisa.
-          </p>
+          <motion.p variants={fadeInUp} className="text-lg text-muted-foreground max-w-xl leading-relaxed">
+            Analizamos bancos digitales como <strong>Revolut, N26 o Wise</strong>. Filtrado por humanos para humanos, sin letra pequeña ni banners engañosos.
+          </motion.p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-3">
-            {/* Botón principal con degradado verde-turquesa */}
-            <Link
-              href="/comparativa"
-              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition-transform hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0"
-            >
-              Ver ranking de bancos
-              <ArrowRight className="ml-1.5 h-4 w-4" />
+          <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
+            <Link href="/comparativa" className="group relative inline-flex items-center justify-center rounded-full bg-foreground px-8 py-4 text-sm font-bold text-background transition-all hover:scale-105 active:scale-95">
+              Explorar Ranking
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-
-            <Link
-              href="/bancos"
-              className="inline-flex items-center justify-center rounded-full border border-border px-6 py-2.5 text-sm font-semibold text-foreground/90 hover:bg-background/70"
-            >
-              Ver todos los bancos
+            <Link href="/bancos" className="inline-flex items-center justify-center rounded-full border border-border bg-background/50 backdrop-blur-sm px-8 py-4 text-sm font-bold transition-all hover:bg-muted">
+              Listado Completo
             </Link>
-          </div>
+          </motion.div>
 
-          {/* Bullets de confianza */}
-          <ul className="mt-4 grid gap-2 text-xs text-muted-foreground md:text-sm">
-            <li className="inline-flex items-start gap-2">
-              <ShieldCheck className="mt-[2px] h-4 w-4 text-emerald-500" />
-              <span>Bancos regulados en la UE y Reino Unido, sin humo comercial.</span>
-            </li>
-            <li className="inline-flex items-start gap-2">
-              <Globe2 className="mt-[2px] h-4 w-4 text-cyan-500" />
-              <span>Perfecto si vives en un país, cobras desde otro o viajas a menudo.</span>
-            </li>
-            <li>• Ideal para remotos, freelancers, nómadas y expatriados.</li>
-          </ul>
-
-          {/* Mini barra de stats */}
-          <div className="mt-5 grid max-w-md grid-cols-3 gap-2 text-[11px] text-muted-foreground">
-            <div className="rounded-2xl bg-background/70 px-3 py-2 text-center shadow-sm">
-              <p className="text-xs font-semibold text-foreground">Bancos clave</p>
-              <p>Revolut · N26 · Wise · Bunq…</p>
+          <motion.div variants={fadeInUp} className="flex items-center gap-6 pt-4 border-t border-border/50">
+            <div className="flex -space-x-3">
+              {[1,2,3,4].map(i => (
+                <div key={i} className="h-10 w-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-[10px] font-bold">
+                  IBAN
+                </div>
+              ))}
             </div>
-            <div className="rounded-2xl bg-background/70 px-3 py-2 text-center shadow-sm">
-              <p className="text-xs font-semibold text-foreground">Tipo de cuentas</p>
-              <p>Neobancos · Multidivisa</p>
-            </div>
-            <div className="rounded-2xl bg-background/70 px-3 py-2 text-center shadow-sm">
-              <p className="text-xs font-semibold text-foreground">Coste para ti</p>
-              <p>0 € · Web gratuita</p>
-            </div>
-          </div>
-        </div>
+            <p className="text-xs text-muted-foreground font-medium">
+              +500 personas han encontrado <br /> su banco ideal este mes.
+            </p>
+          </motion.div>
+        </motion.div>
 
-        {/* Columna tarjeta resumen */}
-        <div className="animate-fade-in-up rounded-3xl border border-border bg-background/95 p-5 shadow-card backdrop-blur md:p-6">
-          <h2 className="mb-4 text-sm font-semibold text-muted-foreground">
-            Resumen rápido de Finanzas Eu
-          </h2>
-          <div className="space-y-3 text-sm">
-            <Row label="Bancos analizados" value="Revolut, N26, Wise, Bunq…" />
-            <Row label="Tipo de cuentas" value="Neobancos, multidivisa, online" />
-            <Row label="Enfoque" value="Claro, directo y sin humo" />
-            <Row label="Coste para ti" value="0 € (web gratuita)" />
-          </div>
+        {/* Columna Derecha: Tarjeta Interactiva Framer */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9, rotate: 2 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="relative group"
+        >
+          <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-[2rem] blur opacity-25 group-hover:opacity-40 transition duration-1000" />
+          <div className="relative rounded-[2rem] border border-border bg-background/80 p-8 shadow-2xl backdrop-blur-xl">
+            <div className="space-y-6">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold tracking-tight">Análisis Rápido</h3>
+                <span className="text-[10px] font-mono bg-muted px-2 py-1 rounded tracking-tighter uppercase">Actualizado 2024</span>
+              </div>
+              
+              <div className="space-y-4">
+                <MetricRow label="Bancos comparados" value="25+" progress={80} />
+                <MetricRow label="Costo del servicio" value="0.00€" progress={100} />
+                <MetricRow label="Fiabilidad" value="Alta (UE)" progress={95} />
+              </div>
 
-          <div className="mt-5 grid grid-cols-3 gap-2 text-[11px] text-muted-foreground">
-            <span className="rounded-full bg-muted px-2 py-1 text-center">
-              Sin comisiones ocultas
-            </span>
-            <span className="rounded-full bg-muted px-2 py-1 text-center">
-              Pensado para remotos
-            </span>
-            <span className="rounded-full bg-muted px-2 py-1 text-center">
-              Enlace directo a los bancos
-            </span>
+              <div className="pt-6 grid grid-cols-2 gap-3">
+                <div className="rounded-2xl bg-emerald-500/5 p-3 border border-emerald-500/10">
+                  <ShieldCheck className="h-5 w-5 text-emerald-500 mb-2" />
+                  <p className="text-[11px] font-bold">Seguridad UE</p>
+                </div>
+                <div className="rounded-2xl bg-cyan-500/5 p-3 border border-cyan-500/10">
+                  <Globe2 className="h-5 w-5 text-cyan-500 mb-2" />
+                  <p className="text-[11px] font-bold">Multidivisa</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+function MetricRow({ label, value, progress }: { label: string; value: string; progress: number }) {
   return (
-    <div className="flex items-center justify-between gap-3">
-      <span className="text-xs text-muted-foreground">{label}</span>
-      <span className="text-sm font-semibold text-right text-foreground">
-        {value}
-      </span>
+    <div className="space-y-1.5">
+      <div className="flex justify-between text-xs font-medium">
+        <span className="text-muted-foreground">{label}</span>
+        <span>{value}</span>
+      </div>
+      <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
+        <motion.div 
+          initial={{ width: 0 }} 
+          animate={{ width: `${progress}%` }} 
+          transition={{ duration: 1, delay: 0.5 }}
+          className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500" 
+        />
+      </div>
     </div>
   );
 }

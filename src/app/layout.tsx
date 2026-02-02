@@ -1,4 +1,4 @@
-// src/app/layout.tsx — VERSIÓN FINAL OPTIMIZADA NOVIEMBRE 2025
+// src/app/layout.tsx
 
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -7,6 +7,10 @@ import { ThemeProvider } from "next-themes";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CookieBanner from "@/components/CookieBanner";
+
+// 🚀 Importamos el nuevo componente
+import StickyPromo from "@/components/layout/StickyPromo"; 
 
 import "./globals.css";
 
@@ -109,7 +113,13 @@ export default function RootLayout({
           <Header />
           <main className="pt-20 md:pt-24">{children}</main>
           <Footer />
+
+          {/* 🚀 StickyPromo integrado aquí: Flotará sobre todas las páginas */}
+          <StickyPromo />
         </ThemeProvider>
+
+        {/* Banner de Cookies */}
+        <CookieBanner />
 
         {/* Schema.org — mejora marca en Google */}
         <script

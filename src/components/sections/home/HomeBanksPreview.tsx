@@ -1,98 +1,79 @@
 // src/components/sections/home/HomeBanksPreview.tsx
+"use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Trophy } from "lucide-react";
+import { Trophy, ArrowUpRight } from "lucide-react";
 import Container from "@/components/layout/Container";
 import { banks } from "@/lib/banks";
 
 export default function HomeBanksPreview() {
-  // Priorizamos bancos con affiliateUrl y cogemos los 3 primeros
-  const featured = [...banks]
-    .sort((a, b) => {
-      const aAff = a.affiliateUrl ? 1 : 0;
-      const bAff = b.affiliateUrl ? 1 : 0;
-      return bAff - aAff;
-    })
-    .slice(0, 3);
+  const featured = [...banks].slice(0, 3);
 
   return (
-    <section className="border-t border-border bg-background py-12 md:py-16">
-      <Container className="space-y-8">
-        <header className="space-y-2 text-center">
-          <h2 className="text-2xl font-bold md:text-3xl">
-            Bancos que suelen funcionar muy bien
-          </h2>
-          <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
-            Una selección rápida de bancos digitales y cuentas multidivisa que
-            suelen encajar con la mayoría de personas que viajan, trabajan en
-            remoto o viven entre países.
-          </p>
-        </header>
+    <section className="py-24 bg-muted/30">
+      <Container>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="space-y-4">
+            <h2 className="text-3xl md:text-5xl font-black">Recomendaciones Top</h2>
+            <p className="text-muted-foreground max-w-lg">
+              Los bancos que mejor funcionan para abrir cuenta online desde el extranjero o para uso multidivisa.
+            </p>
+          </div>
+          <Link href="/bancos" className="text-sm font-bold flex items-center gap-1 group">
+            Ver todo el directorio 
+            <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </Link>
+        </div>
 
         <div className="grid gap-6 md:grid-cols-3">
           {featured.map((bank, index) => (
-            <article
+            <motion.article
               key={bank.slug}
-              className="flex flex-col rounded-3xl border border-border bg-background/90 p-5 shadow-card transition-all hover:-translate-y-1 hover:border-emerald-500/30 hover:shadow-soft"
+              whileHover={{ scale: 1.02 }}
+              className="relative flex flex-col rounded-[2.5rem] border border-border bg-background p-6 shadow-sm overflow-hidden"
             >
-              <div className="mb-3 flex items-center gap-2">
-                <div className="relative h-9 w-9 rounded-xl bg-muted p-1">
-                  <Image
-                    src={bank.logo}
-                    alt={bank.name}
-                    fill
-                    className="rounded-lg object-contain"
-                  />
+              <div className="flex items-start justify-between mb-8">
+                <div className="h-16 w-16 relative bg-muted rounded-[1.25rem] p-3 overflow-hidden">
+                  <Image src={bank.logo} alt={bank.name} fill className="object-contain p-2" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-sm font-semibold">{bank.name}</h3>
-                  <p className="text-[11px] text-muted-foreground">
-                    {bank.country}
-                    {bank.ibanCountry && ` · IBAN ${bank.ibanCountry}`}
-                  </p>
-                </div>
-
-                {/* Badge TOP */}
-                <div className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-200">
-                  <Trophy className="h-3.5 w-3.5" />
-                  TOP {index + 1}
+                <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 text-emerald-700 rounded-full text-[10px] font-black uppercase tracking-widest">
+                  <Trophy className="h-3 w-3" />
+                  # {index + 1}
                 </div>
               </div>
 
-              <p className="mb-3 line-clamp-3 text-xs text-muted-foreground">
-                {bank.tagline}
-              </p>
+              <div className="space-y-2 mb-8 flex-1">
+                <h3 className="text-2xl font-bold tracking-tight">{bank.name}</h3>
+                <div className="flex gap-2 text-[10px] font-semibold text-muted-foreground">
+                  <span className="bg-muted px-2 py-0.5 rounded">IBAN {bank.ibanCountry}</span>
+                  <span className="bg-muted px-2 py-0.5 rounded">{bank.country}</span>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed pt-2">
+                  {bank.tagline}
+                </p>
+              </div>
 
-              <div className="mt-auto flex flex-col gap-2">
+              <div className="grid gap-3">
                 <Link
                   href={`/programas/${bank.slug}`}
-                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:brightness-110"
+                  className="w-full inline-flex items-center justify-center rounded-2xl bg-muted py-3.5 text-sm font-bold transition-colors hover:bg-emerald-500 hover:text-white"
                 >
-                  Ver detalles →
+                  Análisis Detallado
                 </Link>
                 {bank.affiliateUrl && (
                   <a
                     href={bank.affiliateUrl}
                     target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-border px-4 py-2 text-[11px] font-medium text-muted-foreground hover:bg-background/60"
+                    className="w-full inline-flex items-center justify-center rounded-2xl border border-border py-3.5 text-sm font-bold text-muted-foreground hover:border-emerald-500/50 transition-colors"
                   >
-                    Ir directamente a {bank.name}
+                    Abrir cuenta oficial
                   </a>
                 )}
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
-
-        <div className="text-center">
-          <Link
-            href="/bancos"
-            className="inline-flex items-center justify-center rounded-full border border-border px-6 py-2.5 text-sm font-semibold text-foreground hover:bg-background/70"
-          >
-            Ver todos los bancos →
-          </Link>
         </div>
       </Container>
     </section>

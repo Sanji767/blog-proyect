@@ -35,7 +35,8 @@ const menuItems: MenuItem[] = [
   { text: "Blog", url: "/blog" },
   { text: "Ventajas", url: "/ventajas" },
   { text: "FAQ", url: "/faq" },
-  { text: "Contacto", url: "/contacto" },
+  { text: "IBAN Scanner", url: "/iban" }, // 👈 esto
+  
 ];
 
 const ctaText = "Abrir cuenta recomendada";
