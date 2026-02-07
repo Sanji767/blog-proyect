@@ -1,13 +1,15 @@
 // src/app/layout.tsx
 
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Manrope } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { Suspense } from "react";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import GoogleAnalyticsLoader from "@/components/analytics/GoogleAnalyticsLoader";
+import { toJsonLd } from "@/lib/seo";
 
 // 🚀 Importamos el nuevo componente
 import StickyPromo from "@/components/layout/StickyPromo"; 
@@ -95,13 +97,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const gaId =
+    process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ??
+    process.env.GOOGLE_ANALYTICS_ID;
+
   return (
     <html lang="es" suppressHydrationWarning>
       <body
         className={`${manrope.className} ${manrope.variable} antialiased bg-background text-foreground`}
       >
-        {/* Cambia G-XXXXXXX por tu GA4 real */}
-        <GoogleAnalytics gaId="G-XXXXXXX" />
+        {/* Google Analytics (GA4): se carga solo tras aceptar cookies */}
+        {gaId ? (
+          <Suspense fallback={null}>
+            <GoogleAnalyticsLoader gaId={gaId} />
+          </Suspense>
+        ) : null}
 
         {/* Tema claro/oscuro */}
         <ThemeProvider
@@ -125,7 +135,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: toJsonLd({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "FinanzasEU",

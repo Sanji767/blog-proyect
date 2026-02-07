@@ -1,7 +1,6 @@
 // src/lib/blog/posts.ts
 
 import type { BlogPost } from "./types";
-import type { StaticImageData } from "next/image";   // keep if used, or remove if unused
 
 const posts: BlogPost[] = [
   {

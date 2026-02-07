@@ -13,7 +13,7 @@ import {
   Eye,
   Sparkles,
 } from "lucide-react";
-import type { Vlog } from "@/lib/vlogs";
+import type { VlogPreview } from "@/lib/vlogs";
 
 const PLACEHOLDER_IMAGE = "/placeholder-vlog.jpg";
 const PLACEHOLDER_BLUR = "/placeholder-blur.jpg";
@@ -21,7 +21,7 @@ const DEFAULT_AUTHOR_AVATAR = "/jose-avatar.jpg";
 const DEFAULT_AUTHOR_NAME = "José María";
 
 type VlogCardProps = {
-  vlog: Vlog;
+  vlog: VlogPreview;
   variant?: "default" | "featured" | "compact";
   index?: number;
 };

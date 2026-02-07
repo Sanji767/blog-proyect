@@ -53,7 +53,6 @@ const newPost: BlogPost = {
   content,
 };
 
-      // @ts-ignore – estamos modificando el array importado (funciona en Next.js)
       blogPosts.push(newPost);
     }
   }

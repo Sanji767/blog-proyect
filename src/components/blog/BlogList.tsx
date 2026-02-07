@@ -1,8 +1,8 @@
 // src/components/blog/BlogList.tsx
 import BlogCard from "./BlogCard";
-import type { BlogPost } from "@/lib/blog/types";
+import type { BlogPostPreview } from "@/lib/blog/types";
 
-export default function BlogList({ posts }: { posts: BlogPost[] }) {
+export default function BlogList({ posts }: { posts: BlogPostPreview[] }) {
   if (!posts.length) {
     return (
       <div className="rounded-2xl border bg-background p-8 text-center text-sm text-muted-foreground">

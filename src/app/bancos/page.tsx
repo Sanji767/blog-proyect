@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     title: "Comparador de bancos europeos 2025",
     description:
       "Encuentra el banco europeo que mejor encaja con tu perfil: viajero, freelance, empresa o expatriado.",
-    url: "https://bancoseuropa.com/bancos",
+    url: "https://finanzaseu.com/bancos",
     type: "website",
-    siteName: "Bancos Europa",
+    siteName: "FinanzasEU",
   },
 };
 

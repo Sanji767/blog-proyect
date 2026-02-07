@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import BookMockup from "./BookMockup";
 import Badge from "./Badge";
 import Link from "next/link";

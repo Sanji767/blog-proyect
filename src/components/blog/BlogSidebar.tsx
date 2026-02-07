@@ -1,19 +1,10 @@
 // src/components/blog/BlogSidebar.tsx
 import Link from "next/link";
-import { getCategories } from "@/lib/blog/getCategories";
-import { getTags } from "@/lib/blog/getTags";
+import { getCategories, getTags } from "@/lib/blog";
 
-// ← Importamos los tipos del nuevo sistema (el que ya funciona)
-import type { Category } from "@/lib/blog/getCategories";
-import type { Tag } from "@/lib/blog/getTags";
-
-export default function BlogSidebar({
-  currentSlug,
-}: {
-  currentSlug?: string;
-}) {
-  const categories: Category[] = getCategories();
-  const tags: Tag[] = getTags();
+export default function BlogSidebar() {
+  const categories = getCategories();
+  const tags = getTags();
 
   return (
     <aside className="space-y-8 lg:sticky lg:top-24">

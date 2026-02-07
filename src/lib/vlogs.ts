@@ -1560,6 +1560,17 @@ export const vlogs: Vlog[] = [...vlogsBase]
   });
 
 /**
+ * Versión ligera (sin `content`) para listados (home, /vlogs, cards).
+ * Evita enviar el markdown completo al cliente cuando el card es "use client".
+ */
+export type VlogPreview = Omit<Vlog, "content">;
+export const vlogPreviews: VlogPreview[] = vlogs.map((v) => {
+  const { content, ...rest } = v;
+  void content;
+  return rest;
+});
+
+/**
  * Helper opcional: obtener un vlog por slug
  * (por si más adelante quieres centralizar esta lógica).
  */

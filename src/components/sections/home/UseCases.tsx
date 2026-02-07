@@ -93,7 +93,7 @@ export default function UseCases() {
                       Nuestra Recomendación
                     </span>
                     <p className="text-2xl font-bold leading-tight">
-                      "{currentCase?.text}"
+                      “{currentCase?.text}”
                     </p>
                   </div>
 
@@ -101,9 +101,8 @@ export default function UseCases() {
                     <div className="bg-background rounded-3xl p-6 border border-border shadow-xl">
                       <div className="flex items-center gap-5 mb-6">
                         <div className="h-16 w-16 relative bg-muted rounded-2xl p-2 shrink-0 flex items-center justify-center">
-                          {/* Verificación de si el logo es string o StaticImageData */}
                           <Image 
-                            src={typeof recommended.logo === 'string' ? recommended.logo : (recommended.logo as any).src} 
+                            src={recommended.logo} 
                             alt={recommended.name} 
                             width={64}
                             height={64}
@@ -141,6 +140,7 @@ export default function UseCases() {
                           <a 
                             href={recommended.affiliateUrl}
                             target="_blank"
+                            rel="noreferrer noopener"
                             className="text-center text-[11px] font-bold text-muted-foreground hover:text-emerald-500 py-1"
                           >
                             Ir a la web oficial

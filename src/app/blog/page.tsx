@@ -2,20 +2,101 @@
 import type { Metadata } from "next";
 import BlogCard from "@/components/blog/BlogCard";
 import BlogHeader from "@/components/blog/BlogHeader";
-import { getAllPosts, getFeaturedPosts } from "@/lib/blog";
+import { getAllPostPreviews } from "@/lib/blog";
+import {
+  DEFAULT_OG_IMAGE_URL,
+  SITE_LOGO_URL,
+  SITE_NAME,
+  SITE_URL,
+  toJsonLd,
+} from "@/lib/seo";
+
+const BLOG_PAGE_TITLE = "Blog Finanzas EU – Guías reales sobre bancos digitales 2025";
+const BLOG_PAGE_DESCRIPTION =
+  "Comparativas honestas, opiniones reales y trucos para ahorrar con Revolut, Wise, N26 y más.";
 
 export const metadata: Metadata = {
-  title: "Blog Finanzas EU – Guías reales sobre bancos digitales 2025",
-  description: "Comparativas honestas, opiniones reales y trucos para ahorrar con Revolut, Wise, N26 y más.",
+  title: BLOG_PAGE_TITLE,
+  description: BLOG_PAGE_DESCRIPTION,
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default function BlogPage() {
-  const allPosts = getAllPosts();
-  const featured = getFeaturedPosts().slice(0, 3);
+  const allPosts = getAllPostPreviews();
+  const featured = allPosts.filter((p) => p.featured).slice(0, 3);
   const normal = allPosts.filter((p) => !featured.some((f) => f.slug === p.slug));
+
+  const pageUrl = `${SITE_URL}/blog`;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: pageUrl,
+      },
+    ],
+  };
+
+  const blogCollectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}#collection`,
+    url: pageUrl,
+    name: BLOG_PAGE_TITLE,
+    description: BLOG_PAGE_DESCRIPTION,
+    inLanguage: "es-ES",
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: SITE_LOGO_URL,
+      },
+    },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: DEFAULT_OG_IMAGE_URL,
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: allPosts.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${SITE_URL}/blog/${post.slug}`,
+        name: post.title,
+      })),
+    },
+  };
 
   return (
     <>
+      {/* Schema.org: Breadcrumbs + CollectionPage (Blog index) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: toJsonLd(breadcrumbJsonLd),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: toJsonLd(blogCollectionJsonLd),
+        }}
+      />
+
       <BlogHeader total={allPosts.length} />
 
       {featured.length > 0 && (

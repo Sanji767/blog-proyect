@@ -1,58 +1,145 @@
 // src/app/blog/tag/[tag]/page.tsx
+import type { Metadata } from "next";
 import Container from "@/components/layout/Container";
 import BlogCard from "@/components/blog/BlogCard";
-import { blogPosts } from "@/lib/blog/posts";
+import { getAllPostPreviews, getTags } from "@/lib/blog";
+import {
+  DEFAULT_OG_IMAGE_URL,
+  SITE_LOGO_URL,
+  SITE_NAME,
+  SITE_URL,
+  toJsonLd,
+} from "@/lib/seo";
 
-// 1. Definimos el tipo explícitamente
 type Props = {
   params: {
     tag: string;
   };
 };
 
-// 2. generateStaticParams con tipo correcto
-export async function generateStaticParams(): Promise<{ tag: string }[]> {
-  const allTags = new Set<string>();
-  blogPosts.forEach((p) => p.tags?.forEach((t) => allTags.add(t)));
-  return Array.from(allTags).map((tag) => ({ tag }));
+export function generateStaticParams(): Array<{ tag: string }> {
+  return getTags().map((t) => ({ tag: t.slug }));
 }
 
-// 3. generateMetadata con tipo explícito
-export async function generateMetadata({ params }: Props): Promise<any> {
-  const tag = decodeURIComponent(params.tag);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
+  const tag = getTags().find((t) => t.slug === tagSlug);
+  const label = tag?.title ?? tagSlug;
+
   return {
-    title: `#${tag} | Blog Finanzas EU`,
-    description: `Todos los artículos etiquetados con #${tag}`,
+    title: `#${label} | Blog FinanzasEU`,
+    description: `Todos los artículos etiquetados con #${label}.`,
+    alternates: {
+      canonical: `/blog/tag/${encodeURIComponent(tagSlug)}`,
+    },
   };
 }
 
-// 4. Página con tipo explícito
 export default function TagPage({ params }: Props) {
-  const tag = decodeURIComponent(params.tag);
-  const posts = blogPosts.filter((p) =>
-    p.tags?.includes(tag.toLowerCase())
-  );
+  const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
+  const tag = getTags().find((t) => t.slug === tagSlug);
+  const label = tag?.title ?? tagSlug;
+
+  const posts = getAllPostPreviews().filter((p) => p.tags?.includes(tagSlug));
+
+  const pageUrl = `${SITE_URL}/blog/tag/${encodeURIComponent(tagSlug)}`;
+  const pageTitle = `#${label} | Blog FinanzasEU`;
+  const pageDescription = `Todos los artículos etiquetados con #${label}.`;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${SITE_URL}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `#${label}`,
+        item: pageUrl,
+      },
+    ],
+  };
+
+  const tagCollectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}#collection`,
+    url: pageUrl,
+    name: pageTitle,
+    description: pageDescription,
+    inLanguage: "es-ES",
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: SITE_LOGO_URL,
+      },
+    },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: DEFAULT_OG_IMAGE_URL,
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: posts.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${SITE_URL}/blog/${post.slug}`,
+        name: post.title,
+      })),
+    },
+  };
 
   return (
-    <Container className="py-16">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-black mb-4">#{tag}</h1>
-        <p className="text-xl text-muted-foreground">
-          {posts.length} artículo{posts.length !== 1 ? "s" : ""} encontrado{posts.length !== 1 ? "s" : ""}
-        </p>
-      </div>
+    <>
+      {/* Schema.org: Breadcrumbs + CollectionPage (Tag) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: toJsonLd(breadcrumbJsonLd),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: toJsonLd(tagCollectionJsonLd),
+        }}
+      />
 
-      {posts.length === 0 ? (
-        <p className="text-center text-muted-foreground py-20 text-lg">
-          No hay artículos con la etiqueta <strong>#{tag}</strong> todavía.
-        </p>
-      ) : (
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post, i) => (
-            <BlogCard key={post.slug} post={post} index={i} />
-          ))}
+      <Container className="py-16">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-black mb-4">#{label}</h1>
+          <p className="text-xl text-muted-foreground">
+            {posts.length} artículo{posts.length !== 1 ? "s" : ""} encontrado
+            {posts.length !== 1 ? "s" : ""}
+          </p>
         </div>
-      )}
-    </Container>
+
+        {posts.length === 0 ? (
+          <p className="text-center text-muted-foreground py-20 text-lg">
+            No hay artículos con la etiqueta <strong>#{label}</strong> todavía.
+          </p>
+        ) : (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post, i) => (
+              <BlogCard key={post.slug} post={post} index={i} />
+            ))}
+          </div>
+        )}
+      </Container>
+    </>
   );
 }

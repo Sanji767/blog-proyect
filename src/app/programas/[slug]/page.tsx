@@ -6,6 +6,7 @@ import type React from "react";
 
 import { banks, type Bank } from "@/lib/banks";
 import Container from "@/components/layout/Container";
+import { toJsonLd } from "@/lib/seo";
 
 import {
   Globe2,
@@ -204,7 +205,7 @@ export default function ProgramaPage({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(breadcrumbJsonLd),
+            __html: toJsonLd(breadcrumbJsonLd),
           }}
         />
 

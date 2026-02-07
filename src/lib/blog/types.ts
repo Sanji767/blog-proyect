@@ -20,6 +20,9 @@ export type BlogPost = {
   year?: string; // opcional: útil para filtros o URLs por año
 };
 
+// Para cards / listados (evita enviar `content` al cliente en componentes "use client").
+export type BlogPostPreview = Omit<BlogPost, "content">;
+
 export type Category = {
   slug: string;
   title: string;

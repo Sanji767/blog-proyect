@@ -58,7 +58,6 @@ export default function ContactoPage() {
     }
 
     try {
-      console.log("Enviando consulta:", data);
       await new Promise(resolve => setTimeout(resolve, 1200));
       setFormState("success");
       (e.target as HTMLFormElement).reset();

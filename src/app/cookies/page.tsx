@@ -1,3 +1,5 @@
+import CookiePreferences from "@/components/cookies/CookiePreferences";
+
 export const metadata = {
   title: "Política de Cookies | FinanzasEU",
   description:
@@ -33,7 +35,8 @@ export default function CookiesPage() {
           </li>
           <li>
             <strong>Cookies analíticas:</strong> utilizadas para medir de forma anónima
-            cómo los usuarios interactúan con la web (por ejemplo, mediante Plausible).
+            cómo los usuarios interactúan con la web (por ejemplo, mediante Google
+            Analytics).
           </li>
         </ul>
 
@@ -46,9 +49,12 @@ export default function CookiesPage() {
         <h2>Gestión de cookies</h2>
         <p>
           Puedes aceptar o rechazar el uso de cookies desde el banner que aparece al
-          acceder al sitio. Además, puedes configurar tu navegador para bloquear o
-          eliminar cookies en cualquier momento.
+          acceder al sitio. Además, puedes cambiar tu elección desde este panel o
+          configurar tu navegador para bloquear o eliminar cookies en cualquier
+          momento.
         </p>
+
+        <CookiePreferences />
 
         <h2>Actualizaciones de esta política</h2>
         <p>

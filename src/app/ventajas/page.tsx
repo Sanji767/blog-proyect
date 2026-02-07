@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import Container from "@/components/layout/Container";
+import { toJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Ventajas de los bancos digitales en Europa | Finanzas Eu",
@@ -202,7 +203,7 @@ export default function VentajasPage() {
         type="application/ld+json"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: toJsonLd({
             "@context": "https://schema.org",
             "@type": "WebPage",
             name: "Ventajas de los bancos digitales en Europa",

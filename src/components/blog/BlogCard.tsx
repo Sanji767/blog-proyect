@@ -4,10 +4,10 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, Eye, Sparkles, Flame } from "lucide-react";
-import type { BlogPost } from "@/lib/blog/types";
+import type { BlogPostPreview } from "@/lib/blog/types";
 
 type Props = {
-  post: BlogPost;
+  post: BlogPostPreview;
   variant?: "default" | "featured" | "compact";
   index?: number;
 };

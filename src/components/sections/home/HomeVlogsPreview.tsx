@@ -1,13 +1,14 @@
-// src/components/sections/home/HomeBlogPreview.tsx
+// src/components/sections/home/HomeVlogsPreview.tsx
 import Link from "next/link";
-import { ArrowRight, Clock, Calendar } from "lucide-react";
-import { getAllPosts } from "@/lib/blog";
-import type { BlogPost } from "@/lib/blog/types";
+import { ArrowRight } from "lucide-react";
 import Container from "@/components/layout/Container";
-import CategoryBadge from "@/components/blog/CategoryBadge";
+import BlogCard from "@/components/blog/BlogCard";
+import { getAllPostPreviews } from "@/lib/blog";
 
-export default async function HomeBlogPreview() {
-  const recentPosts = getAllPosts().slice(0, 3);
+export default function HomeVlogsPreview() {
+  const recentPosts = getAllPostPreviews().slice(0, 3);
+
+  if (recentPosts.length === 0) return null;
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-background to-muted/30">
@@ -15,13 +16,14 @@ export default async function HomeBlogPreview() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
           <div className="space-y-2">
             <div className="uppercase text-xs font-mono tracking-widest text-primary font-semibold">
-              CONOCIMIENTO PRÁCTICO
+              BLOG
             </div>
             <h2 className="text-3xl md:text-4xl font-black tracking-tighter">
-              Últimas guías y análisis
+              Últimos artículos y análisis
             </h2>
             <p className="text-muted-foreground max-w-md text-[15px]">
-              Análisis actualizados, comparativas reales y trucos útiles sobre bancos digitales en Europa.
+              Resúmenes claros, ejemplos reales y comparativas sin humo para
+              elegir banco, IBAN y comisiones con criterio.
             </p>
           </div>
 
@@ -35,46 +37,8 @@ export default async function HomeBlogPreview() {
         </div>
 
         <div className="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {recentPosts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group block bg-card rounded-3xl border border-border/60 overflow-hidden hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-            >
-              <div className="p-6">
-                {/* Categoría + Fecha */}
-                <div className="flex items-center justify-between mb-4">
-                  <CategoryBadge slug={post.category} />
-                  <span className="text-xs text-muted-foreground flex items-center gap-1">
-                    <Calendar className="h-3 w-3" />
-                    {new Date(post.date).toLocaleDateString("es-ES", { month: "short", day: "numeric" })}
-                  </span>
-                </div>
-
-                {/* Título */}
-                <h3 className="font-bold text-xl leading-snug tracking-tight mb-3 group-hover:text-primary transition-colors line-clamp-3">
-                  {post.title}
-                </h3>
-
-                {/* Extracto */}
-                <p className="text-muted-foreground text-[15px] leading-relaxed line-clamp-3 mb-5">
-                  {post.excerpt || post.description || "Explora esta guía completa..."}
-                </p>
-
-                {/* Meta inferior */}
-                <div className="flex items-center justify-between text-xs text-muted-foreground pt-4 border-t border-border/50">
-                  {post.readingTime && (
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="h-3.5 w-3.5" />
-                      {post.readingTime}
-                    </span>
-                  )}
-                  <span className="font-mono text-primary/70 group-hover:text-primary transition-colors">
-                    Leer →
-                  </span>
-                </div>
-              </div>
-            </Link>
+          {recentPosts.map((post, i) => (
+            <BlogCard key={post.slug} post={post} index={i} />
           ))}
         </div>
       </Container>

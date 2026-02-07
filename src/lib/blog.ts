@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-import type { BlogPost, Category, Tag } from "./blog/types";
+import type { BlogPost, BlogPostPreview, Category, Tag } from "./blog/types";
 
 const POSTS_DIR = path.join(process.cwd(), "src/content/blog/posts");
 
@@ -56,6 +56,18 @@ export function getAllPosts(): BlogPost[] {
   }
 
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+function toPreview(post: BlogPost): BlogPostPreview {
+  const { content, ...rest } = post;
+  void content;
+  return rest;
+}
+
+// ---------------------------------------------------------------------
+// 1b. Todos los posts (versión ligera sin `content`)
+export function getAllPostPreviews(): BlogPostPreview[] {
+  return getAllPosts().map(toPreview);
 }
 
 // ---------------------------------------------------------------------
@@ -122,17 +134,3 @@ export function getTags(): Tag[] {
     }))
     .sort((a, b) => b.count - a.count);
 }
-
-// ---------------------------------------------------------------------
-// Mensaje de inicio (opcional)
-console.log(`
-╔══════════════════════════════════════════════════╗
-║                                                  ║
-║   🎉 BLOG 100% AUTOMÁTICO Y FUNCIONANDO 🎉      ║
-║                                                  ║
-║   → Crea un .mdx en src/content/blog/posts/      ║
-║   → Aparece solo en todo el sitio                ║
-║   → Sin tocar blog.ts nunca más                  ║
-║                                                  ║
-╚══════════════════════════════════════════════════╝
-`);

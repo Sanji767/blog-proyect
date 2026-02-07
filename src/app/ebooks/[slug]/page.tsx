@@ -1,12 +1,14 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import { ebooks } from "@/lib/ebooks-data";
 import { motion } from "framer-motion";
 
 export default function EbookDetailPage() {
   const params = useParams();
-  const ebookId = params.slug as string;
+  const slugParam = params.slug;
+  const ebookId = Array.isArray(slugParam) ? slugParam[0] : (slugParam as string);
   const ebook = ebooks.find((e) => e.id === ebookId);
 
   if (!ebook) {
@@ -22,7 +24,15 @@ export default function EbookDetailPage() {
         className="grid gap-12 md:grid-cols-2"
       >
         <div className="flex justify-center">
-          <img src={ebook.image} alt={ebook.title} className="rounded-2xl shadow-2xl max-w-sm" />
+          <div className="relative w-full max-w-sm aspect-[4/5]">
+            <Image
+              src={ebook.image}
+              alt={ebook.title}
+              fill
+              sizes="(min-width: 768px) 380px, 90vw"
+              className="rounded-2xl shadow-2xl object-cover"
+            />
+          </div>
         </div>
 
         <div className="space-y-8">
