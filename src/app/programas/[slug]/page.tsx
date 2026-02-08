@@ -286,6 +286,8 @@ export default function ProgramaPage({
             <div className="flex flex-wrap gap-3 pt-4">
               <a
                 href={primaryCtaUrl}
+                data-analytics={hasAffiliate ? "affiliate" : undefined}
+                data-affiliate-partner={hasAffiliate ? params.slug : undefined}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-black shadow-md transition hover:brightness-105"
@@ -828,6 +830,8 @@ export default function ProgramaPage({
             </div>
             <a
               href={primaryCtaUrl}
+              data-analytics={hasAffiliate ? "affiliate" : undefined}
+              data-affiliate-partner={hasAffiliate ? params.slug : undefined}
               target="_blank"
               rel="noreferrer noopener"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-black shadow-md transition hover:brightness-105"

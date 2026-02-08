@@ -138,9 +138,7 @@ export default function CurrencyComparison() {
             <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 flex gap-3">
               <Info className="h-5 w-5 text-blue-500 shrink-0" />
               <p className="text-[11px] text-blue-700/80 leading-relaxed">
-                Los datos son estimaciones basadas en las tarifas estándar de 2026. 
-                Los bancos tradicionales suelen aplicar además un sobrecoste oculto 
-                en el tipo de cambio del 2% al 5%.
+                Ejemplo orientativo: las comisiones varían según entidad, plan, divisa y método de pago. En banca tradicional, el coste total puede incluir comisión + margen en el tipo de cambio.
               </p>
             </div>
           </div>

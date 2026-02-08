@@ -65,6 +65,8 @@ export default function HomeBanksPreview() {
                 {bank.affiliateUrl && (
                   <a
                     href={bank.affiliateUrl}
+                    data-analytics="affiliate"
+                    data-affiliate-partner={bank.slug}
                     target="_blank"
                     className="w-full inline-flex items-center justify-center rounded-2xl border border-border py-3.5 text-sm font-bold text-muted-foreground hover:border-emerald-500/50 transition-colors"
                   >

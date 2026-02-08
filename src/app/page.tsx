@@ -11,6 +11,7 @@ import HomeHowItWorks from "@/components/sections/home/HomeHowItWorks";
 import HomeFaqPreview from "@/components/sections/home/HomeFaqPreview";
 import HomeVlogsPreview from "@/components/sections/home/HomeVlogsPreview";
 import CurrencyComparison from "@/components/sections/home/CurrencyComparison";
+import CtaSection from "@/components/sections/comunes/CtaSection";
 
 // 🚀 Nuevos Componentes Avanzados
 import TrustStrip from "@/components/sections/home/TrustStrip";
@@ -151,6 +152,7 @@ export default function HomePage() {
       <HomeFaqPreview />
 
       {/* 8. Conversión */}
+      <CtaSection />
     </>
   );
 }

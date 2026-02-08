@@ -863,6 +863,8 @@ export default function ComparativaPage() {
                   {bank.affiliateUrl && (
                     <a
                       href={bank.affiliateUrl}
+                      data-analytics="affiliate"
+                      data-affiliate-partner={bank.slug}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1"
@@ -1141,6 +1143,8 @@ export default function ComparativaPage() {
                           {bank.affiliateUrl && (
                             <a
                               href={bank.affiliateUrl}
+                              data-analytics="affiliate"
+                              data-affiliate-partner={bank.slug}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="w-full"

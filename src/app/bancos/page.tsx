@@ -255,6 +255,8 @@ function BankCard({ bank }: { bank: Bank }) {
         {affiliateUrl && (
           <a
             href={affiliateUrl}
+            data-analytics="affiliate"
+            data-affiliate-partner={slug}
             target="_blank"
             rel="noreferrer"
             className="mt-1 inline-flex items-center justify-center rounded-full border border-border bg-background px-4 py-2 text-[11px] font-medium text-muted-foreground transition hover:bg-muted/70"

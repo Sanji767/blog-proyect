@@ -139,6 +139,8 @@ export default function UseCases() {
                         {recommended.affiliateUrl && (
                           <a 
                             href={recommended.affiliateUrl}
+                            data-analytics="affiliate"
+                            data-affiliate-partner={recommended.slug}
                             target="_blank"
                             rel="noreferrer noopener"
                             className="text-center text-[11px] font-bold text-muted-foreground hover:text-emerald-500 py-1"

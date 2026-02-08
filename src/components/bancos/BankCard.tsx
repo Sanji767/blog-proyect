@@ -130,6 +130,8 @@ export default function BankCard({
         {showDirectLink && hasAffiliate && (
           <a
             href={bank.affiliateUrl}
+            data-analytics="affiliate"
+            data-affiliate-partner={bank.slug}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center rounded-full border border-border px-4 py-2 text-[11px] font-medium text-muted-foreground hover:bg-background/60"

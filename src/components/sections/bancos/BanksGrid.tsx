@@ -221,6 +221,8 @@ function BankCard({ bank, index }: { bank: Bank; index: number }) {
           {bank.affiliateUrl && (
             <a
               href={bank.affiliateUrl}
+              data-analytics="affiliate"
+              data-affiliate-partner={bank.slug}
               target="_blank"
               rel="noopener noreferrer"
               className="block"

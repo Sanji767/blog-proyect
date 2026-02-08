@@ -5,18 +5,18 @@ import Container from "@/components/layout/Container";
 const steps = [
   {
     step: "1",
-    title: "Me cuentas tu situación",
-    desc: "Vives en un país, cobras desde otro, trabajas en remoto, viajas mucho… Cada caso es distinto y eso importa.",
+    title: "Elige tu perfil",
+    desc: "Remoto, viajero, nómina, autónomo… cada caso tiene requisitos distintos (IBAN, países admitidos, límites).",
   },
   {
     step: "2",
-    title: "Filtramos bancos que no encajan",
-    desc: "Quitamos de la lista bancos que no aceptan tu país, tienen comisiones absurdas o no ofrecen lo que necesitas.",
+    title: "Compara con criterios claros",
+    desc: "Comisiones, IBAN, requisitos y letra pequeña: en fichas rápidas para entender pros y contras sin humo.",
   },
   {
     step: "3",
-    title: "Te quedas con 1–3 opciones claras",
-    desc: "Te explico en lenguaje normal pros y contras de cada opción para que tú decidas con la cabeza fría.",
+    title: "Decide y pasa a la acción",
+    desc: "Lee el análisis completo, valida tu IBAN si lo necesitas y abre la cuenta en la web oficial.",
   },
 ];
 
@@ -33,7 +33,7 @@ export default function HomeHowItWorks() {
             ?
           </h2>
           <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
-            No soy un banco, ni una asesoría cara. Soy una guía que te ayuda a
+            No somos un banco ni una asesoría cara. Somos una guía para
             descartar lo que no te sirve y quedarte con lo que sí.
           </p>
         </div>

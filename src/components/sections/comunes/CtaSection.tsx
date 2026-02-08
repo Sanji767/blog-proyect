@@ -21,7 +21,7 @@ export default function CtaSection() {
           <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
             Puedes empezar comparando los bancos más usados por viajeros,
             remotos y gente que cobra en varias divisas. Si sigues con dudas,
-            te ayudo a elegir 1–3 opciones claras según tu situación real.
+            te ayudamos a elegir 1–3 opciones claras según tu situación real.
           </p>
         </div>
 
@@ -42,14 +42,14 @@ export default function CtaSection() {
             className="inline-flex items-center justify-center rounded-full border border-border bg-background/80 px-7 py-2.5 text-sm font-semibold text-foreground shadow-sm hover:bg-background"
           >
             <MessageCircle className="mr-1.5 h-4 w-4" />
-            Preguntarme directamente
+            Escribirnos
           </Link>
         </div>
 
         {/* Mini beneficios debajo de los botones */}
         <div className="mx-auto mt-2 grid max-w-xl grid-cols-1 gap-2 text-[11px] text-muted-foreground sm:grid-cols-3">
           <p className="rounded-full bg-background/80 px-3 py-1">
-            ✔ No vendo bancos, te explico opciones
+            ✔ Transparencia: explicamos opciones
           </p>
           <p className="rounded-full bg-background/80 px-3 py-1">
             ✔ Enfoque práctico para vivir y trabajar en Europa

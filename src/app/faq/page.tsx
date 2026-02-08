@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
+import { SITE_URL, toJsonLd } from "@/lib/seo";
 import {
   ChevronDown,
   MessageCircle,
@@ -107,6 +108,25 @@ const faqGroups: FaqGroup[] = [
   },
 ];
 
+const FAQ_URL = `${SITE_URL}/faq`;
+const faqPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${FAQ_URL}#faq`,
+  url: FAQ_URL,
+  inLanguage: "es-ES",
+  mainEntity: faqGroups.flatMap((group) =>
+    group.items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  ),
+};
+
 const quickFacts = [
   {
     icon: <Globe className="h-5 w-5" />,
@@ -133,6 +153,13 @@ export default function FaqPage() {
 
   return (
     <section className="py-16 md:py-24 overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: toJsonLd(faqPageJsonLd),
+        }}
+      />
+
       <Container className="max-w-6xl space-y-16">
         {/* Hero épico */}
         <motion.div

@@ -13,6 +13,8 @@ export default function Hero() {
     transition: { duration: 0.5 }
   };
 
+  const quickTokens = ["IBAN", "TOP", "BLOG", "FAQ"];
+
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background py-20 md:py-32">
       {/* Background Decoración Avanzada */}
@@ -55,14 +57,17 @@ export default function Hero() {
 
           <motion.div variants={fadeInUp} className="flex items-center gap-6 pt-4 border-t border-border/50">
             <div className="flex -space-x-3">
-              {[1,2,3,4].map(i => (
-                <div key={i} className="h-10 w-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-[10px] font-bold">
-                  IBAN
+              {quickTokens.map((token) => (
+                <div
+                  key={token}
+                  className="h-10 w-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-[9px] font-bold uppercase"
+                >
+                  {token}
                 </div>
               ))}
             </div>
             <p className="text-xs text-muted-foreground font-medium">
-              +500 personas han encontrado <br /> su banco ideal este mes.
+              Comparativas, IBAN Scanner y guías <br /> para elegir con criterio.
             </p>
           </motion.div>
         </motion.div>
@@ -79,7 +84,7 @@ export default function Hero() {
             <div className="space-y-6">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold tracking-tight">Análisis Rápido</h3>
-                <span className="text-[10px] font-mono bg-muted px-2 py-1 rounded tracking-tighter uppercase">Actualizado 2024</span>
+                <span className="text-[10px] font-mono bg-muted px-2 py-1 rounded tracking-tighter uppercase">Actualizado</span>
               </div>
               
               <div className="space-y-4">

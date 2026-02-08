@@ -1,13 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Gift, ArrowRight, Sparkles } from "lucide-react";
 
 export default function StickyPromo() {
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    if (pathname !== "/") {
+      setIsVisible(false);
+      return;
+    }
+
     // Esperamos 5 segundos antes de mostrar la promo para no agobiar al usuario
     const timer = setTimeout(() => {
       // Solo lo mostramos si el usuario no lo ha cerrado ya en esta sesión
@@ -18,12 +26,14 @@ export default function StickyPromo() {
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [pathname]);
 
   const closePromo = () => {
     setIsVisible(false);
     sessionStorage.setItem("promo-closed", "true");
   };
+
+  if (pathname !== "/") return null;
 
   return (
     <AnimatePresence>
@@ -59,31 +69,25 @@ export default function StickyPromo() {
                       Recurso Gratuito
                     </div>
                     <h4 className="text-lg font-bold leading-tight">
-                      Guía de Supervivencia: <br />
-                      <span className="text-emerald-400">Finanzas para Expats</span>
+                      Guía 2026: <br />
+                      <span className="text-emerald-400">Mejores bancos digitales</span>
                     </h4>
                     <p className="text-xs text-background/60 leading-relaxed">
-                      Descarga nuestra guía en PDF con los 5 errores que más dinero te hacen perder al mudarte a Europa.
+                      Comparativa con criterios claros (IBAN, comisiones y requisitos) para elegir con calma.
                     </p>
                   </div>
 
-                  <form 
-                    onSubmit={(e) => e.preventDefault()} 
-                    className="flex flex-col gap-2 pt-1"
+                  <Link
+                    href="/blog/los-mejores-bancos-digitales-en-europa-en-2026"
+                    onClick={closePromo}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 py-3 text-xs font-black uppercase tracking-widest text-white transition-all hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/20"
                   >
-                    <input 
-                      type="email" 
-                      placeholder="Tu mejor email..."
-                      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs text-background outline-none focus:border-emerald-500/50 focus:bg-white/10 transition-all"
-                    />
-                    <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 py-3 text-xs font-black uppercase tracking-widest text-white transition-all hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/20">
-                      Enviar Guía
-                      <ArrowRight className="h-3 w-3" />
-                    </button>
-                  </form>
+                    Ver la guía
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
                   
                   <p className="text-[9px] text-center text-background/30 italic">
-                    Cero spam. Solo consejos financieros reales cada semana.
+                    Sin registro. Lectura rápida y directa.
                   </p>
                 </div>
               </div>

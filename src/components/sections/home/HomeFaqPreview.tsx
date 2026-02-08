@@ -8,17 +8,17 @@ const faqs = [
   {
     question: "¿Puedo abrir cuenta si no vivo en Europa?",
     answer:
-      "Depende del banco. Algunos aceptan no residentes, otros solo residentes en la UE. En cada ficha lo indico y te doy alternativas.",
+      "Depende del banco. Algunos aceptan no residentes, otros solo residentes en la UE. En cada ficha lo indicamos y te damos alternativas.",
   },
   {
     question: "¿Es seguro usar bancos digitales en vez de uno tradicional?",
     answer:
-      "Los bancos que menciono están regulados y muchos tienen fondo de garantía. Aun así, explico riesgos y buenas prácticas para que decidas con calma.",
+      "Los bancos que mencionamos están regulados y muchos tienen garantía de depósitos. Aun así, explicamos riesgos y buenas prácticas para que decidas con calma.",
   },
   {
     question: "¿Ganas dinero si abro cuenta con tus enlaces?",
     answer:
-      "En algunos casos sí, pero eso no cambia lo que recomiendo. Si un banco no compensa, lo digo igual de claro.",
+      "En algunos casos sí, pero eso no cambia lo que recomendamos. Si un banco no compensa, lo decimos igual de claro.",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function HomeFaqPreview() {
               Dudas frecuentes sobre bancos digitales
             </h2>
             <p className="max-w-xl text-sm text-muted-foreground md:text-base">
-              Muchas personas me escriben con las mismas preguntas. Aquí tienes
+              Muchas personas nos escriben con las mismas preguntas. Aquí tienes
               algunas respuestas rápidas y, si quieres, puedes ver el resto en
               la página de FAQ.
             </p>

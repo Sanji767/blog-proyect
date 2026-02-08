@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import AnalyticsClickTracker from "@/components/analytics/AnalyticsClickTracker";
 import {
   COOKIE_ANALYTICS_CONSENT_KEY,
   COOKIE_CONSENT_EVENT,
@@ -24,7 +25,9 @@ export default function GoogleAnalyticsLoader({ gaId }: { gaId: string }) {
 
   useEffect(() => {
     const sync = () => {
-      setEnabled(readAnalyticsConsent() === true);
+      const consentEnabled = readAnalyticsConsent() === true;
+      (window as Record<string, unknown>)[`ga-disable-${gaId}`] = !consentEnabled;
+      setEnabled(consentEnabled);
     };
 
     sync();
@@ -34,7 +37,7 @@ export default function GoogleAnalyticsLoader({ gaId }: { gaId: string }) {
       window.removeEventListener(COOKIE_ANALYTICS_CONSENT_KEY, sync);
       window.removeEventListener(COOKIE_CONSENT_EVENT, sync);
     };
-  }, []);
+  }, [gaId]);
 
   const pagePath = useMemo(() => {
     const query = searchParams?.toString();
@@ -59,5 +62,10 @@ export default function GoogleAnalyticsLoader({ gaId }: { gaId: string }) {
   }, [enabled, gaId, pagePath]);
 
   if (!enabled) return null;
-  return <GoogleAnalytics gaId={gaId} />;
+  return (
+    <>
+      <GoogleAnalytics gaId={gaId} />
+      <AnalyticsClickTracker />
+    </>
+  );
 }

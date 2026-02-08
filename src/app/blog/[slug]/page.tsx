@@ -19,6 +19,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 
 import { getPostBySlug, getAllPosts } from "@/lib/blog";
+import { extractFaqFromMarkdown } from "@/lib/blog/extractFaq";
 import {
   DEFAULT_OG_IMAGE_URL,
   SITE_LOGO_URL,
@@ -217,6 +218,26 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     isAccessibleForFree: true,
   };
 
+  const faqItems = extractFaqFromMarkdown(post.content);
+  const faqJsonLd =
+    faqItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${canonicalUrl}#faq`,
+          url: canonicalUrl,
+          inLanguage: "es-ES",
+          mainEntity: faqItems.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }
+      : null;
+
   const formattedDate = publishedDate.toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
@@ -253,6 +274,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           __html: toJsonLd(blogPostingJsonLd),
         }}
       />
+      {faqJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: toJsonLd(faqJsonLd),
+          }}
+        />
+      ) : null}
 
       <article className="relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-white to-gray-50 shadow-lg dark:from-black/80 dark:to-gray-900">
         <header className="relative p-6 md:p-10">

@@ -9,7 +9,8 @@ const BENEFITS = [
   {
     icon: ShieldCheck,
     title: "Seguridad Bancaria",
-    description: "Fichas técnicas de entidades reguladas bajo el fondo de garantía de depósitos (FGD) europeo.",
+    description:
+      "Fichas técnicas con licencia, supervisión y garantía de depósitos (según el país de la entidad).",
     color: "emerald"
   },
   {
