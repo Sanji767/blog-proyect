@@ -37,7 +37,7 @@ export default function Features() {
           <h2 className="text-2xl font-bold md:text-3xl">
             ¿Qué hace diferente a{" "}
             <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">
-              Finanzas Eu
+              FinanzasEU
             </span>
             ?
           </h2>

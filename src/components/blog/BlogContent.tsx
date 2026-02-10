@@ -1,8 +1,15 @@
 // src/components/blog/BlogContent.tsx
 import type { BlogPost } from "@/lib/blog/types";
 import { Calendar, Clock, Eye, User2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeExternalLinks from "rehype-external-links";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 import CategoryBadge from "./CategoryBadge";
 import TagBadge from "./TagBadge";
+import PortableTextRenderer from "./PortableTextRenderer";
+import { stripLeadingMarkdownH1 } from "@/lib/blog/markdown";
 
 export default function BlogContent({ post }: { post: BlogPost }) {
   const publishedDate = new Date(post.date);
@@ -71,10 +78,25 @@ export default function BlogContent({ post }: { post: BlogPost }) {
       </header>
 
       <section className="rounded-3xl border border-border/60 bg-card p-6 shadow-sm md:p-10">
-        <div
-          className="prose prose-neutral dark:prose-invert max-w-none leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
+        <div className="prose prose-neutral dark:prose-invert max-w-none leading-relaxed">
+          {typeof post.content === "string" ? (
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[
+                rehypeSlug,
+                [rehypeAutolinkHeadings, { behavior: "wrap" }],
+                [
+                  rehypeExternalLinks,
+                  { target: "_blank", rel: ["noopener", "noreferrer"] },
+                ],
+              ]}
+            >
+              {stripLeadingMarkdownH1(post.content)}
+            </ReactMarkdown>
+          ) : (
+            <PortableTextRenderer value={post.content} />
+          )}
+        </div>
       </section>
     </article>
   );

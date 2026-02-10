@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import Container from "@/components/layout/Container";
 import BlogCard from "@/components/blog/BlogCard";
-import { getAllPostPreviews, getTags } from "@/lib/blog";
+import { getPostsByTag, getTags } from "@/lib/blog";
 import {
   DEFAULT_OG_IMAGE_URL,
   SITE_LOGO_URL,
@@ -17,13 +17,15 @@ type Props = {
   };
 };
 
-export function generateStaticParams(): Array<{ tag: string }> {
-  return getTags().map((t) => ({ tag: t.slug }));
+export async function generateStaticParams(): Promise<Array<{ tag: string }>> {
+  const tags = await getTags();
+  return tags.map((t) => ({ tag: t.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
-  const tag = getTags().find((t) => t.slug === tagSlug);
+  const tags = await getTags();
+  const tag = tags.find((t) => t.slug === tagSlug);
   const label = tag?.title ?? tagSlug;
 
   return {
@@ -35,12 +37,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function TagPage({ params }: Props) {
+export default async function TagPage({ params }: Props) {
   const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
-  const tag = getTags().find((t) => t.slug === tagSlug);
+  const tags = await getTags();
+  const tag = tags.find((t) => t.slug === tagSlug);
   const label = tag?.title ?? tagSlug;
 
-  const posts = getAllPostPreviews().filter((p) => p.tags?.includes(tagSlug));
+  const posts = await getPostsByTag(tagSlug);
 
   const pageUrl = `${SITE_URL}/blog/tag/${encodeURIComponent(tagSlug)}`;
   const pageTitle = `#${label} | Blog FinanzasEU`;

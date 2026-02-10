@@ -16,64 +16,65 @@ import Container from "@/components/layout/Container";
 import { toJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Ventajas de los bancos digitales en Europa | Finanzas Eu",
+  title: "Ventajas de los bancos digitales en Europa | FinanzasEU",
   description:
-    "Análisis independiente de las ventajas reales de los bancos digitales en Europa: comisiones, IBAN europeo, seguridad, multidivisa y soporte. Actualizado a noviembre de 2025.",
+    "Análisis independiente de las ventajas reales de los bancos digitales en Europa: comisiones, IBAN, seguridad, multidivisa y soporte. Actualizado en 2026.",
 };
 
-const LAST_UPDATE = "Noviembre 2025";
+const LAST_UPDATE = "Febrero 2026";
+const LAST_UPDATE_ISO = "2026-02-08";
 
 export default function VentajasPage() {
   const ventajas = [
     {
       icon: <Globe className="w-6 h-6" />,
-      title: "IBAN europeo válido en 30+ países",
-      desc: "Recibe tu sueldo, paga facturas o alquila en cualquier país de la UE con un único IBAN europeo.",
-      stat: "30 países",
+      title: "IBAN europeo (SEPA) para operar en Europa",
+      desc: "Recibe dinero, paga facturas o domicilia recibos con un IBAN europeo (según entidad y país).",
+      stat: "SEPA",
     },
     {
       icon: <Euro className="w-6 h-6" />,
-      title: "Cero comisiones en transferencias SEPA",
-      desc: "Envía y recibe euros entre cuentas europeas sin coste. Nada de 3–5 días de espera ni sorpresas.",
-      stat: "Gratis",
+      title: "Transferencias SEPA con comisiones bajas",
+      desc: "En muchos bancos digitales, las transferencias SEPA estándar son gratuitas o baratas (según plan).",
+      stat: "Según plan",
     },
     {
       icon: <CreditCard className="w-6 h-6" />,
-      title: "Pagos en el extranjero sin recargo",
-      desc: "Paga en otras divisas al tipo de cambio real, evitando recargos del 3–5% típicos de bancos tradicionales.",
-      stat: "0% FX",
+      title: "Pagos internacionales con mejor tipo de cambio",
+      desc: "Algunas cuentas multidivisa reducen el margen de cambio frente a bancos tradicionales (según plan y horario).",
+      stat: "Multidivisa",
     },
     {
       icon: <Lock className="w-6 h-6" />,
-      title: "Depósitos protegidos hasta 100.000 €",
-      desc: "Los bancos que analizamos están regulados y adheridos a fondos de garantía de depósitos europeos.",
-      stat: "100.000 €",
+      title: "Protección y regulación (según entidad)",
+      desc: "Si es un banco con licencia, puede aplicar garantía de depósitos (habitualmente hasta 100.000 €). En e-money no es lo mismo.",
+      stat: "Según entidad",
     },
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "Transferencias realmente instantáneas",
-      desc: "Envía dinero en segundos, incluso de madrugada, entre cuentas compatibles con transferencias instantáneas.",
+      title: "Transferencias instantáneas (cuando disponible)",
+      desc: "Envía dinero en segundos entre cuentas compatibles con transferencias instantáneas SEPA.",
       stat: "< 10 s",
     },
     {
       icon: <Users className="w-6 h-6" />,
-      title: "Soporte en español 24/7 (en muchos casos)",
-      desc: "Chat en vivo, email y teléfono. Seleccionamos bancos con buen soporte según valoraciones reales.",
-      stat: "4,8/5",
+      title: "Soporte en español (en muchos casos)",
+      desc: "Chat/email y ayuda en español en varias entidades. Lo indicamos en cada ficha cuando aplica.",
+      stat: "Soporte",
     },
   ];
 
   const stats = [
-    { value: "+€2.3B", label: "Ahorrados en comisiones por usuarios en 2025" },
-    { value: "30M+", label: "Cuentas activas de bancos digitales en Europa" },
-    { value: "4,8/5", label: "Valoración media en plataformas como Trustpilot" },
+    { value: "SEPA", label: "IBAN y transferencias en la UE" },
+    { value: "Fuentes", label: "Enlaces oficiales para verificar condiciones" },
+    { value: "2026", label: `Última revisión: ${LAST_UPDATE}` },
   ];
 
   const pasos = [
     {
       step: "1",
       title: "Datos reales",
-      desc: "Probamos cada banco durante semanas. Revisamos comisiones, límites, tiempos de ingreso y experiencia real de uso.",
+      desc: "Revisamos comisiones, requisitos, límites y condiciones, y los contrastamos con fuentes oficiales.",
     },
     {
       step: "2",
@@ -149,7 +150,7 @@ export default function VentajasPage() {
           {/* Proceso de análisis */}
           <section className="rounded-3xl border border-border bg-card p-8 shadow-card md:p-12">
             <h2 className="mb-8 text-center text-2xl font-bold md:text-3xl">
-              Cómo analizamos los bancos en Finanzas Eu
+              Cómo analizamos los bancos en FinanzasEU
             </h2>
             <div className="grid gap-8 md:grid-cols-3">
               {pasos.map((s) => (
@@ -208,12 +209,12 @@ export default function VentajasPage() {
             "@type": "WebPage",
             name: "Ventajas de los bancos digitales en Europa",
             description:
-              "Análisis independiente de comisiones, seguridad, IBAN europeo y ventajas reales de los bancos digitales.",
+              "Análisis independiente de comisiones, seguridad, IBAN y ventajas reales de los bancos digitales.",
             publisher: {
               "@type": "Organization",
-              name: "Finanzas Eu",
+              name: "FinanzasEU",
             },
-            dateModified: "2025-11-16",
+            dateModified: LAST_UPDATE_ISO,
           }),
         }}
       />

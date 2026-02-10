@@ -11,6 +11,7 @@ import {
   type BankCategory,
   type BankFeatureTag,
 } from "@/lib/banks";
+import { formatIsoYmdToEsDate } from "@/lib/seo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +28,7 @@ import jsPDF from "jspdf";
 import {
   Search,
   ArrowUpDown,
+  Info,
   ExternalLink,
   X,
   Heart,
@@ -138,6 +140,15 @@ export default function ComparativaPage() {
 
   const tableRef = useRef<HTMLDivElement | null>(null);
   const favoritesCount = favorites.length;
+
+  const lastUpdatedLabel = useMemo(() => {
+    const latest = banks
+      .map((b) => b._lastUpdated)
+      .filter(Boolean)
+      .sort()
+      .at(-1);
+    return formatIsoYmdToEsDate(latest);
+  }, []);
 
   const allTags = useMemo((): BankTag[] => {
     const tags = new Set<BankTag>();
@@ -310,14 +321,14 @@ export default function ComparativaPage() {
               <Trophy className="h-4 w-4 text-amber-500" />
               <span>Ranking TOP bancario Europa</span>
               <span className="rounded-full bg-[#E6F9F0] px-2 py-0.5 text-[10px] font-semibold text-[#027A48]">
-                Conversión x10
+                Metodología clara
               </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
               <Star className="h-7 w-7 text-amber-400" />
               <h1 className="bg-gradient-to-r from-[#00C9A7] via-[#00B4D8] to-[#4ADE80] bg-clip-text text-4xl font-black tracking-tight text-transparent sm:text-5xl">
-                Comparativa Épica de Bancos
+                Comparativa de bancos en Europa
               </h1>
             </div>
 
@@ -326,11 +337,91 @@ export default function ComparativaPage() {
               <strong className="text-slate-900 dark:text-white">
                 menos de 60 segundos
               </strong>
-              . Filtra, ordena, compara y guarda favoritos.
-              <span className="mt-1 block font-semibold text-[#00A76F] dark:text-[#4ADE80]">
-                +10.000 usuarios ya eligieron su cuenta perfecta.
-              </span>
+              . Filtra, ordena, compara y guarda favoritos con criterios claros
+              y enlaces oficiales.
             </p>
+
+            <div className="mt-4 grid gap-3 sm:max-w-2xl">
+              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-700 dark:text-slate-100">
+                {lastUpdatedLabel ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-3 py-1 shadow-sm dark:bg-slate-900/80">
+                    <Info className="h-4 w-4" />
+                    Actualizado:{" "}
+                    <strong className="font-semibold">{lastUpdatedLabel}</strong>
+                  </span>
+                ) : null}
+
+                <Link
+                  href="/aviso-afiliados"
+                  className="inline-flex items-center gap-1 rounded-full bg-white/80 px-3 py-1 shadow-sm underline underline-offset-2 dark:bg-slate-900/80"
+                >
+                  Aviso de afiliados
+                </Link>
+              </div>
+
+              <details className="rounded-2xl border border-slate-200 bg-white/70 p-4 text-xs text-slate-700 shadow-sm dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-100">
+                <summary className="cursor-pointer font-semibold">
+                  Metodología y fuentes oficiales
+                </summary>
+                <div className="mt-3 space-y-3 leading-relaxed">
+                  <p>
+                    Ordenamos el ranking principalmente por utilidad real para
+                    el usuario (costes, IBAN y requisitos), y siempre dejamos
+                    enlaces oficiales para verificar condiciones.
+                  </p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>Cuota, cajeros, cambio de divisa y comisiones.</li>
+                    <li>IBAN/SEPA y operativa (nómina, pagos, domiciliaciones).</li>
+                    <li>Requisitos, países admitidos y proceso de alta.</li>
+                    <li>Licencia, supervisión y garantía de depósitos (según entidad).</li>
+                  </ul>
+
+                  <div>
+                    <p className="font-semibold">Fuentes oficiales:</p>
+                    <ul className="mt-1 list-disc space-y-1 pl-5">
+                      {banks.map((bank) => (
+                        <li key={bank.slug}>
+                          <a
+                            href={bank.website}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="underline underline-offset-2"
+                          >
+                            {bank.name}: web oficial <ExternalLink className="inline h-3 w-3" />
+                          </a>
+                          {bank.appStoreUrl ? (
+                            <>
+                              {" · "}
+                              <a
+                                href={bank.appStoreUrl}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="underline underline-offset-2"
+                              >
+                                App Store
+                              </a>
+                            </>
+                          ) : null}
+                          {bank.googlePlayUrl ? (
+                            <>
+                              {" · "}
+                              <a
+                                href={bank.googlePlayUrl}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="underline underline-offset-2"
+                              >
+                                Google Play
+                              </a>
+                            </>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </details>
+            </div>
 
             <div className="flex flex-wrap items-center gap-3">
               {/* Botón principal con degradado verde-turquesa */}

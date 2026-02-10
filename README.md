@@ -66,6 +66,28 @@ Before starting, make sure you have the following installed:
 
 ---
 
+## Sanity CMS (Optional Blog/Magazine)
+
+This project can serve blog posts from:
+
+- **Local MDX** in `src/content/blog/posts` (default, no extra setup)
+- **Sanity CMS** (recommended) when environment variables are present
+
+### Setup
+
+1. Create a Sanity project + dataset (usually `production`)
+2. Add the variables from `.env.example` into your `.env.local`:
+   - `NEXT_PUBLIC_SANITY_PROJECT_ID`
+   - `NEXT_PUBLIC_SANITY_DATASET`
+   - `NEXT_PUBLIC_SANITY_API_VERSION`
+3. Run the app and open the Studio:
+   - `yarn dev`
+   - `http://localhost:3000/studio`
+
+The blog routes (`/blog`, `/blog/[slug]`, tag/category filters, and `sitemap.xml`) will automatically read from Sanity when configured.
+
+---
+
 ## Deploying on Vercel
 
 The fastest way to deploy Finwise is on [Vercel](https://vercel.com/). Simply click the "Deploy with Vercel" button at the top of this README, or check the [Next.js deployment docs](https://vercel.com/docs/deployments/deployment-methods) for other deployment options.

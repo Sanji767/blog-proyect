@@ -8,16 +8,17 @@ import { banks } from "@/lib/banks";
 import type { Bank } from "@/lib/banks";
 import { Badge } from "@/components/ui/badge";
 import { Globe2, CreditCard, ShieldCheck, Star } from "lucide-react";
+import { formatIsoYmdToEsDate } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Comparador de bancos europeos 2025",
+  title: "Comparador de bancos europeos 2026",
   description:
-    "Compara neobancos y bancos europeos como Revolut, N26, Wise o Bunq. Filtra por IBAN, comisiones, soporte en español, multidivisa y más.",
+    "Compara neobancos y bancos europeos como Revolut, N26, Wise o Bunq. Filtra por IBAN, comisiones, requisitos, soporte en español, multidivisa y más.",
   alternates: {
     canonical: "https://finanzaseu.com/bancos",
   },
   openGraph: {
-    title: "Comparador de bancos europeos 2025",
+    title: "Comparador de bancos europeos 2026",
     description:
       "Encuentra el banco europeo que mejor encaja con tu perfil: viajero, freelance, empresa o expatriado.",
     url: "https://finanzaseu.com/bancos",
@@ -27,6 +28,14 @@ export const metadata: Metadata = {
 };
 
 export default function BancosPage() {
+  const latestBankUpdate = banks
+    .map((b) => b._lastUpdated)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
+
+  const lastUpdatedLabel = formatIsoYmdToEsDate(latestBankUpdate);
+
   // Ordenamos usando prioridad interna y afiliación
   const sortedBanks = [...banks].sort((a, b) => {
     const aPriority = typeof a._priority === "number" ? a._priority : 999;
@@ -58,8 +67,21 @@ export default function BancosPage() {
         <header className="space-y-5 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
             <Star className="h-3 w-3" />
-            Ranking 2025 · Bancos recomendados en Europa
+            Ranking 2026 · Bancos recomendados en Europa
           </span>
+
+          {lastUpdatedLabel ? (
+            <p className="text-xs text-muted-foreground">
+              Última revisión:{" "}
+              <strong className="font-semibold text-foreground">
+                {lastUpdatedLabel}
+              </strong>{" "}
+              ·{" "}
+              <Link href="/aviso-afiliados" className="underline underline-offset-2">
+                Transparencia (afiliados)
+              </Link>
+            </p>
+          ) : null}
 
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
             Elige tu banco en Europa con{" "}
@@ -248,7 +270,7 @@ function BankCard({ bank }: { bank: Bank }) {
           </span>
           <span className="inline-flex items-center gap-1">
             <ShieldCheck className="h-3 w-3" />
-            Depósitos protegidos en la UE
+            Protección (según entidad)
           </span>
         </div>
 

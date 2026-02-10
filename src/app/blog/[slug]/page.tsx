@@ -6,6 +6,7 @@ import BlogCard from "@/components/blog/BlogCard";
 import CategoryBadge from "@/components/blog/CategoryBadge";
 import TagBadge from "@/components/blog/TagBadge";
 import TableOfContents from "@/components/blog/TableOfContents";
+import PortableTextRenderer from "@/components/blog/PortableTextRenderer";
 import { ArrowLeft, Calendar, Clock, Eye, User2 } from "lucide-react";
 import type { Metadata } from "next";
 import ReactMarkdown, { type Components } from "react-markdown";
@@ -18,8 +19,9 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 
-import { getPostBySlug, getAllPosts } from "@/lib/blog";
+import { getAllPostPreviews, getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { extractFaqFromMarkdown } from "@/lib/blog/extractFaq";
+import { stripLeadingMarkdownH1 } from "@/lib/blog/markdown";
 import {
   DEFAULT_OG_IMAGE_URL,
   SITE_LOGO_URL,
@@ -85,13 +87,13 @@ const MarkdownComponents: Components = {
 // -------------------------------------------------------------
 // Generación de parámetros estáticos
 export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 // Metadata dinámica (tipada y con StaticImageData compatible)
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+  const post = await getPostBySlug(params.slug);
   if (!post) return { title: "Artículo no encontrado | FinanzasEU" };
 
   const canonicalPath = `/blog/${post.slug}`;
@@ -132,11 +134,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 // Página del post
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await getPostBySlug(params.slug);
   if (!post) notFound();
 
   const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
+  const authorLabel = (post.author ?? "").trim() || "Equipo editorial";
 
   const publishedDate = new Date(post.date);
   const heroImage = post.coverImage ?? post.image;
@@ -218,7 +221,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     isAccessibleForFree: true,
   };
 
-  const faqItems = extractFaqFromMarkdown(post.content);
+  const markdownContent =
+    typeof post.content === "string" ? stripLeadingMarkdownH1(post.content) : "";
+  const faqItems = markdownContent ? extractFaqFromMarkdown(markdownContent) : [];
   const faqJsonLd =
     faqItems.length > 0
       ? {
@@ -245,19 +250,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   });
 
   // Posts relacionados (tags 100% tipados)
-  const related: BlogPostPreview[] = getAllPosts()
+  const related: BlogPostPreview[] = (await getAllPostPreviews())
     .filter(
       (p) =>
         p.slug !== post.slug &&
-        p.tags.length > 0 &&
+        (p.tags?.length ?? 0) > 0 &&
         p.tags.some((tag: string) => post.tags.includes(tag))
     )
-    .slice(0, 3)
-    .map((p) => {
-      const { content, ...rest } = p;
-      void content;
-      return rest;
-    });
+    .slice(0, 3);
 
   return (
     <div className="space-y-16">
@@ -314,12 +314,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 </span>
               )}
 
-              {post.author && (
-                <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs text-muted-foreground">
+              <Link
+                href="/sobre"
+                className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground transition"
+              >
                   <User2 className="h-3.5 w-3.5" />
-                  {post.author}
-                </span>
-              )}
+                  {authorLabel}
+              </Link>
 
               {post.views !== undefined && (
                 <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs text-muted-foreground">
@@ -371,17 +372,24 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="prose prose-lg dark:prose-invert max-w-3xl mx-auto">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm, remarkHeadingId]}
-              rehypePlugins={[
-                rehypeSlug,
-                [rehypeAutolinkHeadings, { behavior: "wrap" }],
-                [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
-              ]}
-              components={MarkdownComponents}
-            >
-              {post.content}
-            </ReactMarkdown>
+            {typeof post.content === "string" ? (
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkHeadingId]}
+                rehypePlugins={[
+                  rehypeSlug,
+                  [rehypeAutolinkHeadings, { behavior: "wrap" }],
+                  [
+                    rehypeExternalLinks,
+                    { target: "_blank", rel: ["noopener", "noreferrer"] },
+                  ],
+                ]}
+                components={MarkdownComponents}
+              >
+                {markdownContent}
+              </ReactMarkdown>
+            ) : (
+              <PortableTextRenderer value={post.content} />
+            )}
           </div>
         </div>
       </article>

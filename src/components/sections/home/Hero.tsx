@@ -31,7 +31,7 @@ export default function Hero() {
         >
           <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
             <Sparkles className="h-4 w-4" />
-            Finanzas Eu · Expertos en Neobancos
+            FinanzasEU · Guía independiente
           </motion.div>
 
           <motion.h1 variants={fadeInUp} className="text-4xl font-black tracking-tight sm:text-6xl text-balance">

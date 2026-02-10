@@ -5,8 +5,8 @@ import Container from "@/components/layout/Container";
 import BlogCard from "@/components/blog/BlogCard";
 import { getAllPostPreviews } from "@/lib/blog";
 
-export default function HomeVlogsPreview() {
-  const recentPosts = getAllPostPreviews().slice(0, 3);
+export default async function HomeVlogsPreview() {
+  const recentPosts = (await getAllPostPreviews()).slice(0, 3);
 
   if (recentPosts.length === 0) return null;
 

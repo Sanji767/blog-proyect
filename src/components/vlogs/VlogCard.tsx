@@ -17,8 +17,8 @@ import type { VlogPreview } from "@/lib/vlogs";
 
 const PLACEHOLDER_IMAGE = "/placeholder-vlog.jpg";
 const PLACEHOLDER_BLUR = "/placeholder-blur.jpg";
-const DEFAULT_AUTHOR_AVATAR = "/jose-avatar.jpg";
-const DEFAULT_AUTHOR_NAME = "José María";
+const DEFAULT_AUTHOR_AVATAR = "/logo.png";
+const DEFAULT_AUTHOR_NAME = "Equipo editorial";
 
 type VlogCardProps = {
   vlog: VlogPreview;
@@ -50,7 +50,7 @@ export default function VlogCard({
 
   const viewsLabel = vlog.views
     ? `${vlog.views.toLocaleString("es-ES")} vistas`
-    : "12.400 vistas";
+    : null;
 
   const imageSizes = isFeatured
     ? "60vw"
@@ -145,7 +145,7 @@ export default function VlogCard({
               <p className="text-sm font-bold">
                 {vlog.author || DEFAULT_AUTHOR_NAME}
               </p>
-              <p className="text-xs opacity-90">FUNDADOR FINANZAS EU</p>
+              <p className="text-xs opacity-90">EQUIPO FINANZASEU</p>
             </div>
           </div>
         )}
@@ -176,10 +176,12 @@ export default function VlogCard({
             </span>
           )}
 
-          <span className="flex items-center gap-1.5">
-            <Eye className="h-4 w-4" />
-            {viewsLabel}
-          </span>
+          {viewsLabel ? (
+            <span className="flex items-center gap-1.5">
+              <Eye className="h-4 w-4" />
+              {viewsLabel}
+            </span>
+          ) : null}
         </div>
 
         <h3

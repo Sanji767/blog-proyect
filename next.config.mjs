@@ -14,7 +14,14 @@ const nextConfig = {
   },
 
   // Opcional: mejora compatibilidad con algunos paquetes
-  transpilePackages: ["react-markdown", "rehype-*", "remark-*"],
+  transpilePackages: [
+    "sanity",
+    "next-sanity",
+    "@sanity/ui",
+    "react-markdown",
+    "rehype-*",
+    "remark-*",
+  ],
 
   // ← ADD THIS BLOCK
   eslint: {

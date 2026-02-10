@@ -282,6 +282,16 @@ details > summary::-webkit-details-marker {
   margin-bottom: 1.1em;
 }
 
+/* Lead paragraph (primera línea del artículo) */
+.prose > p:first-child {
+  font-size: 1.15em;
+  line-height: 1.75;
+  color: var(--foreground-accent);
+}
+.dark .prose > p:first-child {
+  color: var(--muted-foreground);
+}
+
 /* Títulos estilo “revista” */
 .prose h2 {
   margin-top: 2.2em;

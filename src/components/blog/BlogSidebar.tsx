@@ -2,9 +2,8 @@
 import Link from "next/link";
 import { getCategories, getTags } from "@/lib/blog";
 
-export default function BlogSidebar() {
-  const categories = getCategories();
-  const tags = getTags();
+export default async function BlogSidebar() {
+  const [categories, tags] = await Promise.all([getCategories(), getTags()]);
 
   return (
     <aside className="space-y-8 lg:sticky lg:top-24">

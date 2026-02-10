@@ -18,9 +18,10 @@ import {
   FileText,
   Cookie,
   Users,
+  Info,
 } from "lucide-react";
 
-const siteName = "Finanzas EU";
+const siteName = "FinanzasEU";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -35,6 +36,7 @@ export default function Footer() {
   ];
 
   const legalLinks = [
+    { text: "Sobre FinanzasEU", url: "/sobre", icon: Info },
     { text: "Aviso de afiliados", url: "/aviso-afiliados", icon: Users },
     { text: "Política de privacidad", url: "/privacidad", icon: Scale },
     { text: "Términos y condiciones", url: "/terminos", icon: FileText },
@@ -49,7 +51,7 @@ export default function Footer() {
           <div className="md:col-span-5 lg:col-span-4 space-y-8">
             <Link href="/" className="inline-block group">
               <Logo className="h-12 md:h-14 group-hover:scale-105 transition-transform" />
-              <span className="sr-only">Finanzas EU - Inicio</span>
+              <span className="sr-only">FinanzasEU - Inicio</span>
             </Link>
 
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -60,11 +62,11 @@ export default function Footer() {
             <div className="flex flex-wrap gap-3">
               <div className="flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-2 text-xs font-medium text-emerald-700 dark:text-emerald-400">
                 <Shield className="h-4 w-4" />
-                Fondos protegidos hasta 100.000 €
+                Depósitos protegidos (según entidad)
               </div>
               <div className="flex items-center gap-2 rounded-full bg-cyan-500/10 px-4 py-2 text-xs font-medium text-cyan-700 dark:text-cyan-400">
                 <Lock className="h-4 w-4" />
-                Licencias bancarias UE
+                Licencia y supervisión (según entidad)
               </div>
             </div>
 
@@ -138,8 +140,10 @@ export default function Footer() {
           <div className="md:col-span-12 lg:col-span-2">
             <div className="rounded-3xl bg-gradient-to-br from-emerald-500 to-emerald-600 p-8 text-white shadow-2xl">
               <CheckCircle2 className="h-12 w-12 mb-4 opacity-90" />
-              <p className="text-4xl font-black leading-tight">+12.400</p>
-              <p className="mt-2 text-sm opacity-90">usuarios confiaron en {currentYear}</p>
+              <p className="text-2xl font-black leading-tight">Metodología clara</p>
+              <p className="mt-2 text-sm opacity-90">
+                Actualizado {currentYear} · Enlaces oficiales
+              </p>
             </div>
           </div>
         </Container>
@@ -149,7 +153,9 @@ export default function Footer() {
       <div className="border-t py-10">
         <Container className="flex flex-col items-center justify-between gap-4 text-center text-sm text-muted-foreground md:flex-row">
           <p>
-            © {currentYear} <span className="font-semibold text-foreground">{siteName}</span> · Guía independiente desde 2023
+            © {currentYear}{" "}
+            <span className="font-semibold text-foreground">{siteName}</span> ·{" "}
+            Guía independiente
           </p>
           <p className="flex items-center gap-2">
             Hecho con <Heart className="h-4 w-4 fill-red-500 text-red-500" /> en España

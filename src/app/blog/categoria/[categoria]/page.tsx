@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import Container from "@/components/layout/Container";
 import BlogCard from "@/components/blog/BlogCard";
-import { getAllPostPreviews, getCategories } from "@/lib/blog";
+import { getCategories, getPostsByCategory } from "@/lib/blog";
 import {
   DEFAULT_OG_IMAGE_URL,
   SITE_LOGO_URL,
@@ -17,13 +17,17 @@ type Props = {
   };
 };
 
-export function generateStaticParams(): Array<{ categoria: string }> {
-  return getCategories().map((cat) => ({ categoria: cat.slug }));
+export async function generateStaticParams(): Promise<
+  Array<{ categoria: string }>
+> {
+  const categories = await getCategories();
+  return categories.map((cat) => ({ categoria: cat.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categoria = decodeURIComponent(params.categoria).toLowerCase().trim();
-  const cat = getCategories().find((c) => c.slug === categoria);
+  const categories = await getCategories();
+  const cat = categories.find((c) => c.slug === categoria);
 
   if (!cat) {
     return { title: "Categoría no encontrada | FinanzasEU" };
@@ -38,9 +42,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params }: Props) {
   const categoria = decodeURIComponent(params.categoria).toLowerCase().trim();
-  const cat = getCategories().find((c) => c.slug === categoria);
+  const categories = await getCategories();
+  const cat = categories.find((c) => c.slug === categoria);
 
   if (!cat) {
     return (
@@ -50,7 +55,7 @@ export default function CategoryPage({ params }: Props) {
     );
   }
 
-  const posts = getAllPostPreviews().filter((p) => p.category === categoria);
+  const posts = await getPostsByCategory(categoria);
 
   const pageUrl = `${SITE_URL}/blog/categoria/${encodeURIComponent(categoria)}`;
   const pageTitle = `${cat.title} | Blog FinanzasEU`;

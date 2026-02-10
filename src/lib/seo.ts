@@ -35,3 +35,16 @@ export function toJsonLd(value: unknown): string {
   // Prevent `</script>`-style injection in inline JSON-LD.
   return JSON.stringify(value).replace(/</g, "\\u003c");
 }
+
+export function formatIsoYmdToEsDate(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+
+  const date = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return undefined;
+
+  return date.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}

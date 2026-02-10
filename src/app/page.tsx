@@ -11,21 +11,24 @@ import HomeHowItWorks from "@/components/sections/home/HomeHowItWorks";
 import HomeFaqPreview from "@/components/sections/home/HomeFaqPreview";
 import HomeVlogsPreview from "@/components/sections/home/HomeVlogsPreview";
 import CurrencyComparison from "@/components/sections/home/CurrencyComparison";
+import RankingMethodology from "@/components/sections/home/RankingMethodology";
 import CtaSection from "@/components/sections/comunes/CtaSection";
 
 // 🚀 Nuevos Componentes Avanzados
 import TrustStrip from "@/components/sections/home/TrustStrip";
 import UseCases from "@/components/sections/home/UseCases";
 import Container from "@/components/layout/Container";
+import { banks } from "@/lib/banks";
+import { formatIsoYmdToEsDate } from "@/lib/seo";
 
 
 /* ============================
    🧠 SEO / METADATA
 ============================ */
 export const metadata: Metadata = {
-  title: "Comparador de Bancos y Validador de IBAN | Ahorra y Elige Mejor",
+  title: "Comparativa de bancos en Europa (2026) + validador IBAN",
   description:
-    "Descubre qué banco te conviene, compara comisiones y valida cualquier IBAN. Herramientas gratuitas para elegir mejor tu cuenta bancaria.",
+    "Compara bancos con criterios claros (IBAN, comisiones y requisitos) y enlaces oficiales. Incluye validador de IBAN SEPA para comprobar datos antes de enviar dinero.",
   keywords: [
     "comparador de bancos",
     "mejor banco",
@@ -37,21 +40,29 @@ export const metadata: Metadata = {
     "SEPA IBAN",
   ],
   openGraph: {
-    title: "Comparador de Bancos + Validador de IBAN",
+    title: "Comparativa de bancos en Europa (2026) + validador IBAN",
     description:
-      "Compara bancos, descubre de qué país es un IBAN y valida cuentas en segundos.",
+      "Comisiones, IBAN, requisitos y enlaces oficiales para elegir banco con criterio. Incluye validador IBAN SEPA.",
     type: "website",
     locale: "es_ES",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Comparador de Bancos y Validador de IBAN",
+    title: "Comparativa de bancos en Europa (2026) + validador IBAN",
     description:
-      "Elige mejor tu banco y valida cualquier IBAN en segundos.",
+      "Compara bancos con criterios claros y usa el validador IBAN SEPA para verificar datos.",
   },
 };
 
 export default function HomePage() {
+  const latestBankUpdate = banks
+    .map((b) => b._lastUpdated)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
+
+  const lastUpdatedLabel = formatIsoYmdToEsDate(latestBankUpdate);
+
   return (
     <>
       {/* 1. Impacto Inicial */}
@@ -63,6 +74,9 @@ export default function HomePage() {
       {/* 3. Características y Segmentación */}
       <Features />
       <UseCases />
+
+      {/* 3.1 Metodología y transparencia */}
+      <RankingMethodology lastUpdatedLabel={lastUpdatedLabel} />
 
       {/* 4. 🔎 Herramienta SEO: Validador IBAN */}
       <section className="py-24 bg-muted/30">

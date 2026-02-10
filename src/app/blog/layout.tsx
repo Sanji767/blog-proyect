@@ -7,11 +7,11 @@ import Container from "@/components/layout/Container";
 import BlogAside from "@/components/blog/BlogAside";
 
 export const metadata: Metadata = {
-  title: "Blog de Bancos Digitales, Comisiones y Guías 2025 | FinanzasEU",
+  title: "Blog de bancos digitales, IBAN y comisiones (2026) | FinanzasEU",
   description:
-    "Guías prácticas sobre bancos digitales, IBAN europeo, comisiones, multidivisa y finanzas para vivir o trabajar en Europa. Actualizado a noviembre 2025.",
+    "Guías prácticas sobre bancos digitales, IBAN europeo, comisiones, multidivisa y finanzas para vivir o trabajar en Europa. Actualizado en 2026.",
   openGraph: {
-    title: "Blog FinanzasEU — Guías, Bancos y Consejos 2025",
+    title: "Blog FinanzasEU — Guías, bancos y consejos (2026)",
     description:
       "Artículos reales y comparativas sobre los mejores bancos digitales de Europa.",
     url: "https://finanzaseu.com/blog",
@@ -29,9 +29,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogLayout({ children }: { children: ReactNode }) {
-  const categories = getCategories();
-  const tags = getTags();
+export default async function BlogLayout({ children }: { children: ReactNode }) {
+  const [categories, tags] = await Promise.all([getCategories(), getTags()]);
 
   return (
     <Container className="py-12 md:py-20">

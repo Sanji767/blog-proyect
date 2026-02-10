@@ -27,19 +27,19 @@ const faqGroups: FaqGroup[] = [
     icon: <HelpCircle className="h-6 w-6" />,
     items: [
       {
-        question: "¿Qué es exactamente Bancos Europa?",
+        question: "¿Qué es exactamente FinanzasEU?",
         answer:
-          "Bancos Europa es la guía independiente más completa de banca digital en Europa. Analizo personalmente cada banco: comisiones reales, requisitos, velocidad de apertura, soporte en español… Todo sin filtros ni patrocinados ocultos. Mi objetivo: que elijas la cuenta perfecta sin perder tiempo ni dinero.",
+          "FinanzasEU es una guía editorial independiente de banca digital en Europa. Analizamos comisiones, requisitos, IBAN/SEPA y soporte, y enlazamos fuentes oficiales para que puedas verificar condiciones. El objetivo: ayudarte a elegir la cuenta que encaja contigo sin perder tiempo ni dinero.",
       },
       {
         question: "¿En qué países aplican las recomendaciones?",
         answer:
-          "Me centro en cuentas que puedes abrir desde España y cualquier país de la Unión Europea. También incluyo opciones para residentes en Latinoamérica, nómadas digitales y freelancers internacionales. En cada ficha indico exactamente qué países acepta cada banco.",
+          "Nos centramos en cuentas que puedes abrir desde España y otros países de la Unión Europea. También incluimos opciones para residentes fuera de la UE cuando aplica. En cada ficha indicamos qué países acepta cada banco.",
       },
       {
         question: "¿La información está siempre actualizada?",
         answer:
-          "Sí. Reviso condiciones cada semana. Cuando un banco cambia comisiones, requisitos o países admitidos, actualizo la ficha en muy poco tiempo. Si ves algo raro, escríbeme y lo corrijo cuanto antes.",
+          "Intentamos mantenerlo actualizado. Revisamos condiciones con frecuencia y actualizamos fichas cuando cambian comisiones, requisitos o países admitidos. Si ves algo raro, escríbenos y lo revisamos.",
       },
     ],
   },
@@ -50,12 +50,12 @@ const faqGroups: FaqGroup[] = [
       {
         question: "¿Qué diferencia hay entre neobancos y bancos tradicionales?",
         answer:
-          "Neobancos (N26, Revolut, Bunq…) = 100% app, apertura en 5 minutos, pocas oficinas.\nBancos tradicionales (ING, Santander, Deutsche Bank…) = más productos (hipotecas, préstamos), pero más burocracia.\nYo te digo cuál usar como cuenta principal y cuál como secundaria según tu estilo de vida.",
+          "Neobancos (N26, Revolut, Bunq…) = 100% app, apertura rápida, pocas oficinas.\nBancos tradicionales (ING, Santander, Deutsche Bank…) = más productos (hipotecas, préstamos), pero más burocracia.\nTe explicamos cuál usar como cuenta principal y cuál como secundaria según tu estilo de vida.",
       },
       {
         question: "¿Puedo usar estos bancos como cuenta principal?",
         answer:
-          "Sí. Miles de usuarios ya usan N26, Revolut o Bunq como cuenta principal para nómina, recibos y gastos diarios. En cada análisis te digo si el banco permite domiciliaciones SEPA, ingreso de nómina, recibos habituales, etc.",
+          "En muchos casos sí. En cada ficha indicamos si el banco permite domiciliaciones SEPA, ingreso de nómina, recibos habituales y detalles prácticos del día a día.",
       },
       {
         question: "¿Qué es una cuenta multidivisa y cuándo me interesa?",
@@ -92,17 +92,17 @@ const faqGroups: FaqGroup[] = [
       {
         question: "¿Es seguro usar estos bancos?",
         answer:
-          "Sí. Todos los bancos que recomiendo están regulados en la UE y tus depósitos están protegidos hasta 100.000 € por el fondo de garantía del país correspondiente (Alemania, Lituania, Países Bajos…). Además usan autenticación biométrica, tarjetas virtuales desechables y bloqueo instantáneo desde la app.",
+          "Depende de la entidad. Si es un banco con licencia en la UE, suele aplicar un esquema de garantía de depósitos (habitualmente hasta 100.000 € por titular y entidad). En cada ficha indicamos licencia, supervisión y protección, y recomendamos verificarlo en la web oficial.",
       },
       {
         question: "¿Ganas dinero si abro cuenta desde tus enlaces?",
         answer:
-          "Sí, en algunos bancos tengo acuerdo de afiliación. Eso significa que si abres cuenta desde mi enlace, yo recibo una comisión (entre 10 y 100 €) que el banco paga de su bolsillo. A ti NO te cuesta nada extra, y muchas veces consigues bonus exclusivos que no están en la web oficial.",
+          "En algunos casos sí: si abres cuenta desde nuestros enlaces podemos recibir una comisión sin coste extra para ti. Siempre indicamos cuando un enlace es de afiliado y eso no determina el análisis. Te recomendamos comprobar condiciones en la web oficial.",
       },
       {
         question: "¿Me cobras algo por la web o por ayudarte?",
         answer:
-          "Nunca. La web es 100% gratuita. Si me escribes por email o a través del formulario de contacto para que te recomiende el mejor banco para tu caso concreto (freelancer, empresa, nómada, etc.), también es gratis. Solo te pido que, si te ayudo, uses mis enlaces para apoyar el proyecto.",
+          "Nunca. La web es gratuita. Si nos escribes por email o a través del formulario de contacto para revisar tu caso (freelancer, empresa, nómada, etc.), también es gratis. Si te ayudamos y decides abrir cuenta, usar nuestros enlaces (cuando existan) ayuda a mantener el proyecto.",
       },
     ],
   },
@@ -169,7 +169,7 @@ export default function FaqPage() {
         >
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs md:text-sm font-semibold text-primary">
             <MessageCircle className="h-4 w-4" />
-            Más de 25.000 personas ya han usado esta guía
+            Guía práctica para dudas reales (sin humo)
           </div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent leading-tight">
@@ -180,7 +180,7 @@ export default function FaqPage() {
           <p className="text-base md:text-xl text-muted-foreground max-w-3xl md:max-w-4xl mx-auto">
             Esta página reúne las preguntas que más se repiten sobre bancos europeos, neobancos
             y cuentas para nómadas, freelancers y empresas. Si tu caso es más raro, al final
-            encontrarás cómo contarme tu situación para que te responda personalmente.
+            encontrarás cómo contarnos tu situación para que te respondamos.
           </p>
         </motion.div>
 
@@ -226,7 +226,7 @@ export default function FaqPage() {
                   <h2 className="text-2xl md:text-3xl font-bold">{group.title}</h2>
                 </div>
                 <p className="text-xs md:text-sm text-muted-foreground max-w-md md:text-right">
-                  Preguntas reales que me han hecho cientos de veces sobre{" "}
+                  Preguntas reales que nos han hecho muchas veces sobre{" "}
                   <span className="font-semibold lowercase">{group.title}</span>.
                 </p>
               </div>
@@ -310,12 +310,12 @@ export default function FaqPage() {
               </h2>
               <p className="text-base md:text-xl text-muted-foreground">
                 Freelancer en dólares, empresa en Estonia, nómada digital, residente en Latinoamérica,
-                familia con cuentas conjuntas… Si tu situación no encaja en las FAQ, escríbeme
-                y te digo qué banco usar como principal y cuál como apoyo.
+                familia con cuentas conjuntas… Si tu situación no encaja en las FAQ, escríbenos
+                y te decimos qué banco usar como principal y cuál como apoyo.
               </p>
               <p className="text-sm md:text-base text-muted-foreground">
-                Me lees gratis, te respondo gratis. Lo único que te pido es que, si te ayudo,
-                uses mis enlaces para abrir tu cuenta y así apoyas el proyecto.
+                Puedes leer gratis y te respondemos gratis. Si te ayudamos y decides abrir cuenta,
+                usar nuestros enlaces (cuando existan) ayuda a mantener el proyecto.
               </p>
             </div>
 

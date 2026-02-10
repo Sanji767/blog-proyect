@@ -5,14 +5,9 @@ import { Manrope } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Suspense } from "react";
 
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import CookieBanner from "@/components/CookieBanner";
 import GoogleAnalyticsLoader from "@/components/analytics/GoogleAnalyticsLoader";
+import AppChrome from "@/components/layout/AppChrome";
 import { toJsonLd } from "@/lib/seo";
-
-// 🚀 Importamos el nuevo componente
-import StickyPromo from "@/components/layout/StickyPromo"; 
 
 import "./globals.css";
 
@@ -26,15 +21,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://finanzaseu.com"),
 
   title: {
-    default: "Los 7 Mejores Bancos Digitales con IBAN Europeo en 2025 y 2026",
+    default: "Comparativa de bancos digitales y validador IBAN (2026) | FinanzasEU",
     template: "%s • FinanzasEU",
   },
 
   description:
-    "Ranking actualizado noviembre 2025: bancos con IBAN europeo real, 0 comisiones y tarjeta gratis. Comparativa real sin patrocinio.",
+    "Guía independiente para elegir banco en Europa: comisiones, IBAN europeo, requisitos y enlaces oficiales. Comparativa y herramientas gratis (IBAN scanner). Actualizado en 2026.",
 
   keywords: [
-    "mejores bancos 2025",
     "mejores bancos 2026",
     "banco con iban europeo",
     "cuentas sin comisiones",
@@ -44,8 +38,9 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "Los 7 Mejores Bancos con IBAN Europeo en 2025-2026",
-    description: "Ranking real y actualizado. Descubre cuál es el mejor banco ahora mismo.",
+    title: "Comparativa de bancos digitales y validador IBAN (2026)",
+    description:
+      "Comisiones, IBAN, requisitos y enlaces oficiales para elegir banco con criterio. Actualizado en 2026.",
     url: "https://finanzaseu.com",
     siteName: "FinanzasEU",
     locale: "es_ES",
@@ -55,15 +50,16 @@ export const metadata: Metadata = {
         url: "/og-escalada.png",
         width: 1200,
         height: 630,
-        alt: "Comparativa bancos digitales 2025",
+        alt: "Comparativa de bancos digitales",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Los 7 Mejores Bancos Europeos 2025",
-    description: "Comparativa real, sin patrocinio.",
+    title: "Comparativa de bancos digitales (2026)",
+    description:
+      "Guía independiente: comisiones, IBAN, requisitos y enlaces oficiales. Actualizado en 2026.",
     images: ["/og-escalada.png"],
   },
 
@@ -120,16 +116,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="pt-20 md:pt-24">{children}</main>
-          <Footer />
-
-          {/* 🚀 StickyPromo integrado aquí: Flotará sobre todas las páginas */}
-          <StickyPromo />
+          <AppChrome>{children}</AppChrome>
         </ThemeProvider>
-
-        {/* Banner de Cookies */}
-        <CookieBanner />
 
         {/* Schema.org — mejora marca en Google */}
         <script

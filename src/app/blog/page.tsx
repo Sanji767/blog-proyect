@@ -11,7 +11,8 @@ import {
   toJsonLd,
 } from "@/lib/seo";
 
-const BLOG_PAGE_TITLE = "Blog Finanzas EU – Guías reales sobre bancos digitales 2025";
+const BLOG_PAGE_TITLE =
+  "Blog FinanzasEU — guías prácticas de bancos, IBAN y comisiones (2026)";
 const BLOG_PAGE_DESCRIPTION =
   "Comparativas honestas, opiniones reales y trucos para ahorrar con Revolut, Wise, N26 y más.";
 
@@ -23,8 +24,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  const allPosts = getAllPostPreviews();
+export default async function BlogPage() {
+  const allPosts = await getAllPostPreviews();
   const featured = allPosts.filter((p) => p.featured).slice(0, 3);
   const normal = allPosts.filter((p) => !featured.some((f) => f.slug === p.slug));
 

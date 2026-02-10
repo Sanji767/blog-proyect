@@ -6,7 +6,7 @@ import type React from "react";
 
 import { banks, type Bank } from "@/lib/banks";
 import Container from "@/components/layout/Container";
-import { toJsonLd } from "@/lib/seo";
+import { formatIsoYmdToEsDate, toJsonLd } from "@/lib/seo";
 
 import {
   Globe2,
@@ -73,7 +73,7 @@ export function generateMetadata({
 
   if (!bank) {
     return {
-      title: "Programa no encontrado | Finanzas Eu",
+      title: "Programa no encontrado | FinanzasEU",
       description:
         "No hemos encontrado el banco o programa que estabas buscando.",
     };
@@ -84,7 +84,7 @@ export function generateMetadata({
   return {
     title:
       seo?.metaTitle ??
-      `${name} – Opiniones, comisiones y cómo abrir tu cuenta | Finanzas Eu`,
+      `${name} – Opiniones, comisiones y cómo abrir tu cuenta | FinanzasEU`,
     description: seo?.metaDescription ?? tagline,
     alternates: seo?.canonicalUrl
       ? { canonical: seo.canonicalUrl }
@@ -135,11 +135,14 @@ export default function ProgramaPage({
     support,
     rating,
     compliance,
+    appStoreUrl,
+    googlePlayUrl,
     acceptedCountries,
     expertOpinion,
     openingSteps,
     history = [],
     reviews = [],
+    _lastUpdated: lastUpdated,
   } = bank as BankContent;
 
   const monthlyFee = fees.monthly;
@@ -154,6 +157,8 @@ export default function ProgramaPage({
 
   const logoSrc = logo; // string | StaticImageData
   const heroSrc = heroImage || null;
+
+  const lastUpdatedLabel = formatIsoYmdToEsDate(lastUpdated);
 
   const isFree =
     /gratis/i.test(monthlyFee) || /0\s*€/.test(monthlyFee);
@@ -232,7 +237,7 @@ export default function ProgramaPage({
           <div className="space-y-6">
             {/* Etiquetas superiores */}
             <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
-              <span>Banco analizado por Finanzas Eu</span>
+              <span>Banco analizado por FinanzasEU</span>
               {hasAffiliate && (
                 <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-black">
                   Enlace recomendado (sin coste extra)
@@ -304,6 +309,58 @@ export default function ProgramaPage({
                 Ver web oficial
               </a>
             </div>
+
+            {(lastUpdatedLabel || appStoreUrl || googlePlayUrl) ? (
+              <div className="mt-4 rounded-2xl border border-border bg-muted/20 p-4 text-xs text-muted-foreground">
+                {lastUpdatedLabel ? (
+                  <p>
+                    Actualizado:{" "}
+                    <strong className="font-semibold text-foreground">
+                      {lastUpdatedLabel}
+                    </strong>
+                  </p>
+                ) : null}
+                <p className={lastUpdatedLabel ? "mt-1" : ""}>
+                  Fuentes oficiales:{" "}
+                  <a
+                    href={website}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="underline underline-offset-2"
+                  >
+                    Web oficial
+                  </a>
+                  {appStoreUrl ? (
+                    <>
+                      {" "}
+                      ·{" "}
+                      <a
+                        href={appStoreUrl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="underline underline-offset-2"
+                      >
+                        App Store
+                      </a>
+                    </>
+                  ) : null}
+                  {googlePlayUrl ? (
+                    <>
+                      {" "}
+                      ·{" "}
+                      <a
+                        href={googlePlayUrl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="underline underline-offset-2"
+                      >
+                        Google Play
+                      </a>
+                    </>
+                  ) : null}
+                </p>
+              </div>
+            ) : null}
 
             {/* Stats rápidos */}
             <div className="mt-4 grid gap-2 rounded-2xl border border-border bg-background p-3 text-xs md:grid-cols-4">
@@ -383,7 +440,7 @@ export default function ProgramaPage({
               </span>
               <span className="inline-flex items-center gap-1">
                 <ShieldCheck className="h-3 w-3" />
-                Depósitos protegidos en la UE
+                Protección (según entidad)
               </span>
             </div>
           </aside>
@@ -842,7 +899,7 @@ export default function ProgramaPage({
           </div>
           <p className="mt-3 max-w-xl text-[11px] text-muted-foreground">
             Algunos enlaces de esta página son enlaces de afiliado. Esto
-            significa que Finanzas Eu puede recibir una comisión si abres
+            significa que FinanzasEU puede recibir una comisión si abres
             tu cuenta a través de ellos. No pagarás nada extra y esta
             comisión no afecta a nuestra opinión ni a nuestra valoración
             del producto.

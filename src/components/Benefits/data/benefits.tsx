@@ -44,15 +44,16 @@ export const benefits: IBenefit[] = [
       "Te mostramos qué garantía tiene tu dinero en cada banco europeo y cómo están protegidos tus depósitos.",
     image: "/images/benefits/security.webp",
     align: "image-left",
-    ctaLabel: "Ver garantías por país",
-    ctaHref: "/garantias",
+    ctaLabel: "Ver garantías por banco",
+    ctaHref: "/bancos",
     bullets: [
       {
         id: 1,
         title: "Garantías de depósitos",
-        description: "100.000€ en la mayoría de países de la UE.",
+        description:
+          "Habitualmente hasta 100.000€ por titular y entidad cuando aplica (según licencia).",
         icon: <Euro size={28} className="text-primary" />,
-        stat: "100K€",
+        stat: "Hasta 100K€",
       },
       {
         id: 2,

@@ -1,20 +1,21 @@
 // src/components/blog/CategoryBadge.tsx
 import Link from "next/link";
-import { getCategories } from "@/lib/blog";              // ← corrige la ruta si es necesario
-import type { Category } from "@/lib/blog/types";        // ← este es el tipo correcto
+
+function humanizeSlug(value: string): string {
+  const normalized = value.trim().replace(/-/g, " ");
+  return normalized ? normalized.charAt(0).toUpperCase() + normalized.slice(1) : value;
+}
 
 export default function CategoryBadge({ slug }: { slug: string }) {
-  const categories: Category[] = getCategories();
-  const cat = categories.find((c) => c.slug === slug);
-
-  if (!cat) return null;
+  const categorySlug = decodeURIComponent(slug).toLowerCase().trim();
+  if (!categorySlug) return null;
 
   return (
     <Link
-      href={`/blog/categoria/${cat.slug}`}
+      href={`/blog/categoria/${encodeURIComponent(categorySlug)}`}
       className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary"
     >
-      {cat.title}
+      {humanizeSlug(categorySlug)}
     </Link>
   );
 }

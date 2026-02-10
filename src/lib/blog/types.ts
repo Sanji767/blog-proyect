@@ -1,12 +1,13 @@
 // src/lib/blog/types.ts
 import type { StaticImageData } from "next/image";
+import type { PortableTextBlock } from "@portabletext/types";
 
 export type BlogPost = {
   slug: string;
   title: string;
   description?: string;
   excerpt?: string;
-  content: string;
+  content: string | PortableTextBlock[];
   coverImage?: string;
   image?: string | StaticImageData;
   date: string;

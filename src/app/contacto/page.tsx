@@ -49,6 +49,7 @@ export default function ContactoPage() {
       country: formData.get("country")?.toString().trim() || "No indicado",
       goal: selectedGoal || formData.get("goal")?.toString() || "No indicado",
       message: formData.get("message")?.toString().trim() || "",
+      website: formData.get("website")?.toString().trim() || "",
     };
 
     if (!data.name || !data.email || !data.message) {
@@ -58,7 +59,24 @@ export default function ContactoPage() {
     }
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1200));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = (await response.json().catch(() => null)) as
+        | { ok?: boolean; error?: string }
+        | null;
+
+      if (!response.ok) {
+        setFormState("error");
+        setErrorMessage(
+          result?.error || "Error al enviar. Inténtalo de nuevo.",
+        );
+        return;
+      }
+
       setFormState("success");
       (e.target as HTMLFormElement).reset();
       setSelectedGoal("");
@@ -100,6 +118,15 @@ export default function ContactoPage() {
             transition={{ delay: 0.2 }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot anti-spam (debe quedar vacío) */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+              />
+
               <div className="grid md:grid-cols-2 gap-5">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-base font-semibold">Nombre</Label>
@@ -138,11 +165,11 @@ export default function ContactoPage() {
                           <span className="font-medium text-sm">{goal.label}</span>
                         </div>
                         {isSelected && <CheckCircle className="absolute top-3 right-3 h-5 w-5 text-primary" />}
-                        <input type="hidden" name="goal" value={selectedGoal} />
                       </button>
                     );
                   })}
                 </div>
+                <input type="hidden" name="goal" value={selectedGoal} />
               </div>
 
               <div className="space-y-2">
@@ -189,15 +216,15 @@ export default function ContactoPage() {
           >
             {/* Stats */}
             <div className="rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 p-8 border border-primary/20">
-              <h3 className="text-2xl font-bold mb-6">Ya ayudé a más de 25.000 personas</h3>
+              <h3 className="text-2xl font-bold mb-6">Respuesta clara y personalizada</h3>
               <div className="grid grid-cols-2 gap-6 text-center">
                 <div>
-                  <div className="text-4xl font-black text-primary">25k+</div>
-                  <div className="text-sm text-muted-foreground">Consultas respondidas</div>
+                  <div className="text-3xl md:text-4xl font-black text-primary">Objetivo: 24h</div>
+                  <div className="text-sm text-muted-foreground">Tiempo de respuesta</div>
                 </div>
                 <div>
-                  <div className="text-4xl font-black text-primary">4.9/5</div>
-                  <div className="text-sm text-muted-foreground">Valoración media</div>
+                  <div className="text-3xl md:text-4xl font-black text-primary">1–3</div>
+                  <div className="text-sm text-muted-foreground">Opciones recomendadas</div>
                 </div>
               </div>
             </div>

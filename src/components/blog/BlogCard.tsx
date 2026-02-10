@@ -1,6 +1,7 @@
 // src/components/blog/BlogCard.tsx
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, Eye, Sparkles, Flame } from "lucide-react";
@@ -20,6 +21,10 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
   const isNew = new Date(post.date) > new Date(Date.now() - 3 * 24 * 60 * 60 * 1000); // últimos 3 días
   const isHot = (post.views || 0) > 25000;
 
+  const cover =
+    (typeof post.coverImage === "string" ? post.coverImage : undefined) ??
+    (typeof post.image === "string" ? post.image : undefined);
+
   const formattedDate = new Date(post.date).toLocaleDateString("es-ES", {
     day: "numeric",
     month: "short",
@@ -35,6 +40,10 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
   };
 
   const views = formatViews(post.views);
+  const description =
+    (post.description ?? "").trim() ||
+    (post.excerpt ?? "").trim() ||
+    "Guía y análisis con ejemplos claros.";
 
   return (
     <motion.article
@@ -49,6 +58,23 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
         className={`block rounded-3xl border border-border/50 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:border-primary/20
           p-6 bg-gradient-to-br from-white to-gray-50 dark:from-black/80 dark:to-gray-900`}
       >
+        {!isCompact && (
+          <div className="relative mb-5 aspect-[16/9] overflow-hidden rounded-2xl border border-border/40 bg-muted/40">
+            {cover ? (
+              <Image
+                src={cover}
+                alt={post.title}
+                fill
+                sizes="(min-width: 1024px) 420px, 100vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-background to-emerald-400/10" />
+            )}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/0 via-black/0 to-black/20 dark:to-black/40" />
+          </div>
+        )}
+
         {/* Badges */}
         <div className="flex flex-wrap gap-2 mb-3">
           {isNew && (
@@ -104,7 +130,7 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
 
         {/* Descripción */}
         <p className="text-muted-foreground line-clamp-4 leading-relaxed text-sm md:text-base mb-4">
-          {post.description ?? post.excerpt ?? "Sin descripción disponible"}
+          {description}
         </p>
 
         {/* Tags + CTA */}

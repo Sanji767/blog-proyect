@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 
 import { banks } from "@/lib/banks";
-import { getAllPosts, getCategories, getTags } from "@/lib/blog";
+import { getAllPostPreviews, getCategories, getTags } from "@/lib/blog";
 import { ebooks } from "@/lib/ebooks-data";
 import { vlogPreviews } from "@/lib/vlogs";
 
 const BASE_URL = "https://finanzaseu.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticRoutes = [
@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
   }));
 
-  const posts = getAllPosts();
+  const posts = await getAllPostPreviews();
   urls.push(
     ...posts.map((post) => ({
       url: `${BASE_URL}/blog/${post.slug}`,
@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  const categories = getCategories();
+  const categories = await getCategories();
   urls.push(
     ...categories.map((cat) => ({
       url: `${BASE_URL}/blog/categoria/${encodeURIComponent(cat.slug)}`,
@@ -48,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  const tags = getTags();
+  const tags = await getTags();
   urls.push(
     ...tags.map((tag) => ({
       url: `${BASE_URL}/blog/tag/${encodeURIComponent(tag.slug)}`,

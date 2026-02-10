@@ -2,11 +2,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Términos y Condiciones de Uso | Finanzas EU",
-  description: "Condiciones legales de uso de Finanzas EU – web independiente de información financiera.",
+  title: "Términos y Condiciones de Uso | FinanzasEU",
+  description: "Condiciones legales de uso de FinanzasEU – web independiente de información financiera.",
 };
 
 export default function Terminos() {
+  const currentYear = new Date().getFullYear();
   return (
     <article className="container mx-auto max-w-4xl px-4 py-16">
       <h1 className="text-4xl font-black mb-8 text-center md:text-left">
@@ -23,7 +24,7 @@ export default function Terminos() {
             1. Aceptación de los términos
           </h2>
           <p>
-            Al acceder y utilizar <strong>Finanzas EU</strong> (en adelante “el Sitio”), aceptas estar vinculado por estos Términos y Condiciones de Uso, todas las leyes y regulaciones aplicables, y aceptas que eres responsable del cumplimiento de cualquier ley local aplicable.
+            Al acceder y utilizar <strong>FinanzasEU</strong> (en adelante “el Sitio”), aceptas estar vinculado por estos Términos y Condiciones de Uso, todas las leyes y regulaciones aplicables, y aceptas que eres responsable del cumplimiento de cualquier ley local aplicable.
           </p>
         </section>
 
@@ -32,7 +33,7 @@ export default function Terminos() {
             2. Naturaleza del contenido
           </h2>
           <p>
-            Finanzas EU es una <strong>web informativa independiente</strong>. No somos una entidad bancaria, asesor financiero registrado ni intermediario financiero.
+            FinanzasEU es una <strong>web informativa independiente</strong>. No somos una entidad bancaria, asesor financiero registrado ni intermediario financiero.
           </p>
           <p>
             Toda la información publicada tiene <strong>carácter orientativo y educativo</strong>. No constituye asesoramiento financiero, fiscal, legal ni de ningún otro tipo.
@@ -47,7 +48,7 @@ export default function Terminos() {
             3. Enlaces de afiliados y transparencia
           </h2>
           <p>
-            Parte de los enlaces a productos bancarios son <strong>enlaces de afiliado</strong>. Esto significa que, si abres una cuenta a través de ellos, Finanzas EU puede recibir una comisión <strong>sin coste adicional para ti</strong>.
+            Parte de los enlaces a productos bancarios son <strong>enlaces de afiliado</strong>. Esto significa que, si abres una cuenta a través de ellos, FinanzasEU puede recibir una comisión <strong>sin coste adicional para ti</strong>.
           </p>
           <p>
             Esta comisión nos ayuda a mantener la web gratuita y actualizada, pero <strong>nunca influye en nuestras opiniones ni en el orden de los rankings</strong>. Solo recomendamos productos que consideramos útiles y que nosotros mismos usaríamos.
@@ -69,7 +70,7 @@ export default function Terminos() {
             5. Propiedad intelectual
           </h2>
           <p>
-            Todo el contenido original de Finanzas EU (textos, comparativas, guías, imágenes propias) está protegido por derechos de autor. 
+            Todo el contenido original de FinanzasEU (textos, comparativas, guías, imágenes propias) está protegido por derechos de autor. 
             Puedes compartirlo citando la fuente, pero queda prohibida su reproducción masiva o con fines comerciales sin autorización previa.
           </p>
         </section>
@@ -79,7 +80,7 @@ export default function Terminos() {
             6. Limitación de responsabilidad
           </h2>
           <p>
-            En ningún caso Finanzas EU ni sus responsables serán responsables de ningún daño directo, indirecto, incidental o consecuente derivado del uso o la imposibilidad de uso de esta web.
+            En ningún caso FinanzasEU ni sus responsables serán responsables de ningún daño directo, indirecto, incidental o consecuente derivado del uso o la imposibilidad de uso de esta web.
           </p>
         </section>
 
@@ -106,7 +107,7 @@ export default function Terminos() {
         </section>
 
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© 2025 Finanzas EU – Todos los derechos reservados</p>
+          <p>© {currentYear} FinanzasEU – Todos los derechos reservados</p>
         </div>
       </div>
     </article>

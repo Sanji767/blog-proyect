@@ -1,17 +1,18 @@
 // src/components/blog/TagBadge.tsx
 import Link from "next/link";
-import { getTags } from "@/lib/blog";          // ← ruta correcta (o "@/lib/blog/getTags" si está separado)
-import type { Tag } from "@/lib/blog/types";  // ← el tipo centralizado (el mismo que BlogPost y Category)
+
+function humanizeSlug(value: string): string {
+  const normalized = value.trim().replace(/-/g, " ");
+  return normalized ? normalized.charAt(0).toUpperCase() + normalized.slice(1) : value;
+}
 
 export default function TagBadge({ slug }: { slug: string }) {
-  const tags: Tag[] = getTags();
-  const tag = tags.find((t) => t.slug === slug);
-
-  const label = tag?.title ?? slug;
+  const tagSlug = decodeURIComponent(slug).toLowerCase().trim();
+  const label = humanizeSlug(tagSlug);
 
   return (
     <Link
-      href={`/blog/tag/${slug}`}
+      href={`/blog/tag/${encodeURIComponent(tagSlug)}`}
       className="inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium text-muted-foreground hover:bg-muted"
     >
       {label}
