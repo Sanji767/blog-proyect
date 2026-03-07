@@ -1,7 +1,9 @@
 // src/app/blog/categoria/[categoria]/page.tsx
 import type { Metadata } from "next";
-import Container from "@/components/layout/Container";
-import BlogCard from "@/components/blog/BlogCard";
+import Link from "next/link";
+
+import BlogExplore from "@/components/blog/BlogExplore";
+import NewsPostCard from "@/components/blog/NewsPostCard";
 import { getCategories, getPostsByCategory } from "@/lib/blog";
 import {
   DEFAULT_OG_IMAGE_URL,
@@ -17,9 +19,7 @@ type Props = {
   };
 };
 
-export async function generateStaticParams(): Promise<
-  Array<{ categoria: string }>
-> {
+export async function generateStaticParams(): Promise<Array<{ categoria: string }>> {
   const categories = await getCategories();
   return categories.map((cat) => ({ categoria: cat.slug }));
 }
@@ -29,9 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categories = await getCategories();
   const cat = categories.find((c) => c.slug === categoria);
 
-  if (!cat) {
-    return { title: "Categoría no encontrada | FinanzasEU" };
-  }
+  if (!cat) return { title: "Categoría no encontrada | FinanzasEU" };
 
   return {
     title: `${cat.title} | Blog FinanzasEU`,
@@ -49,9 +47,9 @@ export default async function CategoryPage({ params }: Props) {
 
   if (!cat) {
     return (
-      <Container className="py-20 text-center">
-        <p className="text-lg text-muted-foreground">Categoría no encontrada</p>
-      </Container>
+      <div className="py-16 text-center">
+        <p className="text-base text-muted-foreground">Categoría no encontrada.</p>
+      </div>
     );
   }
 
@@ -65,24 +63,9 @@ export default async function CategoryPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Inicio",
-        item: SITE_URL,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: `${SITE_URL}/blog`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: cat.title,
-        item: pageUrl,
-      },
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: cat.title, item: pageUrl },
     ],
   };
 
@@ -98,15 +81,9 @@ export default async function CategoryPage({ params }: Props) {
       "@type": "Organization",
       name: SITE_NAME,
       url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: SITE_LOGO_URL,
-      },
+      logo: { "@type": "ImageObject", url: SITE_LOGO_URL },
     },
-    primaryImageOfPage: {
-      "@type": "ImageObject",
-      url: DEFAULT_OG_IMAGE_URL,
-    },
+    primaryImageOfPage: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE_URL },
     mainEntity: {
       "@type": "ItemList",
       itemListElement: posts.map((post, index) => ({
@@ -120,34 +97,48 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <>
-      {/* Schema.org: Breadcrumbs + CollectionPage (Category) */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: toJsonLd(breadcrumbJsonLd),
-        }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: toJsonLd(categoryCollectionJsonLd),
-        }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(categoryCollectionJsonLd) }}
       />
 
-      <Container className="py-16">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-black mb-4">{cat.title}</h1>
-          <p className="text-xl text-muted-foreground">
-            {posts.length} artículo{posts.length !== 1 ? "s" : ""} en esta categoría
-          </p>
-        </div>
+      <header className="space-y-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <Link href="/blog" className="underline-offset-4 hover:underline">
+            Blog
+          </Link>{" "}
+          <span className="text-muted-foreground/70">/</span> Categoría
+        </p>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post, i) => (
-            <BlogCard key={post.slug} post={post} index={i} />
-          ))}
-        </div>
-      </Container>
+        <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
+          {cat.title}
+        </h1>
+
+        <p className="text-base text-muted-foreground md:text-lg">
+          {posts.length} artículo{posts.length !== 1 ? "s" : ""}.
+        </p>
+      </header>
+
+      {posts.length === 0 ? (
+        <p className="mt-12 text-base text-muted-foreground">
+          Todavía no hay artículos en <strong>{cat.title}</strong>.
+        </p>
+      ) : (
+        <section className="mt-12">
+          <div className="grid gap-6 md:grid-cols-2">
+            {posts.map((post, idx) => (
+              <NewsPostCard key={post.slug} post={post} index={idx} showDescription />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <BlogExplore />
     </>
   );
 }
+

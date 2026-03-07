@@ -8,6 +8,7 @@ type RelatedBanksProps = {
 
 export default function RelatedBanks({ currentBank }: RelatedBanksProps) {
   const related = banks
+    .filter((bank) => bank._status !== "draft")
     .filter((bank) => bank.slug !== currentBank.slug)
     .map((bank) => {
       // score simple: +2 si misma categoría, +1 por cada tag en común

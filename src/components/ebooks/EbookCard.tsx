@@ -9,21 +9,21 @@ interface EbookCardProps {
 
 export default function EbookCard({ ebook }: EbookCardProps) {
   return (
-    <Link href={`/ebooks/${ebook.id}`} className="block h-full group">
-      <div className="bg-white rounded-[2rem] p-0 flex flex-col h-full transition-transform duration-300 group-hover:-translate-y-1">
+    <Link href={`/ebooks/${ebook.id}`} className="group block h-full">
+      <article className="relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-secondary bg-secondary text-secondary-foreground shadow-soft transition-shadow group-hover:shadow-offset-accent">
         <BookMockup image={ebook.image} />
 
-        <div className="mt-4 flex flex-col items-start px-1">
-          <h3 className="text-[14px] font-medium text-gray-800 leading-tight line-clamp-2 mb-3">
+        <div className="flex flex-1 flex-col gap-4 p-6">
+          <h3 className="text-balance text-lg font-black leading-tight text-accent line-clamp-2">
             {ebook.title}
           </h3>
-          
-          <div className="flex gap-2">
-            <Badge>{ebook.format || "Curso Online"}</Badge>
-            {ebook.isFree && <Badge variant="free">Gratis</Badge>}
+
+          <div className="mt-auto flex flex-wrap gap-2">
+            <Badge>{ebook.format || "Curso online"}</Badge>
+            {ebook.isFree ? <Badge variant="free">Gratis</Badge> : null}
           </div>
         </div>
-      </div>
+      </article>
     </Link>
   );
 }

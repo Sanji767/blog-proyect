@@ -1,0 +1,18 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Banco">
+  <rect x="10" y="10" width="108" height="108" rx="26" stroke="#2FB7D1" stroke-width="6" />
+  <path
+    d="M26 52.5L64 32L102 52.5V58H26V52.5Z"
+    fill="#F8C44C"
+  />
+  <path
+    d="M34 58H94V94H34V58Z"
+    fill="#1C0F2A"
+    stroke="#F8C44C"
+    stroke-width="4"
+  />
+  <path d="M44 66V90" stroke="#2FB7D1" stroke-width="6" stroke-linecap="round" />
+  <path d="M64 66V90" stroke="#2FB7D1" stroke-width="6" stroke-linecap="round" />
+  <path d="M84 66V90" stroke="#2FB7D1" stroke-width="6" stroke-linecap="round" />
+  <path d="M30 98H98" stroke="#F15B3A" stroke-width="6" stroke-linecap="round" />
+</svg>
+

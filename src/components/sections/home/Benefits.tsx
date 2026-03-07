@@ -2,78 +2,93 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Clock3, Globe2, CreditCard } from "lucide-react";
+import { Clock3, CreditCard, Globe2, ShieldCheck } from "lucide-react";
+
 import Container from "@/components/layout/Container";
 
 const BENEFITS = [
   {
     icon: ShieldCheck,
-    title: "Seguridad Bancaria",
+    title: "Seguridad y supervisión",
     description:
-      "Fichas técnicas con licencia, supervisión y garantía de depósitos (según el país de la entidad).",
-    color: "emerald"
+      "Fichas con licencia, supervisión y garantías (según país) para saber qué estás abriendo.",
   },
   {
     icon: Globe2,
-    title: "Nómada Digital",
-    description: "Soluciones multidivisa con IBAN locales para cobrar y pagar como un residente en cualquier país.",
-    color: "cyan"
+    title: "Multidivisa, de verdad",
+    description:
+      "Opciones para cobrar y pagar en varias divisas con IBAN y operativa real para el día a día.",
   },
   {
     icon: CreditCard,
-    title: "Transparencia Total",
-    description: "Desglosamos comisiones ocultas en tipos de cambio y mantenimiento de tarjetas.",
-    color: "blue"
+    title: "Comisiones al descubierto",
+    description:
+      "Costes reales (cambio de divisa, cajeros, tarjeta) sin letra pequeña disfrazada.",
   },
   {
     icon: Clock3,
-    title: "Ahorro Estratégico",
-    description: "Eliminamos el ruido publicitario. Solo las mejores cuentas neobancarias en un vistazo.",
-    color: "purple"
-  }
+    title: "Ahorra tiempo (y dudas)",
+    description:
+      "Menos ruido: una selección editorial para decidir rápido con criterios claros y comparables.",
+  },
 ];
 
 export default function Benefits() {
   return (
-    <section className="py-24 bg-background overflow-hidden">
+    <section className="border-t border-border bg-background py-16 md:py-24">
       <Container>
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+        <div className="mx-auto mb-12 max-w-3xl space-y-4 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+            Por qué importa
+          </p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-black"
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-balance text-3xl font-black leading-tight md:text-5xl"
           >
-            Tu dinero, sin fronteras <br /> 
-            <span className="text-muted-foreground">y sin complicaciones.</span>
+            Menos comisiones.{" "}
+            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+              Más control.
+            </span>
           </motion.h2>
+
+          <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+            Una experiencia premium no es “más diseño”: es quitar fricción y
+            dejar solo lo que te ayuda a decidir mejor.
+          </p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {BENEFITS.map((item, idx) => (
-            <motion.div
+            <motion.article
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="relative p-8 rounded-[2rem] border border-border bg-card/50 hover:bg-card transition-colors group overflow-hidden"
+              transition={{ delay: idx * 0.06, duration: 0.6, ease: "easeOut" }}
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent"
             >
-              <div className="absolute -top-10 -right-10 h-32 w-32 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-colors" />
-              
-              <div className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 transition-transform group-hover:scale-110 group-hover:rotate-3`}>
-                <item.icon className="h-7 w-7" />
+              <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-accent/10 blur-3xl transition-colors group-hover:bg-accent/15" />
+
+              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 text-accent transition-transform group-hover:scale-110 group-hover:rotate-2">
+                <item.icon className="h-6 w-6" />
               </div>
-              
-              <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
-              <p className="text-muted-foreground leading-relaxed text-sm">
+
+              <h3 className="mb-3 text-xl font-black text-accent">
+                {item.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-secondary-foreground/80">
                 {item.description}
               </p>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </Container>
     </section>
   );
 }
+

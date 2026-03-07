@@ -37,12 +37,23 @@ export function toJsonLd(value: unknown): string {
 }
 
 export function formatIsoYmdToEsDate(value: string | undefined): string | undefined {
+  return formatIsoYmdToLocaleDate(value, "es-ES");
+}
+
+export function formatIsoYmdToEnDate(value: string | undefined): string | undefined {
+  return formatIsoYmdToLocaleDate(value, "en-US");
+}
+
+export function formatIsoYmdToLocaleDate(
+  value: string | undefined,
+  locale: string,
+): string | undefined {
   if (!value) return undefined;
 
   const date = new Date(`${value}T00:00:00Z`);
   if (Number.isNaN(date.getTime())) return undefined;
 
-  return date.toLocaleDateString("es-ES", {
+  return date.toLocaleDateString(locale, {
     year: "numeric",
     month: "long",
     day: "numeric",

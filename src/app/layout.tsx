@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Suspense } from "react";
 
@@ -11,10 +11,16 @@ import { toJsonLd } from "@/lib/seo";
 
 import "./globals.css";
 
-// Fuente principal
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-inter",
+  adjustFontFallback: false,
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -100,7 +106,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body
-        className={`${manrope.className} ${manrope.variable} antialiased bg-background text-foreground`}
+        className={`${inter.className} ${inter.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground`}
       >
         {/* Google Analytics (GA4): se carga solo tras aceptar cookies */}
         {gaId ? (

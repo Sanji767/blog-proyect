@@ -11,13 +11,15 @@ export default function TrustStrip() {
   ];
 
   return (
-    <div className="border-y border-border bg-muted/20 py-6">
+    <div className="border-y-2 border-border bg-muted py-6">
       <Container>
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
           {signals.map((item) => (
             <div key={item.name} className="flex items-center gap-2">
-              <item.icon className="h-5 w-5" />
-              <span className="text-xs font-bold tracking-tighter uppercase">{item.name}</span>
+              <item.icon className="h-5 w-5 text-primary" />
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                {item.name}
+              </span>
             </div>
           ))}
         </div>
@@ -25,3 +27,4 @@ export default function TrustStrip() {
     </div>
   );
 }
+

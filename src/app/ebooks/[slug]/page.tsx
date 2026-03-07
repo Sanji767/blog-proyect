@@ -1,112 +1,127 @@
-"use client";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { useParams } from "next/navigation";
-import Image from "next/image";
+import EbookDetailClient from "./EbookDetailClient";
 import { ebooks } from "@/lib/ebooks-data";
-import { motion } from "framer-motion";
+import {
+  DEFAULT_OG_IMAGE_URL,
+  SITE_LOGO_URL,
+  SITE_NAME,
+  SITE_URL,
+  toAbsoluteUrl,
+  toJsonLd,
+} from "@/lib/seo";
 
-export default function EbookDetailPage() {
-  const params = useParams();
-  const slugParam = params.slug;
-  const ebookId = Array.isArray(slugParam) ? slugParam[0] : (slugParam as string);
-  const ebook = ebooks.find((e) => e.id === ebookId);
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata {
+  const ebook = ebooks.find((e) => e.id === params.slug);
 
   if (!ebook) {
-    return <div className="text-center py-20">Ebook no encontrado</div>;
+    return {
+      title: `Ebook no encontrado | ${SITE_NAME}`,
+      description: "No hemos encontrado el ebook o curso que buscabas.",
+      robots: { index: false, follow: true },
+    };
   }
 
+  const canonicalPath = `/ebooks/${encodeURIComponent(ebook.id)}`;
+
+  return {
+    title: `${ebook.title} | ${SITE_NAME}`,
+    description: ebook.description,
+    alternates: { canonical: canonicalPath },
+    openGraph: {
+      title: ebook.title,
+      description: ebook.description,
+      url: canonicalPath,
+      type: "website",
+      images: [
+        {
+          url: ebook.image ? toAbsoluteUrl(ebook.image) : DEFAULT_OG_IMAGE_URL,
+        },
+      ],
+    },
+  };
+}
+
+export default function EbookDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const ebook = ebooks.find((e) => e.id === params.slug);
+  if (!ebook) notFound();
+
+  const pageUrl = `${SITE_URL}/ebooks/${encodeURIComponent(ebook.id)}`;
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Ebooks", item: `${SITE_URL}/ebooks` },
+      { "@type": "ListItem", position: 3, name: ebook.title, item: pageUrl },
+    ],
+  };
+
+  const offerJsonLd =
+    typeof ebook.price === "number"
+      ? {
+          "@type": "Offer",
+          price: String(ebook.price),
+          priceCurrency: "EUR",
+          url: ebook.hotmartUrl,
+          availability: "https://schema.org/InStock",
+        }
+      : {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "EUR",
+          url: ebook.hotmartUrl,
+          availability: "https://schema.org/InStock",
+        };
+
+  const courseJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "@id": `${pageUrl}#course`,
+    url: pageUrl,
+    name: ebook.title,
+    description: ebook.description,
+    inLanguage: "es-ES",
+    provider: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: SITE_LOGO_URL },
+    },
+    image: [ebook.image ? toAbsoluteUrl(ebook.image) : DEFAULT_OG_IMAGE_URL],
+    offers: offerJsonLd,
+    aggregateRating: ebook.reviews
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: ebook.reviews.rating,
+          reviewCount: ebook.reviews.count,
+        }
+      : undefined,
+  };
+
   return (
-    <main className="max-w-6xl mx-auto px-6 py-16">
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="grid gap-12 md:grid-cols-2"
-      >
-        <div className="flex justify-center">
-          <div className="relative w-full max-w-sm aspect-[4/5]">
-            <Image
-              src={ebook.image}
-              alt={ebook.title}
-              fill
-              sizes="(min-width: 768px) 380px, 90vw"
-              className="rounded-2xl shadow-2xl object-cover"
-            />
-          </div>
-        </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: toJsonLd(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: toJsonLd(courseJsonLd) }}
+      />
 
-        <div className="space-y-8">
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">{ebook.title}</h1>
-          <p className="text-xl text-gray-600">{ebook.description}</p>
-
-          {ebook.author && (
-            <div className="mt-4 text-gray-700">
-              <p className="font-semibold">{ebook.author.name}</p>
-              <p>{ebook.author.bio}</p>
-            </div>
-          )}
-
-          <a
-            href={ebook.hotmartUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-yellow-400 text-black px-10 py-4 rounded-xl font-bold text-lg hover:scale-105 transition"
-          >
-            Acceder al Curso Ahora
-          </a>
-        </div>
-      </motion.section>
-
-      <section className="mt-20 space-y-14">
-        {ebook.learnings && ebook.learnings.length > 0 && (
-          <div>
-            <h2 className="text-3xl font-bold mb-4">¿Qué aprenderás?</h2>
-            <ul className="grid sm:grid-cols-2 gap-3 text-gray-700">
-              {ebook.learnings.map((item, i) => (
-                <li key={i}>✔️ {item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {ebook.targetAudience && (
-          <div>
-            <h2 className="text-3xl font-bold mb-4">¿Para quién es este curso?</h2>
-            <p className="text-gray-700 max-w-3xl">{ebook.targetAudience}</p>
-          </div>
-        )}
-
-        {ebook.whyInvest && (
-          <div>
-            <h2 className="text-3xl font-bold mb-4">Por qué invertir / tomar este curso</h2>
-            <p className="text-gray-700 max-w-3xl">{ebook.whyInvest}</p>
-          </div>
-        )}
-
-        {ebook.reviews && (
-          <div>
-            <h2 className="text-3xl font-bold mb-4">Evaluaciones</h2>
-            <p>
-              ⭐ {ebook.reviews.rating} ({ebook.reviews.count} evaluaciones)
-            </p>
-          </div>
-        )}
-
-        <div className="bg-black p-10 rounded-3xl text-center space-y-4">
-          <h2 className="text-3xl font-extrabold text-white">Empieza hoy</h2>
-          <p className="text-gray-300">
-            Accede ahora al curso y transforma tu aprendizaje en resultados reales.
-          </p>
-          <a
-            href={ebook.hotmartUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-yellow-400 text-black px-12 py-4 rounded-xl font-bold text-lg hover:scale-105 transition"
-          >
-            Acceder al Curso Ahora
-          </a>
-        </div>
-      </section>
-    </main>
+      <EbookDetailClient ebook={ebook} />
+    </>
   );
 }
+

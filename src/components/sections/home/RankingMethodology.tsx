@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { CheckCircle2, FileText, Info, Scale, ShieldCheck } from "lucide-react";
+
 import Container from "@/components/layout/Container";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   lastUpdatedLabel?: string;
@@ -28,23 +30,32 @@ const criteria = [
   {
     title: "Seguridad y soporte",
     description:
-      "Licencia, supervisión, garantía de depósitos (según la entidad) y soporte en español.",
+      "Licencia, supervisión, garantías (según entidad) y soporte en español.",
     icon: ShieldCheck,
   },
 ];
 
 export default function RankingMethodology({ lastUpdatedLabel }: Props) {
   return (
-    <section className="border-t border-border bg-background py-12 md:py-16">
-      <Container className="space-y-8">
-        <header className="space-y-3 text-center">
-          <h2 className="text-2xl font-bold md:text-3xl">
-            Metodología del ranking
-          </h2>
-          <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
-            Ordenamos las recomendaciones con criterios claros y comparables.
-            Siempre te dejamos enlaces oficiales para verificar condiciones.
+    <section className="border-t border-border bg-background py-16 md:py-24">
+      <Container className="space-y-10">
+        <header className="space-y-4 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+            Transparencia
           </p>
+
+          <h2 className="text-balance text-3xl font-black tracking-tight md:text-5xl">
+            Metodología del{" "}
+            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+              ranking
+            </span>
+          </h2>
+
+          <p className="mx-auto max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
+            Ordenamos recomendaciones con criterios comparables y enlaces
+            oficiales para verificar condiciones.
+          </p>
+
           {lastUpdatedLabel ? (
             <p className="text-xs text-muted-foreground">
               Última actualización del dataset:{" "}
@@ -59,25 +70,25 @@ export default function RankingMethodology({ lastUpdatedLabel }: Props) {
           {criteria.map((item) => (
             <article
               key={item.title}
-              className="rounded-2xl border border-border bg-background/80 p-5 shadow-card"
+              className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft"
             >
-              <div className="mb-3 inline-flex items-center gap-2">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <div className="mb-3 inline-flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border-2 border-border bg-muted text-primary">
                   <item.icon className="h-4 w-4" />
                 </span>
-                <h3 className="text-base font-semibold md:text-lg">
+                <h3 className="text-base font-black tracking-tight md:text-lg">
                   {item.title}
                 </h3>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
             </article>
           ))}
         </div>
 
-        <div className="flex flex-col items-center gap-3 text-center">
-          <div className="inline-flex items-center gap-2 rounded-2xl border border-border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <div className="inline-flex items-center gap-2 rounded-2xl border-2 border-border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
             <Info className="h-4 w-4" />
             <p>
               La información puede cambiar. Revisa siempre la web oficial antes
@@ -86,18 +97,12 @@ export default function RankingMethodology({ lastUpdatedLabel }: Props) {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/comparativa"
-              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-2.5 text-xs font-semibold text-white shadow-lg shadow-emerald-500/30 hover:brightness-110"
-            >
-              Ver comparativa
-            </Link>
-            <Link
-              href="/aviso-afiliados"
-              className="inline-flex items-center justify-center rounded-full border border-border bg-background px-6 py-2.5 text-xs font-semibold text-foreground hover:bg-muted"
-            >
-              Transparencia (afiliados)
-            </Link>
+            <Button asChild>
+              <Link href="/comparativa">Ver comparativa</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/aviso-afiliados">Transparencia (afiliados)</Link>
+            </Button>
           </div>
         </div>
       </Container>

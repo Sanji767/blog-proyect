@@ -2,9 +2,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import { getCategories, getTags } from "@/lib/blog";
 import Container from "@/components/layout/Container";
-import BlogAside from "@/components/blog/BlogAside";
 
 export const metadata: Metadata = {
   title: "Blog de bancos digitales, IBAN y comisiones (2026) | FinanzasEU",
@@ -12,8 +10,7 @@ export const metadata: Metadata = {
     "Guías prácticas sobre bancos digitales, IBAN europeo, comisiones, multidivisa y finanzas para vivir o trabajar en Europa. Actualizado en 2026.",
   openGraph: {
     title: "Blog FinanzasEU — Guías, bancos y consejos (2026)",
-    description:
-      "Artículos reales y comparativas sobre los mejores bancos digitales de Europa.",
+    description: "Artículos reales y comparativas sobre bancos en Europa.",
     url: "https://finanzaseu.com/blog",
     siteName: "FinanzasEU",
     locale: "es_ES",
@@ -29,19 +26,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function BlogLayout({ children }: { children: ReactNode }) {
-  const [categories, tags] = await Promise.all([getCategories(), getTags()]);
-
+export default function BlogLayout({ children }: { children: ReactNode }) {
   return (
-    <Container className="py-12 md:py-20">
-      <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
-        {/* CONTENIDO PRINCIPAL */}
-        <div className="space-y-12 min-w-0">
-          {children}
-        </div>
-
-        <BlogAside categories={categories} tags={tags} />
-      </div>
-    </Container>
+    <div className="py-16 md:py-24">
+      <Container className="max-w-6xl">{children}</Container>
+    </div>
   );
 }
+

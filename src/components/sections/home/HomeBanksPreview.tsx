@@ -4,74 +4,137 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Trophy, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+
 import Container from "@/components/layout/Container";
+import { Button } from "@/components/ui/button";
 import { banks } from "@/lib/banks";
 
 export default function HomeBanksPreview() {
-  const featured = [...banks].slice(0, 3);
+  const featured = [...banks]
+    .filter((b) => b._status !== "draft")
+    .sort((a, b) => (a._priority ?? 999) - (b._priority ?? 999))
+    .slice(0, 3);
 
   return (
-    <section className="py-24 bg-muted/30">
+    <section className="border-t border-border bg-muted/30 py-16 md:py-24">
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="space-y-4">
-            <h2 className="text-3xl md:text-5xl font-black">Recomendaciones Top</h2>
-            <p className="text-muted-foreground max-w-lg">
-              Los bancos que mejor funcionan para abrir cuenta online desde el extranjero o para uso multidivisa.
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              Ranking 2026
+            </p>
+            <h2 className="text-balance text-3xl font-black tracking-tight md:text-5xl">
+              Recomendaciones{" "}
+              <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+                Top
+              </span>
+            </h2>
+            <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
+              Bancos que suelen encajar para abrir cuenta online desde el
+              extranjero, viajar o gestionar dinero en varias divisas.
             </p>
           </div>
-          <Link href="/bancos" className="text-sm font-bold flex items-center gap-1 group">
-            Ver todo el directorio 
-            <ArrowUpRight className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </Link>
-        </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
+          <Button asChild variant="outline" className="gap-2 shrink-0">
+            <Link href="/bancos">
+              Ver todo el directorio
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        </header>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
           {featured.map((bank, index) => (
             <motion.article
               key={bank.slug}
-              whileHover={{ scale: 1.02 }}
-              className="relative flex flex-col rounded-[2.5rem] border border-border bg-background p-6 shadow-sm overflow-hidden"
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.05 }}
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent"
             >
-              <div className="flex items-start justify-between mb-8">
-                <div className="h-16 w-16 relative bg-muted rounded-[1.25rem] p-3 overflow-hidden">
-                  <Image src={bank.logo} alt={bank.name} fill className="object-contain p-2" />
+              <div className="pointer-events-none absolute -top-24 -left-24 h-56 w-56 rounded-full bg-primary/15 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-28 -right-28 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
+
+              <div className="relative flex items-start justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="relative h-14 w-14 rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
+                    <Image
+                      src={bank.logo}
+                      alt={bank.name}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                      Top #{index + 1}
+                    </p>
+                    <h3 className="mt-2 text-2xl font-black leading-tight text-accent">
+                      {bank.name}
+                    </h3>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 text-emerald-700 rounded-full text-[10px] font-black uppercase tracking-widest">
-                  <Trophy className="h-3 w-3" />
-                  # {index + 1}
+
+                <span className="inline-flex items-center rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+                  #{index + 1}
+                </span>
+              </div>
+
+              <p className="relative mt-5 text-sm leading-relaxed text-secondary-foreground/80 line-clamp-3">
+                {bank.tagline}
+              </p>
+
+              <div className="relative mt-6 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary-foreground/70">
+                    IBAN
+                  </p>
+                  <p className="mt-2 font-semibold">
+                    {bank.ibanPrefix} ({bank.ibanCountry})
+                  </p>
+                </div>
+                <div className="rounded-xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary-foreground/70">
+                    Cuota mensual
+                  </p>
+                  <p className="mt-2 font-semibold">{bank.fees.monthly}</p>
                 </div>
               </div>
 
-              <div className="space-y-2 mb-8 flex-1">
-                <h3 className="text-2xl font-bold tracking-tight">{bank.name}</h3>
-                <div className="flex gap-2 text-[10px] font-semibold text-muted-foreground">
-                  <span className="bg-muted px-2 py-0.5 rounded">IBAN {bank.ibanCountry}</span>
-                  <span className="bg-muted px-2 py-0.5 rounded">{bank.country}</span>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed pt-2">
-                  {bank.tagline}
-                </p>
-              </div>
+              <div className="relative mt-6 flex flex-col gap-3 sm:flex-row">
+                <Button asChild size="sm" className="flex-1">
+                  <Link href={`/programas/${bank.slug}`}>Ver análisis</Link>
+                </Button>
 
-              <div className="grid gap-3">
-                <Link
-                  href={`/programas/${bank.slug}`}
-                  className="w-full inline-flex items-center justify-center rounded-2xl bg-muted py-3.5 text-sm font-bold transition-colors hover:bg-emerald-500 hover:text-white"
-                >
-                  Análisis Detallado
-                </Link>
-                {bank.affiliateUrl && (
-                  <a
-                    href={bank.affiliateUrl}
-                    data-analytics="affiliate"
-                    data-affiliate-partner={bank.slug}
-                    target="_blank"
-                    className="w-full inline-flex items-center justify-center rounded-2xl border border-border py-3.5 text-sm font-bold text-muted-foreground hover:border-emerald-500/50 transition-colors"
+                {bank.affiliateUrl ? (
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className="flex-1 border-secondary-foreground/20 text-secondary-foreground hover:border-secondary-foreground/35 hover:bg-secondary-foreground/5"
                   >
-                    Abrir cuenta oficial
-                  </a>
+                    <a
+                      href={bank.affiliateUrl}
+                      data-analytics="affiliate"
+                      data-affiliate-partner={bank.slug}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      Web oficial
+                    </a>
+                  </Button>
+                ) : (
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className="flex-1 border-secondary-foreground/20 text-secondary-foreground hover:border-secondary-foreground/35 hover:bg-secondary-foreground/5"
+                  >
+                    <Link href="/bancos">Ver alternativas</Link>
+                  </Button>
                 )}
               </div>
             </motion.article>

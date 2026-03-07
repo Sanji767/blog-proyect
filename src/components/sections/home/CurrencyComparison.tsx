@@ -1,32 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Info, ArrowRightLeft, TrendingDown, Landmark } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRightLeft, Info, Landmark } from "lucide-react";
+import React, { useMemo, useState } from "react";
+
 import Container from "@/components/layout/Container";
 
-// Datos simulados basados en las comparativas de tu sitio
 const COMPARISON_DATA = [
   {
-    name: "Banca Tradicional (Media)",
+    name: "Banca tradicional (media)",
     feePercent: 3.5,
     fixedFee: 5.0,
     isBank: true,
-    logo: <Landmark className="h-5 w-5" />,
+    icon: <Landmark className="h-5 w-5" />,
   },
   {
-    name: "Revolut (Plan Standard)",
+    name: "Revolut (Standard)",
     feePercent: 0.5,
     fixedFee: 0,
     isBank: false,
-    color: "bg-blue-600",
   },
   {
     name: "Wise",
     feePercent: 0.41,
     fixedFee: 0,
     isBank: false,
-    color: "bg-emerald-500",
   },
 ];
 
@@ -37,33 +35,47 @@ export default function CurrencyComparison() {
     return val - (val * (feeP / 100) + fixed);
   };
 
+  const bestTotal = useMemo(() => {
+    const totals = COMPARISON_DATA.map((item) =>
+      calculateTotal(amount, item.feePercent, item.fixedFee)
+    );
+    return Math.max(...totals);
+  }, [amount]);
+
   return (
-    <section className="py-20 bg-muted/20">
+    <section className="border-t border-border bg-muted/20 py-16 md:py-24">
       <Container>
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Columna Izquierda: Controladores */}
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-600">
-              <ArrowRightLeft className="h-3 w-3" />
-              Calculadora de Ahorro Real
+            <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+              <ArrowRightLeft className="h-3.5 w-3.5" />
+              Calculadora de ahorro
             </div>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight">
-              No dejes que las comisiones <br />
-              <span className="text-emerald-500">se coman tu dinero.</span>
+
+            <h2 className="text-balance text-3xl font-black tracking-tight md:text-4xl">
+              No dejes que las comisiones{" "}
+              <span className="inline-block border-2 border-secondary bg-background px-3 py-2 text-foreground shadow-offset-accent">
+                se coman tu dinero
+              </span>
+              .
             </h2>
-            <p className="text-muted-foreground">
-              Mueve el selector para ver cuánto dinero llega realmente al destino 
-              cuando envías dinero al extranjero o pagas en otra divisa.
+
+            <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
+              Mueve el selector para ver cuánto dinero llega realmente al
+              destino cuando envías dinero al extranjero o pagas en otra divisa.
             </p>
 
-            <div className="p-6 bg-background rounded-3xl border border-border shadow-sm space-y-8">
+            <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
               <div className="space-y-4">
-                <div className="flex justify-between items-end">
-                  <label className="text-sm font-bold">Cantidad a enviar</label>
-                  <span className="text-3xl font-black text-emerald-500">
-                    {amount.toLocaleString()} €
+                <div className="flex items-end justify-between gap-4">
+                  <label className="text-sm font-semibold text-foreground">
+                    Cantidad a enviar
+                  </label>
+                  <span className="text-3xl font-black text-foreground">
+                    {amount.toLocaleString("es-ES")} €
                   </span>
                 </div>
+
                 <input
                   type="range"
                   min="100"
@@ -71,9 +83,10 @@ export default function CurrencyComparison() {
                   step="100"
                   value={amount}
                   onChange={(e) => setAmount(Number(e.target.value))}
-                  className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-muted accent-primary"
                 />
-                <div className="flex justify-between text-[10px] font-mono text-muted-foreground uppercase">
+
+                <div className="flex justify-between text-[10px] font-mono uppercase text-muted-foreground">
                   <span>100 €</span>
                   <span>5.000 €</span>
                   <span>10.000 €</span>
@@ -82,63 +95,75 @@ export default function CurrencyComparison() {
             </div>
           </div>
 
-          {/* Columna Derecha: Visualización de Resultados */}
           <div className="space-y-4">
             <AnimatePresence mode="popLayout">
               {COMPARISON_DATA.map((item) => {
                 const total = calculateTotal(amount, item.feePercent, item.fixedFee);
                 const lost = amount - total;
-                const isWinner = !item.isBank && item.feePercent < 1;
+                const isWinner = !item.isBank && total === bestTotal;
 
                 return (
                   <motion.div
                     layout
                     key={item.name}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 18 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className={`relative p-5 rounded-2xl border transition-all ${
-                      isWinner 
-                        ? "border-emerald-500/30 bg-emerald-500/[0.02] shadow-md" 
-                        : "border-border bg-background"
-                    }`}
+                    exit={{ opacity: 0, x: -18 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className={[
+                      "relative overflow-hidden rounded-2xl border-2 p-6",
+                      "bg-secondary text-secondary-foreground border-secondary shadow-soft",
+                      isWinner ? "shadow-offset-accent" : "",
+                    ].join(" ")}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${item.color || "bg-muted"} text-white font-bold`}>
-                          {item.logo || item.name[0]}
+                    <div className="pointer-events-none absolute -top-28 -right-28 h-56 w-56 rounded-full bg-accent/10 blur-3xl" />
+
+                    <div className="relative flex items-center justify-between gap-6">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 text-accent">
+                          {item.icon ?? item.name[0]}
                         </div>
                         <div>
-                          <h3 className="text-sm font-bold">{item.name}</h3>
-                          <p className="text-[10px] text-muted-foreground">
-                            Comisión estimada: {item.feePercent}% {item.fixedFee > 0 && `+ ${item.fixedFee}€`}
+                          <h3 className="text-sm font-black tracking-tight text-accent">
+                            {item.name}
+                          </h3>
+                          <p className="mt-1 text-[11px] text-secondary-foreground/75">
+                            Comisión estimada: {item.feePercent}%{" "}
+                            {item.fixedFee > 0 ? `+ ${item.fixedFee}€` : ""}
                           </p>
                         </div>
                       </div>
+
                       <div className="text-right">
-                        <span className="block text-lg font-black tracking-tighter">
-                          {total.toLocaleString(undefined, { minimumFractionDigits: 2 })} €
+                        <span className="block text-lg font-black tracking-tight">
+                          {total.toLocaleString("es-ES", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}{" "}
+                          €
                         </span>
-                        <span className="text-[10px] font-medium text-red-500">
-                          -{lost.toLocaleString()} € de comisión
+                        <span className="text-[11px] font-medium text-destructive">
+                          -{lost.toLocaleString("es-ES")} € en comisiones
                         </span>
                       </div>
                     </div>
-                    
-                    {isWinner && (
-                      <div className="absolute -top-2 -right-2 bg-emerald-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-lg flex items-center gap-1">
-                        <TrendingDown className="h-2 w-2" />
-                        MEJOR OPCIÓN
+
+                    {isWinner ? (
+                      <div className="absolute -top-2 -right-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+                        Mejor opción
                       </div>
-                    )}
+                    ) : null}
                   </motion.div>
                 );
               })}
             </AnimatePresence>
 
-            <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 flex gap-3">
-              <Info className="h-5 w-5 text-blue-500 shrink-0" />
-              <p className="text-[11px] text-blue-700/80 leading-relaxed">
-                Ejemplo orientativo: las comisiones varían según entidad, plan, divisa y método de pago. En banca tradicional, el coste total puede incluir comisión + margen en el tipo de cambio.
+            <div className="flex gap-3 rounded-2xl border-2 border-border bg-card p-5 text-foreground shadow-soft">
+              <Info className="h-5 w-5 shrink-0 text-primary" />
+              <p className="text-[11px] leading-relaxed text-muted-foreground">
+                Ejemplo orientativo: las comisiones varían según entidad, plan,
+                divisa y método de pago. En banca tradicional, el coste total
+                puede incluir comisión + margen en el tipo de cambio.
               </p>
             </div>
           </div>

@@ -3,6 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { List } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Heading = {
   id: string;
@@ -137,14 +138,14 @@ export default function TableOfContents({
 
   return (
     <nav
-      className={[
-        "not-prose rounded-3xl border border-border/60 bg-card/70 p-6 shadow-sm backdrop-blur",
-        className ?? "",
-      ].join(" ")}
+      className={cn(
+        "not-prose rounded-2xl border-2 border-secondary bg-secondary p-5 text-secondary-foreground shadow-soft",
+        className
+      )}
       aria-label="Tabla de contenidos"
     >
-      <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-muted-foreground">
-        <List className="h-4 w-4 text-primary" />
+      <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-primary">
+        <List className="h-4 w-4 text-accent" />
         {title}
       </div>
 
@@ -164,18 +165,18 @@ export default function TableOfContents({
                   });
                 }}
                 className={[
-                  "group flex items-start gap-3 rounded-2xl px-3 py-2 transition",
+                  "group flex items-start gap-3 rounded-xl px-3 py-2 transition-colors",
                   isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
+                    ? "border-2 border-secondary bg-accent text-accent-foreground"
+                    : "border-2 border-transparent text-secondary-foreground/75 hover:border-secondary-foreground/10 hover:bg-secondary-foreground/5 hover:text-secondary-foreground",
                 ].join(" ")}
               >
                 <span
                   className={[
                     "mt-2 h-1.5 w-1.5 rounded-full transition",
                     isActive
-                      ? "bg-primary"
-                      : "bg-border group-hover:bg-foreground/30",
+                      ? "bg-accent-foreground"
+                      : "bg-secondary-foreground/25 group-hover:bg-accent/80",
                   ].join(" ")}
                   aria-hidden="true"
                 />

@@ -96,7 +96,7 @@ const BenefitSection: React.FC<BenefitSectionProps> = ({ benefit, index }) => {
         <div className="pt-3">
           <Link
             href={ctaHref}
-            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-black shadow-soft transition hover:brightness-105"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft transition hover:brightness-105"
           >
             {ctaLabel} →
           </Link>

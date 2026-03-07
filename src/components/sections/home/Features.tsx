@@ -1,5 +1,6 @@
 // src/components/sections/home/Features.tsx
 import { CheckCircle2, ListFilter, MessageCircleMore } from "lucide-react";
+
 import Container from "@/components/layout/Container";
 
 type Feature = {
@@ -10,60 +11,65 @@ type Feature = {
 
 const features: Feature[] = [
   {
-    title: "Selección de bancos verificada",
+    title: "Selección verificada",
     description:
-      "No listamos todo lo que existe, solo los bancos y cuentas que realmente tienen sentido para viajeros, remotos y no residentes.",
+      "No listamos todo lo que existe: solo bancos y cuentas que tienen sentido para viajeros, remotos y no residentes.",
     icon: <ListFilter className="h-5 w-5" />,
   },
   {
-    title: "Información clara y directa",
+    title: "Datos claros",
     description:
-      "Comisiones, límites, países admitidos, IBAN y requisitos. Sin textos comerciales vacíos ni banners por todas partes.",
+      "Comisiones, límites, países admitidos, IBAN y requisitos. Sin banners ni textos comerciales vacíos.",
     icon: <CheckCircle2 className="h-5 w-5" />,
   },
   {
-    title: "Pensado para tu situación real",
+    title: "Pensado para casos reales",
     description:
-      "Tanto si trabajas en Suiza, vives en España o cobras en varias divisas, te indico qué encaja mejor contigo y por qué.",
+      "Nómina, freelance, multidivisa o mudanza: te decimos qué encaja contigo y por qué, sin humo.",
     icon: <MessageCircleMore className="h-5 w-5" />,
   },
 ];
 
 export default function Features() {
   return (
-    <section className="py-12 md:py-16">
+    <section className="py-16 md:py-24">
       <Container>
-        <div className="mb-8 space-y-2 text-center">
-          <h2 className="text-2xl font-bold md:text-3xl">
-            ¿Qué hace diferente a{" "}
-            <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">
+        <header className="mx-auto mb-10 max-w-3xl space-y-4 text-center">
+          <h2 className="text-balance text-3xl font-black leading-tight md:text-4xl">
+            Qué hace diferente a{" "}
+            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
               FinanzasEU
             </span>
-            ?
           </h2>
-          <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
-            No somos un banco ni una agencia. Somos una guía para que tú tomes
-            mejores decisiones con tu dinero en Europa, sin venderte humo.
+          <p className="text-pretty text-base leading-relaxed text-muted-foreground">
+            No somos un banco ni una agencia. Somos una guía editorial para que
+            tomes mejores decisiones con tu dinero en Europa.
           </p>
-        </div>
+        </header>
 
         <div className="grid gap-6 md:grid-cols-3">
           {features.map((item) => (
             <article
               key={item.title}
-              className="flex h-full flex-col gap-3 rounded-2xl border border-border bg-background/80 p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-emerald-500/30 hover:shadow-soft"
+              className="rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft"
             >
-              <div className="flex items-center gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-200">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                Guía
+              </p>
+
+              <div className="mt-5 flex items-start gap-4">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 text-accent">
                   {item.icon}
                 </div>
-                <h3 className="text-base font-semibold md:text-lg">
-                  {item.title}
-                </h3>
+                <div className="min-w-0">
+                  <h3 className="text-balance text-xl font-black leading-snug text-accent">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-secondary-foreground/80">
+                    {item.description}
+                  </p>
+                </div>
               </div>
-              <p className="text-sm text-muted-foreground">
-                {item.description}
-              </p>
             </article>
           ))}
         </div>
@@ -71,3 +77,4 @@ export default function Features() {
     </section>
   );
 }
+

@@ -80,12 +80,14 @@ export function generateMetadata({
   }
 
   const { seo, name, tagline } = bank;
+  const isDraft = bank._status === "draft";
 
   return {
     title:
       seo?.metaTitle ??
       `${name} – Opiniones, comisiones y cómo abrir tu cuenta | FinanzasEU`,
     description: seo?.metaDescription ?? tagline,
+    robots: isDraft ? { index: false, follow: true } : undefined,
     alternates: seo?.canonicalUrl
       ? { canonical: seo.canonicalUrl }
       : undefined,
@@ -143,6 +145,7 @@ export default function ProgramaPage({
     history = [],
     reviews = [],
     _lastUpdated: lastUpdated,
+    _status: status,
   } = bank as BankContent;
 
   const monthlyFee = fees.monthly;
@@ -214,6 +217,19 @@ export default function ProgramaPage({
           }}
         />
 
+        {status === "draft" ? (
+          <section className="rounded-2xl border-2 border-secondary bg-secondary p-6 text-secondary-foreground shadow-offset-accent">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-primary">
+              En revisión
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-secondary-foreground/80">
+              Esta ficha está en progreso: estamos verificando comisiones,
+              requisitos y detalles regulatorios. Para decisiones importantes,
+              confirma siempre las condiciones en la web oficial del banco.
+            </p>
+          </section>
+        ) : null}
+
         {/* BREADCRUMB */}
         <nav
           aria-label="Ruta de navegación"
@@ -239,7 +255,7 @@ export default function ProgramaPage({
             <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
               <span>Banco analizado por FinanzasEU</span>
               {hasAffiliate && (
-                <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-black">
+                <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-foreground">
                   Enlace recomendado (sin coste extra)
                 </span>
               )}
@@ -295,7 +311,7 @@ export default function ProgramaPage({
                 data-affiliate-partner={hasAffiliate ? params.slug : undefined}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-black shadow-md transition hover:brightness-105"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition hover:brightness-105"
               >
                 Abrir cuenta en {name}
                 <ArrowRight className="h-4 w-4" />
@@ -397,7 +413,7 @@ export default function ProgramaPage({
                 />
               </div>
             ) : (
-              <div className="mb-4 h-40 rounded-2xl bg-gradient-to-br from-primary/20 to-primary-accent/30" />
+              <div className="mb-4 h-40 rounded-2xl border-2 border-border bg-muted/40" />
             )}
 
             <h2 className="mb-3 text-sm font-semibold text-muted-foreground">
@@ -457,7 +473,7 @@ export default function ProgramaPage({
               <ul className="space-y-2 text-sm md:text-base">
                 {keyPros.map((item: string) => (
                   <li key={item} className="flex gap-2">
-                    <span className="mt-1 text-green-500">
+                    <span className="mt-1 text-primary">
                       <CheckCircle2 className="h-4 w-4" />
                     </span>
                     <span>{item}</span>
@@ -474,7 +490,7 @@ export default function ProgramaPage({
                 <ul className="space-y-2 text-sm md:text-base">
                   {keyCons.map((item: string) => (
                     <li key={item} className="flex gap-2">
-                      <span className="mt-1 text-red-500">●</span>
+                      <span className="mt-1 text-destructive">●</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -564,7 +580,7 @@ export default function ProgramaPage({
               {compliance && (
                 <div className="border-t border-border pt-3">
                   <h2 className="mb-2 flex items-center gap-2 text-lg font-semibold">
-                    <ShieldCheck className="h-4 w-4 text-emerald-500" />
+                    <ShieldCheck className="h-4 w-4 text-primary" />
                     Seguridad y regulación
                   </h2>
                   <ul className="space-y-1 text-sm text-muted-foreground">
@@ -608,7 +624,7 @@ export default function ProgramaPage({
                   "Te interesa una tarjeta fácil de usar para viajar.",
                 ]).map((item: string) => (
                   <li key={item} className="flex gap-2">
-                    <span className="mt-1 text-emerald-500">●</span>
+                    <span className="mt-1 text-primary">●</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -625,7 +641,7 @@ export default function ProgramaPage({
                   "Necesitas servicios muy avanzados de inversión o empresa.",
                 ]).map((item: string) => (
                   <li key={item} className="flex gap-2">
-                    <span className="mt-1 text-red-500">●</span>
+                    <span className="mt-1 text-destructive">●</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -648,7 +664,7 @@ export default function ProgramaPage({
                 key={step}
                 className="flex gap-3 rounded-2xl bg-muted/40 p-3"
               >
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-black">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
                   {index + 1}
                 </span>
                 <p>{step}</p>
@@ -861,7 +877,7 @@ export default function ProgramaPage({
                     </p>
                     <Link
                       href={`/programas/${related.slug}`}
-                      className="mt-auto inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-[11px] font-semibold text-black hover:brightness-105"
+                      className="mt-auto inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-[11px] font-semibold text-primary-foreground hover:brightness-105"
                     >
                       Ver detalles →
                     </Link>
@@ -891,7 +907,7 @@ export default function ProgramaPage({
               data-affiliate-partner={hasAffiliate ? params.slug : undefined}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-black shadow-md transition hover:brightness-105"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-md transition hover:brightness-105"
             >
               Empezar ahora
               <ArrowRight className="h-4 w-4" />
@@ -945,7 +961,7 @@ function StatPill({
 }) {
   const valueClasses =
     highlight === "success"
-      ? "text-emerald-600 dark:text-emerald-400 font-semibold"
+      ? "text-primary font-semibold"
       : "text-foreground";
 
   return (
@@ -983,6 +999,7 @@ function formatTag(tag: string): string {
  */
 function getRelatedBanks(current: BankContent): BankContent[] {
   return banks
+    .filter((b) => b._status !== "draft")
     .filter((b) => b.slug !== current.slug)
     .map((b) => {
       const sameCategoryScore = b.category === current.category ? 2 : 0;

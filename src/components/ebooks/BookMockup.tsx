@@ -6,13 +6,13 @@ interface Props {
 
 export default function BookMockup({ image }: Props) {
   return (
-    <div className="relative w-full aspect-square overflow-hidden rounded-[1.5rem] shadow-sm">
+    <div className="relative aspect-square w-full overflow-hidden border-b-2 border-secondary bg-secondary">
       <Image
         src={image}
         alt="Ebook cover"
         fill
         sizes="(min-width: 1024px) 260px, 50vw"
-        className="object-cover"
+        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
       />
     </div>
   );

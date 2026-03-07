@@ -50,7 +50,7 @@ export default function CookiePreferences() {
   };
 
   return (
-    <section className="not-prose mt-8 rounded-2xl border border-border bg-card p-6 shadow-card">
+    <section className="not-prose mt-8 rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
       <h3 className="text-xl font-bold">Preferencias de cookies</h3>
       <p className="mt-2 text-sm text-muted-foreground">
         Las cookies técnicas son necesarias para que la web funcione. Las cookies
@@ -58,7 +58,7 @@ export default function CookiePreferences() {
       </p>
 
       <div className="mt-6 space-y-3">
-        <div className="flex items-start justify-between gap-4 rounded-xl border border-border p-4">
+        <div className="flex items-start justify-between gap-4 rounded-xl border-2 border-border p-4">
           <div>
             <p className="font-semibold">Cookies analíticas</p>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -70,7 +70,7 @@ export default function CookiePreferences() {
               type="checkbox"
               checked={analyticsEnabled}
               onChange={(e) => setAnalyticsEnabled(e.target.checked)}
-              className="h-5 w-5"
+              className="h-5 w-5 accent-accent"
             />
             <span className="text-sm">{analyticsEnabled ? "Sí" : "No"}</span>
           </label>
@@ -80,7 +80,7 @@ export default function CookiePreferences() {
           <button
             type="button"
             onClick={save}
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-black shadow-soft hover:brightness-105 transition"
+            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-soft hover:brightness-105 transition"
           >
             Guardar
           </button>
@@ -140,4 +140,3 @@ export default function CookiePreferences() {
     </section>
   );
 }
-

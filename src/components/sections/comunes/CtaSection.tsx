@@ -1,64 +1,65 @@
 // src/components/sections/comunes/CtaSection.tsx
 import Link from "next/link";
-import { ArrowRight, MessageCircle, Compass } from "lucide-react";
+import { ArrowRight, Compass, MessageCircle } from "lucide-react";
+
 import Container from "@/components/layout/Container";
+import { Button } from "@/components/ui/button";
 
 export default function CtaSection() {
   return (
-    <section className="border-t border-border bg-hero-background/70 py-14 md:py-18">
-      <Container className="space-y-6 text-center">
-        {/* Badge + título */}
-        <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-200">
+    <section className="border-t-2 border-secondary bg-secondary py-16 text-secondary-foreground md:py-20">
+      <Container className="space-y-7 text-center">
+        <div className="space-y-4">
+          <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
             <Compass className="h-3.5 w-3.5" />
             Tu brújula para bancos en Europa
           </div>
 
-          <h2 className="text-balance text-2xl font-bold md:text-3xl">
-            ¿Aún no sabes qué banco encaja mejor contigo?
+          <h2 className="text-balance text-3xl font-black tracking-tight text-accent md:text-5xl">
+            ¿Aún no sabes qué banco encaja contigo?
           </h2>
 
-          <p className="mx-auto max-w-2xl text-sm text-muted-foreground md:text-base">
-            Puedes empezar comparando los bancos más usados por viajeros,
-            remotos y gente que cobra en varias divisas. Si sigues con dudas,
-            te ayudamos a elegir 1–3 opciones claras según tu situación real.
+          <p className="mx-auto max-w-2xl text-pretty text-sm leading-relaxed text-secondary-foreground/80 md:text-base">
+            Empieza por la comparativa y quédate con 1–3 opciones claras según
+            tu situación real: viajes, remoto, nómina o empresa.
           </p>
         </div>
 
-        {/* CTA buttons */}
         <div className="flex flex-wrap items-center justify-center gap-3">
-          {/* Botón principal – degradado verde/turquesa */}
-          <Link
-            href="/comparativa"
-            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-7 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition-transform hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0"
-          >
-            Ver ranking de bancos
-            <ArrowRight className="ml-1.5 h-4 w-4" />
-          </Link>
+          <Button asChild className="gap-2">
+            <Link href="/comparativa">
+              Ver ranking de bancos
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
 
-          {/* Botón secundario */}
-          <Link
-            href="/contacto"
-            className="inline-flex items-center justify-center rounded-full border border-border bg-background/80 px-7 py-2.5 text-sm font-semibold text-foreground shadow-sm hover:bg-background"
+          <Button
+            asChild
+            variant="outline"
+            className="border-secondary-foreground/20 text-secondary-foreground hover:border-secondary-foreground/35 hover:bg-secondary-foreground/5"
           >
-            <MessageCircle className="mr-1.5 h-4 w-4" />
-            Escribirnos
-          </Link>
+            <Link href="/contacto">
+              <span className="inline-flex items-center gap-2">
+                <MessageCircle className="h-4 w-4" />
+                Escribirnos
+              </span>
+            </Link>
+          </Button>
         </div>
 
-        {/* Mini beneficios debajo de los botones */}
-        <div className="mx-auto mt-2 grid max-w-xl grid-cols-1 gap-2 text-[11px] text-muted-foreground sm:grid-cols-3">
-          <p className="rounded-full bg-background/80 px-3 py-1">
+        <div className="mx-auto grid max-w-3xl grid-cols-1 gap-2 text-[11px] text-secondary-foreground/80 sm:grid-cols-3">
+          <p className="rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1">
             ✔ Transparencia: explicamos opciones
           </p>
-          <p className="rounded-full bg-background/80 px-3 py-1">
+          <p className="rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1">
             ✔ Enfoque práctico para vivir y trabajar en Europa
           </p>
-          <p className="rounded-full bg-background/80 px-3 py-1">
-            ✔ Web gratuita, tú decides dónde abrir cuenta
+          <p className="rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1">
+            ✔ Web gratuita: tú decides dónde abrir cuenta
           </p>
         </div>
       </Container>
     </section>
   );
 }
+

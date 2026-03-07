@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import StickyPromo from "@/components/layout/StickyPromo";
+import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 
 export default function AppChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,13 +17,12 @@ export default function AppChrome({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <>
+    <LocaleProvider>
       <Header />
       <main className="pt-20 md:pt-24">{children}</main>
       <Footer />
       <StickyPromo />
       <CookieBanner />
-    </>
+    </LocaleProvider>
   );
 }
-

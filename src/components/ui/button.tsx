@@ -1,5 +1,8 @@
-// components/ui/button.tsx
+// src/components/ui/button.tsx
 import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+
+import { cn } from "@/lib/utils";
 
 type ButtonVariant =
   | "default"
@@ -13,48 +16,52 @@ type ButtonSize = "default" | "sm" | "lg" | "icon";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  asChild?: boolean;
   variant?: ButtonVariant;
   size?: ButtonSize;
 }
 
-function getButtonClasses(
-  variant: ButtonVariant = "default",
-  size: ButtonSize = "default",
-  extra?: string
-) {
-  const base =
-    "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+const base =
+  "inline-flex items-center justify-center whitespace-nowrap border-2 text-sm font-semibold tracking-tight transition-transform transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 active:translate-y-px";
 
-  const variantClasses: Record<ButtonVariant, string> = {
-    default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-    destructive:
-      "bg-destructive text-destructive-foreground shadow hover:bg-destructive/90",
-    outline:
-      "border border-input bg-background shadow hover:bg-accent hover:text-accent-foreground",
-    secondary:
-      "bg-secondary text-secondary-foreground shadow hover:bg-secondary/80",
-    ghost: "hover:bg-accent hover:text-accent-foreground",
-    link: "text-primary underline-offset-4 hover:underline",
-  };
+const variants: Record<ButtonVariant, string> = {
+  default:
+    "rounded-xl border-secondary bg-accent text-accent-foreground shadow-offset-accent hover:-translate-x-1 hover:-translate-y-1",
+  secondary:
+    "rounded-xl border-secondary bg-secondary text-secondary-foreground shadow-offset-accent hover:-translate-x-1 hover:-translate-y-1",
+  outline:
+    "rounded-xl border-secondary/25 bg-transparent text-foreground hover:border-secondary/60 hover:bg-muted",
+  ghost:
+    "rounded-xl border-transparent bg-transparent text-foreground hover:bg-muted",
+  destructive:
+    "rounded-xl border-secondary bg-destructive text-destructive-foreground shadow-offset-accent hover:-translate-x-1 hover:-translate-y-1",
+  link: "border-transparent bg-transparent p-0 text-primary underline-offset-4 hover:underline",
+};
 
-  const sizeClasses: Record<ButtonSize, string> = {
-    default: "h-10 px-4 py-2",
-    sm: "h-9 rounded-md px-3",
-    lg: "h-11 rounded-md px-8",
-    icon: "h-10 w-10",
-  };
-
-  return [base, variantClasses[variant], sizeClasses[size], extra]
-    .filter(Boolean)
-    .join(" ");
-}
+const sizes: Record<ButtonSize, string> = {
+  default: "h-11 px-5",
+  sm: "h-10 px-4 text-sm",
+  lg: "h-12 px-7 text-base",
+  icon: "h-11 w-11",
+};
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size = "default", ...props }, ref) => {
+  (
+    {
+      className,
+      variant = "default",
+      size = "default",
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : "button";
+
     return (
-      <button
+      <Comp
         ref={ref}
-        className={getButtonClasses(variant, size, className)}
+        className={cn(base, variants[variant], sizes[size], className)}
         {...props}
       />
     );

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/layout/Container";
 import TableOfContents from "@/components/blog/TableOfContents";
+import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, Eye, PlayCircle } from "lucide-react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -156,7 +157,7 @@ export default function VlogPage({ params }: { params: { slug: string } }) {
 
             <div className="mt-10 space-y-10">
               {vlog.youtubeId && (
-                <div className="overflow-hidden rounded-3xl border border-border/60 bg-black shadow-lg">
+                <div className="overflow-hidden rounded-3xl border border-border/60 bg-secondary shadow-lg">
                   <div className="aspect-video">
                     <iframe
                       src={`https://www.youtube-nocookie.com/embed/${vlog.youtubeId}`}
@@ -220,18 +221,19 @@ export default function VlogPage({ params }: { params: { slug: string } }) {
                   parece a tu caso.
                 </p>
                 <div className="mt-5 grid gap-3">
-                  <Link
-                    href="/comparativa"
-                    className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-primary/80 px-5 py-3 text-sm font-black text-white shadow-lg hover:shadow-xl transition"
+                  <Button
+                    asChild
+                    className="w-full rounded-full shadow-none hover:translate-x-0 hover:translate-y-0"
                   >
-                    Ir a la comparativa
-                  </Link>
-                  <Link
-                    href="/bancos"
-                    className="inline-flex items-center justify-center rounded-full border border-border/60 bg-background px-5 py-3 text-sm font-black text-foreground hover:bg-muted transition"
+                    <Link href="/comparativa">Ir a la comparativa</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full rounded-full shadow-none hover:translate-x-0 hover:translate-y-0"
                   >
-                    Ver bancos
-                  </Link>
+                    <Link href="/bancos">Ver bancos</Link>
+                  </Button>
                 </div>
               </div>
             </div>

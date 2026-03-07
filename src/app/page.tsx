@@ -3,28 +3,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 
-import Hero from "@/components/sections/home/Hero";
-import Features from "@/components/sections/home/Features";
-import Benefits from "@/components/sections/home/Benefits";
-import HomeBanksPreview from "@/components/sections/home/HomeBanksPreview";
-import HomeHowItWorks from "@/components/sections/home/HomeHowItWorks";
-import HomeFaqPreview from "@/components/sections/home/HomeFaqPreview";
-import HomeVlogsPreview from "@/components/sections/home/HomeVlogsPreview";
-import CurrencyComparison from "@/components/sections/home/CurrencyComparison";
-import RankingMethodology from "@/components/sections/home/RankingMethodology";
+import Container from "@/components/layout/Container";
 import CtaSection from "@/components/sections/comunes/CtaSection";
-
-// 🚀 Nuevos Componentes Avanzados
+import Benefits from "@/components/sections/home/Benefits";
+import CurrencyComparison from "@/components/sections/home/CurrencyComparison";
+import Features from "@/components/sections/home/Features";
+import Hero from "@/components/sections/home/Hero";
+import HomeBanksPreview from "@/components/sections/home/HomeBanksPreview";
+import HomeFaqPreview from "@/components/sections/home/HomeFaqPreview";
+import HomeHowItWorks from "@/components/sections/home/HomeHowItWorks";
+import HomeVlogsPreview from "@/components/sections/home/HomeVlogsPreview";
+import RankingMethodology from "@/components/sections/home/RankingMethodology";
 import TrustStrip from "@/components/sections/home/TrustStrip";
 import UseCases from "@/components/sections/home/UseCases";
-import Container from "@/components/layout/Container";
+import { Button } from "@/components/ui/button";
 import { banks } from "@/lib/banks";
 import { formatIsoYmdToEsDate } from "@/lib/seo";
 
-
-/* ============================
-   🧠 SEO / METADATA
-============================ */
 export const metadata: Metadata = {
   title: "Comparativa de bancos en Europa (2026) + validador IBAN",
   description:
@@ -65,38 +60,42 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 1. Impacto Inicial */}
+      {/* 1. Impacto inicial */}
       <Hero />
 
-      {/* 2. Autoridad Inmediata */}
+      {/* 2. Autoridad inmediata */}
       <TrustStrip />
 
-      {/* 3. Características y Segmentación */}
+      {/* 3. Características y segmentación */}
       <Features />
       <UseCases />
 
       {/* 3.1 Metodología y transparencia */}
       <RankingMethodology lastUpdatedLabel={lastUpdatedLabel} />
 
-      {/* 4. 🔎 Herramienta SEO: Validador IBAN */}
-      <section className="py-24 bg-muted/30">
+      {/* 4. Herramienta: Validador IBAN */}
+      <section className="border-t border-border bg-muted/30 py-16 md:py-24">
         <Container>
-          <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card p-8 shadow-card md:p-12">
+          <div className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent md:p-12">
             <div className="pointer-events-none absolute -top-28 -right-28 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-emerald-400/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
 
             <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
               <div className="space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-black uppercase tracking-wide text-primary">
+                <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-4 py-2 text-xs font-black uppercase tracking-wide text-primary">
                   <ShieldCheck className="h-4 w-4" />
                   Herramienta gratuita
                 </div>
 
-                <h2 className="text-3xl font-black tracking-tight md:text-4xl">
-                  Valida un IBAN en segundos (país, SEPA y entidad)
+                <h2 className="text-balance text-3xl font-black tracking-tight md:text-4xl">
+                  Valida un IBAN en{" "}
+                  <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+                    segundos
+                  </span>{" "}
+                  (país, SEPA y entidad)
                 </h2>
 
-                <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
+                <p className="max-w-2xl text-sm text-secondary-foreground/80 md:text-base">
                   Pega cualquier IBAN y te decimos si tiene la longitud correcta,
                   si pertenece a SEPA y, cuando aplica, el banco asociado. Ideal
                   para nóminas, transferencias internacionales y comprobar datos
@@ -104,24 +103,26 @@ export default function HomePage() {
                 </p>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="/iban"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary/80 px-7 py-3 text-sm font-black text-white shadow-lg hover:shadow-xl transition"
+                  <Button asChild size="lg" className="w-full gap-2 sm:w-auto">
+                    <Link href="/iban">
+                      Abrir IBAN Scanner
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="w-full border-secondary-foreground/20 text-secondary-foreground hover:border-secondary-foreground/35 hover:bg-secondary-foreground/5 sm:w-auto"
                   >
-                    Abrir IBAN Scanner
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/bancos"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-border/60 bg-background px-7 py-3 text-sm font-black text-foreground hover:bg-muted transition"
-                  >
-                    Ver comparador de bancos
-                  </Link>
+                    <Link href="/bancos">Ver comparador de bancos</Link>
+                  </Button>
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-border/60 bg-background/70 p-6 shadow-sm backdrop-blur">
-                <p className="text-xs font-black uppercase tracking-wide text-muted-foreground">
+              <div className="rounded-2xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-6 backdrop-blur">
+                <p className="text-xs font-black uppercase tracking-wide text-secondary-foreground/70">
                   Ejemplo rápido
                 </p>
                 <p className="mt-3 font-mono text-sm md:text-base">
@@ -129,21 +130,19 @@ export default function HomePage() {
                 </p>
                 <div className="mt-5 grid gap-3 text-sm">
                   <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">País</span>
+                    <span className="text-secondary-foreground/70">País</span>
                     <span className="font-semibold">España</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">SEPA</span>
-                    <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                      Sí
-                    </span>
+                    <span className="text-secondary-foreground/70">SEPA</span>
+                    <span className="font-semibold text-accent">Sí</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Longitud</span>
+                    <span className="text-secondary-foreground/70">Longitud</span>
                     <span className="font-semibold">24</span>
                   </div>
                 </div>
-                <p className="mt-5 text-xs text-muted-foreground">
+                <p className="mt-5 text-xs text-secondary-foreground/70">
                   Esta herramienta no mueve dinero: solo valida y explica el
                   formato del IBAN.
                 </p>
@@ -153,14 +152,14 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 5. Producto: Selección de bancos */}
+      {/* 5. Selección de bancos */}
       <HomeBanksPreview />
 
-      {/* 6. Valor y Dolor */}
+      {/* 6. Valor */}
       <Benefits />
       <CurrencyComparison />
 
-      {/* 7. Social Proof y Metodología */}
+      {/* 7. Contenido + FAQ */}
       <HomeHowItWorks />
       <HomeVlogsPreview />
       <HomeFaqPreview />
@@ -170,3 +169,4 @@ export default function HomePage() {
     </>
   );
 }
+

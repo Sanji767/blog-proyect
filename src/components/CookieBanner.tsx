@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import {
   COOKIE_ANALYTICS_CONSENT_KEY,
   COOKIE_CONSENT_EVENT,
@@ -10,7 +11,43 @@ import {
   writeAnalyticsConsent,
 } from "@/lib/cookieConsent";
 
+const COPY = {
+  es: {
+    message:
+      "Usamos cookies técnicas (necesarias) y cookies analíticas (Google Analytics) para mejorar la experiencia. Puedes leer nuestra",
+    policy: "Política de Cookies",
+    accept: "Aceptar",
+    reject: "Rechazar",
+    configure: "Configurar",
+    title: "Preferencias de cookies",
+    subtitle:
+      "Las cookies técnicas son necesarias. Puedes activar o desactivar las cookies analíticas.",
+    analytics: "Analíticas",
+    save: "Guardar",
+    back: "Volver",
+    yes: "Sí",
+    no: "No",
+  },
+  en: {
+    message:
+      "We use essential cookies and analytics cookies (Google Analytics) to improve the experience. Read our",
+    policy: "Cookie Policy",
+    accept: "Accept",
+    reject: "Reject",
+    configure: "Settings",
+    title: "Cookie preferences",
+    subtitle:
+      "Essential cookies are required. You can enable or disable analytics cookies.",
+    analytics: "Analytics",
+    save: "Save",
+    back: "Back",
+    yes: "Yes",
+    no: "No",
+  },
+} as const;
+
 export default function CookieBanner() {
+  const { locale } = useLocale();
   const [visible, setVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
@@ -57,64 +94,73 @@ export default function CookieBanner() {
 
   if (!visible) return null;
 
+  const copy = COPY[locale];
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur text-white">
-      <div className="container mx-auto p-4">
+    <div className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-secondary-foreground/10 bg-secondary text-secondary-foreground">
+      <div className="mx-auto max-w-7xl px-6 py-5">
         {!showSettings ? (
-          <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-            <p className="text-sm text-center md:text-left">
-              Usamos cookies técnicas (necesarias) y cookies analíticas (Google
-              Analytics) para mejorar la experiencia. Puedes leer nuestra{" "}
-              <Link href="/cookies" className="underline">
-                Política de Cookies
-              </Link>
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-center text-sm text-secondary-foreground/80 md:text-left">
+              {copy.message}{" "}
+              <LocalizedLink
+                href="/cookies"
+                className="text-primary underline-offset-4 hover:text-accent hover:underline transition-colors"
+              >
+                {copy.policy}
+              </LocalizedLink>
               .
             </p>
+
             <div className="flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={acceptCookies}
-                className="bg-white text-black px-4 py-2 rounded-lg hover:opacity-90 transition"
+                className="rounded-xl border-2 border-secondary bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-x-1 hover:-translate-y-1 active:translate-y-px shadow-offset-accent"
               >
-                Aceptar
+                {copy.accept}
               </button>
               <button
                 onClick={rejectCookies}
-                className="border border-white/30 px-4 py-2 rounded-lg hover:bg-white/10 transition"
+                className="rounded-xl border-2 border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-secondary-foreground/25 hover:text-accent"
               >
-                Rechazar
+                {copy.reject}
               </button>
               <button
                 onClick={openSettings}
-                className="px-4 py-2 rounded-lg hover:bg-white/10 transition"
+                className="rounded-xl border-2 border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-secondary-foreground/25 hover:text-accent"
               >
-                Configurar
+                {copy.configure}
               </button>
             </div>
           </div>
         ) : (
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div className="space-y-1">
-                <p className="text-sm font-semibold">Preferencias de cookies</p>
-                <p className="text-xs text-white/80">
-                  Las cookies técnicas son necesarias. Puedes activar o desactivar
-                  las cookies analíticas.
+                <p className="text-sm font-semibold">{copy.title}</p>
+                <p className="text-xs text-secondary-foreground/75">
+                  {copy.subtitle}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between gap-4 rounded-xl border border-white/15 bg-white/5 px-4 py-3">
+              <div className="flex items-center justify-between gap-4 rounded-xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-4 py-3">
                 <div>
-                  <p className="text-sm font-semibold">Analíticas</p>
-                  <p className="text-xs text-white/70">Google Analytics (GA4)</p>
+                  <p className="text-sm font-semibold">{copy.analytics}</p>
+                  <p className="text-xs text-secondary-foreground/70">
+                    Google Analytics (GA4)
+                  </p>
                 </div>
+
                 <label className="inline-flex items-center gap-2">
                   <input
                     type="checkbox"
                     checked={analyticsEnabled}
                     onChange={(e) => setAnalyticsEnabled(e.target.checked)}
-                    className="h-5 w-5 accent-white"
+                    className="h-5 w-5 accent-accent"
                   />
-                  <span className="text-sm">{analyticsEnabled ? "Sí" : "No"}</span>
+                  <span className="text-sm">
+                    {analyticsEnabled ? copy.yes : copy.no}
+                  </span>
                 </label>
               </div>
             </div>
@@ -127,15 +173,15 @@ export default function CookieBanner() {
                   setShowSettings(false);
                   setVisible(false);
                 }}
-                className="bg-white text-black px-4 py-2 rounded-lg hover:opacity-90 transition"
+                className="rounded-xl border-2 border-secondary bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-x-1 hover:-translate-y-1 active:translate-y-px shadow-offset-accent"
               >
-                Guardar
+                {copy.save}
               </button>
               <button
                 onClick={() => setShowSettings(false)}
-                className="border border-white/30 px-4 py-2 rounded-lg hover:bg-white/10 transition"
+                className="rounded-xl border-2 border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-secondary-foreground/25 hover:text-accent"
               >
-                Volver
+                {copy.back}
               </button>
             </div>
           </div>

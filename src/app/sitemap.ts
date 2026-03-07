@@ -18,9 +18,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/contacto",
     "/comparativa",
     "/iban",
+    "/rss.xml",
+    "/herramientas",
+    "/herramientas/interes-compuesto",
+    "/herramientas/inflacion",
+    "/herramientas/objetivo-ahorro",
+    "/herramientas/regla-4",
+    "/herramientas/tae",
     "/blog",
     "/ebooks",
     "/vlogs",
+    "/sobre",
     "/terminos",
     "/privacidad",
     "/cookies",
@@ -57,7 +65,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   urls.push(
-    ...banks.map((bank) => ({
+    ...banks.filter((bank) => bank._status !== "draft").map((bank) => ({
       url: `${BASE_URL}/programas/${bank.slug}`,
       lastModified: now,
     }))

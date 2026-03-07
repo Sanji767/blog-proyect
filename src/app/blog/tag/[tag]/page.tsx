@@ -1,7 +1,9 @@
 // src/app/blog/tag/[tag]/page.tsx
 import type { Metadata } from "next";
-import Container from "@/components/layout/Container";
-import BlogCard from "@/components/blog/BlogCard";
+import Link from "next/link";
+
+import BlogExplore from "@/components/blog/BlogExplore";
+import NewsPostCard from "@/components/blog/NewsPostCard";
 import { getPostsByTag, getTags } from "@/lib/blog";
 import {
   DEFAULT_OG_IMAGE_URL,
@@ -53,24 +55,9 @@ export default async function TagPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Inicio",
-        item: SITE_URL,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: `${SITE_URL}/blog`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: `#${label}`,
-        item: pageUrl,
-      },
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: `#${label}`, item: pageUrl },
     ],
   };
 
@@ -86,15 +73,9 @@ export default async function TagPage({ params }: Props) {
       "@type": "Organization",
       name: SITE_NAME,
       url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: SITE_LOGO_URL,
-      },
+      logo: { "@type": "ImageObject", url: SITE_LOGO_URL },
     },
-    primaryImageOfPage: {
-      "@type": "ImageObject",
-      url: DEFAULT_OG_IMAGE_URL,
-    },
+    primaryImageOfPage: { "@type": "ImageObject", url: DEFAULT_OG_IMAGE_URL },
     mainEntity: {
       "@type": "ItemList",
       itemListElement: posts.map((post, index) => ({
@@ -108,41 +89,48 @@ export default async function TagPage({ params }: Props) {
 
   return (
     <>
-      {/* Schema.org: Breadcrumbs + CollectionPage (Tag) */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: toJsonLd(breadcrumbJsonLd),
-        }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: toJsonLd(tagCollectionJsonLd),
-        }}
+        dangerouslySetInnerHTML={{ __html: toJsonLd(tagCollectionJsonLd) }}
       />
 
-      <Container className="py-16">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-black mb-4">#{label}</h1>
-          <p className="text-xl text-muted-foreground">
-            {posts.length} artículo{posts.length !== 1 ? "s" : ""} encontrado
-            {posts.length !== 1 ? "s" : ""}
-          </p>
-        </div>
+      <header className="space-y-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <Link href="/blog" className="underline-offset-4 hover:underline">
+            Blog
+          </Link>{" "}
+          <span className="text-muted-foreground/70">/</span> Tag
+        </p>
 
-        {posts.length === 0 ? (
-          <p className="text-center text-muted-foreground py-20 text-lg">
-            No hay artículos con la etiqueta <strong>#{label}</strong> todavía.
-          </p>
-        ) : (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post, i) => (
-              <BlogCard key={post.slug} post={post} index={i} />
+        <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
+          #{label}
+        </h1>
+
+        <p className="text-base text-muted-foreground md:text-lg">
+          {posts.length} artículo{posts.length !== 1 ? "s" : ""}.
+        </p>
+      </header>
+
+      {posts.length === 0 ? (
+        <p className="mt-12 text-base text-muted-foreground">
+          No hay artículos con la etiqueta <strong>#{label}</strong> todavía.
+        </p>
+      ) : (
+        <section className="mt-12">
+          <div className="grid gap-6 md:grid-cols-2">
+            {posts.map((post, idx) => (
+              <NewsPostCard key={post.slug} post={post} index={idx} showDescription />
             ))}
           </div>
-        )}
-      </Container>
+        </section>
+      )}
+
+      <BlogExplore />
     </>
   );
 }
+

@@ -19,7 +19,7 @@ export default function CookiesPage() {
         </p>
       </header>
 
-      <section className="prose prose-neutral dark:prose-invert max-w-none">
+      <section className="prose prose-lg dark:prose-invert max-w-none">
         <h2>¿Qué son las cookies?</h2>
         <p>
           Las cookies son pequeños archivos que se almacenan en tu dispositivo cuando

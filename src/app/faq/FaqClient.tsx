@@ -1,0 +1,346 @@
+// src/app/faq/FaqClient.tsx
+"use client";
+
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Container from "@/components/layout/Container";
+import { SITE_URL, toJsonLd } from "@/lib/seo";
+import {
+  ChevronDown,
+  MessageCircle,
+  Sparkles,
+  Shield,
+  Globe,
+  Clock,
+  Euro,
+  HelpCircle,
+  ArrowRight,
+} from "lucide-react";
+
+type FaqItem = { question: string; answer: string };
+type FaqGroup = { title: string; items: FaqItem[]; icon?: React.ReactNode };
+
+const faqGroups: FaqGroup[] = [
+  {
+    title: "Generales",
+    icon: <HelpCircle className="h-6 w-6" />,
+    items: [
+      {
+        question: "¿Qué es exactamente FinanzasEU?",
+        answer:
+          "FinanzasEU es una guía editorial independiente de banca digital en Europa. Analizamos comisiones, requisitos, IBAN/SEPA y soporte, y enlazamos fuentes oficiales para que puedas verificar condiciones. El objetivo: ayudarte a elegir la cuenta que encaja contigo sin perder tiempo ni dinero.",
+      },
+      {
+        question: "¿En qué países aplican las recomendaciones?",
+        answer:
+          "Nos centramos en cuentas que puedes abrir desde España y otros países de la Unión Europea. También incluimos opciones para residentes fuera de la UE cuando aplica. En cada ficha indicamos qué países acepta cada banco.",
+      },
+      {
+        question: "¿La información está siempre actualizada?",
+        answer:
+          "Intentamos mantenerlo actualizado. Revisamos condiciones con frecuencia y actualizamos fichas cuando cambian comisiones, requisitos o países admitidos. Si ves algo raro, escríbenos y lo revisamos.",
+      },
+    ],
+  },
+  {
+    title: "Tipos de bancos y cuentas",
+    icon: <Sparkles className="h-6 w-6" />,
+    items: [
+      {
+        question: "¿Qué diferencia hay entre neobancos y bancos tradicionales?",
+        answer:
+          "Neobancos (N26, Revolut, Bunq…) = 100% app, apertura rápida, pocas oficinas.\nBancos tradicionales (ING, Santander, Deutsche Bank…) = más productos (hipotecas, préstamos), pero más burocracia.\nTe explicamos cuál usar como cuenta principal y cuál como secundaria según tu estilo de vida.",
+      },
+      {
+        question: "¿Puedo usar estos bancos como cuenta principal?",
+        answer:
+          "En muchos casos sí. En cada ficha indicamos si el banco permite domiciliaciones SEPA, ingreso de nómina, recibos habituales y detalles prácticos del día a día.",
+      },
+      {
+        question: "¿Qué es una cuenta multidivisa y cuándo me interesa?",
+        answer:
+          "Es una cuenta donde puedes tener EUR, USD, GBP, CHF, etc. al mismo tiempo y cambiar entre ellas al tipo de cambio real (sin comisiones ocultas).\nTe interesa si:\n• Cobras en dólares o libras\n• Viajas mucho\n• Haces compras en Amazon USA, UK, etc.\n• Eres nómada digital o freelancer internacional",
+      },
+    ],
+  },
+  {
+    title: "Apertura y requisitos",
+    icon: <Clock className="h-6 w-6" />,
+    items: [
+      {
+        question: "¿Puedo abrir cuenta si no vivo en Europa?",
+        answer:
+          "Sí, cada vez más. Hay bancos que aceptan residentes en México, Argentina, Colombia, Perú, Chile… y hasta en países fuera de Latinoamérica. En cada ficha tienes un apartado “Países aceptados” con la lista actualizada.",
+      },
+      {
+        question: "¿Qué documentos suelen pedir?",
+        answer:
+          "99% online:\n• DNI / NIE / Pasaporte\n• Selfie + verificación facial\n• A veces: justificante de domicilio o vídeo-identificación\nNo necesitas ir a ninguna oficina.",
+      },
+      {
+        question: "¿Cuánto tarda en abrirse la cuenta?",
+        answer:
+          "• Neobancos: 3–10 minutos (Revolut, N26, Wise)\n• Bancos tradicionales online: 1–3 días (ING, Bunq Premium)\n• Con revisión manual: hasta 7 días (si tu país de residencia no es de la UE)",
+      },
+    ],
+  },
+  {
+    title: "Seguridad, dinero y transparencia",
+    icon: <Shield className="h-6 w-6" />,
+    items: [
+      {
+        question: "¿Es seguro usar estos bancos?",
+        answer:
+          "Depende de la entidad. Si es un banco con licencia en la UE, suele aplicar un esquema de garantía de depósitos (habitualmente hasta 100.000 € por titular y entidad). En cada ficha indicamos licencia, supervisión y protección, y recomendamos verificarlo en la web oficial.",
+      },
+      {
+        question: "¿Ganas dinero si abro cuenta desde tus enlaces?",
+        answer:
+          "En algunos casos sí: si abres cuenta desde nuestros enlaces podemos recibir una comisión sin coste extra para ti. Siempre indicamos cuando un enlace es de afiliado y eso no determina el análisis. Te recomendamos comprobar condiciones en la web oficial.",
+      },
+      {
+        question: "¿Me cobras algo por la web o por ayudarte?",
+        answer:
+          "Nunca. La web es gratuita. Si nos escribes por email o a través del formulario de contacto para revisar tu caso (freelancer, empresa, nómada, etc.), también es gratis. Si te ayudamos y decides abrir cuenta, usar nuestros enlaces (cuando existan) ayuda a mantener el proyecto.",
+      },
+    ],
+  },
+];
+
+const FAQ_URL = `${SITE_URL}/faq`;
+const faqPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${FAQ_URL}#faq`,
+  url: FAQ_URL,
+  inLanguage: "es-ES",
+  mainEntity: faqGroups.flatMap((group) =>
+    group.items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  ),
+};
+
+const quickFacts = [
+  {
+    icon: <Globe className="h-5 w-5" />,
+    label: "Países",
+    value: "Europa + Latam",
+    description: "Opciones para residentes en la UE y fuera de ella.",
+  },
+  {
+    icon: <Clock className="h-5 w-5" />,
+    label: "Tiempo medio",
+    value: "5–10 min",
+    description: "Aperturas 100% online en los principales neobancos.",
+  },
+  {
+    icon: <Euro className="h-5 w-5" />,
+    label: "Coste",
+    value: "Desde 0 €/mes",
+    description: "Cuentas gratuitas y planes avanzados según tu perfil.",
+  },
+];
+
+export default function FaqPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section className="py-16 md:py-24 overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: toJsonLd(faqPageJsonLd),
+        }}
+      />
+
+      <Container className="max-w-6xl space-y-16">
+        {/* Hero épico */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center space-y-6"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent md:text-sm">
+            <MessageCircle className="h-4 w-4" />
+            Guía práctica para dudas reales (sin humo)
+          </div>
+
+          <h1 className="text-balance text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
+            Todas tus dudas de banca,<br className="hidden md:block" />
+            resueltas en minutos
+          </h1>
+
+          <p className="text-base md:text-xl text-muted-foreground max-w-3xl md:max-w-4xl mx-auto">
+            Esta página reúne las preguntas que más se repiten sobre bancos europeos, neobancos
+            y cuentas para nómadas, freelancers y empresas. Si tu caso es más raro, al final
+            encontrarás cómo contarnos tu situación para que te respondamos.
+          </p>
+        </motion.div>
+
+        {/* Quick facts / resumen visual */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="grid gap-4 md:grid-cols-3"
+        >
+          {quickFacts.map((fact) => (
+            <div
+              key={fact.label}
+              className="rounded-2xl border border-border/60 bg-card/80 p-5 flex flex-col gap-2 shadow-sm"
+            >
+              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  {fact.icon}
+                </span>
+                {fact.label}
+              </div>
+              <div className="text-2xl font-bold text-foreground">{fact.value}</div>
+              <p className="text-sm text-muted-foreground">{fact.description}</p>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* FAQ con acordeón brutal */}
+        <div className="space-y-12">
+          {faqGroups.map((group, groupIdx) => (
+            <motion.section
+              key={group.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: groupIdx * 0.08 }}
+              className="space-y-6"
+            >
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="rounded-2xl bg-primary/10 p-4 text-primary">
+                    {group.icon}
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold">{group.title}</h2>
+                </div>
+                <p className="text-xs md:text-sm text-muted-foreground max-w-md md:text-right">
+                  Preguntas reales que nos han hecho muchas veces sobre{" "}
+                  <span className="font-semibold lowercase">{group.title}</span>.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                {group.items.map((item, idx) => {
+                  const globalIndex = groupIdx * 10 + idx;
+                  const isOpen = openIndex === globalIndex;
+
+                  return (
+                    <motion.article
+                      key={globalIndex}
+                      layout
+                      initial={{ opacity: 0, scale: 0.97 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ delay: idx * 0.04 }}
+                      className="group"
+                    >
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setOpenIndex(isOpen ? null : globalIndex)
+                        }
+                        className="w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 rounded-2xl"
+                      >
+                        <div className="rounded-2xl border-2 border-border/50 bg-card/80 p-6 transition-all hover:border-primary/60 hover:shadow-xl group-hover:bg-card">
+                          <div className="flex items-start justify-between gap-4">
+                            <h3 className="text-base md:text-lg font-semibold text-foreground pr-6">
+                              {item.question}
+                            </h3>
+                            <motion.div
+                              animate={{ rotate: isOpen ? 180 : 0 }}
+                              transition={{ duration: 0.25 }}
+                              className="flex-shrink-0 mt-1"
+                            >
+                              <ChevronDown className="h-5 w-5 text-primary" />
+                            </motion.div>
+                          </div>
+
+                          <motion.div
+                            initial={false}
+                            animate={{
+                              height: isOpen ? "auto" : 0,
+                              marginTop: isOpen ? 16 : 0,
+                              opacity: isOpen ? 1 : 0,
+                            }}
+                            className="overflow-hidden"
+                          >
+                            <p className="text-sm md:text-base text-muted-foreground leading-relaxed whitespace-pre-line">
+                              {item.answer}
+                            </p>
+                          </motion.div>
+                        </div>
+                      </button>
+                    </motion.article>
+                  );
+                })}
+              </div>
+            </motion.section>
+          ))}
+        </div>
+
+        {/* CTA Final épico – sin WhatsApp, full pro */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary text-secondary-foreground shadow-offset-accent"
+        >
+          <div className="p-8 md:p-12 lg:p-16 text-center space-y-8">
+            <div className="pointer-events-none absolute -top-28 -right-28 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
+            <div className="flex justify-center">
+              <div className="rounded-2xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 p-6">
+                <MessageCircle className="h-12 w-12 md:h-16 md:w-16 text-accent" />
+              </div>
+            </div>
+
+            <div className="space-y-4 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-black">
+                ¿Tu caso es un poco “complicado”?
+              </h2>
+              <p className="text-base md:text-xl text-muted-foreground">
+                Freelancer en dólares, empresa en Estonia, nómada digital, residente en Latinoamérica,
+                familia con cuentas conjuntas… Si tu situación no encaja en las FAQ, escríbenos
+                y te decimos qué banco usar como principal y cuál como apoyo.
+              </p>
+              <p className="text-sm md:text-base text-muted-foreground">
+                Puedes leer gratis y te respondemos gratis. Si te ayudamos y decides abrir cuenta,
+                usar nuestros enlaces (cuando existan) ayuda a mantener el proyecto.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                href="/contacto"
+                className="inline-flex items-center gap-3 rounded-xl border-2 border-secondary bg-accent px-8 py-4 text-base font-semibold text-accent-foreground shadow-offset-accent transition-transform active:translate-y-px md:py-5 md:text-lg"
+              >
+                Analiza mi caso
+                <ArrowRight className="h-5 w-5 md:h-6 md:w-6" />
+              </Link>
+
+              <Link
+                href="/"
+                className="inline-flex items-center gap-3 rounded-xl border-2 border-secondary-foreground/20 bg-secondary-foreground/5 px-8 py-4 text-base font-semibold text-secondary-foreground transition-colors hover:border-secondary-foreground/35 hover:bg-secondary-foreground/10 md:py-5 md:text-lg"
+              >
+                Ver bancos recomendados
+                <Sparkles className="h-5 w-5 md:h-6 md:w-6" />
+              </Link>
+            </div>
+          </div>
+        </motion.section>
+      </Container>
+    </section>
+  );
+}
