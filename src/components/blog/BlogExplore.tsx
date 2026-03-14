@@ -17,7 +17,7 @@ const COPY: Record<Locale, { summary: string; categories: string; tags: string }
 };
 
 export default async function BlogExplore({ locale = "es" }: { locale?: Locale } = {}) {
-  const [categories, tags] = await Promise.all([getCategories(), getTags()]);
+  const [categories, tags] = await Promise.all([getCategories(locale), getTags(locale)]);
   if (categories.length === 0 && tags.length === 0) return null;
 
   const copy = COPY[locale];

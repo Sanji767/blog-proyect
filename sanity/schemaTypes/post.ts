@@ -12,6 +12,19 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "language",
+      title: "Idioma",
+      type: "string",
+      initialValue: "es",
+      options: {
+        list: [
+          { title: "Español", value: "es" },
+          { title: "English", value: "en" },
+        ],
+        layout: "radio",
+      },
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",

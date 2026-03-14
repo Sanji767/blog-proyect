@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import VlogPageEs, {
+import {
   generateMetadata as generateMetadataEs,
-  generateStaticParams as generateStaticParamsEs,
 } from "@/app/vlogs/[slug]/page";
 
 export function generateStaticParams(): Array<{ slug: string }> {
-  return generateStaticParamsEs();
+  return [];
 }
 
 export async function generateMetadata(
@@ -45,11 +44,6 @@ export default function VlogPageEn({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </section>
-
-      <div lang="es">
-        <VlogPageEs params={params} />
-      </div>
     </>
   );
 }
-

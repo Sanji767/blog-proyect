@@ -6,6 +6,7 @@ import matter from "gray-matter";
 import { cache } from "react";
 
 import type { BlogPost, BlogPostPreview, Category, Tag } from "./blog/types";
+import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 import { sanityConfigured } from "@/sanity/env";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
@@ -17,7 +18,14 @@ import {
 } from "@/sanity/lib/queries";
 import { stripLeadingMarkdownH1 } from "@/lib/blog/markdown";
 
-const POSTS_DIR = path.join(process.cwd(), "src/content/blog/posts");
+const POSTS_DIR_BY_LOCALE: Record<Locale, string> = {
+  es: path.join(process.cwd(), "src/content/blog/posts"),
+  en: path.join(process.cwd(), "src/content/blog/posts-en"),
+};
+
+function getPostsDir(locale: Locale): string {
+  return POSTS_DIR_BY_LOCALE[locale] ?? POSTS_DIR_BY_LOCALE[DEFAULT_LOCALE];
+}
 
 type SanityPostPreview = Omit<BlogPostPreview, "image"> & {
   image?: string | null;
@@ -48,10 +56,11 @@ function normalizeCategory(value: unknown): string {
   return normalized || "general";
 }
 
-function normalizePreview(post: SanityPostPreview): BlogPostPreview {
+function normalizePreview(post: SanityPostPreview, locale: Locale): BlogPostPreview {
+  const untitled = locale === "en" ? "Untitled" : "Sin título";
   return {
     slug: String(post.slug ?? "").toLowerCase().trim(),
-    title: post.title ?? "Sin título",
+    title: post.title ?? untitled,
     description: post.description ?? "",
     excerpt: post.excerpt ?? post.description ?? "",
     date: post.date ?? new Date().toISOString(),
@@ -67,9 +76,9 @@ function normalizePreview(post: SanityPostPreview): BlogPostPreview {
   };
 }
 
-function normalizePost(post: SanityPost): BlogPost {
+function normalizePost(post: SanityPost, locale: Locale): BlogPost {
   return {
-    ...normalizePreview(post),
+    ...normalizePreview(post, locale),
     content: post.content ?? [],
   };
 }
@@ -106,14 +115,16 @@ function deriveExcerptFromMarkdown(markdown: string): string {
   return "";
 }
 
-function readLocalPosts(): BlogPost[] {
-  if (!fs.existsSync(POSTS_DIR)) return [];
+function readLocalPosts(locale: Locale): BlogPost[] {
+  const postsDir = getPostsDir(locale);
+  if (!fs.existsSync(postsDir)) return [];
+  const untitled = locale === "en" ? "Untitled" : "Sin título";
 
   const years = fs
-    .readdirSync(POSTS_DIR)
+    .readdirSync(postsDir)
     .filter((item) => {
       if (item.startsWith("_")) return false;
-      const fullPath = path.join(POSTS_DIR, item);
+      const fullPath = path.join(postsDir, item);
       return fs.statSync(fullPath).isDirectory();
     })
     .sort();
@@ -121,7 +132,7 @@ function readLocalPosts(): BlogPost[] {
   const posts: BlogPost[] = [];
 
   for (const year of years) {
-    const yearPath = path.join(POSTS_DIR, year);
+    const yearPath = path.join(postsDir, year);
     const files = fs.readdirSync(yearPath);
 
     for (const file of files) {
@@ -142,7 +153,7 @@ function readLocalPosts(): BlogPost[] {
 
       posts.push({
         slug,
-        title: data.title ?? "Sin título",
+        title: data.title ?? untitled,
         description: description || derivedExcerpt,
         excerpt: derivedExcerpt,
         date: data.date ?? `${year}-01-01`,
@@ -166,7 +177,7 @@ function readLocalPosts(): BlogPost[] {
   );
 }
 
-const getLocalPosts = cache(() => readLocalPosts());
+const getLocalPosts = cache((locale: Locale) => readLocalPosts(locale));
 
 function toPreview(post: BlogPost): BlogPostPreview {
   const { content, ...rest } = post;
@@ -174,90 +185,136 @@ function toPreview(post: BlogPost): BlogPostPreview {
   return rest;
 }
 
-export const getAllPostPreviews = cache(async (): Promise<BlogPostPreview[]> => {
-  if (!sanityConfigured) return getLocalPosts().map(toPreview);
+export const getAllPostPreviews = cache(
+  async (locale: Locale = DEFAULT_LOCALE): Promise<BlogPostPreview[]> => {
+    if (!sanityConfigured) return getLocalPosts(locale).map(toPreview);
 
-  const posts = await sanityFetch<SanityPostPreview[]>(
-    allPostPreviewsQuery,
-    {},
-    { revalidate: 60, tags: ["blog"] },
-  );
+    try {
+      const posts = await sanityFetch<SanityPostPreview[]>(
+        allPostPreviewsQuery,
+        { locale },
+        { revalidate: 60, tags: ["blog", `locale:${locale}`] },
+      );
 
-  return posts.map(normalizePreview).filter((p) => Boolean(p.slug));
-});
+      const normalized = posts
+        .map((p) => normalizePreview(p, locale))
+        .filter((p) => Boolean(p.slug));
+      return normalized.length > 0 ? normalized : getLocalPosts(locale).map(toPreview);
+    } catch {
+      return getLocalPosts(locale).map(toPreview);
+    }
+  },
+);
 
-export const getPostsByTag = cache(async (tag: string): Promise<BlogPostPreview[]> => {
-  const tagSlug = decodeURIComponent(tag).toLowerCase().trim();
-  if (!tagSlug) return [];
+export const getPostsByTag = cache(
+  async (tag: string, locale: Locale = DEFAULT_LOCALE): Promise<BlogPostPreview[]> => {
+    const tagSlug = decodeURIComponent(tag).toLowerCase().trim();
+    if (!tagSlug) return [];
 
-  if (!sanityConfigured) {
-    return (await getAllPostPreviews()).filter((p) => p.tags?.includes(tagSlug));
-  }
+    if (!sanityConfigured) {
+      return (await getAllPostPreviews(locale)).filter((p) => p.tags?.includes(tagSlug));
+    }
 
-  const posts = await sanityFetch<SanityPostPreview[]>(
-    postsByTagQuery,
-    { tag: tagSlug },
-    { revalidate: 60, tags: ["blog", `tag:${tagSlug}`] },
-  );
+    try {
+      const posts = await sanityFetch<SanityPostPreview[]>(
+        postsByTagQuery,
+        { tag: tagSlug, locale },
+        { revalidate: 60, tags: ["blog", `locale:${locale}`, `tag:${tagSlug}`] },
+      );
 
-  return posts.map(normalizePreview).filter((p) => Boolean(p.slug));
-});
+      const normalized = posts
+        .map((p) => normalizePreview(p, locale))
+        .filter((p) => Boolean(p.slug));
+      return normalized.length > 0
+        ? normalized
+        : (await getAllPostPreviews(locale)).filter((p) => p.tags?.includes(tagSlug));
+    } catch {
+      return (await getAllPostPreviews(locale)).filter((p) => p.tags?.includes(tagSlug));
+    }
+  },
+);
 
 export const getPostsByCategory = cache(
-  async (category: string): Promise<BlogPostPreview[]> => {
+  async (category: string, locale: Locale = DEFAULT_LOCALE): Promise<BlogPostPreview[]> => {
     const categorySlug = decodeURIComponent(category).toLowerCase().trim();
     if (!categorySlug) return [];
 
     if (!sanityConfigured) {
-      return (await getAllPostPreviews()).filter((p) => p.category === categorySlug);
+      return (await getAllPostPreviews(locale)).filter((p) => p.category === categorySlug);
     }
 
-    const posts = await sanityFetch<SanityPostPreview[]>(
-      postsByCategoryQuery,
-      { category: categorySlug },
-      { revalidate: 60, tags: ["blog", `category:${categorySlug}`] },
-    );
+    try {
+      const posts = await sanityFetch<SanityPostPreview[]>(
+        postsByCategoryQuery,
+        { category: categorySlug, locale },
+        { revalidate: 60, tags: ["blog", `locale:${locale}`, `category:${categorySlug}`] },
+      );
 
-    return posts.map(normalizePreview).filter((p) => Boolean(p.slug));
+      const normalized = posts
+        .map((p) => normalizePreview(p, locale))
+        .filter((p) => Boolean(p.slug));
+      return normalized.length > 0
+        ? normalized
+        : (await getAllPostPreviews(locale)).filter((p) => p.category === categorySlug);
+    } catch {
+      return (await getAllPostPreviews(locale)).filter((p) => p.category === categorySlug);
+    }
   },
 );
 
-export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
-  const slugValue = decodeURIComponent(slug).toLowerCase().trim();
-  if (!slugValue) return null;
+export const getPostBySlug = cache(
+  async (slug: string, locale: Locale = DEFAULT_LOCALE): Promise<BlogPost | null> => {
+    const slugValue = decodeURIComponent(slug).toLowerCase().trim();
+    if (!slugValue) return null;
 
-  if (!sanityConfigured) {
-    const post = getLocalPosts().find((p) => p.slug === slugValue);
-    return post ?? null;
-  }
+    if (!sanityConfigured) {
+      const post = getLocalPosts(locale).find((p) => p.slug === slugValue);
+      return post ?? null;
+    }
 
-  const post = await sanityFetch<SanityPost | null>(
-    postBySlugQuery,
-    { slug: slugValue },
-    { revalidate: 60, tags: ["blog", `post:${slugValue}`] },
-  );
+    try {
+      const post = await sanityFetch<SanityPost | null>(
+        postBySlugQuery,
+        { slug: slugValue, locale },
+        { revalidate: 60, tags: ["blog", `locale:${locale}`, `post:${slugValue}`] },
+      );
 
-  if (!post) return null;
-  const normalized = normalizePost(post);
-  return normalized.slug ? normalized : null;
-});
+      if (!post) {
+        const local = getLocalPosts(locale).find((p) => p.slug === slugValue);
+        return local ?? null;
+      }
+      const normalized = normalizePost(post, locale);
+      return normalized.slug ? normalized : null;
+    } catch {
+      const post = getLocalPosts(locale).find((p) => p.slug === slugValue);
+      return post ?? null;
+    }
+  },
+);
 
-export const getAllPostSlugs = cache(async (): Promise<string[]> => {
-  if (!sanityConfigured) return getLocalPosts().map((p) => p.slug);
+export const getAllPostSlugs = cache(
+  async (locale: Locale = DEFAULT_LOCALE): Promise<string[]> => {
+    if (!sanityConfigured) return getLocalPosts(locale).map((p) => p.slug);
 
-  const rows = await sanityFetch<Array<{ slug?: string | null }>>(
-    allPostSlugsQuery,
-    {},
-    { revalidate: 60, tags: ["blog"] },
-  );
+    try {
+      const rows = await sanityFetch<Array<{ slug?: string | null }>>(
+        allPostSlugsQuery,
+        { locale },
+        { revalidate: 60, tags: ["blog", `locale:${locale}`] },
+      );
 
-  return rows
-    .map((r) => String(r.slug ?? "").toLowerCase().trim())
-    .filter(Boolean);
-});
+      const slugs = rows
+        .map((r) => String(r.slug ?? "").toLowerCase().trim())
+        .filter(Boolean);
+      return slugs.length > 0 ? slugs : getLocalPosts(locale).map((p) => p.slug);
+    } catch {
+      return getLocalPosts(locale).map((p) => p.slug);
+    }
+  },
+);
 
-export const getCategories = cache(async (): Promise<Category[]> => {
-  const posts = await getAllPostPreviews();
+export const getCategories = cache(async (locale: Locale = DEFAULT_LOCALE): Promise<Category[]> => {
+  const posts = await getAllPostPreviews(locale);
   const map = new Map<string, number>();
 
   for (const post of posts) {
@@ -274,8 +331,8 @@ export const getCategories = cache(async (): Promise<Category[]> => {
     .sort((a, b) => b.count - a.count);
 });
 
-export const getTags = cache(async (): Promise<Tag[]> => {
-  const posts = await getAllPostPreviews();
+export const getTags = cache(async (locale: Locale = DEFAULT_LOCALE): Promise<Tag[]> => {
+  const posts = await getAllPostPreviews(locale);
   const map = new Map<string, number>();
 
   for (const post of posts) {

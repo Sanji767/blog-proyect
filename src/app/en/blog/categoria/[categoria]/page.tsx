@@ -21,13 +21,13 @@ type Props = {
 };
 
 export async function generateStaticParams(): Promise<Array<{ categoria: string }>> {
-  const categories = await getCategories();
+  const categories = await getCategories("en");
   return categories.map((cat) => ({ categoria: cat.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categoria = decodeURIComponent(params.categoria).toLowerCase().trim();
-  const categories = await getCategories();
+  const categories = await getCategories("en");
   const cat = categories.find((c) => c.slug === categoria);
 
   if (!cat) return { title: "Category not found | FinanzasEU" };
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CategoryPageEn({ params }: Props) {
   const locale = "en" as const;
   const categoria = decodeURIComponent(params.categoria).toLowerCase().trim();
-  const categories = await getCategories();
+  const categories = await getCategories(locale);
   const cat = categories.find((c) => c.slug === categoria);
 
   if (!cat) {
@@ -55,7 +55,7 @@ export default async function CategoryPageEn({ params }: Props) {
     );
   }
 
-  const posts = await getPostsByCategory(categoria);
+  const posts = await getPostsByCategory(categoria, locale);
 
   const pageUrl = `${SITE_URL}/en/blog/categoria/${encodeURIComponent(categoria)}`;
   const pageTitle = `${cat.title} | FinanzasEU Blog`;

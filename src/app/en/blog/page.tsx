@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 export default async function BlogPageEn() {
   const locale = "en" as const;
-  const allPosts = await getAllPostPreviews();
+  const allPosts = await getAllPostPreviews(locale);
   const pageUrl = `${SITE_URL}/en/blog`;
 
   const breadcrumbJsonLd = {

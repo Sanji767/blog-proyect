@@ -21,13 +21,13 @@ type Props = {
 };
 
 export async function generateStaticParams(): Promise<Array<{ tag: string }>> {
-  const tags = await getTags();
+  const tags = await getTags("en");
   return tags.map((t) => ({ tag: t.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
-  const tags = await getTags();
+  const tags = await getTags("en");
   const tag = tags.find((t) => t.slug === tagSlug);
   const label = tag?.title ?? tagSlug;
 
@@ -43,11 +43,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function TagPageEn({ params }: Props) {
   const locale = "en" as const;
   const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
-  const tags = await getTags();
+  const tags = await getTags(locale);
   const tag = tags.find((t) => t.slug === tagSlug);
   const label = tag?.title ?? tagSlug;
 
-  const posts = await getPostsByTag(tagSlug);
+  const posts = await getPostsByTag(tagSlug, locale);
 
   const pageUrl = `${SITE_URL}/en/blog/tag/${encodeURIComponent(tagSlug)}`;
   const pageTitle = `#${label} | FinanzasEU Blog`;

@@ -4,51 +4,119 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Briefcase, Home, Plane, Star, Users } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Container from "@/components/layout/Container";
+import LocalizedLink from "@/components/i18n/LocalizedLink";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Button } from "@/components/ui/button";
 import { banks } from "@/lib/banks";
 import { cn } from "@/lib/utils";
 
-const CASES = [
-  {
-    id: "remoto",
-    label: "Trabajo remoto",
-    icon: Briefcase,
-    text: "IBAN para cobrar en varias divisas y gestionar cobros internacionales.",
-    recommendedBank: "wise",
+const CASES_BY_LOCALE = {
+  es: [
+    {
+      id: "remoto",
+      label: "Trabajo remoto",
+      icon: Briefcase,
+      text: "IBAN para cobrar en varias divisas y gestionar cobros internacionales.",
+      recommendedBank: "wise",
+    },
+    {
+      id: "viajero",
+      label: "Viajero",
+      icon: Plane,
+      text: "Tarjetas con buen tipo de cambio y gestión multidivisa.",
+      recommendedBank: "revolut",
+    },
+    {
+      id: "nomina",
+      label: "Cuenta nómina",
+      icon: Home,
+      text: "Cuenta principal para recibos, domiciliaciones y el día a día.",
+      recommendedBank: "n26",
+    },
+    {
+      id: "negocios",
+      label: "Autónomos / Pymes",
+      icon: Users,
+      text: "Subcuentas y organización de impuestos y gastos sin líos.",
+      recommendedBank: "bunq",
+    },
+  ],
+  en: [
+    {
+      id: "remote",
+      label: "Remote work",
+      icon: Briefcase,
+      text: "An IBAN to get paid in multiple currencies and manage international payments.",
+      recommendedBank: "wise",
+    },
+    {
+      id: "travel",
+      label: "Travel",
+      icon: Plane,
+      text: "Cards with good FX rates and real multi‑currency management.",
+      recommendedBank: "revolut",
+    },
+    {
+      id: "salary",
+      label: "Salary account",
+      icon: Home,
+      text: "A main account for bills, direct debits and everyday banking.",
+      recommendedBank: "n26",
+    },
+    {
+      id: "business",
+      label: "Freelance / small business",
+      icon: Users,
+      text: "Sub-accounts and a clean way to organize taxes and expenses.",
+      recommendedBank: "bunq",
+    },
+  ],
+} as const;
+
+const COPY = {
+  es: {
+    titlePrefix: "Dime quién eres,",
+    titleHighlight: "y te digo por dónde empezar",
+    recommendation: "Recomendación",
+    bestFor: "Top para",
+    iban: "IBAN",
+    monthlyFee: "Cuota mensual",
+    viewAnalysis: "Ver análisis",
+    officialSite: "Web oficial",
+    seeAlternatives: "Ver alternativas",
+    missingBank: "No hemos encontrado datos para este banco.",
   },
-  {
-    id: "viajero",
-    label: "Viajero",
-    icon: Plane,
-    text: "Tarjetas con buen tipo de cambio y gestión multidivisa.",
-    recommendedBank: "revolut",
+  en: {
+    titlePrefix: "Tell me who you are,",
+    titleHighlight: "and I’ll tell you where to start",
+    recommendation: "Recommendation",
+    bestFor: "Best for",
+    iban: "IBAN",
+    monthlyFee: "Monthly fee",
+    viewAnalysis: "View analysis",
+    officialSite: "Official site",
+    seeAlternatives: "See alternatives",
+    missingBank: "We couldn’t find data for this bank.",
   },
-  {
-    id: "nomina",
-    label: "Cuenta nómina",
-    icon: Home,
-    text: "Cuenta principal para recibos, domiciliaciones y el día a día.",
-    recommendedBank: "n26",
-  },
-  {
-    id: "negocios",
-    label: "Autónomos / Pymes",
-    icon: Users,
-    text: "Subcuentas y organización de impuestos y gastos sin líos.",
-    recommendedBank: "bunq",
-  },
-];
+} as const;
 
 export default function UseCases() {
-  const [active, setActive] = useState(CASES[0].id);
+  const { locale } = useLocale();
+  const cases = CASES_BY_LOCALE[locale];
+  const copy = COPY[locale];
+
+  const [active, setActive] = useState<string>(cases[0].id);
+
+  useEffect(() => {
+    setActive(cases[0].id);
+  }, [cases]);
 
   const currentCase = useMemo(
-    () => CASES.find((c) => c.id === active) ?? CASES[0],
-    [active]
+    () => cases.find((c) => c.id === active) ?? cases[0],
+    [active, cases]
   );
 
   const recommended = useMemo(
@@ -63,15 +131,15 @@ export default function UseCases() {
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             <div className="space-y-6 lg:col-span-5">
               <h2 className="text-balance text-3xl font-black leading-tight md:text-4xl">
-                Dime quién eres,{" "}
+                {copy.titlePrefix}{" "}
                 <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
-                  y te digo por dónde empezar
+                  {copy.titleHighlight}
                 </span>
                 .
               </h2>
 
               <div className="grid gap-3">
-                {CASES.map((c) => {
+                {cases.map((c) => {
                   const Icon = c.icon;
                   const isActive = c.id === active;
 
@@ -127,7 +195,7 @@ export default function UseCases() {
             <div className="lg:col-span-7">
               <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                  Recomendación
+                  {copy.recommendation}
                 </p>
 
                 <AnimatePresence mode="wait">
@@ -157,7 +225,7 @@ export default function UseCases() {
                           </div>
                           <div className="min-w-0">
                             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                              Top para {currentCase.label}
+                              {copy.bestFor} {currentCase.label}
                             </p>
                             <h3 className="mt-1 text-2xl font-black tracking-tight">
                               {recommended.name}{" "}
@@ -171,7 +239,7 @@ export default function UseCases() {
                         <div className="mt-6 grid gap-4 text-sm sm:grid-cols-2">
                           <div className="rounded-xl border-2 border-border bg-card p-4">
                             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                              IBAN
+                              {copy.iban}
                             </p>
                             <p className="mt-2 font-semibold">
                               {recommended.ibanPrefix} ({recommended.ibanCountry})
@@ -179,7 +247,7 @@ export default function UseCases() {
                           </div>
                           <div className="rounded-xl border-2 border-border bg-card p-4">
                             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                              Cuota mensual
+                              {copy.monthlyFee}
                             </p>
                             <p className="mt-2 font-semibold">
                               {recommended.fees.monthly}
@@ -193,10 +261,10 @@ export default function UseCases() {
                             size="sm"
                             className="w-full flex-1 gap-2"
                           >
-                            <Link href={`/programas/${recommended.slug}`}>
-                              Ver análisis
+                            <LocalizedLink href={`/programas/${recommended.slug}`}>
+                              {copy.viewAnalysis}
                               <ArrowRight className="h-4 w-4" />
-                            </Link>
+                            </LocalizedLink>
                           </Button>
 
                           {recommended.affiliateUrl ? (
@@ -213,7 +281,7 @@ export default function UseCases() {
                                 target="_blank"
                                 rel="noreferrer noopener"
                               >
-                                Web oficial
+                                {copy.officialSite}
                               </a>
                             </Button>
                           ) : (
@@ -223,14 +291,16 @@ export default function UseCases() {
                               variant="outline"
                               className="w-full flex-1"
                             >
-                              <Link href="/bancos">Ver alternativas</Link>
+                              <LocalizedLink href="/bancos">
+                                {copy.seeAlternatives}
+                              </LocalizedLink>
                             </Button>
                           )}
                         </div>
                       </div>
                     ) : (
                       <p className="text-sm text-secondary-foreground/80">
-                        No hemos encontrado datos para este banco.
+                        {copy.missingBank}
                       </p>
                     )}
                   </motion.div>
@@ -243,4 +313,3 @@ export default function UseCases() {
     </section>
   );
 }
-

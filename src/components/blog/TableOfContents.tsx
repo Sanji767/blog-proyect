@@ -4,6 +4,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { List } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
 type Heading = {
   id: string;
@@ -62,15 +63,18 @@ function parseHeadingsFromDom(): Heading[] {
 
 export default function TableOfContents({
   content,
-  title = "En esta página",
+  title,
   className,
 }: {
   content?: string;
   title?: string;
   className?: string;
 }) {
+  const { locale } = useLocale();
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const resolvedTitle = title ?? (locale === "en" ? "On this page" : "En esta página");
+  const ariaLabel = locale === "en" ? "Table of contents" : "Tabla de contenidos";
 
   const fromMarkdown = useMemo(() => {
     if (!content) return null;
@@ -142,11 +146,11 @@ export default function TableOfContents({
         "not-prose rounded-2xl border-2 border-secondary bg-secondary p-5 text-secondary-foreground shadow-soft",
         className
       )}
-      aria-label="Tabla de contenidos"
+      aria-label={ariaLabel}
     >
       <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-primary">
         <List className="h-4 w-4 text-accent" />
-        {title}
+        {resolvedTitle}
       </div>
 
       <ul className="mt-4 space-y-1.5 text-sm">

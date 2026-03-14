@@ -1,44 +1,77 @@
 // src/components/sections/home/HomeHowItWorks.tsx
 
 import Container from "@/components/layout/Container";
+import type { Locale } from "@/lib/i18n";
 
-const steps = [
-  {
-    step: "1",
-    title: "Elige tu perfil",
-    desc: "Remoto, viajero, nómina, autónomo… cada caso tiene requisitos distintos (IBAN, países admitidos, límites).",
+const COPY = {
+  es: {
+    kicker: "Cómo funciona",
+    titlePrefix: "Tres pasos.",
+    titleHighlight: "Cero ruido.",
+    desc: "FinanzasEU no es un banco ni una asesoría cara. Es una guía para descartar lo que no te sirve y quedarte con lo que sí.",
+    steps: [
+      {
+        step: "1",
+        title: "Elige tu perfil",
+        desc: "Remoto, viajero, nómina, autónomo… cada caso tiene requisitos distintos (IBAN, países admitidos, límites).",
+      },
+      {
+        step: "2",
+        title: "Compara con criterios claros",
+        desc: "Comisiones, IBAN, requisitos y letra pequeña: fichas rápidas para entender pros y contras sin humo.",
+      },
+      {
+        step: "3",
+        title: "Decide y pasa a la acción",
+        desc: "Lee el análisis completo, valida tu IBAN si lo necesitas y abre la cuenta en la web oficial.",
+      },
+    ],
   },
-  {
-    step: "2",
-    title: "Compara con criterios claros",
-    desc: "Comisiones, IBAN, requisitos y letra pequeña: fichas rápidas para entender pros y contras sin humo.",
+  en: {
+    kicker: "How it works",
+    titlePrefix: "Three steps.",
+    titleHighlight: "Zero noise.",
+    desc: "FinanzasEU isn’t a bank and isn’t pricey advice. It’s an editorial guide to discard what doesn’t fit and keep what does.",
+    steps: [
+      {
+        step: "1",
+        title: "Pick your profile",
+        desc: "Remote, travel, salary, self-employed… each case has different requirements (IBAN, eligibility, limits).",
+      },
+      {
+        step: "2",
+        title: "Compare with clear criteria",
+        desc: "Fees, IBAN, requirements and fine print: quick cards to understand pros and cons without fluff.",
+      },
+      {
+        step: "3",
+        title: "Decide and take action",
+        desc: "Read the full analysis, validate your IBAN if needed, and open the account on the official website.",
+      },
+    ],
   },
-  {
-    step: "3",
-    title: "Decide y pasa a la acción",
-    desc: "Lee el análisis completo, valida tu IBAN si lo necesitas y abre la cuenta en la web oficial.",
-  },
-];
+} as const;
 
-export default function HomeHowItWorks() {
+export default function HomeHowItWorks({ locale = "es" }: { locale?: Locale }) {
+  const copy = COPY[locale];
+  const steps = copy.steps;
   return (
     <section className="border-t border-border bg-background py-16 md:py-24">
       <Container>
         <header className="mx-auto mb-10 max-w-3xl space-y-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-            Cómo funciona
+            {copy.kicker}
           </p>
 
           <h2 className="text-balance text-3xl font-black tracking-tight md:text-5xl">
-            Tres pasos.{" "}
+            {copy.titlePrefix}{" "}
             <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
-              Cero ruido.
+              {copy.titleHighlight}
             </span>
           </h2>
 
           <p className="text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
-            FinanzasEU no es un banco ni una asesoría cara. Es una guía para
-            descartar lo que no te sirve y quedarte con lo que sí.
+            {copy.desc}
           </p>
         </header>
 
@@ -76,4 +109,3 @@ export default function HomeHowItWorks() {
     </section>
   );
 }
-

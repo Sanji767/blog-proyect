@@ -5,30 +5,92 @@ import { ArrowRightLeft, Info, Landmark } from "lucide-react";
 import React, { useMemo, useState } from "react";
 
 import Container from "@/components/layout/Container";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
-const COMPARISON_DATA = [
-  {
-    name: "Banca tradicional (media)",
-    feePercent: 3.5,
-    fixedFee: 5.0,
-    isBank: true,
-    icon: <Landmark className="h-5 w-5" />,
+type ComparisonItem = {
+  name: string;
+  feePercent: number;
+  fixedFee: number;
+  isBank: boolean;
+  icon?: React.ReactNode;
+};
+
+const COMPARISON_DATA_BY_LOCALE: Record<"es" | "en", ComparisonItem[]> = {
+  es: [
+    {
+      name: "Banca tradicional (media)",
+      feePercent: 3.5,
+      fixedFee: 5.0,
+      isBank: true,
+      icon: <Landmark className="h-5 w-5" />,
+    },
+    {
+      name: "Revolut (Standard)",
+      feePercent: 0.5,
+      fixedFee: 0,
+      isBank: false,
+    },
+    {
+      name: "Wise",
+      feePercent: 0.41,
+      fixedFee: 0,
+      isBank: false,
+    },
+  ],
+  en: [
+    {
+      name: "Traditional bank (average)",
+      feePercent: 3.5,
+      fixedFee: 5.0,
+      isBank: true,
+      icon: <Landmark className="h-5 w-5" />,
+    },
+    {
+      name: "Revolut (Standard)",
+      feePercent: 0.5,
+      fixedFee: 0,
+      isBank: false,
+    },
+    {
+      name: "Wise",
+      feePercent: 0.41,
+      fixedFee: 0,
+      isBank: false,
+    },
+  ],
+};
+
+const COPY = {
+  es: {
+    kicker: "Calculadora de ahorro",
+    titlePrefix: "No dejes que las comisiones",
+    titleHighlight: "se coman tu dinero",
+    desc: "Mueve el selector para ver cuánto dinero llega realmente al destino cuando envías dinero al extranjero o pagas en otra divisa.",
+    amountLabel: "Cantidad a enviar",
+    estimatedFee: "Comisión estimada",
+    lostFeesSuffix: "en comisiones",
+    best: "Mejor opción",
+    note: "Ejemplo orientativo: las comisiones varían según entidad, plan, divisa y método de pago. En banca tradicional, el coste total puede incluir comisión + margen en el tipo de cambio.",
   },
-  {
-    name: "Revolut (Standard)",
-    feePercent: 0.5,
-    fixedFee: 0,
-    isBank: false,
+  en: {
+    kicker: "Savings calculator",
+    titlePrefix: "Don’t let fees",
+    titleHighlight: "eat your money",
+    desc: "Move the slider to see how much money actually arrives when you send money abroad or pay in another currency.",
+    amountLabel: "Amount to send",
+    estimatedFee: "Estimated fee",
+    lostFeesSuffix: "in fees",
+    best: "Best option",
+    note: "Illustrative example: fees vary by provider, plan, currency and payment method. With traditional banks, total cost can include a fee plus a margin on the FX rate.",
   },
-  {
-    name: "Wise",
-    feePercent: 0.41,
-    fixedFee: 0,
-    isBank: false,
-  },
-];
+} as const;
 
 export default function CurrencyComparison() {
+  const { locale } = useLocale();
+  const copy = COPY[locale];
+  const numberLocale = locale === "en" ? "en-US" : "es-ES";
+  const data = COMPARISON_DATA_BY_LOCALE[locale];
+
   const [amount, setAmount] = useState(1000);
 
   const calculateTotal = (val: number, feeP: number, fixed: number) => {
@@ -36,11 +98,11 @@ export default function CurrencyComparison() {
   };
 
   const bestTotal = useMemo(() => {
-    const totals = COMPARISON_DATA.map((item) =>
+    const totals = data.map((item) =>
       calculateTotal(amount, item.feePercent, item.fixedFee)
     );
     return Math.max(...totals);
-  }, [amount]);
+  }, [amount, data]);
 
   return (
     <section className="border-t border-border bg-muted/20 py-16 md:py-24">
@@ -49,30 +111,29 @@ export default function CurrencyComparison() {
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
               <ArrowRightLeft className="h-3.5 w-3.5" />
-              Calculadora de ahorro
+              {copy.kicker}
             </div>
 
             <h2 className="text-balance text-3xl font-black tracking-tight md:text-4xl">
-              No dejes que las comisiones{" "}
+              {copy.titlePrefix}{" "}
               <span className="inline-block border-2 border-secondary bg-background px-3 py-2 text-foreground shadow-offset-accent">
-                se coman tu dinero
+                {copy.titleHighlight}
               </span>
               .
             </h2>
 
             <p className="max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
-              Mueve el selector para ver cuánto dinero llega realmente al
-              destino cuando envías dinero al extranjero o pagas en otra divisa.
+              {copy.desc}
             </p>
 
             <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
               <div className="space-y-4">
                 <div className="flex items-end justify-between gap-4">
                   <label className="text-sm font-semibold text-foreground">
-                    Cantidad a enviar
+                    {copy.amountLabel}
                   </label>
                   <span className="text-3xl font-black text-foreground">
-                    {amount.toLocaleString("es-ES")} €
+                    {amount.toLocaleString(numberLocale)} €
                   </span>
                 </div>
 
@@ -88,8 +149,8 @@ export default function CurrencyComparison() {
 
                 <div className="flex justify-between text-[10px] font-mono uppercase text-muted-foreground">
                   <span>100 €</span>
-                  <span>5.000 €</span>
-                  <span>10.000 €</span>
+                  <span>{(5000).toLocaleString(numberLocale)} €</span>
+                  <span>{(10000).toLocaleString(numberLocale)} €</span>
                 </div>
               </div>
             </div>
@@ -97,7 +158,7 @@ export default function CurrencyComparison() {
 
           <div className="space-y-4">
             <AnimatePresence mode="popLayout">
-              {COMPARISON_DATA.map((item) => {
+              {data.map((item) => {
                 const total = calculateTotal(amount, item.feePercent, item.fixedFee);
                 const lost = amount - total;
                 const isWinner = !item.isBank && total === bestTotal;
@@ -128,7 +189,7 @@ export default function CurrencyComparison() {
                             {item.name}
                           </h3>
                           <p className="mt-1 text-[11px] text-secondary-foreground/75">
-                            Comisión estimada: {item.feePercent}%{" "}
+                            {copy.estimatedFee}: {item.feePercent}%{" "}
                             {item.fixedFee > 0 ? `+ ${item.fixedFee}€` : ""}
                           </p>
                         </div>
@@ -136,21 +197,21 @@ export default function CurrencyComparison() {
 
                       <div className="text-right">
                         <span className="block text-lg font-black tracking-tight">
-                          {total.toLocaleString("es-ES", {
+                          {total.toLocaleString(numberLocale, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}{" "}
                           €
                         </span>
                         <span className="text-[11px] font-medium text-destructive">
-                          -{lost.toLocaleString("es-ES")} € en comisiones
+                          -{lost.toLocaleString(numberLocale)} € {copy.lostFeesSuffix}
                         </span>
                       </div>
                     </div>
 
                     {isWinner ? (
                       <div className="absolute -top-2 -right-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
-                        Mejor opción
+                        {copy.best}
                       </div>
                     ) : null}
                   </motion.div>
@@ -161,9 +222,7 @@ export default function CurrencyComparison() {
             <div className="flex gap-3 rounded-2xl border-2 border-border bg-card p-5 text-foreground shadow-soft">
               <Info className="h-5 w-5 shrink-0 text-primary" />
               <p className="text-[11px] leading-relaxed text-muted-foreground">
-                Ejemplo orientativo: las comisiones varían según entidad, plan,
-                divisa y método de pago. En banca tradicional, el coste total
-                puede incluir comisión + margen en el tipo de cambio.
+                {copy.note}
               </p>
             </div>
           </div>

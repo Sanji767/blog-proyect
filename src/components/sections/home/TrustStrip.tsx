@@ -1,14 +1,25 @@
 // src/components/sections/home/TrustStrip.tsx
 import { ShieldCheck, Landmark, Gavel, Globe } from "lucide-react";
 import Container from "@/components/layout/Container";
+import type { Locale } from "@/lib/i18n";
 
-export default function TrustStrip() {
-  const signals = [
+const SIGNALS_BY_LOCALE = {
+  es: [
     { name: "Licencia y supervisión", icon: Landmark },
     { name: "Garantía de depósitos", icon: ShieldCheck },
     { name: "Comisiones claras", icon: Gavel },
     { name: "IBAN / SEPA", icon: Globe },
-  ];
+  ],
+  en: [
+    { name: "License & regulation", icon: Landmark },
+    { name: "Deposit protection", icon: ShieldCheck },
+    { name: "Clear fees", icon: Gavel },
+    { name: "IBAN / SEPA", icon: Globe },
+  ],
+} as const;
+
+export default function TrustStrip({ locale = "es" }: { locale?: Locale }) {
+  const signals = SIGNALS_BY_LOCALE[locale];
 
   return (
     <div className="border-y-2 border-border bg-muted py-6">
@@ -27,4 +38,3 @@ export default function TrustStrip() {
     </div>
   );
 }
-

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import VlogsPageEs, { metadata as metadataEs } from "@/app/vlogs/page";
+import { metadata as metadataEs } from "@/app/vlogs/page";
 
 export const metadata: Metadata = {
   ...(metadataEs as Metadata),
@@ -20,6 +20,7 @@ type Props = {
 };
 
 export default function VlogsPageEn(props: Props) {
+  void props;
   return (
     <>
       <section className="py-10 md:py-14">
@@ -39,11 +40,6 @@ export default function VlogsPageEn(props: Props) {
           </div>
         </div>
       </section>
-
-      <div lang="es">
-        <VlogsPageEs {...props} />
-      </div>
     </>
   );
 }
-

@@ -5,41 +5,85 @@ import { motion } from "framer-motion";
 import { Clock3, CreditCard, Globe2, ShieldCheck } from "lucide-react";
 
 import Container from "@/components/layout/Container";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 
-const BENEFITS = [
-  {
-    icon: ShieldCheck,
-    title: "Seguridad y supervisión",
-    description:
-      "Fichas con licencia, supervisión y garantías (según país) para saber qué estás abriendo.",
+const COPY = {
+  es: {
+    kicker: "Por qué importa",
+    titlePrefix: "Menos comisiones.",
+    titleHighlight: "Más control.",
+    desc: "Una experiencia premium no es “más diseño”: es quitar fricción y dejar solo lo que te ayuda a decidir mejor.",
+    items: [
+      {
+        icon: ShieldCheck,
+        title: "Seguridad y supervisión",
+        description:
+          "Fichas con licencia, supervisión y garantías (según país) para saber qué estás abriendo.",
+      },
+      {
+        icon: Globe2,
+        title: "Multidivisa, de verdad",
+        description:
+          "Opciones para cobrar y pagar en varias divisas con IBAN y operativa real para el día a día.",
+      },
+      {
+        icon: CreditCard,
+        title: "Comisiones al descubierto",
+        description:
+          "Costes reales (cambio de divisa, cajeros, tarjeta) sin letra pequeña disfrazada.",
+      },
+      {
+        icon: Clock3,
+        title: "Ahorra tiempo (y dudas)",
+        description:
+          "Menos ruido: una selección editorial para decidir rápido con criterios claros y comparables.",
+      },
+    ],
   },
-  {
-    icon: Globe2,
-    title: "Multidivisa, de verdad",
-    description:
-      "Opciones para cobrar y pagar en varias divisas con IBAN y operativa real para el día a día.",
+  en: {
+    kicker: "Why it matters",
+    titlePrefix: "Fewer fees.",
+    titleHighlight: "More control.",
+    desc: "A premium experience isn’t “more design”: it’s removing friction and keeping only what helps you decide better.",
+    items: [
+      {
+        icon: ShieldCheck,
+        title: "Security & regulation",
+        description:
+          "Cards with license, supervision and guarantees (when applicable) so you know what you’re opening.",
+      },
+      {
+        icon: Globe2,
+        title: "Real multi-currency",
+        description:
+          "Options to get paid and spend in multiple currencies, with IBAN and day-to-day usability.",
+      },
+      {
+        icon: CreditCard,
+        title: "Fees made explicit",
+        description:
+          "Real costs (FX, ATMs, cards) without fine print disguised as marketing.",
+      },
+      {
+        icon: Clock3,
+        title: "Save time (and doubt)",
+        description:
+          "Less noise: an editorial selection so you can decide fast with clear, comparable criteria.",
+      },
+    ],
   },
-  {
-    icon: CreditCard,
-    title: "Comisiones al descubierto",
-    description:
-      "Costes reales (cambio de divisa, cajeros, tarjeta) sin letra pequeña disfrazada.",
-  },
-  {
-    icon: Clock3,
-    title: "Ahorra tiempo (y dudas)",
-    description:
-      "Menos ruido: una selección editorial para decidir rápido con criterios claros y comparables.",
-  },
-];
+} as const;
 
 export default function Benefits() {
+  const { locale } = useLocale();
+  const copy = COPY[locale];
+
   return (
     <section className="border-t border-border bg-background py-16 md:py-24">
       <Container>
         <div className="mx-auto mb-12 max-w-3xl space-y-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-            Por qué importa
+            {copy.kicker}
           </p>
 
           <motion.h2
@@ -49,20 +93,19 @@ export default function Benefits() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-balance text-3xl font-black leading-tight md:text-5xl"
           >
-            Menos comisiones.{" "}
+            {copy.titlePrefix}{" "}
             <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
-              Más control.
+              {copy.titleHighlight}
             </span>
           </motion.h2>
 
           <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-            Una experiencia premium no es “más diseño”: es quitar fricción y
-            dejar solo lo que te ayuda a decidir mejor.
+            {copy.desc}
           </p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {BENEFITS.map((item, idx) => (
+          {copy.items.map((item, idx) => (
             <motion.article
               key={item.title}
               initial={{ opacity: 0, y: 22 }}
@@ -91,4 +134,3 @@ export default function Benefits() {
     </section>
   );
 }
-

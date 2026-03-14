@@ -2,7 +2,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { HiBars3, HiOutlineXMark } from "react-icons/hi2";
 
 import Container from "@/components/layout/Container";
@@ -98,7 +98,9 @@ export default function Header() {
               </LocalizedLink>
             );
           })}
-          <LanguageSwitch />
+          <Suspense fallback={null}>
+            <LanguageSwitch />
+          </Suspense>
         </nav>
 
         <div className="lg:hidden">
@@ -138,7 +140,9 @@ export default function Header() {
                   </LocalizedLink>
                 );
               })}
-              <LanguageSwitch className="w-fit" />
+              <Suspense fallback={null}>
+                <LanguageSwitch className="w-fit" />
+              </Suspense>
             </nav>
           </div>
         </div>

@@ -69,14 +69,14 @@ export default function HomePageEn() {
       <Hero />
 
       {/* 2. Trust / authority */}
-      <TrustStrip />
+      <TrustStrip locale={locale} />
 
       {/* 3. Features + segmentation */}
-      <Features />
+      <Features locale={locale} />
       <UseCases />
 
       {/* 3.1 Methodology */}
-      <RankingMethodology lastUpdatedLabel={lastUpdatedLabel} />
+      <RankingMethodology locale={locale} lastUpdatedLabel={lastUpdatedLabel} />
 
       {/* 4. Tool: IBAN validator */}
       <section className="border-t border-border bg-muted/30 py-16 md:py-24">
@@ -167,13 +167,12 @@ export default function HomePageEn() {
       <CurrencyComparison />
 
       {/* 7. Content + FAQ */}
-      <HomeHowItWorks />
-      <HomeVlogsPreview />
-      <HomeFaqPreview />
+      <HomeHowItWorks locale={locale} />
+      <HomeVlogsPreview locale={locale} />
+      <HomeFaqPreview locale={locale} />
 
       {/* 8. Conversion */}
-      <CtaSection />
+      <CtaSection locale={locale} />
     </>
   );
 }
-

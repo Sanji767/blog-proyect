@@ -20,6 +20,7 @@ export const postPreviewFields = groq`
 export const allPostPreviewsQuery = groq`
   *[
     _type == "post" &&
+    coalesce(language, "es") == $locale &&
     defined(slug.current) &&
     defined(publishedAt) &&
     publishedAt <= now() &&
@@ -33,6 +34,7 @@ export const allPostPreviewsQuery = groq`
 export const postBySlugQuery = groq`
   *[
     _type == "post" &&
+    coalesce(language, "es") == $locale &&
     slug.current == $slug &&
     defined(publishedAt) &&
     publishedAt <= now() &&
@@ -52,6 +54,7 @@ export const postBySlugQuery = groq`
 export const allPostSlugsQuery = groq`
   *[
     _type == "post" &&
+    coalesce(language, "es") == $locale &&
     defined(slug.current) &&
     defined(publishedAt) &&
     publishedAt <= now() &&
@@ -64,6 +67,7 @@ export const allPostSlugsQuery = groq`
 export const postsByTagQuery = groq`
   *[
     _type == "post" &&
+    coalesce(language, "es") == $locale &&
     defined(slug.current) &&
     defined(publishedAt) &&
     publishedAt <= now() &&
@@ -78,6 +82,7 @@ export const postsByTagQuery = groq`
 export const postsByCategoryQuery = groq`
   *[
     _type == "post" &&
+    coalesce(language, "es") == $locale &&
     defined(slug.current) &&
     defined(publishedAt) &&
     publishedAt <= now() &&
@@ -88,4 +93,3 @@ export const postsByCategoryQuery = groq`
     ${postPreviewFields}
   }
 `;
-
