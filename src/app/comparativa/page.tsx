@@ -10,7 +10,13 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: "/comparativa" },
+  alternates: {
+    canonical: "/comparativa",
+    languages: {
+      es: "/comparativa",
+      en: "/en/comparativa",
+    },
+  },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -103,4 +109,3 @@ export default function ComparativaPage() {
     </>
   );
 }
-

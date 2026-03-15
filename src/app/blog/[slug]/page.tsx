@@ -15,6 +15,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import TableOfContents from "@/components/blog/TableOfContents";
 import EditorialPostRow from "@/components/blog/EditorialPostRow";
 import PortableTextRenderer from "@/components/blog/PortableTextRenderer";
+import LeadCaptureInline from "@/components/leads/LeadCaptureInline";
 import { getAllPostPreviews, getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { extractFaqFromMarkdown } from "@/lib/blog/extractFaq";
 import { stripLeadingMarkdownH1 } from "@/lib/blog/markdown";
@@ -391,6 +392,8 @@ export default async function BlogPostPage({
           ) : null}
         </section>
       </article>
+
+      <LeadCaptureInline source={`blog:${post.slug}`} />
 
       <section className="mt-14 overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent md:p-10">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">

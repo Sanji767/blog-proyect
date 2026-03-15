@@ -36,6 +36,10 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/en",
+    languages: {
+      es: "/",
+      en: "/en",
+    },
   },
   openGraph: {
     title: "Digital bank comparison in Europe (2026) + IBAN validator",

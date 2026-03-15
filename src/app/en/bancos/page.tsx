@@ -16,6 +16,10 @@ export const metadata: Metadata = {
     "Compare European banks and neobanks like Revolut, N26, Wise or bunq. Filter by IBAN, fees, requirements, multi-currency features and more.",
   alternates: {
     canonical: "https://finanzaseu.com/en/bancos",
+    languages: {
+      es: "https://finanzaseu.com/bancos",
+      en: "https://finanzaseu.com/en/bancos",
+    },
   },
   openGraph: {
     title: "European banks comparison 2026",
@@ -272,7 +276,7 @@ function BankCard({ bank, locale }: { bank: Bank; locale: "en" }) {
               data-analytics="affiliate"
               data-affiliate-partner={slug}
               target="_blank"
-              rel="noreferrer noopener"
+              rel="noreferrer noopener sponsored"
             >
               Go directly to {name}
             </a>
@@ -379,4 +383,3 @@ function Metric({
     </div>
   );
 }
-

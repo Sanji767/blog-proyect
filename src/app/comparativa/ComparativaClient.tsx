@@ -904,7 +904,7 @@ export default function ComparativaPage() {
                         data-analytics="affiliate"
                         data-affiliate-partner={bank.slug}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer sponsored"
                       >
                         Abrir cuenta
                         <ExternalLink className="ml-1 h-3 w-3" />
@@ -1182,7 +1182,7 @@ export default function ComparativaPage() {
                                 data-analytics="affiliate"
                                 data-affiliate-partner={bank.slug}
                                 target="_blank"
-                                rel="noopener noreferrer"
+                                rel="noopener noreferrer sponsored"
                               >
                                 Abrir cuenta
                                 <ExternalLink className="ml-1 h-3 w-3" />

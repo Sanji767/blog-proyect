@@ -12,6 +12,10 @@ export const metadata: Metadata = {
     "Conoce quién está detrás de FinanzasEU, cómo analizamos bancos y cuentas en Europa y cómo mantenemos la transparencia (afiliados, fuentes oficiales y actualización).",
   alternates: {
     canonical: "/sobre",
+    languages: {
+      es: "/sobre",
+      en: "/en/sobre",
+    },
   },
 };
 
@@ -159,4 +163,3 @@ export default function SobrePage() {
     </section>
   );
 }
-

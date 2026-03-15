@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   description: BLOG_PAGE_DESCRIPTION,
   alternates: {
     canonical: "/blog",
+    languages: {
+      es: "/blog",
+      en: "/en/blog",
+    },
   },
 };
 

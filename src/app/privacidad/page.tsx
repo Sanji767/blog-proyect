@@ -4,6 +4,13 @@ export const metadata: Metadata = {
   title: "Política de Privacidad | FinanzasEU",
   description:
     "Información sobre privacidad en FinanzasEU: qué datos se recogen, para qué se usan y cómo protegemos tu información.",
+  alternates: {
+    canonical: "/privacidad",
+    languages: {
+      es: "/privacidad",
+      en: "/en/privacidad",
+    },
+  },
 };
 
 export default function Privacidad() {

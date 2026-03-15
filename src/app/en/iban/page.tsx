@@ -10,7 +10,13 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: "/en/iban" },
+  alternates: {
+    canonical: "/en/iban",
+    languages: {
+      es: "/iban",
+      en: "/en/iban",
+    },
+  },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -104,4 +110,3 @@ export default function IbanPageEn() {
     </section>
   );
 }
-

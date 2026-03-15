@@ -151,7 +151,7 @@ export default function BankCard({ bank, showDirectLink = true }: BankCardProps)
               data-analytics="affiliate"
               data-affiliate-partner={bank.slug}
               target="_blank"
-              rel="noreferrer noopener"
+              rel="noreferrer noopener sponsored"
             >
               Ir directamente a {bank.name}
             </a>

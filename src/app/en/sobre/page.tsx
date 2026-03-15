@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     "Learn who is behind FinanzasEU, how we analyze banks and accounts in Europe, and how we keep transparency (affiliate links, official sources and updates).",
   alternates: {
     canonical: "/en/sobre",
+    languages: {
+      es: "/sobre",
+      en: "/en/sobre",
+    },
   },
   openGraph: {
     title: "About FinanzasEU",
@@ -170,4 +174,3 @@ export default function SobrePageEn() {
     </section>
   );
 }
-

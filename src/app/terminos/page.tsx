@@ -4,6 +4,13 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Términos y Condiciones de Uso | FinanzasEU",
   description: "Condiciones legales de uso de FinanzasEU – web independiente de información financiera.",
+  alternates: {
+    canonical: "/terminos",
+    languages: {
+      es: "/terminos",
+      en: "/en/terminos",
+    },
+  },
 };
 
 export default function Terminos() {

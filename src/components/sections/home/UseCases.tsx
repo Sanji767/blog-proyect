@@ -279,7 +279,7 @@ export default function UseCases() {
                                 data-analytics="affiliate"
                                 data-affiliate-partner={recommended.slug}
                                 target="_blank"
-                                rel="noreferrer noopener"
+                                rel="noreferrer noopener sponsored"
                               >
                                 {copy.officialSite}
                               </a>

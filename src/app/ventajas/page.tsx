@@ -21,6 +21,13 @@ export const metadata: Metadata = {
   title: "Ventajas de los bancos digitales en Europa | FinanzasEU",
   description:
     "Análisis independiente de las ventajas reales de los bancos digitales en Europa: comisiones, IBAN, seguridad, multidivisa y soporte. Actualizado en 2026.",
+  alternates: {
+    canonical: "/ventajas",
+    languages: {
+      es: "/ventajas",
+      en: "/en/ventajas",
+    },
+  },
 };
 
 const LAST_UPDATE = "Febrero 2026";
@@ -234,4 +241,3 @@ export default function VentajasPage() {
     </>
   );
 }
-

@@ -3,6 +3,13 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Aviso de Afiliados - FinanzasEU",
   description: "Transparencia total: explicamos cómo ganamos dinero y por qué nuestras recomendaciones siguen siendo 100% honestas.",
+  alternates: {
+    canonical: "/aviso-afiliados",
+    languages: {
+      es: "/aviso-afiliados",
+      en: "/en/aviso-afiliados",
+    },
+  },
 };
 
 export default function AvisoAfiliados() {

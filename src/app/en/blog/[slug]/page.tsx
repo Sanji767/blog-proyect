@@ -11,6 +11,7 @@ import rehypeExternalLinks from "rehype-external-links";
 
 import TableOfContents from "@/components/blog/TableOfContents";
 import PortableTextRenderer from "@/components/blog/PortableTextRenderer";
+import LeadCaptureInline from "@/components/leads/LeadCaptureInline";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { stripLeadingMarkdownH1 } from "@/lib/blog/markdown";
 
@@ -144,6 +145,8 @@ export default async function BlogPostPageEn({ params }: { params: { slug: strin
           </div>
         </aside>
       </section>
+
+      <LeadCaptureInline source={`blog:${post.slug}`} />
     </article>
   );
 }

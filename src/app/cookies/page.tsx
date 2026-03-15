@@ -4,6 +4,13 @@ export const metadata = {
   title: "Política de Cookies | FinanzasEU",
   description:
     "Información sobre el uso de cookies en FinanzasEU: qué son, qué tipos utilizamos y cómo puedes gestionarlas.",
+  alternates: {
+    canonical: "/cookies",
+    languages: {
+      es: "/cookies",
+      en: "/en/cookies",
+    },
+  },
 };
 
 export default function CookiesPage() {

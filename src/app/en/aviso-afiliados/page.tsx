@@ -1,39 +1,43 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-
-import AvisoAfiliadosEs, { metadata as metadataEs } from "@/app/aviso-afiliados/page";
 
 export const metadata: Metadata = {
-  ...(metadataEs as Metadata),
-  robots: { index: false, follow: true },
-  alternates: { canonical: "/aviso-afiliados" },
+  title: "Affiliate Disclosure | FinanzasEU",
+  description:
+    "Full transparency: how FinanzasEU makes money and why recommendations remain honest and editorial.",
+  alternates: {
+    canonical: "/en/aviso-afiliados",
+    languages: {
+      es: "/aviso-afiliados",
+      en: "/en/aviso-afiliados",
+    },
+  },
+  openGraph: {
+    locale: "en_US",
+  },
 };
 
-export default function AvisoAfiliadosPageEn() {
+export default function AffiliateDisclosurePageEn() {
   return (
-    <>
-      <section className="py-10 md:py-14">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="rounded-2xl border-2 border-border bg-card p-5 text-sm text-muted-foreground shadow-soft">
-            <p className="font-semibold text-foreground">Spanish version</p>
-            <p className="mt-1">
-              Affiliate disclosure is currently available in Spanish:{" "}
-              <Link
-                href="/aviso-afiliados"
-                className="font-semibold text-foreground underline-offset-4 hover:underline"
-              >
-                /aviso-afiliados
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <div lang="es">
-        <AvisoAfiliadosEs />
+    <article className="container mx-auto max-w-4xl px-4 py-16">
+      <h1 className="mb-6 text-4xl font-black">Affiliate disclosure</h1>
+      <div className="prose dark:prose-invert max-w-none">
+        <p className="lead text-lg">
+          FinanzasEU aims to be fully transparent.
+        </p>
+        <p>
+          Some links on this website are affiliate links. This means that if you
+          open an account through them, FinanzasEU may receive a small commission{" "}
+          <strong>at no extra cost to you</strong>.
+        </p>
+        <p>
+          This helps keep the site free and up to date, but{" "}
+          <strong>it never influences our recommendations</strong>. We only
+          highlight banks and products we genuinely believe are useful and would
+          consider using ourselves.
+        </p>
+        <p className="font-bold text-primary">Trust comes first.</p>
       </div>
-    </>
+    </article>
   );
 }
 

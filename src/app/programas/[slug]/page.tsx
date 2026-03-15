@@ -310,7 +310,7 @@ export default function ProgramaPage({
                 data-analytics={hasAffiliate ? "affiliate" : undefined}
                 data-affiliate-partner={hasAffiliate ? params.slug : undefined}
                 target="_blank"
-                rel="noreferrer noopener"
+                rel={hasAffiliate ? "noopener noreferrer sponsored" : "noopener noreferrer"}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition hover:brightness-105"
               >
                 Abrir cuenta en {name}
@@ -906,7 +906,7 @@ export default function ProgramaPage({
               data-analytics={hasAffiliate ? "affiliate" : undefined}
               data-affiliate-partner={hasAffiliate ? params.slug : undefined}
               target="_blank"
-              rel="noreferrer noopener"
+              rel={hasAffiliate ? "noopener noreferrer sponsored" : "noopener noreferrer"}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground shadow-md transition hover:brightness-105"
             >
               Empezar ahora

@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   title: "Comparativa de bancos en Europa (2026) + validador IBAN",
   description:
     "Compara bancos con criterios claros (IBAN, comisiones y requisitos) y enlaces oficiales. Incluye validador de IBAN SEPA para comprobar datos antes de enviar dinero.",
+  alternates: {
+    canonical: "/",
+    languages: {
+      es: "/",
+      en: "/en",
+    },
+  },
   keywords: [
     "comparador de bancos",
     "mejor banco",
@@ -169,4 +176,3 @@ export default function HomePage() {
     </>
   );
 }
-

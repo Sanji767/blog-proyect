@@ -155,7 +155,7 @@ export default function HomeBanksPreview() {
                       data-analytics="affiliate"
                       data-affiliate-partner={bank.slug}
                       target="_blank"
-                      rel="noreferrer noopener"
+                      rel="noreferrer noopener sponsored"
                     >
                       {copy.officialSite}
                     </a>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import Container from "@/components/layout/Container";
+import ExchangeRatesWidget from "@/components/tools/ExchangeRatesWidget";
 import { SITE_URL, toJsonLd } from "@/lib/seo";
 
 const TITLE = "Herramientas financieras | FinanzasEU";
@@ -13,6 +14,10 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   alternates: {
     canonical: "/herramientas",
+    languages: {
+      es: "/herramientas",
+      en: "/en/herramientas",
+    },
   },
   openGraph: {
     title: TITLE,
@@ -174,6 +179,8 @@ export default function HerramientasPage() {
             ))}
           </nav>
         </header>
+
+        <ExchangeRatesWidget />
 
         {featured.length > 0 ? (
           <section className="grid gap-6 md:grid-cols-3">
