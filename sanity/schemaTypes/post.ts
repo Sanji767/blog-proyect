@@ -20,6 +20,7 @@ export default defineType({
         list: [
           { title: "Español", value: "es" },
           { title: "English", value: "en" },
+          { title: "Todos (Español e Inglés)", value: "all" },
         ],
         layout: "radio",
       },

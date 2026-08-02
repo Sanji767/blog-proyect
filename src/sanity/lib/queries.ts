@@ -22,11 +22,10 @@ export const allPostPreviewsQuery = groq`
     _type == "post" &&
     coalesce(language, "es") == $locale &&
     defined(slug.current) &&
-    defined(publishedAt) &&
-    publishedAt <= now() &&
+    coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**"))
   ]
-  | order(publishedAt desc) {
+  | order(coalesce(publishedAt, _createdAt) desc) {
     ${postPreviewFields}
   }
 `;
@@ -36,8 +35,7 @@ export const postBySlugQuery = groq`
     _type == "post" &&
     coalesce(language, "es") == $locale &&
     slug.current == $slug &&
-    defined(publishedAt) &&
-    publishedAt <= now() &&
+    coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**"))
   ][0] {
     ${postPreviewFields},
@@ -56,8 +54,7 @@ export const allPostSlugsQuery = groq`
     _type == "post" &&
     coalesce(language, "es") == $locale &&
     defined(slug.current) &&
-    defined(publishedAt) &&
-    publishedAt <= now() &&
+    coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**"))
   ]{
     "slug": slug.current
@@ -69,12 +66,11 @@ export const postsByTagQuery = groq`
     _type == "post" &&
     coalesce(language, "es") == $locale &&
     defined(slug.current) &&
-    defined(publishedAt) &&
-    publishedAt <= now() &&
+    coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**")) &&
     $tag in tags[]
   ]
-  | order(publishedAt desc) {
+  | order(coalesce(publishedAt, _createdAt) desc) {
     ${postPreviewFields}
   }
 `;
@@ -84,12 +80,11 @@ export const postsByCategoryQuery = groq`
     _type == "post" &&
     coalesce(language, "es") == $locale &&
     defined(slug.current) &&
-    defined(publishedAt) &&
-    publishedAt <= now() &&
+    coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**")) &&
     category == $category
   ]
-  | order(publishedAt desc) {
+  | order(coalesce(publishedAt, _createdAt) desc) {
     ${postPreviewFields}
   }
 `;

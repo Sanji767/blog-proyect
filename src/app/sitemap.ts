@@ -203,6 +203,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }),
   );
 
+  const activeBanksList = banks.filter((b) => b._status !== "draft");
+  for (let i = 0; i < activeBanksList.length; i++) {
+    for (let j = i + 1; j < activeBanksList.length; j++) {
+      const slug = `${activeBanksList[i].slug}-vs-${activeBanksList[j].slug}`;
+      urls.push({
+        url: toUrl(`/comparar/${slug}`),
+        lastModified: now,
+      });
+    }
+  }
+
   urls.push(
     ...vlogPreviews.flatMap((vlog) => {
       const esPath = `/vlogs/${vlog.slug}`;
