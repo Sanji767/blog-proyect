@@ -88,13 +88,14 @@ export default async function ComparisonPage({ params }: PageProps) {
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: toJsonLd(breadcrumbJsonLd) }}
-      />
+    <main className="py-12 md:py-20">
+      <Container className="space-y-12">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: toJsonLd(breadcrumbJsonLd) }}
+        />
 
-      <header className="space-y-6">
+        <header className="space-y-6">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
           <ShieldCheck className="h-4 w-4" /> Comparativa Frente a Frente (2026)
         </div>
@@ -275,6 +276,7 @@ export default async function ComparisonPage({ params }: PageProps) {
           )}
         </div>
       </section>
-    </>
+      </Container>
+    </main>
   );
 }
