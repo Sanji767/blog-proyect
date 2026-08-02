@@ -179,17 +179,6 @@ function readLocalPosts(locale: Locale): BlogPost[] {
 
 const getLocalPosts = cache((locale: Locale) => readLocalPosts(locale));
 
-const getLocalPostsMerged = cache((locale: Locale): BlogPost[] => {
-  const basePosts = getLocalPosts(DEFAULT_LOCALE);
-  if (locale === DEFAULT_LOCALE) return basePosts;
-
-  const localePosts = getLocalPosts(locale);
-  const map = new Map<string, BlogPost>();
-  basePosts.forEach((p) => map.set(p.slug, p));
-  localePosts.forEach((p) => map.set(p.slug, p)); // English overrides if present
-  return Array.from(map.values());
-});
-
 function toPreview(post: BlogPost): BlogPostPreview {
   const { content, ...rest } = post;
   void content;
@@ -198,9 +187,9 @@ function toPreview(post: BlogPost): BlogPostPreview {
 
 export const getAllPostPreviews = cache(
   async (locale: Locale = DEFAULT_LOCALE): Promise<BlogPostPreview[]> => {
-    const localMerged = getLocalPostsMerged(locale).map(toPreview);
+    const localPosts = getLocalPosts(locale).map(toPreview);
     const map = new Map<string, BlogPostPreview>();
-    localMerged.forEach((p) => map.set(p.slug, p));
+    localPosts.forEach((p) => map.set(p.slug, p));
 
     if (!sanityConfigured) {
       return Array.from(map.values()).sort(
@@ -316,8 +305,8 @@ export const getPostBySlug = cache(
       }
     }
 
-    const localMerged = getLocalPostsMerged(locale);
-    const found = localMerged.find((p) => p.slug === slugValue);
+    const localPosts = getLocalPosts(locale);
+    const found = localPosts.find((p) => p.slug === slugValue);
     return found ?? null;
   },
 );
