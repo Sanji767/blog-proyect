@@ -102,7 +102,8 @@ export default function ComparisonHubClient() {
   const copy = UI_COPY[locale];
   const router = useRouter();
 
-  const publishedBanks = banks.filter((b) => b._status === "published");
+  // Sort all banks alphabetically by name for easy selection
+  const availableBanks = [...banks].sort((a, b) => a.name.localeCompare(b.name));
 
   const [bank1, setBank1] = useState<string>("revolut");
   const [bank2, setBank2] = useState<string>("wise");
@@ -143,10 +144,10 @@ export default function ComparisonHubClient() {
             <select
               value={bank1}
               onChange={(e) => setBank1(e.target.value)}
-              className="w-full rounded-2xl border-2 border-secondary-foreground/15 bg-background p-3 text-sm font-bold text-secondary-foreground shadow-sm focus:border-accent focus:outline-none"
+              className="w-full rounded-2xl border-2 border-accent/40 bg-background p-3.5 text-sm font-bold text-foreground shadow-sm focus:border-accent focus:outline-none dark:bg-slate-900 dark:text-white"
             >
-              {publishedBanks.map((b) => (
-                <option key={b.slug} value={b.slug}>
+              {availableBanks.map((b) => (
+                <option key={b.slug} value={b.slug} className="bg-background text-foreground dark:bg-slate-900 dark:text-white py-1">
                   {b.name} ({b.ibanPrefix || b.country})
                 </option>
               ))}
@@ -166,10 +167,10 @@ export default function ComparisonHubClient() {
             <select
               value={bank2}
               onChange={(e) => setBank2(e.target.value)}
-              className="w-full rounded-2xl border-2 border-secondary-foreground/15 bg-background p-3 text-sm font-bold text-secondary-foreground shadow-sm focus:border-accent focus:outline-none"
+              className="w-full rounded-2xl border-2 border-accent/40 bg-background p-3.5 text-sm font-bold text-foreground shadow-sm focus:border-accent focus:outline-none dark:bg-slate-900 dark:text-white"
             >
-              {publishedBanks.map((b) => (
-                <option key={b.slug} value={b.slug}>
+              {availableBanks.map((b) => (
+                <option key={b.slug} value={b.slug} className="bg-background text-foreground dark:bg-slate-900 dark:text-white py-1">
                   {b.name} ({b.ibanPrefix || b.country})
                 </option>
               ))}
@@ -200,8 +201,8 @@ export default function ComparisonHubClient() {
 
         <div className="grid gap-6 md:grid-cols-2">
           {POPULAR_DUELS.map((duel) => {
-            const b1 = publishedBanks.find((b) => b.slug === duel.slug1);
-            const b2 = publishedBanks.find((b) => b.slug === duel.slug2);
+            const b1 = availableBanks.find((b) => b.slug === duel.slug1);
+            const b2 = availableBanks.find((b) => b.slug === duel.slug2);
             if (!b1 || !b2) return null;
 
             const comparisonSlug = `${duel.slug1}-vs-${duel.slug2}`;
