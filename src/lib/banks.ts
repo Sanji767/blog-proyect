@@ -656,6 +656,7 @@ export const banks: Bank[] = [
     slug: "santander",
     name: "Banco Santander",
     shortName: "Santander",
+    logo: "/logos/santander.svg",
     tagline: "Banco español con IBAN ES, app completa y oferta amplia",
     description:
       "Banco tradicional español con presencia internacional. Ofrece cuentas, tarjetas y servicios para particulares y empresas; las condiciones varían según el producto.",
@@ -700,6 +701,7 @@ export const banks: Bank[] = [
     slug: "bbva",
     name: "BBVA",
     shortName: "BBVA",
+    logo: "/logos/bbva.svg",
     tagline: "Banco español con IBAN ES y alta online (según cuenta)",
     description:
       "Entidad bancaria española con operativa digital avanzada. Ofrece cuentas, tarjetas y productos de ahorro/inversión; la disponibilidad y comisiones dependen del plan.",
@@ -770,6 +772,7 @@ export const banks: Bank[] = [
     slug: "openbank",
     name: "Openbank",
     shortName: "Openbank",
+    logo: "/logos/openbank.svg",
     tagline: "Banco digital con IBAN ES y apertura 100% online (según cuenta)",
     description:
       "Banco digital orientado a operativa online. Suele encajar si priorizas gestión desde app/web; las condiciones y comisiones dependen del producto.",
@@ -805,6 +808,7 @@ export const banks: Bank[] = [
     slug: "ing",
     name: "ING",
     shortName: "ING",
+    logo: "/logos/ing.svg",
     tagline: "Banco europeo con cuenta en España (IBAN ES) y operativa online",
     description:
       "Banco europeo con operativa online en España. Oferta de cuentas y tarjetas orientada a gestión digital; condiciones y comisiones dependen del plan.",
@@ -946,6 +950,7 @@ export const banks: Bank[] = [
     slug: "myinvestor",
     name: "MyInvestor",
     shortName: "MyInvestor",
+    logo: "/logos/myinvestor.svg",
     tagline: "Plataforma fintech con cuenta e inversión (según producto)",
     country: "España",
     headquarters: "Madrid",
@@ -1000,6 +1005,7 @@ export const banks: Bank[] = [
     slug: "trade-republic",
     name: "Trade Republic",
     shortName: "Trade Republic",
+    logo: "/logos/trade-republic.svg",
     tagline: "Fintech alemana para ahorro/inversión con operativa digital",
     country: "Alemania",
     headquarters: "Berlín",
