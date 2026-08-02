@@ -189,7 +189,15 @@ export default function HomeBanksPreview() {
                         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary-foreground/70">
                           {copy.monthlyFee}
                         </p>
-                        <p className="mt-2 font-semibold">{bank.fees.monthly}</p>
+                        <p className="mt-2 font-semibold">
+                          {locale === "en"
+                            ? bank.fees.monthly
+                                .replace(/gratis/gi, "Free")
+                                .replace(/0\s*€/g, "Free (€0)")
+                                .replace(/Desde 0\s*€/gi, "From €0")
+                                .replace(/según condiciones/gi, "depending on plan")
+                            : bank.fees.monthly}
+                        </p>
                       </div>
                     </div>
                   </div>

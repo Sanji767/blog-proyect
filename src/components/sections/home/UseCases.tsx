@@ -250,7 +250,13 @@ export default function UseCases() {
                               {copy.monthlyFee}
                             </p>
                             <p className="mt-2 font-semibold">
-                              {recommended.fees.monthly}
+                              {locale === "en"
+                                ? recommended.fees.monthly
+                                    .replace(/gratis/gi, "Free")
+                                    .replace(/0\s*€/g, "Free (€0)")
+                                    .replace(/Desde 0\s*€/gi, "From €0")
+                                    .replace(/según condiciones/gi, "depending on plan")
+                                : recommended.fees.monthly}
                             </p>
                           </div>
                         </div>
