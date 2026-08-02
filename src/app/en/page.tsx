@@ -16,6 +16,8 @@ import HomeVlogsPreview from "@/components/sections/home/HomeVlogsPreview";
 import RankingMethodology from "@/components/sections/home/RankingMethodology";
 import TrustStrip from "@/components/sections/home/TrustStrip";
 import UseCases from "@/components/sections/home/UseCases";
+import SavingsCalculator from "@/components/tools/SavingsCalculator";
+import BankQuiz from "@/components/tools/BankQuiz";
 import { Button } from "@/components/ui/button";
 import { banks } from "@/lib/banks";
 import { withLocale } from "@/lib/i18n";
@@ -165,6 +167,20 @@ export default function HomePageEn() {
 
       {/* 5. Bank selection */}
       <HomeBanksPreview />
+
+      {/* 5.1 Interactive Savings Calculator */}
+      <section className="py-12 border-t border-border">
+        <Container>
+          <SavingsCalculator />
+        </Container>
+      </section>
+
+      {/* 5.2 Smart Bank Recommender Quiz */}
+      <section className="py-12 border-t border-border bg-muted/20">
+        <Container>
+          <BankQuiz />
+        </Container>
+      </section>
 
       {/* 6. Value */}
       <Benefits />

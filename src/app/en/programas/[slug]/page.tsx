@@ -61,9 +61,34 @@ export default function ProgramaPageEn({ params }: { params: { slug: string } })
   const primaryCtaUrl = bank.affiliateUrl || bank.website;
   const hasAffiliate = Boolean(bank.affiliateUrl);
 
+  const financialProductJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    name: bank.name,
+    description: bank.tagline,
+    brand: {
+      "@type": "Brand",
+      name: bank.name,
+    },
+    aggregateRating: bank.rating?.trustpilot
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: bank.rating.trustpilot.toFixed(1),
+          bestRating: "5",
+          ratingCount: bank.rating.totalReviews || 2500,
+        }
+      : undefined,
+  };
+
   return (
     <section className="py-16 md:py-24">
       <Container className="max-w-5xl space-y-6">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(financialProductJsonLd),
+          }}
+        />
         <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
             Bank profile

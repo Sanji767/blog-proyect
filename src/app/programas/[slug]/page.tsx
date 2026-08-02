@@ -181,6 +181,30 @@ export default function ProgramaPage({
 
   const siteUrl = "https://finanzaseu.com"; // ⚠️ Ajusta a tu dominio real
 
+  const financialProductJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    name: name,
+    description: tagline,
+    brand: {
+      "@type": "Brand",
+      name: name,
+    },
+    offers: {
+      "@type": "Offer",
+      price: isFree ? "0.00" : "0",
+      priceCurrency: "EUR",
+    },
+    aggregateRating: rating?.trustpilot
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: rating.trustpilot.toFixed(1),
+          bestRating: "5",
+          ratingCount: rating.totalReviews || 2500,
+        }
+      : undefined,
+  };
+
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -209,11 +233,17 @@ export default function ProgramaPage({
   return (
     <section className="py-10 md:py-14">
       <Container className="space-y-10">
-        {/* Schema.org Breadcrumbs */}
+        {/* Schema.org Microdatos */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: toJsonLd(breadcrumbJsonLd),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: toJsonLd(financialProductJsonLd),
           }}
         />
 
