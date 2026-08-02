@@ -207,10 +207,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (let i = 0; i < activeBanksList.length; i++) {
     for (let j = i + 1; j < activeBanksList.length; j++) {
       const slug = `${activeBanksList[i].slug}-vs-${activeBanksList[j].slug}`;
-      urls.push({
-        url: toUrl(`/comparar/${slug}`),
-        lastModified: now,
-      });
+      const esPath = `/comparar/${slug}`;
+      const enPath = `/en/comparar/${slug}`;
+      const alternates = {
+        languages: {
+          es: toUrl(esPath),
+          en: toUrl(enPath),
+        },
+      } satisfies NonNullable<MetadataRoute.Sitemap[number]["alternates"]>;
+
+      urls.push({ url: toUrl(esPath), lastModified: now, alternates });
+      urls.push({ url: toUrl(enPath), lastModified: now, alternates });
     }
   }
 
