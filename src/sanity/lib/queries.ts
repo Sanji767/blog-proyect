@@ -20,7 +20,7 @@ export const postPreviewFields = groq`
 export const allPostPreviewsQuery = groq`
   *[
     _type == "post" &&
-    coalesce(language, "es") == $locale &&
+    (coalesce(language, "es") == $locale || language == "all" || !defined(language)) &&
     defined(slug.current) &&
     coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**"))
@@ -33,7 +33,6 @@ export const allPostPreviewsQuery = groq`
 export const postBySlugQuery = groq`
   *[
     _type == "post" &&
-    coalesce(language, "es") == $locale &&
     slug.current == $slug &&
     coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**"))
@@ -52,7 +51,6 @@ export const postBySlugQuery = groq`
 export const allPostSlugsQuery = groq`
   *[
     _type == "post" &&
-    coalesce(language, "es") == $locale &&
     defined(slug.current) &&
     coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**"))
@@ -64,7 +62,7 @@ export const allPostSlugsQuery = groq`
 export const postsByTagQuery = groq`
   *[
     _type == "post" &&
-    coalesce(language, "es") == $locale &&
+    (coalesce(language, "es") == $locale || language == "all" || !defined(language)) &&
     defined(slug.current) &&
     coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**")) &&
@@ -78,7 +76,7 @@ export const postsByTagQuery = groq`
 export const postsByCategoryQuery = groq`
   *[
     _type == "post" &&
-    coalesce(language, "es") == $locale &&
+    (coalesce(language, "es") == $locale || language == "all" || !defined(language)) &&
     defined(slug.current) &&
     coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**")) &&

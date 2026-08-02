@@ -179,6 +179,17 @@ function readLocalPosts(locale: Locale): BlogPost[] {
 
 const getLocalPosts = cache((locale: Locale) => readLocalPosts(locale));
 
+const getLocalPostsMerged = cache((locale: Locale): BlogPost[] => {
+  const basePosts = getLocalPosts(DEFAULT_LOCALE);
+  if (locale === DEFAULT_LOCALE) return basePosts;
+
+  const localePosts = getLocalPosts(locale);
+  const map = new Map<string, BlogPost>();
+  basePosts.forEach((p) => map.set(p.slug, p));
+  localePosts.forEach((p) => map.set(p.slug, p)); // English overrides if present
+  return Array.from(map.values());
+});
+
 function toPreview(post: BlogPost): BlogPostPreview {
   const { content, ...rest } = post;
   void content;
@@ -187,7 +198,15 @@ function toPreview(post: BlogPost): BlogPostPreview {
 
 export const getAllPostPreviews = cache(
   async (locale: Locale = DEFAULT_LOCALE): Promise<BlogPostPreview[]> => {
-    if (!sanityConfigured) return getLocalPosts(locale).map(toPreview);
+    const localMerged = getLocalPostsMerged(locale).map(toPreview);
+    const map = new Map<string, BlogPostPreview>();
+    localMerged.forEach((p) => map.set(p.slug, p));
+
+    if (!sanityConfigured) {
+      return Array.from(map.values()).sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+      );
+    }
 
     try {
       const posts = await sanityFetch<SanityPostPreview[]>(
@@ -199,9 +218,16 @@ export const getAllPostPreviews = cache(
       const normalized = posts
         .map((p) => normalizePreview(p, locale))
         .filter((p) => Boolean(p.slug));
-      return normalized.length > 0 ? normalized : getLocalPosts(locale).map(toPreview);
+
+      normalized.forEach((p) => map.set(p.slug, p));
+
+      return Array.from(map.values()).sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+      );
     } catch {
-      return getLocalPosts(locale).map(toPreview);
+      return Array.from(map.values()).sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+      );
     }
   },
 );
@@ -225,9 +251,12 @@ export const getPostsByTag = cache(
       const normalized = posts
         .map((p) => normalizePreview(p, locale))
         .filter((p) => Boolean(p.slug));
-      return normalized.length > 0
-        ? normalized
-        : (await getAllPostPreviews(locale)).filter((p) => p.tags?.includes(tagSlug));
+
+      const map = new Map<string, BlogPostPreview>();
+      (await getAllPostPreviews(locale)).filter((p) => p.tags?.includes(tagSlug)).forEach(p => map.set(p.slug, p));
+      normalized.forEach(p => map.set(p.slug, p));
+
+      return Array.from(map.values());
     } catch {
       return (await getAllPostPreviews(locale)).filter((p) => p.tags?.includes(tagSlug));
     }
@@ -253,9 +282,12 @@ export const getPostsByCategory = cache(
       const normalized = posts
         .map((p) => normalizePreview(p, locale))
         .filter((p) => Boolean(p.slug));
-      return normalized.length > 0
-        ? normalized
-        : (await getAllPostPreviews(locale)).filter((p) => p.category === categorySlug);
+
+      const map = new Map<string, BlogPostPreview>();
+      (await getAllPostPreviews(locale)).filter((p) => p.category === categorySlug).forEach(p => map.set(p.slug, p));
+      normalized.forEach(p => map.set(p.slug, p));
+
+      return Array.from(map.values());
     } catch {
       return (await getAllPostPreviews(locale)).filter((p) => p.category === categorySlug);
     }
@@ -267,49 +299,33 @@ export const getPostBySlug = cache(
     const slugValue = decodeURIComponent(slug).toLowerCase().trim();
     if (!slugValue) return null;
 
-    if (!sanityConfigured) {
-      const post = getLocalPosts(locale).find((p) => p.slug === slugValue);
-      return post ?? null;
-    }
+    if (sanityConfigured) {
+      try {
+        const post = await sanityFetch<SanityPost | null>(
+          postBySlugQuery,
+          { slug: slugValue, locale },
+          { revalidate: 60, tags: ["blog", `locale:${locale}`, `post:${slugValue}`] },
+        );
 
-    try {
-      const post = await sanityFetch<SanityPost | null>(
-        postBySlugQuery,
-        { slug: slugValue, locale },
-        { revalidate: 60, tags: ["blog", `locale:${locale}`, `post:${slugValue}`] },
-      );
-
-      if (!post) {
-        const local = getLocalPosts(locale).find((p) => p.slug === slugValue);
-        return local ?? null;
+        if (post) {
+          const normalized = normalizePost(post, locale);
+          if (normalized.slug) return normalized;
+        }
+      } catch {
+        // Fallback to local
       }
-      const normalized = normalizePost(post, locale);
-      return normalized.slug ? normalized : null;
-    } catch {
-      const post = getLocalPosts(locale).find((p) => p.slug === slugValue);
-      return post ?? null;
     }
+
+    const localMerged = getLocalPostsMerged(locale);
+    const found = localMerged.find((p) => p.slug === slugValue);
+    return found ?? null;
   },
 );
 
 export const getAllPostSlugs = cache(
   async (locale: Locale = DEFAULT_LOCALE): Promise<string[]> => {
-    if (!sanityConfigured) return getLocalPosts(locale).map((p) => p.slug);
-
-    try {
-      const rows = await sanityFetch<Array<{ slug?: string | null }>>(
-        allPostSlugsQuery,
-        { locale },
-        { revalidate: 60, tags: ["blog", `locale:${locale}`] },
-      );
-
-      const slugs = rows
-        .map((r) => String(r.slug ?? "").toLowerCase().trim())
-        .filter(Boolean);
-      return slugs.length > 0 ? slugs : getLocalPosts(locale).map((p) => p.slug);
-    } catch {
-      return getLocalPosts(locale).map((p) => p.slug);
-    }
+    const previews = await getAllPostPreviews(locale);
+    return previews.map((p) => p.slug);
   },
 );
 
