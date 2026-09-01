@@ -154,6 +154,7 @@ function BankCard({ bank }: { bank: Bank }) {
     fees,
     cardType,
     affiliateUrl,
+    website,
     support,
     rating,
   } = bank;

@@ -156,6 +156,7 @@ function BankCard({ bank, locale }: { bank: Bank; locale: "en" }) {
     fees,
     cardType,
     affiliateUrl,
+    website,
     support,
     rating,
   } = bank;
