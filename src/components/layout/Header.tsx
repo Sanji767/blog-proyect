@@ -9,6 +9,7 @@ import Container from "@/components/layout/Container";
 import LanguageSwitch from "@/components/i18n/LanguageSwitch";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 import Logo from "@/components/ui/logo";
 import { stripLocaleFromPathname } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -101,9 +102,11 @@ export default function Header() {
           <Suspense fallback={null}>
             <LanguageSwitch />
           </Suspense>
+          <ThemeToggle />
         </nav>
 
-        <div className="lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
@@ -140,9 +143,12 @@ export default function Header() {
                   </LocalizedLink>
                 );
               })}
-              <Suspense fallback={null}>
-                <LanguageSwitch className="w-fit" />
-              </Suspense>
+              <div className="flex items-center gap-3 pt-2">
+                <Suspense fallback={null}>
+                  <LanguageSwitch className="w-fit" />
+                </Suspense>
+                <ThemeToggle />
+              </div>
             </nav>
           </div>
         </div>

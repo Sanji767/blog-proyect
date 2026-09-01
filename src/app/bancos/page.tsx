@@ -262,24 +262,22 @@ function BankCard({ bank }: { bank: Bank }) {
           </span>
         </div>
 
-        {affiliateUrl ? (
-          <Button
-            asChild
-            size="sm"
-            variant="outline"
-            className="w-full border-secondary-foreground/20 text-secondary-foreground hover:border-secondary-foreground/35 hover:bg-secondary-foreground/5"
+        <Button
+          asChild
+          size="sm"
+          variant="outline"
+          className="w-full border-secondary-foreground/20 text-secondary-foreground hover:border-secondary-foreground/35 hover:bg-secondary-foreground/5"
+        >
+          <a
+            href={affiliateUrl || website}
+            data-analytics="affiliate"
+            data-affiliate-partner={slug}
+            target="_blank"
+            rel="noreferrer noopener sponsored"
           >
-            <a
-              href={affiliateUrl}
-              data-analytics="affiliate"
-              data-affiliate-partner={slug}
-              target="_blank"
-              rel="noreferrer noopener sponsored"
-            >
-              Ir directamente a {name}
-            </a>
-          </Button>
-        ) : null}
+            Abrir cuenta en {name} →
+          </a>
+        </Button>
       </div>
     </article>
   );

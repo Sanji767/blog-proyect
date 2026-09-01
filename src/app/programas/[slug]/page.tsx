@@ -337,10 +337,10 @@ export default function ProgramaPage({
             <div className="flex flex-wrap gap-3 pt-4">
               <a
                 href={primaryCtaUrl}
-                data-analytics={hasAffiliate ? "affiliate" : undefined}
-                data-affiliate-partner={hasAffiliate ? params.slug : undefined}
+                data-analytics="affiliate"
+                data-affiliate-partner={params.slug}
                 target="_blank"
-                rel={hasAffiliate ? "noopener noreferrer sponsored" : "noopener noreferrer"}
+                rel="noopener noreferrer sponsored"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition hover:brightness-105"
               >
                 Abrir cuenta en {name}

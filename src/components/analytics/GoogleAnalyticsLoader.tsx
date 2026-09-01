@@ -25,7 +25,8 @@ export default function GoogleAnalyticsLoader({ gaId }: { gaId: string }) {
 
   useEffect(() => {
     const sync = () => {
-      const consentEnabled = readAnalyticsConsent() === true;
+      // Activo por defecto salvo que el usuario haya rechazado explícitamente (false)
+      const consentEnabled = readAnalyticsConsent() !== false;
       (window as Record<string, unknown>)[`ga-disable-${gaId}`] = !consentEnabled;
       setEnabled(consentEnabled);
     };

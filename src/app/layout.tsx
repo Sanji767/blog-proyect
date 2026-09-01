@@ -82,13 +82,19 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
     other: [
       {
         rel: "icon",
-        url: "/favicon.png",
+        url: "/favicon.svg",
+        type: "image/svg+xml",
       },
     ],
   },
@@ -115,11 +121,11 @@ export default function RootLayout({
           </Suspense>
         ) : null}
 
-        {/* Tema claro/oscuro */}
+        {/* Tema claro/oscuro (Modo día por defecto) */}
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <AppChrome>{children}</AppChrome>

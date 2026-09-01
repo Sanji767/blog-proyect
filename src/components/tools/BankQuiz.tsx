@@ -319,14 +319,18 @@ export default function BankQuiz() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                {matchedBank.affiliateUrl ? (
-                  <Button asChild size="lg" className="flex-1 font-bold gap-2">
-                    <a href={matchedBank.affiliateUrl} target="_blank" rel="noreferrer noopener sponsored">
-                      {copy.openAccount}
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </Button>
-                ) : null}
+                <Button asChild size="lg" className="flex-1 font-bold gap-2">
+                  <a
+                    href={matchedBank.affiliateUrl || matchedBank.website}
+                    data-analytics="affiliate"
+                    data-affiliate-partner={matchedBank.slug}
+                    target="_blank"
+                    rel="noreferrer noopener sponsored"
+                  >
+                    {copy.openAccount}
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </Button>
 
                 <Button asChild variant="outline" size="lg" className="flex-1 font-bold">
                   <LocalizedLink href={`/programas/${matchedBank.slug}`}>

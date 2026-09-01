@@ -260,20 +260,28 @@ export default async function ComparisonPage({ params }: PageProps) {
         </p>
 
         <div className="mt-6 flex flex-wrap gap-4">
-          {b1.affiliateUrl && (
-            <Button asChild className="gap-2">
-              <a href={b1.affiliateUrl} target="_blank" rel="noreferrer noopener sponsored">
-                Abrir cuenta en {b1.name} <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-          )}
-          {b2.affiliateUrl && (
-            <Button asChild variant="outline" className="gap-2">
-              <a href={b2.affiliateUrl} target="_blank" rel="noreferrer noopener sponsored">
-                Abrir cuenta en {b2.name} <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-          )}
+          <Button asChild className="gap-2">
+            <a
+              href={b1.affiliateUrl || b1.website}
+              data-analytics="affiliate"
+              data-affiliate-partner={b1.slug}
+              target="_blank"
+              rel="noreferrer noopener sponsored"
+            >
+              Abrir cuenta en {b1.name} <ArrowRight className="h-4 w-4" />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="gap-2">
+            <a
+              href={b2.affiliateUrl || b2.website}
+              data-analytics="affiliate"
+              data-affiliate-partner={b2.slug}
+              target="_blank"
+              rel="noreferrer noopener sponsored"
+            >
+              Abrir cuenta en {b2.name} <ArrowRight className="h-4 w-4" />
+            </a>
+          </Button>
         </div>
       </section>
       </Container>
