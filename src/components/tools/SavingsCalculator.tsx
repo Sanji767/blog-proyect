@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { TrendingUp, Award, Sparkles, CheckCircle2, ExternalLink } from "lucide-react";
+import { TrendingUp, Award, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { Locale } from "@/lib/i18n";
@@ -93,18 +93,18 @@ export default function SavingsCalculator() {
   const topProfit = calculateReturn(topOption.rate).profit;
 
   return (
-    <section className="relative overflow-hidden rounded-3xl border-2 border-secondary bg-secondary/80 p-6 md:p-10 text-secondary-foreground shadow-soft">
-      <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-accent/15 blur-3xl" />
+    <section className="relative overflow-hidden rounded-3xl border-2 border-border bg-card p-6 md:p-10 text-card-foreground shadow-soft transition-colors">
+      <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
 
       <header className="max-w-2xl">
-        <div className="inline-flex items-center gap-2 rounded-full border-2 border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-bold text-accent uppercase tracking-wider">
-          <Sparkles className="h-3.5 w-3.5 text-accent" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary uppercase tracking-wider">
+          <Sparkles className="h-3.5 w-3.5 text-primary" />
           <span>Herramienta Interactiva</span>
         </div>
-        <h2 className="mt-3 text-2xl font-black md:text-3xl tracking-tight text-accent">
+        <h2 className="mt-3 text-2xl font-black md:text-3xl tracking-tight text-foreground">
           {copy.title}
         </h2>
-        <p className="mt-2 text-sm md:text-base leading-relaxed text-secondary-foreground/80">
+        <p className="mt-2 text-sm md:text-base leading-relaxed text-muted-foreground">
           {copy.subtitle}
         </p>
       </header>
@@ -112,12 +112,12 @@ export default function SavingsCalculator() {
       <div className="mt-8 grid gap-8 lg:grid-cols-12">
         {/* Controls Column */}
         <div className="space-y-6 lg:col-span-5">
-          <div className="rounded-2xl border-2 border-secondary-foreground/10 bg-background/80 p-6 shadow-sm">
+          <div className="rounded-2xl border-2 border-border bg-muted/40 p-6 shadow-sm">
             <div className="flex items-center justify-between gap-4">
-              <label className="text-xs font-bold uppercase tracking-wider text-secondary-foreground/70">
+              <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 {copy.savingsLabel}
               </label>
-              <span className="text-2xl font-black text-accent">
+              <span className="text-2xl font-black text-primary">
                 {amount.toLocaleString()} €
               </span>
             </div>
@@ -129,17 +129,17 @@ export default function SavingsCalculator() {
               step={500}
               value={amount}
               onChange={(e) => setAmount(Number(e.target.value))}
-              className="mt-4 h-3 w-full cursor-pointer appearance-none rounded-lg bg-secondary-foreground/20 accent-accent"
+              className="mt-4 h-3 w-full cursor-pointer appearance-none rounded-lg bg-muted-foreground/20 accent-primary"
             />
-            <div className="mt-2 flex justify-between text-[11px] font-semibold text-secondary-foreground/60">
+            <div className="mt-2 flex justify-between text-[11px] font-semibold text-muted-foreground">
               <span>500 €</span>
               <span>25.000 €</span>
               <span>50.000 €</span>
             </div>
           </div>
 
-          <div className="rounded-2xl border-2 border-secondary-foreground/10 bg-background/80 p-6 shadow-sm">
-            <label className="text-xs font-bold uppercase tracking-wider text-secondary-foreground/70">
+          <div className="rounded-2xl border-2 border-border bg-muted/40 p-6 shadow-sm">
+            <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {copy.timeframeLabel}
             </label>
             <div className="mt-3 grid grid-cols-3 gap-2">
@@ -150,11 +150,12 @@ export default function SavingsCalculator() {
               ].map((item) => (
                 <button
                   key={item.val}
+                  type="button"
                   onClick={() => setYears(item.val)}
                   className={`rounded-xl border-2 py-2.5 text-xs font-bold transition-all ${
                     years === item.val
-                      ? "border-accent bg-accent text-accent-foreground shadow-sm"
-                      : "border-secondary-foreground/15 bg-secondary-foreground/5 hover:border-secondary-foreground/30"
+                      ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                      : "border-border bg-card text-foreground/80 hover:border-primary/50 hover:bg-muted"
                   }`}
                 >
                   {item.label}
@@ -164,17 +165,17 @@ export default function SavingsCalculator() {
           </div>
 
           {/* Loss Callout Card */}
-          <div className="relative overflow-hidden rounded-2xl border-2 border-amber-500/30 bg-amber-500/10 p-5">
+          <div className="relative overflow-hidden rounded-2xl border-2 border-amber-500/40 bg-amber-500/10 p-5 dark:bg-amber-500/15">
             <div className="flex items-start gap-3">
-              <TrendingUp className="h-6 w-6 shrink-0 text-amber-500" />
+              <TrendingUp className="h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" />
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                <p className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
                   {copy.traditionalBankLoss}
                 </p>
-                <p className="mt-1 text-2xl font-black text-amber-600 dark:text-amber-300">
+                <p className="mt-1 text-2xl font-black text-amber-700 dark:text-amber-300">
                   +{topProfit.toLocaleString()} €
                 </p>
-                <p className="mt-1 text-xs text-secondary-foreground/70">
+                <p className="mt-1 text-xs text-muted-foreground">
                   en {years} {years === 1 ? "año" : "años"} por mantener tu dinero inactivo.
                 </p>
               </div>
@@ -184,7 +185,7 @@ export default function SavingsCalculator() {
 
         {/* Comparison Bars Column */}
         <div className="space-y-4 lg:col-span-7">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-secondary-foreground/70">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             {copy.resultsTitle}
           </h3>
 
@@ -192,7 +193,7 @@ export default function SavingsCalculator() {
             {INTEREST_RATES.map((item) => {
               const res = calculateReturn(item.rate);
               const bankObj = banks.find((b) => b.slug === item.slug);
-              const affUrl = bankObj?.affiliateUrl;
+              const targetUrl = bankObj?.affiliateUrl || bankObj?.website;
 
               const percentWidth = Math.max(12, Math.min(100, (res.profit / (topProfit || 1)) * 100));
 
@@ -201,18 +202,18 @@ export default function SavingsCalculator() {
                   key={item.slug}
                   className={`group relative overflow-hidden rounded-2xl border-2 p-4 transition-all ${
                     item.highlight
-                      ? "border-accent bg-background shadow-md"
-                      : "border-secondary-foreground/10 bg-background/60"
+                      ? "border-emerald-500/50 bg-emerald-500/5 dark:bg-emerald-500/10 shadow-md"
+                      : "border-border bg-card hover:border-border/80"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5">
-                      <span className="font-black text-sm text-accent">{item.name}</span>
-                      <span className="rounded-full bg-secondary-foreground/10 px-2 py-0.5 text-[11px] font-bold text-secondary-foreground/80">
+                      <span className="font-black text-sm text-foreground">{item.name}</span>
+                      <span className="rounded-full bg-muted border border-border px-2 py-0.5 text-[11px] font-bold text-muted-foreground">
                         {item.rate}% APY
                       </span>
                       {item.highlight ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[10px] font-black uppercase text-accent-foreground">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-black uppercase text-white shadow-sm">
                           <Award className="h-3 w-3" />
                           {copy.topRecommendation}
                         </span>
@@ -220,17 +221,17 @@ export default function SavingsCalculator() {
                     </div>
 
                     <div className="text-right">
-                      <span className="text-base font-black text-accent">
+                      <span className="text-base font-black text-foreground">
                         +{res.profit.toLocaleString()} €
                       </span>
-                      <span className="ml-1 text-[11px] text-secondary-foreground/60">
+                      <span className="ml-1 text-[11px] text-muted-foreground">
                         {copy.totalEarnings}
                       </span>
                     </div>
                   </div>
 
                   {/* Progress Bar */}
-                  <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-secondary-foreground/10">
+                  <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-muted">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${percentWidth}%` }}
@@ -239,16 +240,22 @@ export default function SavingsCalculator() {
                     />
                   </div>
 
-                  {item.highlight && affUrl ? (
-                    <div className="mt-3 flex items-center justify-between pt-2">
-                      <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                  {item.highlight && targetUrl ? (
+                    <div className="mt-3 flex items-center justify-between pt-2 border-t border-emerald-500/20">
+                      <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
                         <CheckCircle2 className="h-4 w-4" />
-                        Garantía hasta 100.000 €
+                        Garantía hasta 100.000 € (FGD Europeo)
                       </p>
-                      <Button asChild size="sm" className="gap-1.5 text-xs font-bold">
-                        <a href={affUrl} target="_blank" rel="noreferrer noopener sponsored">
+                      <Button asChild size="sm" className="gap-1.5 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white">
+                        <a
+                          href={targetUrl}
+                          data-analytics="affiliate"
+                          data-affiliate-partner={item.slug}
+                          target="_blank"
+                          rel="noreferrer noopener sponsored"
+                        >
                           {copy.openAccount}
-                          <ExternalLink className="h-3.5 w-3.5" />
+                          <ArrowRight className="h-3.5 w-3.5" />
                         </a>
                       </Button>
                     </div>
