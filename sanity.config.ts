@@ -6,7 +6,7 @@ import { schemaTypes } from "./sanity/schemaTypes";
 const projectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ??
   process.env.SANITY_PROJECT_ID ??
-  "";
+  "lta3kp7s";
 
 const dataset =
   process.env.NEXT_PUBLIC_SANITY_DATASET ??
@@ -16,7 +16,7 @@ const dataset =
 const title =
   process.env.NEXT_PUBLIC_SANITY_STUDIO_TITLE ??
   process.env.SANITY_STUDIO_TITLE ??
-  "Content Studio";
+  "FinazasEU Studio";
 
 export default defineConfig({
   basePath: "/studio",

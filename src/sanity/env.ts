@@ -1,8 +1,12 @@
 export const sanityProjectId =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? process.env.SANITY_PROJECT_ID ?? "";
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ??
+  process.env.SANITY_PROJECT_ID ??
+  "lta3kp7s";
 
 export const sanityDataset =
-  process.env.NEXT_PUBLIC_SANITY_DATASET ?? process.env.SANITY_DATASET ?? "production";
+  process.env.NEXT_PUBLIC_SANITY_DATASET ??
+  process.env.SANITY_DATASET ??
+  "production";
 
 export const sanityApiVersion =
   process.env.NEXT_PUBLIC_SANITY_API_VERSION ??
