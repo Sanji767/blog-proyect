@@ -60,7 +60,7 @@
         {
           "_type": "span",
           "_key": "span_4",
-          "text": "En esta guía de **FinanzasEU.com** te explicamos cómo funcionan las cuentas bancarias para adolescentes, qué pueden hacer los menores con ellas, qué debe tener en cuenta un padre o tutor y cuáles son las características más importantes que conviene comparar antes de abrir una.",
+          "text": "En esta guía de **[FinanzasEU.com](/)** te explicamos cómo funcionan las cuentas bancarias para adolescentes, qué pueden hacer los menores con ellas, qué debe tener en cuenta un padre o tutor y cuáles son las características más importantes que conviene revisar en nuestro **[comparador de cuentas y bancos europeos](/bancos)** antes de abrir una.",
           "marks": []
         }
       ],
@@ -130,7 +130,7 @@
         {
           "_type": "span",
           "_key": "span_15",
-          "text": "* **Tarjeta de débito física o virtual:** Para compras diarias y pagos contactless.",
+          "text": "* **Tarjeta de débito física o virtual:** Para compras diarias y pagos contactless (conoce más en nuestra [comparativa de tarjetas de débito y cashback](/blog/cuentas-cashback-debito-2026)).",
           "marks": []
         }
       ],
@@ -172,7 +172,7 @@
         {
           "_type": "span",
           "_key": "span_18",
-          "text": "* **Herramientas de ahorro:** Huchas o bolsillos virtuales para fijar metas.",
+          "text": "* **Herramientas de ahorro:** Huchas o bolsillos virtuales para fijar metas y simular intereses con nuestra **[Calculadora de Ahorro](/herramientas/calculadora-ahorro)**.",
           "marks": []
         }
       ],
@@ -214,7 +214,7 @@
         {
           "_type": "span",
           "_key": "span_21",
-          "text": "* **Aprender educación financiera:** Administrar un presupuesto personal desde temprana edad.",
+          "text": "* **Aprender educación financiera:** Administrar un presupuesto personal desde temprana edad, siguiendo las directrices del [Plan de Educación Financiera (Finanzas para Todos)](https://www.finanzasparatodos.es/) promovido por el **[Banco de España](https://clientebancario.bde.es/)** y la **[CNMV](https://www.cnmv.es/)**.",
           "marks": []
         }
       ],
@@ -270,7 +270,7 @@
         {
           "_type": "span",
           "_key": "span_31",
-          "text": "**Sí**, los menores de edad pueden disponer de una cuenta bancaria en España y en la Unión Europea, siempre con la autorización o cotitularidad de sus padres o tutores legales.",
+          "text": "**Sí**, los menores de edad pueden disponer de una cuenta bancaria en España y en la Unión Europea, siempre con la autorización o cotitularidad de sus padres o tutores legales, bajo la supervisión del [Banco de España](https://clientebancario.bde.es/):",
           "marks": []
         }
       ],
@@ -312,7 +312,7 @@
         {
           "_type": "span",
           "_key": "span_35",
-          "text": "3. **A partir de los 18 años:** La cuenta pasa automáticamente a ser una cuenta corriente estándar de adulto con plena capacidad jurídica.",
+          "text": "3. **A partir de los 18 años:** La cuenta pasa automáticamente a ser una cuenta corriente estándar de adulto con plena capacidad jurídica (puedes consultar las mejores opciones en nuestra guía de **[mejores bancos digitales en Europa](/blog/los-mejores-bancos-digitales-en-europa-en-2026)**).",
           "marks": []
         }
       ],
@@ -354,7 +354,7 @@
         {
           "_type": "span",
           "_key": "span_43",
-          "text": "| Operación | ¿Disponible para menores? | Nivel de Control Parental |",
+          "text": "| Operación | ¿Disponible para menores? | Nivel de Control Parental | Enlace de Interés |",
           "marks": []
         }
       ],
@@ -368,7 +368,7 @@
         {
           "_type": "span",
           "_key": "span_44",
-          "text": "| :--- | :--- | :--- |",
+          "text": "| :--- | :--- | :--- | :--- |",
           "marks": []
         }
       ],
@@ -382,7 +382,7 @@
         {
           "_type": "span",
           "_key": "span_45",
-          "text": "| **Recibir transferencias / Paga** | Sí | Notificación inmediata al tutor |",
+          "text": "| **Recibir transferencias / Paga** | Sí | Notificación inmediata al tutor | [Guía IBAN Europeo](/blog/discriminacion-iban-derechos-consumidor-2026) |",
           "marks": []
         }
       ],
@@ -396,7 +396,7 @@
         {
           "_type": "span",
           "_key": "span_46",
-          "text": "| **Pagar en comercios físicos** | Sí (con PIN / Contactless) | Límite diario configurable |",
+          "text": "| **Pagar en comercios físicos** | Sí (con PIN / Contactless) | Límite diario configurable | [Tarjetas para viajar](/blog/mejores-tarjetas-para-viajar-sin-comisiones-2026) |",
           "marks": []
         }
       ],
@@ -410,7 +410,7 @@
         {
           "_type": "span",
           "_key": "span_47",
-          "text": "| **Compras por Internet** | Sí (según entidad) | Activación/desactivación por los padres |",
+          "text": "| **Compras por Internet** | Sí (según entidad) | Activación/desactivación por padres | [Seguridad y Phishing](/blog/guia-seguridad-bancaria-phishing-2026) |",
           "marks": []
         }
       ],
@@ -424,7 +424,7 @@
         {
           "_type": "span",
           "_key": "span_48",
-          "text": "| **Retiradas en cajeros** | Sí (con límites reducidos) | Límites fijados por los padres |",
+          "text": "| **Retiradas en cajeros** | Sí (con límites reducidos) | Límites fijados por los padres | [Comparador de Bancos](/bancos) |",
           "marks": []
         }
       ],
@@ -438,7 +438,7 @@
         {
           "_type": "span",
           "_key": "span_49",
-          "text": "| **Bizum** | Según banco (ej. BBVA) | Límite restringido por operación |",
+          "text": "| **Bizum** | Según banco (ej. BBVA) | Límite restringido por operación | [Cuentas sin comisiones](/blog/bancos-vs-neobancos) |",
           "marks": []
         }
       ],
@@ -452,7 +452,7 @@
         {
           "_type": "span",
           "_key": "span_50",
-          "text": "| **Huchas y metas de ahorro** | Sí | Visible por el menor y tutor |",
+          "text": "| **Huchas y metas de ahorro** | Sí | Visible por el menor y tutor | [Calculadora de Rentabilidad](/herramientas/calculadora-ahorro) |",
           "marks": []
         }
       ],
@@ -466,7 +466,7 @@
         {
           "_type": "span",
           "_key": "span_51",
-          "text": "| **Inversión en bolsa o fondos** | Restringido / Requiere tutor | No permitido de forma autónoma |",
+          "text": "| **Inversión en bolsa o fondos** | Restringido / Requiere tutor | No permitido de forma autónoma | [Guía Ahorro vs Inversión](/blog/ahorro-vs-inversion-guia-maestra) |",
           "marks": []
         }
       ],
@@ -522,7 +522,7 @@
         {
           "_type": "span",
           "_key": "span_60",
-          "text": "Busca cuentas 100% gratuitas que no cobren por:",
+          "text": "Busca cuentas 100% gratuitas que no cobren por mantenimiento, tarjetas o transferencias SEPA estándar (respaldadas por la normativa del **[Banco Central Europeo (ECB)](https://www.ecb.europa.eu/)** y con fondos garantizados hasta 100.000 € por el Fondo de Garantía de Depósitos).",
           "marks": []
         }
       ],
@@ -530,27 +530,13 @@
     },
     {
       "_type": "block",
-      "_key": "p_61",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_61",
-          "text": "* Mantenimiento o administración de la cuenta.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_62",
-      "style": "normal",
+      "_key": "h3_62",
+      "style": "h3",
       "children": [
         {
           "_type": "span",
           "_key": "span_62",
-          "text": "* Emisión o renovación de la tarjeta de débito.",
+          "text": "2. Tarjeta de débito con límites configurables",
           "marks": []
         }
       ],
@@ -564,7 +550,7 @@
         {
           "_type": "span",
           "_key": "span_63",
-          "text": "* Transferencias SEPA estándar.",
+          "text": "Una tarjeta física o virtual permite al joven hacer compras independientes. Los padres deben poder configurar desde su propia app el límite máximo diario o mensual (por ejemplo, 20 € al día o 100 € al mes) para fomentar el gasto responsable.",
           "marks": []
         }
       ],
@@ -572,27 +558,27 @@
     },
     {
       "_type": "block",
-      "_key": "p_64",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_64",
-          "text": "* Consulta de saldo y notificaciones push.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "h3_66",
+      "_key": "h3_65",
       "style": "h3",
       "children": [
         {
           "_type": "span",
+          "_key": "span_65",
+          "text": "3. Control parental en tiempo real",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_66",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
           "_key": "span_66",
-          "text": "2. Tarjeta de débito con límites configurables",
+          "text": "Las mejores entidades fintech como **[Revolut](/programas/revolut)** y neobancos como **[N26](/programas/n26)** (ver comparativa en **[Revolut vs N26](/comparar/revolut-vs-n26)**) permiten a los padres:",
           "marks": []
         }
       ],
@@ -606,7 +592,7 @@
         {
           "_type": "span",
           "_key": "span_67",
-          "text": "Una tarjeta física o virtual permite al joven hacer compras independientes. Los padres deben poder configurar desde su propia app el límite máximo diario o mensual (por ejemplo, 20 € al día o 100 € al mes) para fomentar el gasto responsable.",
+          "text": "* Recibir una notificación push instantánea cada vez que el menor realiza una compra.",
           "marks": []
         }
       ],
@@ -614,13 +600,27 @@
     },
     {
       "_type": "block",
-      "_key": "h3_69",
-      "style": "h3",
+      "_key": "p_68",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_68",
+          "text": "* Congelar o bloquear la tarjeta en 1 segundo si se extravía.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_69",
+      "style": "normal",
       "children": [
         {
           "_type": "span",
           "_key": "span_69",
-          "text": "3. Control parental en tiempo real",
+          "text": "* Desactivar temporalmente compras online o pagos en el extranjero.",
           "marks": []
         }
       ],
@@ -634,7 +634,7 @@
         {
           "_type": "span",
           "_key": "span_70",
-          "text": "Las mejores fintech y bancos permiten a los padres:",
+          "text": "* Enviar dinero al instante en caso de urgencia.",
           "marks": []
         }
       ],
@@ -642,27 +642,13 @@
     },
     {
       "_type": "block",
-      "_key": "p_71",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_71",
-          "text": "* Recibir una notificación push instantánea cada vez que el menor realiza una compra.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_72",
-      "style": "normal",
+      "_key": "h3_72",
+      "style": "h3",
       "children": [
         {
           "_type": "span",
           "_key": "span_72",
-          "text": "* Congelar o bloquear la tarjeta en 1 segundo si se extravía.",
+          "text": "4. Aplicación móvil visual e intuitiva",
           "marks": []
         }
       ],
@@ -676,7 +662,7 @@
         {
           "_type": "span",
           "_key": "span_73",
-          "text": "* Desactivar temporalmente compras online o pagos en el extranjero.",
+          "text": "Para los jóvenes, la interfaz lo es todo. Una buena app debe mostrar claramente el balance entre dinero disponible, gastos mensuales y metas de ahorro acumuladas.",
           "marks": []
         }
       ],
@@ -684,68 +670,12 @@
     },
     {
       "_type": "block",
-      "_key": "p_74",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_74",
-          "text": "* Enviar dinero al instante en caso de urgencia.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "h3_76",
+      "_key": "h3_75",
       "style": "h3",
       "children": [
         {
           "_type": "span",
-          "_key": "span_76",
-          "text": "4. Aplicación móvil visual e intuitiva",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_77",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_77",
-          "text": "Para los jóvenes, la interfaz lo es todo. Una buena app debe mostrar claramente:",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_78",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_78",
-          "text": "$$\\text{Saldo Disponible} \\longrightarrow \\text{Gastos del Mes} \\longrightarrow \\text{Ahorro Acumulado}$$",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "h3_80",
-      "style": "h3",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_80",
+          "_key": "span_75",
           "text": "5. Huchas y objetivos de ahorro (Gamificación)",
           "marks": []
         }
@@ -754,13 +684,13 @@
     },
     {
       "_type": "block",
-      "_key": "p_81",
+      "_key": "p_76",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "span_81",
-          "text": "Permite al adolescente fijar metas concretas (por ejemplo, *\"Ahorrar 200 € para una consola\"* o *\"150 € para un viaje escolar\"*) y automatizar el redondeo de compras para destinar los céntimos sobrantes a su hucha personal.",
+          "_key": "span_76",
+          "text": "Permite al adolescente fijar metas concretas y automatizar el redondeo de compras para destinar los céntimos sobrantes a su hucha personal. Si quieres aprender más sobre cómo rentabilizar el capital familiar, consulta nuestro análisis de **[mejores cuentas remuneradas en 2026](/blog/mejores-cuentas-remuneradas-2026)**.",
           "marks": []
         }
       ],
@@ -768,12 +698,12 @@
     },
     {
       "_type": "block",
-      "_key": "h2_85",
+      "_key": "h2_80",
       "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "span_85",
+          "_key": "span_80",
           "text": "Banco tradicional vs Banco digital / Fintech para menores",
           "marks": []
         }
@@ -782,13 +712,69 @@
     },
     {
       "_type": "block",
-      "_key": "h3_87",
+      "_key": "h3_82",
       "style": "h3",
       "children": [
         {
           "_type": "span",
-          "_key": "span_87",
+          "_key": "span_82",
           "text": "Entidades Tradicionales (BBVA, CaixaBank, Santander, Bankinter)",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_83",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_83",
+          "text": "* **Ventajas:** Posibilidad de acudir a una sucursal física, integración con las cuentas familiares habituales y Bizum para menores (por ejemplo en la [Cuenta Online Menores de BBVA](https://www.bbva.es/personas/productos/cuentas/cuenta-online-menores.html)).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_84",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_84",
+          "text": "* **Inconvenientes:** Procesos de alta que a veces exigen acudir presencialmente con documentación física.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "h3_86",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_86",
+          "text": "Neobancos y Fintech (Revolut <18, N26 Smart)",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_87",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_87",
+          "text": "* **Ventajas:** Apertura 100% digital en minutos desde el móvil del padre a través de plataformas líderes como **[Revolut <18](https://www.revolut.com/es-ES/revolut-under-18/)**, tarjetas con diseños personalizables, herramientas de tareas y recompensas, y notificaciones ultra-rápidas (revisa todos los detalles en nuestro **[análisis de bancos vs neobancos](/blog/bancos-vs-neobancos)**).",
           "marks": []
         }
       ],
@@ -802,62 +788,6 @@
         {
           "_type": "span",
           "_key": "span_88",
-          "text": "* **Ventajas:** Posibilidad de acudir a una sucursal física, integración con las cuentas familiares habituales y Bizum para menores (en bancos que lo soportan).",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_89",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_89",
-          "text": "* **Inconvenientes:** Procesos de alta que a veces exigen acudir presencialmente con documentación física y apps a veces menos dinámicas.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "h3_91",
-      "style": "h3",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_91",
-          "text": "Neobancos y Fintech (Revolut <18, etc.)",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_92",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_92",
-          "text": "* **Ventajas:** Apertura 100% digital en minutos desde el móvil del padre, tarjetas con diseños personalizables, herramientas de tareas y recompensas, y notificaciones ultra-rápidas.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_93",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_93",
           "text": "* **Inconvenientes:** No disponen de oficinas físicas para ingreso de dinero en metálico.",
           "marks": []
         }
@@ -866,13 +796,83 @@
     },
     {
       "_type": "block",
-      "_key": "h2_97",
+      "_key": "h2_92",
       "style": "h2",
       "children": [
         {
           "_type": "span",
+          "_key": "span_92",
+          "text": "5 Consejos para Enseñar Finanzas a un Adolescente",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_94",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_94",
+          "text": "1. **Establece una paga periódica:** En lugar de darle dinero cuando lo pide, asigna una cantidad fija semanal o mensual para que aprenda a presupuestar.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_95",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_95",
+          "text": "2. **Aplica la regla 50/30/20 adaptada:**",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_96",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_96",
+          "text": "* **60%** para ocio y gastos del mes.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_97",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
           "_key": "span_97",
-          "text": "¿Qué debería comparar una familia antes de contratar?",
+          "text": "* **30%** para ahorro a medio plazo (revisa nuestra guía para **[construir un fondo de emergencia](/blog/construir-fondo-emergencia-estrategia-2026)**).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_98",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_98",
+          "text": "* **10%** para un objetivo especial o fondo personal.",
           "marks": []
         }
       ],
@@ -886,7 +886,21 @@
         {
           "_type": "span",
           "_key": "span_99",
-          "text": "Antes de abrir una cuenta, revisa esta lista de verificación:",
+          "text": "3. **Revisión mensual constructiva:** Dedicad 10 minutos al mes a revisar juntos los gráficos de gastos de la app sin juzgar, analizando en qué categorías se va el dinero.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_100",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_100",
+          "text": "4. **Cuidado con las suscripciones y micropagos:** Enseña al menor a identificar suscripciones recurrentes en videojuegos o apps que consumen saldo sin que se dé cuenta.",
           "marks": []
         }
       ],
@@ -900,7 +914,7 @@
         {
           "_type": "span",
           "_key": "span_101",
-          "text": "1. **Coste real:** ¿Es gratis sin exigir nómina de los padres ni vinculaciones extrañas?",
+          "text": "5. **Seguridad digital y prevención de estafas:** Recuérdale que **jamás** debe compartir su PIN, contraseñas, ni códigos SMS con amigos o por redes sociales (consulta nuestra guía de **[seguridad bancaria y prevención de phishing](/blog/guia-seguridad-bancaria-phishing-2026)**).",
           "marks": []
         }
       ],
@@ -908,69 +922,55 @@
     },
     {
       "_type": "block",
-      "_key": "p_102",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_102",
-          "text": "2. **Edad admitida:** ¿Encaja con la edad exacta de tu hijo/a?",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_103",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_103",
-          "text": "3. **Seguridad y bloqueo:** ¿Permite apagar la tarjeta desde el móvil al instante?",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_104",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_104",
-          "text": "4. **Cajeros:** ¿Cuántas retiradas gratuitas al mes permite y en qué red de cajeros?",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_105",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_105",
-          "text": "5. **Transición a los 18 años:** ¿Qué ocurre al alcanzar la mayoría de edad? ¿Pasa a cobrar comisiones o se mantiene sin costes?",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "h2_109",
+      "_key": "h2_105",
       "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "span_109",
-          "text": "5 Consejos para Enseñar Finanzas a un Adolescente",
+          "_key": "span_105",
+          "text": "Preguntas Frecuentes (FAQ)",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "h3_107",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_107",
+          "text": "¿A qué edad puede un adolescente tener su propia tarjeta?",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_108",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_108",
+          "text": "La mayoría de entidades permiten tarjetas de débito a partir de los **12 o 14 años**, vinculadas siempre a la autorización parental. Neobancos como Revolut permiten cuentas infantiles supervisadas desde los 6 años a través de su programa [Revolut <18](/programas/revolut).",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "h3_110",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_110",
+          "text": "¿Pueden los padres ver todos los movimientos del menor?",
           "marks": []
         }
       ],
@@ -984,7 +984,7 @@
         {
           "_type": "span",
           "_key": "span_111",
-          "text": "1. **Establece una paga periódica:** En lugar de darle dinero cuando lo pide, asigna una cantidad fija semanal o mensual para que aprenda a presupuestar.",
+          "text": "**Sí.** En todas las cuentas para menores autorizadas en España bajo supervisión del **[Banco de España](https://clientebancario.bde.es/)**, los tutores legales tienen visibilidad completa de los ingresos, pagos y saldo de la cuenta desde su aplicación.",
           "marks": []
         }
       ],
@@ -992,27 +992,13 @@
     },
     {
       "_type": "block",
-      "_key": "p_112",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_112",
-          "text": "2. **Aplica la regla 50/30/20 adaptada:**",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_113",
-      "style": "normal",
+      "_key": "h3_113",
+      "style": "h3",
       "children": [
         {
           "_type": "span",
           "_key": "span_113",
-          "text": "* **60%** para ocio y gastos del mes.",
+          "text": "¿Se puede embargar o endeudar una cuenta para menores?",
           "marks": []
         }
       ],
@@ -1026,7 +1012,7 @@
         {
           "_type": "span",
           "_key": "span_114",
-          "text": "* **30%** para ahorro a medio plazo.",
+          "text": "Las cuentas juveniles no permiten descubiertos ni créditos (saldo negativo), por lo que el menor nunca puede generar deudas bancarias.",
           "marks": []
         }
       ],
@@ -1034,69 +1020,13 @@
     },
     {
       "_type": "block",
-      "_key": "p_115",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_115",
-          "text": "* **10%** para un objetivo especial o fondo personal.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_116",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_116",
-          "text": "3. **Revisión mensual constructiva:** Dedicad 10 minutos al mes a revisar juntos los gráficos de gastos de la app sin juzgar, analizando en qué categorías se va el dinero.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_117",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_117",
-          "text": "4. **Cuidado con las suscripciones y micropagos:** Enseña al menor a identificar suscripciones recurrentes en videojuegos o apps que consumen saldo sin que se dé cuenta.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_118",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_118",
-          "text": "5. **Seguridad digital y prevención de estafas:** Recuérdale que **jamás** debe compartir su PIN, contraseñas, ni códigos SMS con amigos o por redes sociales.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "h2_122",
+      "_key": "h2_118",
       "style": "h2",
       "children": [
         {
           "_type": "span",
-          "_key": "span_122",
-          "text": "Preguntas Frecuentes (FAQ)",
+          "_key": "span_118",
+          "text": "Conclusión",
           "marks": []
         }
       ],
@@ -1104,13 +1034,55 @@
     },
     {
       "_type": "block",
-      "_key": "h3_124",
-      "style": "h3",
+      "_key": "p_120",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_120",
+          "text": "Una cuenta bancaria para adolescentes es una de las herramientas más prácticas y eficaces para inculcar **educación financiera real y autonomía responsable** antes de la universidad o el primer empleo.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_122",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_122",
+          "text": "En **[FinanzasEU.com](/)** comparamos de forma transparente e independiente las mejores alternativas del mercado:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_123",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "span_123",
+          "text": "* 🏦 **[Ver Comparativa Completa de Bancos](/bancos)**",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_type": "block",
+      "_key": "p_124",
+      "style": "normal",
       "children": [
         {
           "_type": "span",
           "_key": "span_124",
-          "text": "¿A qué edad puede un adolescente tener su propia tarjeta?",
+          "text": "* ⚖️ **[Comparar Revolut vs N26](/comparar/revolut-vs-n26)**",
           "marks": []
         }
       ],
@@ -1124,7 +1096,7 @@
         {
           "_type": "span",
           "_key": "span_125",
-          "text": "La mayoría de entidades permiten tarjetas de débito a partir de los **12 o 14 años**, vinculadas siempre a la autorización parental. Neobancos como Revolut permiten cuentas infantiles supervisadas desde los 6 años.",
+          "text": "* 📈 **[Calcular Rentabilidad de Ahorros](/herramientas/calculadora-ahorro)**",
           "marks": []
         }
       ],
@@ -1132,97 +1104,13 @@
     },
     {
       "_type": "block",
-      "_key": "h3_127",
-      "style": "h3",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_127",
-          "text": "¿Pueden los padres ver todos los movimientos del menor?",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_128",
+      "_key": "p_126",
       "style": "normal",
       "children": [
         {
           "_type": "span",
-          "_key": "span_128",
-          "text": "**Sí.** En todas las cuentas para menores autorizadas en España, los tutores legales tienen visibilidad completa de los ingresos, pagos y saldo de la cuenta desde su aplicación.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "h3_130",
-      "style": "h3",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_130",
-          "text": "¿Se puede embargar o endeudar una cuenta para menores?",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_131",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_131",
-          "text": "Las cuentas juveniles no permiten descubiertos ni créditos (saldo negativo), por lo que el menor nunca puede generar deudas bancarias.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "h2_135",
-      "style": "h2",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_135",
-          "text": "Conclusión",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_137",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_137",
-          "text": "Una cuenta bancaria para adolescentes es una de las herramientas más prácticas y eficaces para inculcar **educación financiera real y autonomía responsable** antes de la universidad o el primer empleo.",
-          "marks": []
-        }
-      ],
-      "markDefs": []
-    },
-    {
-      "_type": "block",
-      "_key": "p_139",
-      "style": "normal",
-      "children": [
-        {
-          "_type": "span",
-          "_key": "span_139",
-          "text": "En **FinanzasEU.com** analizamos de forma independiente las mejores alternativas del mercado para que elijas la opción más segura, económica y adaptada a tu familia.",
+          "_key": "span_126",
+          "text": "* 📚 **[Guía de Ahorro vs Inversión para Familias](/blog/ahorro-vs-inversion-guia-maestra)**",
           "marks": []
         }
       ],
