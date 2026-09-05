@@ -17,6 +17,10 @@ import { stripLeadingMarkdownH1 } from "@/lib/blog/markdown";
 
 const locale = "en" as const;
 
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+export const revalidate = 0;
+
 export async function generateStaticParams() {
   const slugs = await getAllPostSlugs(locale);
   return slugs.map((slug) => ({ slug }));

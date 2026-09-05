@@ -19,6 +19,9 @@ const BLOG_PAGE_TITLE =
 const BLOG_PAGE_DESCRIPTION =
   "Comparativas honestas, opiniones reales y trucos para ahorrar con Revolut, Wise, N26 y más.";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: BLOG_PAGE_TITLE,
   description: BLOG_PAGE_DESCRIPTION,

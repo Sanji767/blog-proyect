@@ -201,7 +201,7 @@ export const getAllPostPreviews = cache(
       const posts = await sanityFetch<SanityPostPreview[]>(
         allPostPreviewsQuery,
         { locale },
-        { revalidate: 60, tags: ["blog", `locale:${locale}`] },
+        { revalidate: 0, tags: ["blog", `locale:${locale}`] },
       );
 
       const normalized = posts
@@ -234,7 +234,7 @@ export const getPostsByTag = cache(
       const posts = await sanityFetch<SanityPostPreview[]>(
         postsByTagQuery,
         { tag: tagSlug, locale },
-        { revalidate: 60, tags: ["blog", `locale:${locale}`, `tag:${tagSlug}`] },
+        { revalidate: 0, tags: ["blog", `locale:${locale}`, `tag:${tagSlug}`] },
       );
 
       const normalized = posts
@@ -265,7 +265,7 @@ export const getPostsByCategory = cache(
       const posts = await sanityFetch<SanityPostPreview[]>(
         postsByCategoryQuery,
         { category: categorySlug, locale },
-        { revalidate: 60, tags: ["blog", `locale:${locale}`, `category:${categorySlug}`] },
+        { revalidate: 0, tags: ["blog", `locale:${locale}`, `category:${categorySlug}`] },
       );
 
       const normalized = posts
@@ -293,7 +293,7 @@ export const getPostBySlug = cache(
         const post = await sanityFetch<SanityPost | null>(
           postBySlugQuery,
           { slug: slugValue, locale },
-          { revalidate: 60, tags: ["blog", `locale:${locale}`, `post:${slugValue}`] },
+          { revalidate: 0, tags: ["blog", `locale:${locale}`, `post:${slugValue}`] },
         );
 
         if (post) {

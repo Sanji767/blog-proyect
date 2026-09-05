@@ -22,7 +22,7 @@ export function getSanityClient() {
     projectId: sanityProjectId,
     dataset: sanityDataset,
     apiVersion: sanityApiVersion,
-    useCdn: process.env.NODE_ENV === "production",
+    useCdn: false,
   });
 
   return client;

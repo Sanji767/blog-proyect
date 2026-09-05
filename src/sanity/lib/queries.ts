@@ -20,10 +20,9 @@ export const postPreviewFields = groq`
 export const allPostPreviewsQuery = groq`
   *[
     _type == "post" &&
-    (coalesce(language, "es") == $locale || language == "all") &&
     defined(slug.current) &&
-    coalesce(publishedAt, _createdAt) <= now() &&
-    !(_id in path("drafts.**"))
+    !(_id in path("drafts.**")) &&
+    (!defined(language) || language == null || language == "" || language == "all" || language == $locale || coalesce(language, "es") == $locale)
   ]
   | order(coalesce(publishedAt, _createdAt) desc) {
     ${postPreviewFields}
@@ -33,9 +32,7 @@ export const allPostPreviewsQuery = groq`
 export const postBySlugQuery = groq`
   *[
     _type == "post" &&
-    (coalesce(language, "es") == $locale || language == "all") &&
     slug.current == $slug &&
-    coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**"))
   ][0] {
     ${postPreviewFields},
@@ -52,10 +49,9 @@ export const postBySlugQuery = groq`
 export const allPostSlugsQuery = groq`
   *[
     _type == "post" &&
-    (coalesce(language, "es") == $locale || language == "all") &&
     defined(slug.current) &&
-    coalesce(publishedAt, _createdAt) <= now() &&
-    !(_id in path("drafts.**"))
+    !(_id in path("drafts.**")) &&
+    (!defined(language) || language == null || language == "" || language == "all" || language == $locale || coalesce(language, "es") == $locale)
   ]{
     "slug": slug.current
   }
@@ -64,10 +60,9 @@ export const allPostSlugsQuery = groq`
 export const postsByTagQuery = groq`
   *[
     _type == "post" &&
-    (coalesce(language, "es") == $locale || language == "all") &&
     defined(slug.current) &&
-    coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**")) &&
+    (!defined(language) || language == null || language == "" || language == "all" || language == $locale || coalesce(language, "es") == $locale) &&
     $tag in tags[]
   ]
   | order(coalesce(publishedAt, _createdAt) desc) {
@@ -78,11 +73,10 @@ export const postsByTagQuery = groq`
 export const postsByCategoryQuery = groq`
   *[
     _type == "post" &&
-    (coalesce(language, "es") == $locale || language == "all") &&
     defined(slug.current) &&
-    coalesce(publishedAt, _createdAt) <= now() &&
     !(_id in path("drafts.**")) &&
-    category == $category
+    (!defined(language) || language == null || language == "" || language == "all" || language == $locale || coalesce(language, "es") == $locale) &&
+    (category == $category || lower(category) == lower($category))
   ]
   | order(coalesce(publishedAt, _createdAt) desc) {
     ${postPreviewFields}

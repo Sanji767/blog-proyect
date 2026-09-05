@@ -20,6 +20,10 @@ type Props = {
   };
 };
 
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+export const revalidate = 0;
+
 export async function generateStaticParams(): Promise<Array<{ tag: string }>> {
   const tags = await getTags("en");
   return tags.map((t) => ({ tag: t.slug }));
