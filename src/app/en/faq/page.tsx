@@ -99,7 +99,7 @@ export default function FaqPageEn() {
           </p>
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
             Frequently asked{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               questions
             </span>
           </h1>
@@ -112,7 +112,7 @@ export default function FaqPageEn() {
           {FAQ.map((item) => (
             <details
               key={item.q}
-              className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft"
+              className="rounded-2xl border border-border bg-card p-6 shadow-soft"
             >
               <summary className="cursor-pointer text-base font-black text-foreground">
                 {item.q}
@@ -124,7 +124,7 @@ export default function FaqPageEn() {
           ))}
         </div>
 
-        <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-center text-secondary-foreground shadow-offset-accent">
+        <div className="rounded-2xl bg-secondary p-8 text-center text-secondary-foreground">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             Next step
           </p>
@@ -139,13 +139,13 @@ export default function FaqPageEn() {
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               href={withLocale("/bancos", locale)}
-              className="inline-flex items-center justify-center rounded-xl border-2 border-secondary bg-accent px-6 py-3 text-sm font-black text-accent-foreground shadow-offset-accent"
+              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-black text-accent-foreground"
             >
               See bank ranking →
             </Link>
             <Link
               href={withLocale("/contacto", locale)}
-              className="inline-flex items-center justify-center rounded-xl border-2 border-secondary-foreground/20 bg-secondary-foreground/5 px-6 py-3 text-sm font-black text-secondary-foreground"
+              className="inline-flex items-center justify-center rounded-xl border border-secondary-foreground/20 bg-secondary-foreground/5 px-6 py-3 text-sm font-black text-secondary-foreground"
             >
               Contact →
             </Link>

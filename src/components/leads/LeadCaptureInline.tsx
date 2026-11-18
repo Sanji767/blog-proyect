@@ -102,11 +102,11 @@ export default function LeadCaptureInline({
   return (
     <section
       className={cn(
-        "overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent md:p-10",
+        "overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground md:p-10",
         className,
       )}
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-light">
         {copy.kicker}
       </p>
       <h2 className="mt-4 text-balance text-2xl font-black tracking-tight text-accent md:text-3xl">

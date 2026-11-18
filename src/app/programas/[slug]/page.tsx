@@ -248,7 +248,7 @@ export default function ProgramaPage({
         />
 
         {status === "draft" ? (
-          <section className="rounded-2xl border-2 border-secondary bg-secondary p-6 text-secondary-foreground shadow-offset-accent">
+          <section className="rounded-2xl bg-secondary p-6 text-secondary-foreground">
             <p className="text-xs font-black uppercase tracking-[0.22em] text-primary-text">
               En revisión
             </p>
@@ -282,7 +282,7 @@ export default function ProgramaPage({
           {/* Columna izquierda */}
           <div className="space-y-6">
             {/* Etiquetas superiores */}
-            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-primary-light">
               <span>Banco analizado por FinanzasEU</span>
               {hasAffiliate && (
                 <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-foreground">
@@ -431,7 +431,7 @@ export default function ProgramaPage({
           </div>
 
           {/* Columna derecha: tarjeta resumen */}
-          <aside className="rounded-3xl border border-border bg-hero-background/70 p-5 shadow-md">
+          <aside className="rounded-xl border border-border bg-hero-background/70 p-5 shadow-md">
             {heroSrc ? (
               <div className="relative mb-4 h-40 w-full overflow-hidden rounded-2xl">
                 <Image
@@ -443,7 +443,7 @@ export default function ProgramaPage({
                 />
               </div>
             ) : (
-              <div className="mb-4 h-40 rounded-2xl border-2 border-border bg-muted/40" />
+              <div className="mb-4 h-40 rounded-2xl border border-border bg-muted/40" />
             )}
 
             <h2 className="mb-3 text-sm font-semibold text-muted-foreground">
@@ -496,7 +496,7 @@ export default function ProgramaPage({
         <section className="grid items-start gap-8 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1.4fr)]">
           {/* Izquierda: Pros / Contras */}
           <div className="space-y-6">
-            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
+            <div className="rounded-xl border border-border bg-background p-5 shadow-sm">
               <h2 className="mb-3 text-xl font-semibold">
                 Lo mejor de {name}
               </h2>
@@ -513,7 +513,7 @@ export default function ProgramaPage({
             </div>
 
             {keyCons.length > 0 && (
-              <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
+              <div className="rounded-xl border border-border bg-background p-5 shadow-sm">
                 <h2 className="mb-3 text-xl font-semibold">
                   Puntos a tener en cuenta
                 </h2>
@@ -529,7 +529,7 @@ export default function ProgramaPage({
             )}
 
             {/* Ideal para */}
-            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
+            <div className="rounded-xl border border-border bg-background p-5 shadow-sm">
               <h2 className="mb-3 text-lg font-semibold">
                 ¿Para quién es ideal?
               </h2>
@@ -540,7 +540,7 @@ export default function ProgramaPage({
           {/* Derecha: características, requisitos, países, seguridad */}
           <aside className="space-y-5">
             {/* Características principales */}
-            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
+            <div className="rounded-xl border border-border bg-background p-5 shadow-sm">
               <h2 className="mb-3 text-lg font-semibold">
                 Características principales
               </h2>
@@ -574,7 +574,7 @@ export default function ProgramaPage({
             </div>
 
             {/* Requisitos */}
-            <div className="rounded-3xl border border-border bg-background p-5 shadow-sm">
+            <div className="rounded-xl border border-border bg-background p-5 shadow-sm">
               <h2 className="mb-3 text-lg font-semibold">
                 Requisitos para abrir la cuenta
               </h2>
@@ -589,7 +589,7 @@ export default function ProgramaPage({
             </div>
 
             {/* Países aceptados + Seguridad */}
-            <div className="space-y-4 rounded-3xl border border-border bg-background p-5 shadow-sm">
+            <div className="space-y-4 rounded-xl border border-border bg-background p-5 shadow-sm">
               {acceptedCountries?.length > 0 && (
                 <div>
                   <h2 className="mb-2 text-lg font-semibold">
@@ -633,7 +633,7 @@ export default function ProgramaPage({
         </section>
 
         {/* Opinión experta */}
-        <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+        <section className="rounded-xl border border-border bg-background p-6 shadow-sm">
           <h2 className="mb-3 text-xl font-semibold">
             Opinión de nuestro experto sobre {name}
           </h2>
@@ -681,7 +681,7 @@ export default function ProgramaPage({
         </section>
 
         {/* Guía paso a paso */}
-        <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+        <section className="rounded-xl border border-border bg-background p-6 shadow-sm">
           <h2 className="mb-3 text-xl font-semibold">
             Cómo abrir una cuenta en {name} paso a paso
           </h2>
@@ -704,7 +704,7 @@ export default function ProgramaPage({
         </section>
 
         {/* Tabla de tarifas detallada */}
-        <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+        <section className="rounded-xl border border-border bg-background p-6 shadow-sm">
           <h2 className="mb-3 text-xl font-semibold">
             Tarifas y comisiones de {name}
           </h2>
@@ -770,7 +770,7 @@ export default function ProgramaPage({
 
         {/* Reseñas de usuarios */}
         {reviews && reviews.length > 0 && (
-          <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+          <section className="rounded-xl border border-border bg-background p-6 shadow-sm">
             <h2 className="mb-3 text-xl font-semibold">
               Opiniones de usuarios sobre {name}
             </h2>
@@ -807,7 +807,7 @@ export default function ProgramaPage({
 
         {/* Historia y evolución del banco */}
         {history && history.length > 0 && (
-          <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+          <section className="rounded-xl border border-border bg-background p-6 shadow-sm">
             <h2 className="mb-3 text-xl font-semibold">
               Evolución de {name} en los últimos años
             </h2>
@@ -920,7 +920,7 @@ export default function ProgramaPage({
 
         {/* CTA final */}
         <section className="border-t border-border pt-8">
-          <div className="flex flex-col gap-4 rounded-3xl border border-border bg-hero-background/80 p-6 shadow-md md:flex-row md:items-center md:justify-between md:p-8">
+          <div className="flex flex-col gap-4 rounded-xl border border-border bg-hero-background/80 p-6 shadow-md md:flex-row md:items-center md:justify-between md:p-8">
             <div>
               <h2 className="mb-2 text-xl font-bold md:text-2xl">
                 ¿Listo para abrir tu cuenta en {name}?

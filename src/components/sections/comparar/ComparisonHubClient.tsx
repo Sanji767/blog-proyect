@@ -117,7 +117,7 @@ export default function ComparisonHubClient() {
   return (
     <div className="space-y-12 md:space-y-16">
       <header className="text-center max-w-2xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-2 rounded-full border-2 border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-bold text-accent uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-bold text-accent uppercase tracking-wider">
           <Scale className="h-3.5 w-3.5 text-accent" />
           <span>{copy.badge}</span>
         </div>
@@ -130,7 +130,7 @@ export default function ComparisonHubClient() {
       </header>
 
       {/* Custom Comparison Generator */}
-      <section className="relative overflow-hidden rounded-3xl border-2 border-accent bg-secondary p-6 md:p-8 shadow-soft">
+      <section className="relative overflow-hidden rounded-xl border border-accent bg-secondary p-6 md:p-8 shadow-soft">
         <div className="max-w-xl mx-auto text-center space-y-2">
           <h2 className="text-xl md:text-2xl font-black text-accent">{copy.customTitle}</h2>
           <p className="text-xs md:text-sm text-secondary-foreground/80">{copy.customSubtitle}</p>
@@ -144,10 +144,10 @@ export default function ComparisonHubClient() {
             <select
               value={bank1}
               onChange={(e) => setBank1(e.target.value)}
-              className="w-full rounded-2xl border-2 border-accent/40 bg-background p-3.5 text-sm font-bold text-foreground shadow-sm focus:border-accent focus:outline-none dark:bg-slate-900 dark:text-white"
+              className="w-full rounded-2xl border border-input bg-background p-3.5 text-sm font-bold text-foreground shadow-sm focus:border-ring focus:outline-none"
             >
               {availableBanks.map((b) => (
-                <option key={b.slug} value={b.slug} className="bg-background text-foreground dark:bg-slate-900 dark:text-white py-1">
+                <option key={b.slug} value={b.slug} className="bg-background text-foreground py-1">
                   {b.name} ({b.ibanPrefix || b.country})
                 </option>
               ))}
@@ -155,7 +155,7 @@ export default function ComparisonHubClient() {
           </div>
 
           <div className="sm:col-span-2 flex justify-center py-2 sm:py-0">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-accent bg-accent/10 font-black text-accent text-sm shadow-sm">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-accent bg-accent/10 font-black text-accent text-sm shadow-sm">
               VS
             </span>
           </div>
@@ -167,10 +167,10 @@ export default function ComparisonHubClient() {
             <select
               value={bank2}
               onChange={(e) => setBank2(e.target.value)}
-              className="w-full rounded-2xl border-2 border-accent/40 bg-background p-3.5 text-sm font-bold text-foreground shadow-sm focus:border-accent focus:outline-none dark:bg-slate-900 dark:text-white"
+              className="w-full rounded-2xl border border-input bg-background p-3.5 text-sm font-bold text-foreground shadow-sm focus:border-ring focus:outline-none"
             >
               {availableBanks.map((b) => (
-                <option key={b.slug} value={b.slug} className="bg-background text-foreground dark:bg-slate-900 dark:text-white py-1">
+                <option key={b.slug} value={b.slug} className="bg-background text-foreground py-1">
                   {b.name} ({b.ibanPrefix || b.country})
                 </option>
               ))}
@@ -211,7 +211,7 @@ export default function ComparisonHubClient() {
               <motion.article
                 key={comparisonSlug}
                 whileHover={{ y: -4 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-secondary-foreground/10 bg-secondary p-6 shadow-soft transition-all hover:border-accent"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-secondary-foreground/10 bg-secondary p-6 shadow-soft transition-all hover:border-accent"
               >
                 <div>
                   <div className="flex items-center justify-between gap-4">
@@ -223,7 +223,7 @@ export default function ComparisonHubClient() {
                       <span className="font-black text-lg text-accent">{b2.name}</span>
                     </div>
 
-                    <Trophy className="h-5 w-5 text-amber-500 shrink-0" />
+                    <Trophy className="h-5 w-5 text-accent shrink-0" />
                   </div>
 
                   <p className="mt-4 text-xs md:text-sm leading-relaxed text-secondary-foreground/80">
@@ -232,7 +232,7 @@ export default function ComparisonHubClient() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-secondary-foreground/10 flex justify-end">
-                  <Button asChild variant="ghost" size="sm" className="gap-1 font-bold group-hover:text-accent">
+                  <Button asChild variant="ghost" size="sm" className="gap-1 font-bold text-secondary-foreground hover:bg-secondary-foreground/5 group-hover:text-accent">
                     <LocalizedLink href={`/comparar/${comparisonSlug}`}>
                       {copy.viewComparison}
                     </LocalizedLink>

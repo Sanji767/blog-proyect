@@ -241,20 +241,20 @@ export default function MortgageCalculator() {
 
   return (
     <div className="space-y-10">
-      <Card className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-soft md:p-10">
+      <Card className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground shadow-soft md:p-10">
         <div className="pointer-events-none absolute -top-28 -right-28 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
 
         <div className="relative grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary-foreground/12 bg-secondary-foreground/5 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-primary">
+            <div className="inline-flex items-center gap-2 rounded-full border border-secondary-foreground/12 bg-secondary-foreground/5 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-primary-light">
               <Calculator className="h-4 w-4" />
               {locale === "en" ? "Mortgage" : "Hipoteca"}
             </div>
 
             <h2 className="text-balance text-3xl font-black tracking-tight md:text-4xl">
               {copy.title}{" "}
-              <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+              <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
                 {copy.titleAccent}
               </span>{" "}
               {copy.titleSuffix}
@@ -278,7 +278,7 @@ export default function MortgageCalculator() {
             {toast ? <p className="text-xs font-semibold text-accent">{toast}</p> : null}
           </div>
 
-          <div className="rounded-2xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-6 backdrop-blur">
+          <div className="rounded-2xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-6 backdrop-blur">
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="space-y-2 sm:col-span-2">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-secondary-foreground/70">
@@ -296,9 +296,9 @@ export default function MortgageCalculator() {
                       type="button"
                       onClick={() => setRateType(opt.id)}
                       className={[
-                        "rounded-full border-2 px-4 py-2 text-xs font-semibold transition-colors",
+                        "rounded-full border px-4 py-2 text-xs font-semibold transition-colors",
                         rateType === opt.id
-                          ? "border-secondary bg-accent text-accent-foreground shadow-offset-accent"
+                          ? "border-secondary bg-accent text-accent-foreground"
                           : "border-secondary-foreground/15 bg-secondary-foreground/5 text-secondary-foreground hover:border-secondary-foreground/25",
                       ].join(" ")}
                     >
@@ -317,7 +317,7 @@ export default function MortgageCalculator() {
                   inputMode="decimal"
                   value={principal}
                   onChange={(e) => setPrincipal(e.target.value)}
-                  className="h-12 rounded-xl border-2 border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
+                  className="h-12 rounded-xl border border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
                 />
               </div>
 
@@ -330,7 +330,7 @@ export default function MortgageCalculator() {
                   inputMode="decimal"
                   value={years}
                   onChange={(e) => setYears(e.target.value)}
-                  className="h-12 rounded-xl border-2 border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
+                  className="h-12 rounded-xl border border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
                 />
               </div>
 
@@ -345,7 +345,7 @@ export default function MortgageCalculator() {
                       inputMode="decimal"
                       value={euribor}
                       onChange={(e) => setEuribor(e.target.value)}
-                      className="h-12 rounded-xl border-2 border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
+                      className="h-12 rounded-xl border border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
                     />
                   </div>
 
@@ -358,7 +358,7 @@ export default function MortgageCalculator() {
                       inputMode="decimal"
                       value={differential}
                       onChange={(e) => setDifferential(e.target.value)}
-                      className="h-12 rounded-xl border-2 border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
+                      className="h-12 rounded-xl border border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
                     />
                   </div>
 
@@ -371,7 +371,7 @@ export default function MortgageCalculator() {
                       inputMode="decimal"
                       value={newEuribor}
                       onChange={(e) => setNewEuribor(e.target.value)}
-                      className="h-12 rounded-xl border-2 border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
+                      className="h-12 rounded-xl border border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
                     />
                     <p className="text-xs leading-relaxed text-secondary-foreground/60">
                       {copy.newEuriborHint}
@@ -388,7 +388,7 @@ export default function MortgageCalculator() {
                     inputMode="decimal"
                     value={fixedRate}
                     onChange={(e) => setFixedRate(e.target.value)}
-                    className="h-12 rounded-xl border-2 border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
+                    className="h-12 rounded-xl border border-secondary-foreground/12 bg-transparent font-mono text-secondary-foreground placeholder:text-secondary-foreground/40"
                   />
                 </div>
               )}

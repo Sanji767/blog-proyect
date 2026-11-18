@@ -64,7 +64,7 @@ export default function SobrePage() {
           </p>
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
             Quiénes{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               somos
             </span>
           </h1>
@@ -75,8 +75,8 @@ export default function SobrePage() {
         </header>
 
         <section className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
-            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-border bg-muted text-primary">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted text-primary">
               <Users className="h-5 w-5" />
             </div>
             <h2 className="text-lg font-black tracking-tight">Proyecto editorial</h2>
@@ -86,8 +86,8 @@ export default function SobrePage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
-            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-border bg-muted text-primary">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted text-primary">
               <CheckCircle2 className="h-5 w-5" />
             </div>
             <h2 className="text-lg font-black tracking-tight">Criterios claros</h2>
@@ -97,8 +97,8 @@ export default function SobrePage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
-            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-border bg-muted text-primary">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted text-primary">
               <ShieldCheck className="h-5 w-5" />
             </div>
             <h2 className="text-lg font-black tracking-tight">Transparencia</h2>
@@ -109,31 +109,31 @@ export default function SobrePage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border-2 border-border bg-card p-8 shadow-soft md:p-10">
+        <section className="rounded-2xl border border-border bg-card p-8 shadow-soft md:p-10">
           <h2 className="text-2xl font-black tracking-tight">
             Metodología (resumen)
           </h2>
           <ul className="mt-5 grid gap-3 text-sm text-muted-foreground md:grid-cols-2">
             <li className="flex gap-3">
-              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border-2 border-border bg-muted text-xs font-black text-foreground">
+              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border border-border bg-muted text-xs font-black text-foreground">
                 1
               </span>
               Costes reales: cuota, cajeros, cambio de divisa y condiciones.
             </li>
             <li className="flex gap-3">
-              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border-2 border-border bg-muted text-xs font-black text-foreground">
+              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border border-border bg-muted text-xs font-black text-foreground">
                 2
               </span>
               IBAN / SEPA y operativa: pagos, nómina y domiciliaciones.
             </li>
             <li className="flex gap-3">
-              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border-2 border-border bg-muted text-xs font-black text-foreground">
+              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border border-border bg-muted text-xs font-black text-foreground">
                 3
               </span>
               Requisitos: documentación, residencia y países admitidos.
             </li>
             <li className="flex gap-3">
-              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border-2 border-border bg-muted text-xs font-black text-foreground">
+              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border border-border bg-muted text-xs font-black text-foreground">
                 4
               </span>
               Seguridad y soporte: licencia/supervisión y atención en español cuando aplica.

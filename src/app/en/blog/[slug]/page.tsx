@@ -59,7 +59,7 @@ export default async function BlogPostPageEn({ params }: { params: { slug: strin
     if (!postEs) notFound();
 
     return (
-      <section className="rounded-2xl border-2 border-border bg-card p-6 text-sm text-muted-foreground shadow-soft">
+      <section className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground shadow-soft">
         <p className="font-semibold text-foreground">Spanish version</p>
         <p className="mt-1">
           This article is currently available in Spanish:{" "}
@@ -106,7 +106,7 @@ export default async function BlogPostPageEn({ params }: { params: { slug: strin
         <div className="min-w-0">
           {markdownContent ? (
             <div className="lg:hidden">
-              <details className="rounded-2xl border-2 border-border bg-card p-5 shadow-soft">
+              <details className="rounded-2xl border border-border bg-card p-5 shadow-soft">
                 <summary className="cursor-pointer text-sm font-semibold">
                   Table of contents
                 </summary>

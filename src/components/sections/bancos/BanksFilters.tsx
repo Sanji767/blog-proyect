@@ -72,14 +72,14 @@ export default function BanksFilters() {
   return (
     <section className="space-y-6">
       {/* Controles */}
-      <div className="space-y-4 rounded-3xl border border-border bg-background/90 p-4 shadow-sm md:p-5">
+      <div className="space-y-4 rounded-xl border border-border bg-background/90 p-4 shadow-sm md:p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-sm font-semibold">
-            <Filter className="h-4 w-4 text-emerald-500" />
+            <Filter className="h-4 w-4 text-primary-text" />
             <span>Filtra bancos según lo que buscas</span>
           </div>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Badge variant="outline" className="rounded-full border-emerald-500/30 bg-emerald-500/5 text-[11px] text-emerald-700 dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-200">
+            <Badge variant="outline" className="rounded-full border-primary/30 bg-primary/5 text-[11px] text-primary-text dark:border-primary-light/40 dark:bg-primary-light/10 dark:text-primary-light">
               {current} de {total} bancos
             </Badge>
           </div>
@@ -142,10 +142,10 @@ export default function BanksFilters() {
                   type="checkbox"
                   checked={nonResidentsOnly}
                   onChange={(e) => setNonResidentsOnly(e.target.checked)}
-                  className="h-4 w-4 rounded border-border text-emerald-600 focus:ring-emerald-500"
+                  className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                 />
                 <span className="flex items-center gap-1">
-                  <Globe2 className="h-3.5 w-3.5 text-emerald-500" />
+                  <Globe2 className="h-3.5 w-3.5 text-primary-text" />
                   Solo bancos que aceptan no residentes
                 </span>
               </label>
@@ -174,7 +174,7 @@ export default function BanksFilters() {
                 onClick={() => setTagFilter(prev => prev === f.value ? null : f.value)}
                 className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium transition ${
                   active
-                    ? "bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-sm"
+                    ? "bg-primary text-primary-foreground shadow-sm"
                     : "bg-muted text-muted-foreground hover:bg-muted/80"
                 }`}
               >

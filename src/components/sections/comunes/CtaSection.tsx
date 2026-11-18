@@ -40,7 +40,7 @@ export default function CtaSection({ locale = "es" }: { locale?: Locale }) {
     <section className="border-t-2 border-secondary bg-secondary py-16 text-secondary-foreground md:py-20">
       <Container className="space-y-7 text-center">
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+          <div className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
             <Compass className="h-3.5 w-3.5" />
             {copy.kicker}
           </div>
@@ -80,7 +80,7 @@ export default function CtaSection({ locale = "es" }: { locale?: Locale }) {
           {copy.bullets.map((text) => (
             <p
               key={text}
-              className="rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1"
+              className="rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1"
             >
               {text}
             </p>

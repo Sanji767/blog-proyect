@@ -73,7 +73,7 @@ export default function StickyPromo() {
           exit={{ y: 100, opacity: 0, scale: 0.9 }}
           className="fixed bottom-6 left-6 right-6 z-50 md:left-auto md:right-8 md:bottom-8 md:w-[380px]"
         >
-          <div className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary shadow-offset-accent">
+          <div className="relative overflow-hidden rounded-2xl bg-secondary">
             {/* Glow sutil */}
             <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/20 blur-3xl" />
             
@@ -88,13 +88,13 @@ export default function StickyPromo() {
               </button>
 
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-2 border-secondary-foreground/15 bg-accent shadow-offset-accent">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-secondary-foreground/15 bg-accent">
                   <Gift className="h-6 w-6 text-accent-foreground" />
                 </div>
                 
                 <div className="space-y-3">
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-primary">
+                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-primary-light">
                       <Sparkles className="h-3 w-3" />
                       {copy.badge}
                     </div>
@@ -110,7 +110,7 @@ export default function StickyPromo() {
                   <LocalizedLink
                     href="/blog/los-mejores-bancos-digitales-en-europa-en-2026"
                     onClick={closePromo}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-secondary bg-accent py-3 text-xs font-black uppercase tracking-widest text-accent-foreground transition-transform hover:-translate-x-1 hover:-translate-y-1 active:translate-y-px shadow-offset-accent"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3 text-xs font-black uppercase tracking-widest text-accent-foreground transition-transform"
                   >
                     {copy.cta}
                     <ArrowRight className="h-3 w-3" />

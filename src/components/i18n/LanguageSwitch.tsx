@@ -37,7 +37,7 @@ export default function LanguageSwitch({
       href={href}
       locale={nextLocale}
       className={[
-        "inline-flex items-center justify-center rounded-xl border-2 border-secondary-foreground/15 bg-secondary px-3 py-2 text-xs font-black uppercase tracking-[0.22em] text-primary transition-colors hover:border-secondary-foreground/25 hover:text-accent",
+        "inline-flex items-center justify-center rounded-xl border border-secondary-foreground/15 bg-secondary px-3 py-2 text-xs font-black uppercase tracking-[0.22em] text-primary-light transition-colors hover:border-secondary-foreground/25 hover:text-accent",
         className,
       ]
         .filter(Boolean)

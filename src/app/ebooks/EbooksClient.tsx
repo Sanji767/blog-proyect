@@ -38,7 +38,7 @@ export default function EbooksPage() {
             className="text-balance text-4xl font-black tracking-tight md:text-6xl"
           >
             Guías y cursos para tomar{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               mejores decisiones
             </span>
             .

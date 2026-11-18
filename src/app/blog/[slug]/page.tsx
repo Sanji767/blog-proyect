@@ -250,14 +250,14 @@ export default async function BlogPostPage({
       ) : null}
 
       <article>
-        <header className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent sm:p-10">
+        <header className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground sm:p-10">
           <div className="pointer-events-none absolute -top-28 -right-28 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
 
           <div className="relative mx-auto max-w-3xl">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1.5 text-xs font-semibold text-secondary-foreground/80 transition-colors hover:border-secondary-foreground/20 hover:text-secondary-foreground"
+              className="inline-flex items-center gap-2 rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1.5 text-xs font-semibold text-secondary-foreground/80 transition-colors hover:border-secondary-foreground/20 hover:text-secondary-foreground"
             >
               <span aria-hidden="true">←</span>
               Artículos
@@ -276,33 +276,33 @@ export default async function BlogPostPage({
             <div className="mt-7 flex flex-wrap items-center gap-2 text-xs">
               <Link
                 href={`/blog/categoria/${encodeURIComponent(categorySlug)}`}
-                className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-black uppercase tracking-[0.22em] text-primary transition-colors hover:border-secondary-foreground/20 hover:text-accent"
+                className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-black uppercase tracking-[0.22em] text-primary-light transition-colors hover:border-secondary-foreground/20 hover:text-accent"
               >
                 {categoryLabel}
               </Link>
 
               <time
                 dateTime={post.date}
-                className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80"
+                className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80"
               >
                 {formattedDate}
               </time>
 
               {post.readingTime ? (
-                <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80">
+                <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80">
                   {post.readingTime}
                 </span>
               ) : null}
 
               <Link
                 href="/sobre"
-                className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80 transition-colors hover:border-secondary-foreground/20 hover:text-secondary-foreground"
+                className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80 transition-colors hover:border-secondary-foreground/20 hover:text-secondary-foreground"
               >
                 {authorLabel}
               </Link>
 
               {post.views !== undefined ? (
-                <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80">
+                <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80">
                   {post.views.toLocaleString("es-ES")} vistas
                 </span>
               ) : null}
@@ -317,7 +317,7 @@ export default async function BlogPostPage({
                     <Link
                       key={slug}
                       href={`/blog/tag/${encodeURIComponent(slug)}`}
-                      className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 text-xs font-semibold text-secondary-foreground/75 transition-colors hover:border-accent hover:text-secondary-foreground"
+                      className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 text-xs font-semibold text-secondary-foreground/75 transition-colors hover:border-accent hover:text-secondary-foreground"
                     >
                       #{humanizeSlug(slug)}
                     </Link>
@@ -330,7 +330,7 @@ export default async function BlogPostPage({
 
         {heroImage ? (
           <figure className="mx-auto mt-12 max-w-5xl">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border-2 border-secondary bg-secondary shadow-soft">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-secondary shadow-soft">
               <Image
                 src={heroImage}
                 alt={post.title}
@@ -347,8 +347,8 @@ export default async function BlogPostPage({
           <div className="min-w-0">
             {markdownContent ? (
               <div className="not-prose lg:hidden">
-                <details className="rounded-2xl border-2 border-secondary bg-secondary p-5 text-secondary-foreground shadow-soft">
-                  <summary className="cursor-pointer text-sm font-black uppercase tracking-[0.22em] text-primary">
+                <details className="rounded-2xl bg-secondary p-5 text-secondary-foreground shadow-soft">
+                  <summary className="cursor-pointer text-sm font-black uppercase tracking-[0.22em] text-primary-light">
                     Índice del artículo
                   </summary>
                   <div className="mt-4">
@@ -399,8 +399,8 @@ export default async function BlogPostPage({
 
       <LeadCaptureInline source={`blog:${post.slug}`} />
 
-      <section className="mt-14 overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent md:p-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+      <section className="mt-14 overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground md:p-10">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-light">
           Herramientas
         </p>
         <h2 className="mt-4 text-balance text-2xl font-black tracking-tight text-accent md:text-3xl">
@@ -437,7 +437,7 @@ export default async function BlogPostPage({
             <Link
               key={item.href}
               href={item.href}
-              className="group flex items-center justify-between gap-4 rounded-xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-5 py-4 transition-colors hover:border-secondary-foreground/20"
+              className="group flex items-center justify-between gap-4 rounded-xl border border-secondary-foreground/10 bg-secondary-foreground/5 px-5 py-4 transition-colors hover:border-secondary-foreground/20"
             >
               <span className="min-w-0">
                 <span className="block truncate text-sm font-black text-secondary-foreground group-hover:text-accent">
@@ -447,7 +447,7 @@ export default async function BlogPostPage({
                   {item.meta}
                 </span>
               </span>
-              <span className="text-xs font-black uppercase tracking-[0.22em] text-primary">
+              <span className="text-xs font-black uppercase tracking-[0.22em] text-primary-light">
                 Abrir →
               </span>
             </Link>

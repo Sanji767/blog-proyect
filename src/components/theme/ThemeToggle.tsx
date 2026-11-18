@@ -20,7 +20,7 @@ export default function ThemeToggle({ className }: { className?: string }) {
     return (
       <div
         className={cn(
-          "inline-flex h-9 w-9 items-center justify-center rounded-xl border-2 border-secondary-foreground/15 bg-secondary text-primary opacity-70",
+          "inline-flex h-9 w-9 items-center justify-center rounded-xl border border-secondary-foreground/15 bg-secondary text-primary-light opacity-70",
           className
         )}
       >
@@ -44,7 +44,7 @@ export default function ThemeToggle({ className }: { className?: string }) {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
-        "group relative inline-flex h-9 w-9 items-center justify-center rounded-xl border-2 border-secondary-foreground/15 bg-secondary text-primary transition-all duration-200 hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+        "group relative inline-flex h-9 w-9 items-center justify-center rounded-xl border border-secondary-foreground/15 bg-secondary text-primary-light transition-all duration-200 hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
         className
       )}
       aria-label={label}
@@ -53,7 +53,7 @@ export default function ThemeToggle({ className }: { className?: string }) {
       {isDark ? (
         <Sun className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45 text-accent" />
       ) : (
-        <Moon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12 text-primary group-hover:text-accent" />
+        <Moon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12 text-primary-light group-hover:text-accent" />
       )}
     </button>
   );

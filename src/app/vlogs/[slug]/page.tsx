@@ -157,7 +157,7 @@ export default function VlogPage({ params }: { params: { slug: string } }) {
 
             <div className="mt-10 space-y-10">
               {vlog.youtubeId && (
-                <div className="overflow-hidden rounded-3xl border border-border/60 bg-secondary shadow-lg">
+                <div className="overflow-hidden rounded-xl border border-border/60 bg-secondary shadow-lg">
                   <div className="aspect-video">
                     <iframe
                       src={`https://www.youtube-nocookie.com/embed/${vlog.youtubeId}`}
@@ -171,7 +171,7 @@ export default function VlogPage({ params }: { params: { slug: string } }) {
               )}
 
               {!vlog.youtubeId && vlog.image && (
-                <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-border/60 bg-muted shadow-lg">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-border/60 bg-muted shadow-lg">
                   <Image
                     src={vlog.image}
                     alt={vlog.title}
@@ -210,7 +210,7 @@ export default function VlogPage({ params }: { params: { slug: string } }) {
                 className="max-h-[calc(100vh-18rem)] overflow-auto"
               />
 
-              <div className="rounded-3xl border bg-card p-6 shadow-sm">
+              <div className="rounded-xl border bg-card p-6 shadow-sm">
                 <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-muted-foreground">
                   <PlayCircle className="h-4 w-4 text-primary" />
                   Siguiente paso

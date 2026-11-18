@@ -112,12 +112,12 @@ export default function BankCard({ bank, showDirectLink = true }: BankCardProps)
   const isFree = /gratis|0\s*(€|\u20ac)/i.test(bank.fees.monthly);
 
   return (
-    <article className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-6 text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent">
+    <article className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-secondary p-6 text-secondary-foreground shadow-soft transition-shadow">
       <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-accent/10 blur-3xl" />
 
       <div>
         <header className="relative flex items-start gap-4">
-          <div className="relative h-12 w-12 shrink-0 rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
+          <div className="relative h-12 w-12 shrink-0 rounded-xl border border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
             <Image
               src={bank.logo}
               alt={bank.name}
@@ -133,12 +133,12 @@ export default function BankCard({ bank, showDirectLink = true }: BankCardProps)
                 {bank.name}
               </h3>
               {bank._status === "draft" ? (
-                <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/15 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-secondary-foreground/80">
+                <span className="inline-flex items-center rounded-full border border-secondary-foreground/15 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-secondary-foreground/80">
                   {copy.underReview}
                 </span>
               ) : null}
               {hasAffiliate ? (
-                <span className="inline-flex items-center rounded-full border-2 border-secondary bg-accent px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+                <span className="inline-flex items-center rounded-full bg-accent px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground">
                   {copy.recommended}
                 </span>
               ) : null}
@@ -158,21 +158,21 @@ export default function BankCard({ bank, showDirectLink = true }: BankCardProps)
         </p>
 
         <div className="relative mt-4 flex flex-wrap gap-2">
-          <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/80">
+          <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/80">
             {copy.categories[bank.category] ?? bank.category}
           </span>
 
           {bank.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/80"
+              className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/80"
             >
               {copy.tags[tag] ?? tag}
             </span>
           ))}
 
           {bank.tags.length > 3 ? (
-            <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/70">
+            <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/70">
               +{bank.tags.length - 3}
             </span>
           ) : null}
@@ -241,7 +241,7 @@ function InfoRow({
 }) {
   const valueClasses =
     highlight === "success"
-      ? "text-primary font-semibold"
+      ? "text-primary-light font-semibold"
       : "text-secondary-foreground";
 
   return (

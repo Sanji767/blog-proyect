@@ -8,7 +8,7 @@ export default async function BlogSidebar() {
   return (
     <aside className="space-y-8 lg:sticky lg:top-24">
       {/* Categorías */}
-      <section className="rounded-3xl border bg-card p-6 shadow-sm">
+      <section className="rounded-xl border bg-card p-6 shadow-sm">
         <h3 className="text-lg font-bold mb-5 text-foreground">
           Categorías
         </h3>
@@ -29,7 +29,7 @@ export default async function BlogSidebar() {
       </section>
 
       {/* Tags populares */}
-      <section className="rounded-3xl border bg-card p-6 shadow-sm">
+      <section className="rounded-xl border bg-card p-6 shadow-sm">
         <h3 className="text-lg font-bold mb-5 text-foreground">
           Tags más usados
         </h3>
@@ -47,14 +47,14 @@ export default async function BlogSidebar() {
       </section>
 
       {/* CTA bonito */}
-      <div className="rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-8 text-center text-primary-foreground shadow-xl">
+      <div className="rounded-xl bg-secondary p-8 text-center text-secondary-foreground shadow-card">
         <h3 className="text-xl font-bold mb-3">¿No encuentras lo que buscas?</h3>
         <p className="mb-6 opacity-90">
           Dime qué tema te interesa y escribo un artículo personalizado.
         </p>
         <Link
           href="/contacto"
-          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-primary-text shadow-lg hover:scale-105 transition"
+          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-primary-text shadow-lg transition"
         >
           Pídeme un artículo
         </Link>

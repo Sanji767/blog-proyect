@@ -13,48 +13,47 @@
 /* Modo claro por defecto */
 :root {
   /* Colores base */
-  --background: 251 250 247; /* warm white */
-  --foreground: 28 15 42; /* deep purple */
+  --background: 255 255 255; /* blanco */
+  --foreground: 18 33 26; /* verde oscuro */
 
   /* Brand */
-  --primary: 47 183 209; /* cian */
-  --primary-foreground: 28 15 42;
-  --primary-accent: 23 166 191;
-  --primary-text: 11 107 133; /* teal oscuro: cian legible sobre fondo claro (5.8:1) */
+  --primary: 22 51 0; /* verde profundo #163300 */
+  --primary-foreground: 255 255 255;
+  --primary-accent: 46 125 50; /* verde medio #2E7D32 */
+  --primary-text: 27 94 32; /* verde legible sobre fondo claro */
+  --primary-light: 165 214 167; /* verde claro: legible sobre superficies oscuras */
 
-  --secondary: 43 23 58; /* ink */
-  --secondary-foreground: 251 250 247;
+  --secondary: 22 51 0; /* verde profundo */
+  --secondary-foreground: 255 255 255;
 
   --accent: 248 196 76; /* amarillo */
-  --accent-foreground: 28 15 42;
-  --accent-2: 241 91 58; /* sombra offset */
+  --accent-foreground: 18 33 26;
 
-  --foreground-accent: 95 85 107;
+  --foreground-accent: 74 90 82;
   --hero-background: 255 255 255;
 
-  --border: 231 224 238;
-  --input: 231 224 238;
-  --ring: 47 183 209;
+  --border: 226 232 227;
+  --input: 226 232 227;
+  --ring: 46 125 50;
 
   /* Estados / fondos secundarios */
-  --muted: 243 240 234;
-  --muted-foreground: 109 99 120;
+  --muted: 244 246 243;
+  --muted-foreground: 90 107 96;
 
   --card: 255 255 255;
-  --card-foreground: 28 15 42;
+  --card-foreground: 18 33 26;
 
   --popover: 255 255 255;
-  --popover-foreground: 28 15 42;
+  --popover-foreground: 18 33 26;
 
-  --destructive: 239 68 68; /* red-500 */
+  --destructive: 179 38 30;
   --destructive-foreground: 255 255 255;
 
   /* Radios y sombras base (por si los quieres usar en CSS puro) */
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --shadow-soft: 0 16px 40px rgba(20, 10, 30, 0.08);
-  --shadow-card: 0 18px 60px rgba(20, 10, 30, 0.1);
-  --shadow-offset: 14px 14px 0 rgb(var(--accent-2));
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --shadow-soft: 0 4px 16px rgba(18, 33, 26, 0.06);
+  --shadow-card: 0 8px 24px rgba(18, 33, 26, 0.08);
 
   /* Tipografía */
   --font-sans: var(--font-inter), system-ui, -apple-system,
@@ -64,39 +63,39 @@
 
 /* Modo oscuro (cuando next-themes añade la clase .dark al html) */
 .dark {
-  --background: 15 7 23;
-  --foreground: 247 242 255;
+  --background: 13 20 16;
+  --foreground: 237 244 238;
 
-  --primary: 57 198 221;
-  --primary-foreground: 15 7 23;
-  --primary-accent: 42 176 199;
-  --primary-text: 127 227 245; /* cian claro: legible sobre fondo oscuro */
+  --primary: 129 199 132;
+  --primary-foreground: 13 20 16;
+  --primary-accent: 102 187 106;
+  --primary-text: 165 214 167; /* verde claro: legible sobre fondo oscuro */
+  --primary-light: 165 214 167;
 
-  --secondary: 26 15 36;
-  --secondary-foreground: 247 242 255;
+  --secondary: 22 51 0;
+  --secondary-foreground: 255 255 255;
 
-  --accent: 246 196 83;
-  --accent-foreground: 15 7 23;
-  --accent-2: 241 91 58;
+  --accent: 248 196 76;
+  --accent-foreground: 13 20 16;
 
-  --foreground-accent: 201 193 214;
-  --hero-background: 15 7 23;
+  --foreground-accent: 160 175 165;
+  --hero-background: 13 20 16;
 
-  --border: 42 26 60;
-  --input: 42 26 60;
-  --ring: 57 198 221;
+  --border: 38 52 42;
+  --input: 38 52 42;
+  --ring: 129 199 132;
 
-  --muted: 23 14 34;
-  --muted-foreground: 185 174 198;
+  --muted: 26 38 30;
+  --muted-foreground: 160 175 165;
 
-  --card: 18 10 27;
-  --card-foreground: 247 242 255;
+  --card: 18 28 21;
+  --card-foreground: 237 244 238;
 
-  --popover: 18 10 27;
-  --popover-foreground: 247 242 255;
+  --popover: 18 28 21;
+  --popover-foreground: 237 244 238;
 
-  --destructive: 249 115 115;
-  --destructive-foreground: 15 7 23;
+  --destructive: 229 115 115;
+  --destructive-foreground: 13 20 16;
 }
 
 /* =========================================
@@ -230,20 +229,13 @@ select:focus-visible {
   padding: 0.6rem 1.4rem;
   font-size: 0.875rem;
   font-weight: 600;
-  background: linear-gradient(
-    to right,
-    rgb(var(--primary)),
-    rgb(var(--primary-accent))
-  );
+  background: rgb(var(--primary));
   color: rgb(var(--primary-foreground));
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    filter 0.15s ease;
+  transition: background-color 0.15s ease, filter 0.15s ease;
 }
 .btn-primary:hover {
+  background: rgb(var(--primary-accent));
   filter: brightness(1.05);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-card);
 }
 .btn-primary:disabled {
   opacity: 0.6;

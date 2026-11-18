@@ -91,7 +91,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-semibold tracking-tight text-primary transition-colors hover:text-accent",
+                  "text-sm font-semibold tracking-tight text-primary-light transition-colors hover:text-accent",
                   isActive && "text-accent underline underline-offset-8"
                 )}
               >
@@ -110,7 +110,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="inline-flex items-center justify-center rounded-xl border-2 border-secondary-foreground/15 bg-secondary px-3 py-2 text-primary transition-colors hover:border-secondary-foreground/25 hover:text-accent"
+            className="inline-flex items-center justify-center rounded-xl border border-secondary-foreground/15 bg-secondary px-3 py-2 text-primary-light transition-colors hover:border-secondary-foreground/25 hover:text-accent"
             aria-label={mobileOpen ? copy.closeMenu : copy.openMenu}
             aria-expanded={mobileOpen}
           >
@@ -135,7 +135,7 @@ export default function Header() {
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
                     className={cn(
-                      "rounded-xl border-2 border-secondary-foreground/10 px-4 py-3 text-base font-semibold text-primary transition-colors hover:border-secondary-foreground/20 hover:text-accent",
+                      "rounded-xl border border-secondary-foreground/10 px-4 py-3 text-base font-semibold text-primary-light transition-colors hover:border-secondary-foreground/20 hover:text-accent",
                       isActive && "border-accent text-accent"
                     )}
                   >

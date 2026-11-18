@@ -68,7 +68,7 @@ export default function HomeFaqPreview({ locale = "es" }: { locale?: Locale }) {
       <Container className="space-y-8">
         <header className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+            <div className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
               <HelpCircle className="h-3.5 w-3.5" />
               {copy.kicker}
             </div>
@@ -91,7 +91,7 @@ export default function HomeFaqPreview({ locale = "es" }: { locale?: Locale }) {
           {copy.faqs.map((item) => (
             <details
               key={item.question}
-              className="group rounded-2xl border-2 border-border bg-card p-5 text-sm shadow-soft"
+              className="group rounded-2xl border border-border bg-card p-5 text-sm shadow-soft"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold">
                 <span>{item.question}</span>

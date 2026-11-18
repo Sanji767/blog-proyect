@@ -9,7 +9,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const base =
-  "inline-flex items-center rounded-full border-2 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]";
+  "inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]";
 
 const variants: Record<BadgeVariant, string> = {
   default: "border-secondary bg-secondary text-secondary-foreground",

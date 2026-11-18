@@ -10,7 +10,7 @@ interface EbookCardProps {
 export default function EbookCard({ ebook }: EbookCardProps) {
   return (
     <Link href={`/ebooks/${ebook.id}`} className="group block h-full">
-      <article className="relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-secondary bg-secondary text-secondary-foreground shadow-soft transition-shadow group-hover:shadow-offset-accent">
+      <article className="relative flex h-full flex-col overflow-hidden rounded-2xl bg-secondary text-secondary-foreground shadow-soft transition-shadow group-hover:shadow-card">
         <BookMockup image={ebook.image} />
 
         <div className="flex flex-1 flex-col gap-4 p-6">

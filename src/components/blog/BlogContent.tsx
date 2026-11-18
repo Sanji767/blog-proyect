@@ -16,9 +16,9 @@ export default function BlogContent({ post }: { post: BlogPost }) {
 
   return (
     <article className="mx-auto w-full max-w-3xl space-y-10 md:space-y-12">
-      <header className="relative overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-primary/10 via-background to-background p-6 shadow-sm md:p-10">
+      <header className="relative overflow-hidden rounded-xl border border-border/60 bg-gradient-to-br from-primary/10 via-background to-background p-6 shadow-sm md:p-10">
         <div className="pointer-events-none absolute -top-28 -right-28 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
 
         <div className="relative space-y-5">
           <div className="flex flex-wrap items-center gap-2">
@@ -77,7 +77,7 @@ export default function BlogContent({ post }: { post: BlogPost }) {
         </div>
       </header>
 
-      <section className="rounded-3xl border border-border/60 bg-card p-6 shadow-sm md:p-10">
+      <section className="rounded-xl border border-border/60 bg-card p-6 shadow-sm md:p-10">
         <div className="prose prose-neutral dark:prose-invert max-w-none leading-relaxed">
           {typeof post.content === "string" ? (
             <ReactMarkdown

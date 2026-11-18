@@ -18,12 +18,12 @@ export default function AppleIcon() {
         style={{
           width: "100%",
           height: "100%",
-          background: "linear-gradient(135deg, #2c1642 0%, #1c0f2a 50%, #12081d 100%)",
+          background: "linear-gradient(135deg, #163300 0%, #0f2600 50%, #0a1a00 100%)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 40,
-          border: "4px solid #2fb7d1",
+          border: "4px solid #81C784",
           position: "relative",
           boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
         }}
@@ -38,17 +38,17 @@ export default function AppleIcon() {
           {/* F Vertical Stem */}
           <path
             d="M16 16.5C16 14.567 17.567 13 19.5 13H21.5C23.433 13 25 14.567 25 16.5V47.5C25 49.433 23.433 51 21.5 51H19.5C17.567 51 16 49.433 16 47.5V16.5Z"
-            fill="#2fb7d1"
+            fill="#A5D6A7"
           />
           {/* F Top Bar */}
           <path
             d="M21 13H38C39.933 13 41.5 14.567 41.5 16.5V17.5C41.5 19.433 39.933 21 38 21H21V13Z"
-            fill="#2fb7d1"
+            fill="#A5D6A7"
           />
           {/* F Mid Bar */}
           <path
             d="M21 27.5H32.5C34.433 27.5 36 29.067 36 31V31.5C36 33.433 34.433 35 32.5 35H21V27.5Z"
-            fill="#2fb7d1"
+            fill="#A5D6A7"
           />
           {/* Growth Arrow in Gold */}
           <path

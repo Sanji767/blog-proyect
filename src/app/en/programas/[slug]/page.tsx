@@ -231,7 +231,7 @@ export default function ProgramaPageEn({
         {/* HERO */}
         <header className="grid items-start gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)]">
           <div className="space-y-6">
-            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-primary-light">
               <span>Reviewed by FinanzasEU Editorial Team</span>
               {hasAffiliate && (
                 <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-foreground">
@@ -291,13 +291,13 @@ export default function ProgramaPageEn({
           </div>
 
           {/* ASIDE SUMMARY */}
-          <aside className="rounded-3xl border border-border bg-hero-background/70 p-5 shadow-md">
+          <aside className="rounded-xl border border-border bg-hero-background/70 p-5 shadow-md">
             {heroImage ? (
               <div className="relative mb-4 h-40 w-full overflow-hidden rounded-2xl">
                 <Image src={heroImage} alt={name} fill className="object-cover" />
               </div>
             ) : (
-              <div className="mb-4 h-40 rounded-2xl border-2 border-border bg-muted/40" />
+              <div className="mb-4 h-40 rounded-2xl border border-border bg-muted/40" />
             )}
 
             <h2 className="mb-3 text-sm font-semibold text-muted-foreground">At a glance</h2>
@@ -327,7 +327,7 @@ export default function ProgramaPageEn({
 
         {/* PROS & CONS */}
         <section className="grid items-start gap-8 md:grid-cols-2">
-          <div className="rounded-3xl border border-border bg-background p-5 shadow-sm space-y-3">
+          <div className="rounded-xl border border-border bg-background p-5 shadow-sm space-y-3">
             <h2 className="text-xl font-semibold">Key Highlights of {name}</h2>
             <ul className="space-y-2 text-sm">
               {keyPros.map((item) => (
@@ -339,7 +339,7 @@ export default function ProgramaPageEn({
             </ul>
           </div>
 
-          <div className="rounded-3xl border border-border bg-background p-5 shadow-sm space-y-3">
+          <div className="rounded-xl border border-border bg-background p-5 shadow-sm space-y-3">
             <h2 className="text-xl font-semibold">Things to Consider</h2>
             <ul className="space-y-2 text-sm">
               {keyCons.map((item) => (
@@ -353,7 +353,7 @@ export default function ProgramaPageEn({
         </section>
 
         {/* STEP-BY-STEP */}
-        <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+        <section className="rounded-xl border border-border bg-background p-6 shadow-sm">
           <h2 className="mb-3 text-xl font-semibold">How to Open an Account in {name}</h2>
           <ol className="space-y-3 text-sm">
             {stepsToShow.map((step, index) => (
@@ -368,7 +368,7 @@ export default function ProgramaPageEn({
         </section>
 
         {/* FEES TABLE */}
-        <section className="rounded-3xl border border-border bg-background p-6 shadow-sm">
+        <section className="rounded-xl border border-border bg-background p-6 shadow-sm">
           <h2 className="mb-3 text-xl font-semibold">Fee Breakdown</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">

@@ -87,20 +87,20 @@ export default function HomePageEn() {
       {/* 4. Tool: IBAN validator */}
       <section className="border-t border-border bg-muted/30 py-16 md:py-24">
         <Container>
-          <div className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent md:p-12">
+          <div className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground md:p-12">
             <div className="pointer-events-none absolute -top-28 -right-28 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
 
             <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
               <div className="space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-4 py-2 text-xs font-black uppercase tracking-wide text-primary">
+                <div className="inline-flex items-center gap-2 rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-4 py-2 text-xs font-black uppercase tracking-wide text-primary-light">
                   <ShieldCheck className="h-4 w-4" />
                   Free tool
                 </div>
 
                 <h2 className="text-balance text-3xl font-black tracking-tight md:text-4xl">
                   Validate an IBAN in{" "}
-                  <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+                  <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
                     seconds
                   </span>{" "}
                   (country, SEPA, bank)
@@ -134,7 +134,7 @@ export default function HomePageEn() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-6 backdrop-blur">
+              <div className="rounded-2xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-6 backdrop-blur">
                 <p className="text-xs font-black uppercase tracking-wide text-secondary-foreground/70">
                   Quick example
                 </p>

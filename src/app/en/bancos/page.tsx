@@ -88,7 +88,7 @@ export default function BancosPageEn() {
 
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
             Choose your bank in Europe with{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               clear data
             </span>
             .
@@ -167,11 +167,11 @@ function BankCard({ bank, locale }: { bank: Bank; locale: "en" }) {
   const isFree = /gratis|0\s*€/i.test(fees.monthly);
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-6 text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent">
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl bg-secondary p-6 text-secondary-foreground shadow-soft transition-shadow">
       <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-accent/10 blur-3xl" />
 
       <header className="relative flex items-start gap-4">
-        <div className="relative h-12 w-12 rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
+        <div className="relative h-12 w-12 rounded-xl border border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
           <Image src={logo} alt={name} fill className="object-contain p-1.5" />
         </div>
 
@@ -181,12 +181,12 @@ function BankCard({ bank, locale }: { bank: Bank; locale: "en" }) {
               {name}
             </h2>
             {bank._status === "draft" ? (
-              <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/15 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-secondary-foreground/80">
+              <span className="inline-flex items-center rounded-full border border-secondary-foreground/15 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-secondary-foreground/80">
                 In review
               </span>
             ) : null}
             {affiliateUrl ? (
-              <span className="inline-flex items-center rounded-full border-2 border-secondary bg-accent px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+              <span className="inline-flex items-center rounded-full bg-accent px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground">
                 Recommended
               </span>
             ) : null}
@@ -211,14 +211,14 @@ function BankCard({ bank, locale }: { bank: Bank; locale: "en" }) {
         {tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/80"
+            className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/80"
           >
             {formatTag(tag)}
           </span>
         ))}
 
         {tags.length > 3 ? (
-          <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/70">
+          <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/70">
             +{tags.length - 3}
           </span>
         ) : null}
@@ -299,7 +299,7 @@ function InfoRow({
 }) {
   const valueClasses =
     highlight === "success"
-      ? "text-primary font-semibold"
+      ? "text-primary-light font-semibold"
       : "text-secondary-foreground";
 
   return (
@@ -324,7 +324,7 @@ function CategoryBadge({ category }: { category: Bank["category"] }) {
   };
 
   return (
-    <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/80">
+    <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-medium text-secondary-foreground/80">
       {labelMap[category] ?? category}
     </span>
   );
@@ -364,7 +364,7 @@ function Metric({
   tone?: "default" | "success";
 }) {
   return (
-    <div className="rounded-2xl border-2 border-border bg-card p-4 shadow-soft">
+    <div className="rounded-2xl border border-border bg-card p-4 shadow-soft">
       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
         {label}
       </p>

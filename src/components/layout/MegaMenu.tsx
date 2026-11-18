@@ -21,7 +21,7 @@ type Props = { onClose: () => void };
 const MegaMenu = memo(function MegaMenu({ onClose }: Props) {
   return (
     <div
-      className="w-[480px] rounded-2xl bg-white/95 dark:bg-zinc-900/95 shadow-lg ring-1 ring-border/30 overflow-hidden backdrop-blur-md"
+      className="w-[480px] rounded-2xl bg-card/95 dark:bg-card/95 shadow-lg ring-1 ring-border/30 overflow-hidden backdrop-blur-md"
       role="menu"
       aria-label="Bancos destacados"
     >
@@ -34,7 +34,7 @@ const MegaMenu = memo(function MegaMenu({ onClose }: Props) {
             className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-muted/30 dark:hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/40"
             role="menuitem"
           >
-            <div className="relative h-8 w-8 flex-shrink-0 overflow-hidden rounded-lg bg-white dark:bg-zinc-800">
+            <div className="relative h-8 w-8 flex-shrink-0 overflow-hidden rounded-lg bg-card dark:bg-muted">
               <Image
                 src={bank.logo}
                 alt={`${bank.name} logo`}
@@ -51,7 +51,7 @@ const MegaMenu = memo(function MegaMenu({ onClose }: Props) {
         ))}
       </div>
 
-      <div className="border-t border-border/30 px-4 py-2 text-center bg-white/95 dark:bg-zinc-900/95">
+      <div className="border-t border-border/30 px-4 py-2 text-center bg-card/95 dark:bg-card/95">
         <Link
           href="/bancos"
           onClick={onClose}

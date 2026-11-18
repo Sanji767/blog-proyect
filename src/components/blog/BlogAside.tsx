@@ -42,7 +42,7 @@ export default function BlogAside({
             className="max-h-[calc(100vh-18rem)] overflow-auto"
           />
 
-          <div className="rounded-3xl border bg-card p-6 shadow-sm">
+          <div className="rounded-xl border bg-card p-6 shadow-sm">
             <h3 className="text-lg font-black tracking-tight">
               ¿Quieres una recomendación rápida?
             </h3>
@@ -53,7 +53,7 @@ export default function BlogAside({
             <div className="mt-5 grid gap-3">
               <Link
                 href="/comparativa"
-                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-primary/80 px-5 py-3 text-sm font-black text-primary-foreground shadow-lg hover:shadow-xl transition"
+                className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-black text-primary-foreground shadow-sm transition hover:bg-primary-accent"
               >
                 Ver comparativa
               </Link>
@@ -72,7 +72,7 @@ export default function BlogAside({
 
   return (
     <aside className="space-y-10">
-      <section className="rounded-3xl border bg-card p-6 shadow-sm">
+      <section className="rounded-xl border bg-card p-6 shadow-sm">
         <h3 className="text-lg font-bold mb-4">Categorías</h3>
         <ul className="space-y-2">
           {categories.map((cat) => (
@@ -91,7 +91,7 @@ export default function BlogAside({
         </ul>
       </section>
 
-      <section className="rounded-3xl border bg-card p-6 shadow-sm">
+      <section className="rounded-xl border bg-card p-6 shadow-sm">
         <h3 className="text-lg font-bold mb-4">Tags populares</h3>
         <div className="flex flex-wrap gap-2">
           {tags.slice(0, 12).map((tag) => (
@@ -106,7 +106,7 @@ export default function BlogAside({
         </div>
       </section>
 
-      <div className="rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-8 text-primary-foreground shadow-xl">
+      <div className="rounded-xl bg-secondary p-8 text-secondary-foreground shadow-card">
         <h3 className="text-xl font-bold mb-3">
           ¿Necesitas ayuda personalizada?
         </h3>
@@ -115,7 +115,7 @@ export default function BlogAside({
         </p>
         <Link
           href="/contacto"
-          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-primary-text shadow-lg hover:scale-105 transition"
+          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-primary-text shadow-lg transition"
         >
           Hablar conmigo gratis
         </Link>

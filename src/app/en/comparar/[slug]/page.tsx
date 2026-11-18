@@ -169,11 +169,11 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
           {[b1, b2].map((b) => (
             <div
               key={b.slug}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-soft"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-secondary p-8 text-secondary-foreground shadow-soft"
             >
               <div>
                 <div className="flex items-center gap-4">
-                  <div className="relative h-16 w-16 rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
+                  <div className="relative h-16 w-16 rounded-xl border border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
                     <Image src={b.logo} alt={b.name} fill className="object-contain p-2" />
                   </div>
                   <div>
@@ -210,7 +210,7 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
         <section className="space-y-6">
           <h2 className="text-2xl font-black tracking-tight md:text-3xl">Feature Comparison</h2>
 
-          <div className="overflow-x-auto rounded-2xl border-2 border-border bg-card">
+          <div className="overflow-x-auto rounded-2xl border border-border bg-card">
             <table className="w-full text-left text-sm">
               <thead className="border-b border-border bg-muted/50 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 <tr>
@@ -237,8 +237,8 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
                 </tr>
                 <tr>
                   <td className="p-4 font-semibold">Spanish Support</td>
-                  <td className="p-4">{b1.support.spanishSupport ? <Check className="h-5 w-5 text-emerald-500" /> : <X className="h-5 w-5 text-rose-500" />}</td>
-                  <td className="p-4">{b2.support.spanishSupport ? <Check className="h-5 w-5 text-emerald-500" /> : <X className="h-5 w-5 text-rose-500" />}</td>
+                  <td className="p-4">{b1.support.spanishSupport ? <Check className="h-5 w-5 text-primary-text" /> : <X className="h-5 w-5 text-destructive" />}</td>
+                  <td className="p-4">{b2.support.spanishSupport ? <Check className="h-5 w-5 text-primary-text" /> : <X className="h-5 w-5 text-destructive" />}</td>
                 </tr>
               </tbody>
             </table>
@@ -247,14 +247,14 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
 
         {/* Pros & Cons */}
         <section className="grid gap-8 md:grid-cols-2">
-          <div className="space-y-4 rounded-2xl border-2 border-border p-6 bg-card">
+          <div className="space-y-4 rounded-2xl border border-border p-6 bg-card">
             <h3 className="text-xl font-bold">{b1.name}: Highlights & Features</h3>
             <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-wider text-emerald-500">Key Advantages:</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-primary-text">Key Advantages:</p>
               <ul className="space-y-1.5 text-sm">
                 {b1.keyPros.map((pro, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <Check className="h-4 w-4 shrink-0 text-emerald-500 mt-0.5" />
+                    <Check className="h-4 w-4 shrink-0 text-primary-text mt-0.5" />
                     <span>{pro}</span>
                   </li>
                 ))}
@@ -262,14 +262,14 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="space-y-4 rounded-2xl border-2 border-border p-6 bg-card">
+          <div className="space-y-4 rounded-2xl border border-border p-6 bg-card">
             <h3 className="text-xl font-bold">{b2.name}: Highlights & Features</h3>
             <div className="space-y-2">
-              <p className="text-xs font-bold uppercase tracking-wider text-emerald-500">Key Advantages:</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-primary-text">Key Advantages:</p>
               <ul className="space-y-1.5 text-sm">
                 {b2.keyPros.map((pro, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <Check className="h-4 w-4 shrink-0 text-emerald-500 mt-0.5" />
+                    <Check className="h-4 w-4 shrink-0 text-primary-text mt-0.5" />
                     <span>{pro}</span>
                   </li>
                 ))}
@@ -279,7 +279,7 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
         </section>
 
         {/* Final Verdict */}
-        <section className="rounded-3xl border-2 border-accent bg-secondary p-8 text-secondary-foreground shadow-soft">
+        <section className="rounded-xl border border-accent bg-secondary p-8 text-secondary-foreground shadow-soft">
           <h2 className="text-2xl font-black tracking-tight text-accent">Final Verdict: Which one to choose?</h2>
           <p className="mt-3 text-base leading-relaxed text-secondary-foreground/80">
             If you need a flexible account for international transfers and daily usage, both <strong>{b1.name}</strong> and <strong>{b2.name}</strong> provide top-tier regulated European banking solutions. Review their specific IBAN origin and fee structure above to select the ideal partner.

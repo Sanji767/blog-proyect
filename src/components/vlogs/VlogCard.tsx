@@ -69,7 +69,7 @@ export default function VlogCard({
       onClick={handleClick}
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && handleClick()}
       className={cn(
-        "group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border-2 border-secondary bg-secondary text-secondary-foreground shadow-soft transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:shadow-offset-accent",
+        "group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl bg-secondary text-secondary-foreground shadow-soft transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         isFeatured && "md:grid md:grid-cols-[1.5fr_1fr]",
         isCompact && "md:flex-row md:items-stretch"
       )}
@@ -105,20 +105,20 @@ export default function VlogCard({
 
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
           {isNew ? (
-            <span className="inline-flex items-center rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground">
+            <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground">
               Nuevo
             </span>
           ) : null}
 
           {isFeatured ? (
-            <span className="inline-flex items-center gap-1 rounded-full border-2 border-secondary bg-secondary-foreground/5 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-secondary-foreground">
+            <span className="inline-flex items-center gap-1 rounded-full bg-secondary-foreground/5 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-secondary-foreground">
               <Sparkles className="h-3 w-3 text-accent" />
               Destacado
             </span>
           ) : null}
 
           {vlog.youtubeId ? (
-            <span className="inline-flex items-center gap-1 rounded-full border-2 border-secondary bg-secondary-foreground/5 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-secondary-foreground">
+            <span className="inline-flex items-center gap-1 rounded-full bg-secondary-foreground/5 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-secondary-foreground">
               <PlayCircle className="h-3 w-3 text-primary" />
               Vídeo
             </span>
@@ -180,7 +180,7 @@ export default function VlogCard({
                 key={tag}
                 href={`/vlogs?tag=${tag}`}
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 text-[11px] font-semibold text-secondary-foreground/75 transition-colors hover:border-accent hover:text-secondary-foreground hover:no-underline"
+                className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 text-[11px] font-semibold text-secondary-foreground/75 transition-colors hover:border-accent hover:text-secondary-foreground hover:no-underline"
               >
                 #{tag}
               </Link>

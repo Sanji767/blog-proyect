@@ -76,7 +76,7 @@ export default function SobrePageEn() {
           </p>
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
             Who{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               we are
             </span>
           </h1>
@@ -87,8 +87,8 @@ export default function SobrePageEn() {
         </header>
 
         <section className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
-            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-border bg-muted text-primary">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted text-primary">
               <Users className="h-5 w-5" />
             </div>
             <h2 className="text-lg font-black tracking-tight">Editorial project</h2>
@@ -98,8 +98,8 @@ export default function SobrePageEn() {
             </p>
           </div>
 
-          <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
-            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-border bg-muted text-primary">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted text-primary">
               <CheckCircle2 className="h-5 w-5" />
             </div>
             <h2 className="text-lg font-black tracking-tight">Clear criteria</h2>
@@ -109,8 +109,8 @@ export default function SobrePageEn() {
             </p>
           </div>
 
-          <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
-            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-border bg-muted text-primary">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+            <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted text-primary">
               <ShieldCheck className="h-5 w-5" />
             </div>
             <h2 className="text-lg font-black tracking-tight">Transparency</h2>
@@ -121,29 +121,29 @@ export default function SobrePageEn() {
           </div>
         </section>
 
-        <section className="rounded-2xl border-2 border-border bg-card p-8 shadow-soft md:p-10">
+        <section className="rounded-2xl border border-border bg-card p-8 shadow-soft md:p-10">
           <h2 className="text-2xl font-black tracking-tight">Methodology (summary)</h2>
           <ul className="mt-5 grid gap-3 text-sm text-muted-foreground md:grid-cols-2">
             <li className="flex gap-3">
-              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border-2 border-border bg-muted text-xs font-black text-foreground">
+              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border border-border bg-muted text-xs font-black text-foreground">
                 1
               </span>
               Real costs: fees, cash withdrawals, FX rates and conditions.
             </li>
             <li className="flex gap-3">
-              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border-2 border-border bg-muted text-xs font-black text-foreground">
+              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border border-border bg-muted text-xs font-black text-foreground">
                 2
               </span>
               IBAN / SEPA and day-to-day usage: payments, salary, direct debits.
             </li>
             <li className="flex gap-3">
-              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border-2 border-border bg-muted text-xs font-black text-foreground">
+              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border border-border bg-muted text-xs font-black text-foreground">
                 3
               </span>
               Requirements: documentation, residency, supported countries.
             </li>
             <li className="flex gap-3">
-              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border-2 border-border bg-muted text-xs font-black text-foreground">
+              <span className="mt-0.5 inline-flex h-7 w-7 items-center justify-center border border-border bg-muted text-xs font-black text-foreground">
                 4
               </span>
               Safety and support: licensing/regulation and language support when relevant.

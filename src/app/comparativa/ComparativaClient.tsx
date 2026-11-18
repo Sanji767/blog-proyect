@@ -280,17 +280,17 @@ export default function ComparativaPage() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent sm:p-10"
+        className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground sm:p-10"
       >
         <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
 
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+            <div className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
               <Trophy className="h-4 w-4" />
               <span>Ranking TOP bancario Europa</span>
-              <span className="rounded-full border-2 border-secondary bg-secondary px-2 py-0.5 text-[10px] font-semibold text-secondary-foreground">
+              <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-semibold text-secondary-foreground">
                 Metodología clara
               </span>
             </div>
@@ -314,7 +314,7 @@ export default function ComparativaPage() {
             <div className="mt-4 grid gap-3 sm:max-w-2xl">
               <div className="flex flex-wrap items-center gap-2 text-xs text-secondary-foreground/80">
                 {lastUpdatedLabel ? (
-                  <span className="inline-flex items-center gap-1 rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1">
                     <Info className="h-4 w-4" />
                     Actualizado:{" "}
                     <strong className="font-semibold">{lastUpdatedLabel}</strong>
@@ -323,13 +323,13 @@ export default function ComparativaPage() {
 
                 <Link
                   href="/aviso-afiliados"
-                  className="inline-flex items-center gap-1 rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 underline underline-offset-4"
+                  className="inline-flex items-center gap-1 rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 underline underline-offset-4"
                 >
                   Aviso de afiliados
                 </Link>
               </div>
 
-              <details className="rounded-2xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-5 text-xs text-secondary-foreground/80">
+              <details className="rounded-2xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-5 text-xs text-secondary-foreground/80">
                 <summary className="cursor-pointer font-semibold">
                   Metodología y fuentes oficiales
                 </summary>
@@ -402,10 +402,10 @@ export default function ComparativaPage() {
                 <Link href="/bancos">Ver todos los bancos</Link>
               </Button>
 
-              <div className="flex items-center gap-2 rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-4 py-2 text-xs font-semibold text-secondary-foreground/80">
+              <div className="flex items-center gap-2 rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-4 py-2 text-xs font-semibold text-secondary-foreground/80">
                 <Heart className="h-4 w-4 text-accent" />
                 <span>Favoritos</span>
-                <span className="rounded-full border-2 border-secondary bg-accent px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+                <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground">
                   {favoritesCount}
                 </span>
               </div>
@@ -417,7 +417,7 @@ export default function ComparativaPage() {
             <Trophy className="h-10 w-10 text-accent drop-shadow" />
             <div className="flex flex-col items-center gap-1 text-[11px] text-secondary-foreground/80">
               <span>TOP 1-2-3</span>
-              <span className="rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2 py-0.5">
+              <span className="rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2 py-0.5">
                 Auto-ordenados
               </span>
             </div>
@@ -427,7 +427,7 @@ export default function ComparativaPage() {
 
       {/* QUIZ GUIADO */}
       <section className="mt-2 md:mt-4">
-        <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
@@ -438,7 +438,7 @@ export default function ComparativaPage() {
               </h2>
             </div>
             {quizMode === "done" && (
-              <span className="rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+              <span className="rounded-full bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-accent-foreground">
                 Filtros aplicados ✅
               </span>
             )}
@@ -459,7 +459,7 @@ export default function ComparativaPage() {
                       tag: "sin-comisiones",
                     })
                   }
-                  className="rounded-full border-2 border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
+                  className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
                 >
                   💰 Cobrar nómina
                 </button>
@@ -471,7 +471,7 @@ export default function ComparativaPage() {
                       tag: "multidivisa",
                     })
                   }
-                  className="rounded-full border-2 border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
+                  className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
                 >
                   🌍 Viajar / varias divisas
                 </button>
@@ -492,14 +492,14 @@ export default function ComparativaPage() {
                       sortKey: "monthlyFee",
                     })
                   }
-                  className="rounded-full border-2 border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
+                  className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
                 >
                   💸 Cero comisiones
                 </button>
                 <button
                   type="button"
                   onClick={() => handleQuizApply({ tag: "espanol" })}
-                  className="rounded-full border-2 border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
+                  className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
                 >
                   🇪🇸 App en español
                 </button>
@@ -515,7 +515,7 @@ export default function ComparativaPage() {
                 <button
                   type="button"
                   onClick={() => handleQuizApply({ tag: "no-residentes" })}
-                  className="rounded-full border-2 border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
+                  className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
                 >
                   ✈️ Vivo fuera de España
                 </button>
@@ -527,7 +527,7 @@ export default function ComparativaPage() {
                       tag: "para-freelancers",
                     })
                   }
-                  className="rounded-full border-2 border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
+                  className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-semibold text-foreground transition-colors hover:border-secondary/35 hover:bg-muted"
                 >
                   🧑‍💻 Freelance / SL
                 </button>
@@ -685,7 +685,7 @@ export default function ComparativaPage() {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <Card className="rounded-2xl border-2 border-secondary bg-secondary p-6 text-secondary-foreground shadow-soft">
+            <Card className="rounded-2xl bg-secondary p-6 text-secondary-foreground shadow-soft">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-sm font-black tracking-tight text-accent sm:text-lg">
                   Comparación directa
@@ -703,7 +703,7 @@ export default function ComparativaPage() {
                 {compareBanks.map((bank) => (
                   <div
                     key={bank.slug}
-                    className="space-y-3 rounded-2xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-4 text-secondary-foreground"
+                    className="space-y-3 rounded-2xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-4 text-secondary-foreground"
                   >
                     <div className="flex items-center gap-3">
                       <Image
@@ -776,11 +776,11 @@ export default function ComparativaPage() {
                   stiffness: 220,
                   damping: 22,
                 }}
-                className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-6 text-secondary-foreground shadow-soft transition-shadow will-change-transform hover:shadow-offset-accent"
+                className="relative overflow-hidden rounded-2xl bg-secondary p-6 text-secondary-foreground shadow-soft transition-shadow will-change-transform"
               >
                 {isTop3 ? (
                   <div className="absolute right-4 top-4">
-                    <span className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-accent-foreground">
                       <Trophy className="h-3.5 w-3.5" />
                       TOP {rank}
                     </span>
@@ -789,7 +789,7 @@ export default function ComparativaPage() {
 
                 {/* HEADER CARD */}
                 <div className="flex items-center gap-3">
-                  <div className="relative h-11 w-11 rounded-2xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-1.5">
+                  <div className="relative h-11 w-11 rounded-2xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-1.5">
                     <Image
                       src={bank.logo}
                       alt={bank.name}
@@ -836,7 +836,7 @@ export default function ComparativaPage() {
                       Cuota mensual
                     </p>
                     {isFreeFee(bank.fees?.monthly) ? (
-                      <span className="inline-flex items-center gap-1 rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-semibold text-primary">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[11px] font-semibold text-primary-light">
                         <CheckCircle className="h-3.5 w-3.5" />
                         Gratis
                       </span>
@@ -855,14 +855,14 @@ export default function ComparativaPage() {
                   {bank.cardType
                     ?.toLowerCase()
                     .includes("física") && (
-                    <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground/80">
+                    <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground/80">
                       Física
                     </span>
                   )}
                   {bank.cardType
                     ?.toLowerCase()
                     .includes("virtual") && (
-                    <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground/80">
+                    <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground/80">
                       Virtual
                     </span>
                   )}
@@ -870,7 +870,7 @@ export default function ComparativaPage() {
                   {bank.tags.slice(0, 2).map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground/80"
+                      className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-2.5 py-1 text-[10px] font-semibold text-secondary-foreground/80"
                     >
                       {tagLabels[tag] || tag}
                     </span>
@@ -915,7 +915,7 @@ export default function ComparativaPage() {
                   <button
                     type="button"
                     onClick={() => toggleFavorite(bank)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 text-secondary-foreground/70 transition-colors hover:border-secondary-foreground/20 hover:text-destructive"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 text-secondary-foreground/70 transition-colors hover:border-secondary-foreground/20 hover:text-destructive"
                     aria-label={
                       isFavorite(bank.slug)
                         ? "Quitar de favoritos"
@@ -943,8 +943,8 @@ export default function ComparativaPage() {
                     }
                     className={`inline-flex items-center gap-1 rounded-full px-2 py-1 font-medium transition ${
                       compareIds.includes(bank.slug)
-                        ? "border-2 border-secondary bg-primary/15 px-3 text-primary"
-                        : "border-2 border-transparent text-secondary-foreground/70 hover:bg-secondary-foreground/5 hover:text-secondary-foreground"
+                        ? "border border-secondary bg-primary/15 px-3 text-primary"
+                        : "border border-transparent text-secondary-foreground/70 hover:bg-secondary-foreground/5 hover:text-secondary-foreground"
                     }`}
                   >
                     <Eye className="h-3 w-3" />
@@ -1027,7 +1027,7 @@ export default function ComparativaPage() {
                     >
                       <Td>
                         <div className="flex items-center gap-3">
-                          <div className="relative h-12 w-12 rounded-xl border-2 border-border bg-muted/40 p-1.5">
+                          <div className="relative h-12 w-12 rounded-xl border border-border bg-muted/40 p-1.5">
                             <Image
                               src={bank.logo}
                               alt={bank.name}
@@ -1060,7 +1060,7 @@ export default function ComparativaPage() {
 
                               {/* TOP 1-2-3 */}
                               {isTop3 && (
-                                <span className="flex items-center gap-1 rounded-full border-2 border-border bg-muted px-2 py-0.5 text-[10px] font-semibold text-foreground">
+                                <span className="flex items-center gap-1 rounded-full border border-border bg-muted px-2 py-0.5 text-[10px] font-semibold text-foreground">
                                   <Trophy className="h-3 w-3" />
                                   TOP {rank}
                                 </span>
@@ -1092,7 +1092,7 @@ export default function ComparativaPage() {
                         </div>
                       </Td>
                       <Td>
-                        <span className="inline-flex items-center rounded-full border-2 border-border bg-muted px-3 py-1 text-[11px] font-semibold text-foreground">
+                        <span className="inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-[11px] font-semibold text-foreground">
                           {categoryLabels[bank.category]}
                         </span>
                       </Td>
@@ -1110,7 +1110,7 @@ export default function ComparativaPage() {
                       </Td>
                       <Td className="font-bold">
                         {isFreeFee(bank.fees?.monthly) ? (
-                          <span className="inline-flex items-center gap-1 rounded-full border-2 border-primary/25 bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary-text">
+                          <span className="inline-flex items-center gap-1 rounded-full border border-primary/25 bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary-text">
                             <CheckCircle className="h-4 w-4" />
                             Gratis
                           </span>
@@ -1127,14 +1127,14 @@ export default function ComparativaPage() {
                           {bank.cardType
                             ?.toLowerCase()
                             .includes("física") && (
-                            <span className="inline-flex items-center rounded-full border-2 border-border bg-muted px-3 py-1 text-xs font-semibold text-foreground">
+                            <span className="inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-semibold text-foreground">
                               Física
                             </span>
                           )}
                           {bank.cardType
                             ?.toLowerCase()
                             .includes("virtual") && (
-                            <span className="inline-flex items-center rounded-full border-2 border-border bg-muted px-3 py-1 text-xs font-semibold text-foreground">
+                            <span className="inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-semibold text-foreground">
                               Virtual
                             </span>
                           )}
@@ -1146,7 +1146,7 @@ export default function ComparativaPage() {
                             <Badge
                               key={tag}
                               variant="outline"
-                              className="rounded-full border-2 border-border bg-muted px-2 py-0.5 text-[10px] font-semibold text-foreground"
+                              className="rounded-full border border-border bg-muted px-2 py-0.5 text-[10px] font-semibold text-foreground"
                             >
                               {tagLabels[tag] || tag}
                             </Badge>
@@ -1216,7 +1216,7 @@ export default function ComparativaPage() {
       </Card>
 
       {/* CTA FINAL */}
-      <Card className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-center text-secondary-foreground shadow-offset-accent sm:p-10">
+      <Card className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-center text-secondary-foreground sm:p-10">
         <div className="pointer-events-none absolute -top-28 -right-28 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
 
@@ -1277,10 +1277,10 @@ export default function ComparativaPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ type: "spring", stiffness: 260, damping: 24 }}
-            className="fixed bottom-4 left-1/2 z-40 w-[95%] max-w-2xl -translate-x-1/2 rounded-2xl border-2 border-secondary bg-secondary px-4 py-3 text-secondary-foreground shadow-offset-accent"
+            className="fixed bottom-4 left-1/2 z-40 w-[95%] max-w-2xl -translate-x-1/2 rounded-2xl bg-secondary px-4 py-3 text-secondary-foreground"
           >
             <div className="flex items-center gap-3">
-              <span className="hidden rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-accent-foreground md:inline">
+              <span className="hidden rounded-full bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-accent-foreground md:inline">
                 Comparando
               </span>
 
@@ -1288,7 +1288,7 @@ export default function ComparativaPage() {
                 {compareBanks.map((bank) => (
                   <div
                     key={bank.slug}
-                    className="inline-flex items-center gap-2 rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 text-xs font-semibold text-secondary-foreground"
+                    className="inline-flex items-center gap-2 rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 text-xs font-semibold text-secondary-foreground"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                     <span className="max-w-[120px] truncate">

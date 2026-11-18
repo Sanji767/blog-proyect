@@ -59,7 +59,7 @@ export default function BanksComparativa() {
           en detalle.
         </p>
         <p className="text-xs text-muted-foreground">
-          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-1 font-medium text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-200">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-1 font-medium text-primary-text dark:bg-primary/20 dark:text-primary-light">
             <CheckCircle2 className="h-3 w-3" />
             Tip: los bancos con “Recomendado” suelen convertir mejor para la
             mayoría de usuarios.
@@ -93,7 +93,7 @@ export default function BanksComparativa() {
                 return (
                   <tr
                     key={bank.slug}
-                    className="border-b border-border/60 bg-background/60 text-sm transition-colors hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 last:border-0"
+                    className="border-b border-border/60 bg-background/60 text-sm transition-colors hover:bg-primary/5 dark:hover:bg-primary/10 last:border-0"
                   >
                     {/* Banco */}
                     <Td>
@@ -104,14 +104,14 @@ export default function BanksComparativa() {
                           </span>
 
                           {bank.affiliateUrl && (
-                            <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800 dark:bg-amber-900/60 dark:text-amber-100">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-accent/30 px-2 py-0.5 text-[10px] font-semibold text-accent-foreground dark:bg-accent/25 dark:text-accent">
                               <Star className="h-3 w-3" />
                               Recomendado
                             </span>
                           )}
 
                           {isTop3 && (
-                            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-100">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary-text dark:bg-primary/20 dark:text-primary-light">
                               <Trophy className="h-3 w-3" />
                               TOP {rank}
                             </span>
@@ -148,12 +148,12 @@ export default function BanksComparativa() {
                     <Td className="text-xs">
                       {bank.fees?.monthly ? (
                         isFree ? (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 font-semibold text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-1 font-semibold text-primary-text dark:bg-primary/20 dark:text-primary-light">
                             <CheckCircle2 className="h-3.5 w-3.5" />
                             Gratis
                           </span>
                         ) : (
-                          <span className="font-semibold text-orange-600 dark:text-orange-300">
+                          <span className="font-semibold text-foreground">
                             {bank.fees.monthly}
                           </span>
                         )

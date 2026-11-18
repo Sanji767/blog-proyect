@@ -127,12 +127,12 @@ export default function UseCases() {
   return (
     <section className="py-16 md:py-24">
       <Container>
-        <div className="rounded-2xl border-2 border-border bg-card p-8 md:p-12">
+        <div className="rounded-2xl border border-border bg-card p-8 md:p-12">
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             <div className="space-y-6 lg:col-span-5">
               <h2 className="text-balance text-3xl font-black leading-tight md:text-4xl">
                 {copy.titlePrefix}{" "}
-                <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+                <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
                   {copy.titleHighlight}
                 </span>
                 .
@@ -149,16 +149,16 @@ export default function UseCases() {
                       type="button"
                       onClick={() => setActive(c.id)}
                       className={cn(
-                        "flex items-center gap-4 rounded-xl border-2 px-4 py-4 text-left transition-colors",
+                        "flex items-center gap-4 rounded-xl border px-4 py-4 text-left transition-colors",
                         isActive
-                          ? "border-secondary bg-secondary text-secondary-foreground shadow-offset-accent"
+                          ? "border-secondary bg-secondary text-secondary-foreground"
                           : "border-border bg-background hover:border-secondary/35"
                       )}
                       aria-pressed={isActive}
                     >
                       <div
                         className={cn(
-                          "flex h-11 w-11 items-center justify-center rounded-xl border-2",
+                          "flex h-11 w-11 items-center justify-center rounded-xl border",
                           isActive
                             ? "border-secondary-foreground/10 bg-secondary-foreground/5 text-accent"
                             : "border-border bg-muted text-primary"
@@ -193,8 +193,8 @@ export default function UseCases() {
             </div>
 
             <div className="lg:col-span-7">
-              <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              <div className="rounded-2xl bg-secondary p-8 text-secondary-foreground">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-light">
                   {copy.recommendation}
                 </p>
 
@@ -212,9 +212,9 @@ export default function UseCases() {
                     </p>
 
                     {recommended ? (
-                      <div className="rounded-2xl border-2 border-secondary bg-background p-6 text-foreground shadow-soft">
+                      <div className="rounded-2xl border border-secondary bg-background p-6 text-foreground shadow-soft">
                         <div className="flex items-center gap-5">
-                          <div className="flex h-16 w-16 items-center justify-center rounded-xl border-2 border-border bg-muted p-2">
+                          <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-border bg-muted p-2">
                             <Image
                               src={recommended.logo}
                               alt={recommended.name}
@@ -237,7 +237,7 @@ export default function UseCases() {
                         </div>
 
                         <div className="mt-6 grid gap-4 text-sm sm:grid-cols-2">
-                          <div className="rounded-xl border-2 border-border bg-card p-4">
+                          <div className="rounded-xl border border-border bg-card p-4">
                             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                               {copy.iban}
                             </p>
@@ -245,7 +245,7 @@ export default function UseCases() {
                               {recommended.ibanPrefix} ({recommended.ibanCountry})
                             </p>
                           </div>
-                          <div className="rounded-xl border-2 border-border bg-card p-4">
+                          <div className="rounded-xl border border-border bg-card p-4">
                             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                               {copy.monthlyFee}
                             </p>

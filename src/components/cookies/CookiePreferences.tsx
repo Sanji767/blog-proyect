@@ -100,14 +100,14 @@ export default function CookiePreferences() {
   };
 
   return (
-    <section className="not-prose mt-8 rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
+    <section className="not-prose mt-8 rounded-2xl border border-border bg-card p-6 shadow-soft">
       <h3 className="text-xl font-bold">{copy.title}</h3>
       <p className="mt-2 text-sm text-muted-foreground">
         {copy.intro}
       </p>
 
       <div className="mt-6 space-y-3">
-        <div className="flex items-start justify-between gap-4 rounded-xl border-2 border-border p-4">
+        <div className="flex items-start justify-between gap-4 rounded-xl border border-border p-4">
           <div>
             <p className="font-semibold">{copy.analyticsTitle}</p>
             <p className="mt-1 text-sm text-muted-foreground">

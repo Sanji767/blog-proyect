@@ -84,7 +84,7 @@ export default function HomeBanksPreview() {
             </p>
             <h2 className="text-balance text-3xl font-black tracking-tight md:text-5xl">
               {copy.titlePrefix}{" "}
-              <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+              <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
                 {copy.titleHighlight}
               </span>
             </h2>
@@ -112,9 +112,9 @@ export default function HomeBanksPreview() {
               <button
                 key={filterKey}
                 onClick={() => setActiveFilter(filterKey)}
-                className={`inline-flex items-center gap-1.5 rounded-full border-2 px-4 py-1.5 text-xs font-bold transition-all ${
+                className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-xs font-bold transition-all ${
                   isActive
-                    ? "border-secondary bg-accent text-accent-foreground shadow-offset-accent"
+                    ? "border-secondary bg-accent text-accent-foreground"
                     : "border-border bg-background text-foreground hover:border-secondary/50 hover:bg-muted"
                 }`}
               >
@@ -140,7 +140,7 @@ export default function HomeBanksPreview() {
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
                   whileHover={{ y: -6 }}
-                  className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent flex flex-col justify-between"
+                  className="group relative overflow-hidden rounded-2xl bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow flex flex-col justify-between"
                 >
                   <div className="pointer-events-none absolute -top-24 -left-24 h-56 w-56 rounded-full bg-primary/15 blur-3xl" />
                   <div className="pointer-events-none absolute -bottom-28 -right-28 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
@@ -148,7 +148,7 @@ export default function HomeBanksPreview() {
                   <div>
                     <div className="relative flex items-start justify-between gap-4">
                       <div className="flex items-center gap-4">
-                        <div className="relative h-14 w-14 rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
+                        <div className="relative h-14 w-14 rounded-xl border border-secondary-foreground/12 bg-secondary-foreground/5 p-2">
                           <Image
                             src={bank.logo}
                             alt={bank.name}
@@ -157,7 +157,7 @@ export default function HomeBanksPreview() {
                           />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-light">
                             {copy.top} #{index + 1}
                           </p>
                           <h3 className="mt-2 text-2xl font-black leading-tight text-accent">
@@ -166,7 +166,7 @@ export default function HomeBanksPreview() {
                         </div>
                       </div>
 
-                      <span className="inline-flex items-center rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+                      <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
                         #{index + 1}
                       </span>
                     </div>
@@ -176,16 +176,16 @@ export default function HomeBanksPreview() {
                     </p>
 
                     <div className="relative mt-6 grid gap-3 sm:grid-cols-2">
-                      <div className="rounded-xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-4">
+                      <div className="rounded-xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-4">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary-foreground/70">
                           {copy.iban}
                         </p>
                         <p className="mt-2 font-semibold flex items-center gap-1.5">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                          <CheckCircle2 className="h-3.5 w-3.5 text-primary-light" />
                           {bank.ibanPrefix} ({bank.ibanCountry})
                         </p>
                       </div>
-                      <div className="rounded-xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-4">
+                      <div className="rounded-xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-4">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-secondary-foreground/70">
                           {copy.monthlyFee}
                         </p>

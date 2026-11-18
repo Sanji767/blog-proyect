@@ -40,34 +40,34 @@ function formatTag(tag: string): string {
 
 const categoryColors: Record<string, string> = {
   neobanco:
-    "bg-emerald-50 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-100",
+    "bg-primary/10 text-primary-text dark:bg-primary/20 dark:text-primary-light",
   tradicional:
-    "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100",
+    "bg-muted text-foreground dark:bg-muted dark:text-foreground",
   "cuenta-multidivisa":
-    "bg-purple-50 text-purple-800 dark:bg-purple-900/50 dark:text-purple-100",
+    "bg-accent/30 text-accent-foreground dark:bg-accent/25 dark:text-accent",
   fintech:
-    "bg-cyan-50 text-cyan-800 dark:bg-cyan-900/50 dark:text-cyan-100",
+    "bg-primary/10 text-primary-text dark:bg-primary/20 dark:text-primary-light",
 };
 
 const tagColors: Record<string, string> = {
   "sin-comisiones":
-    "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-100",
+    "bg-primary/10 text-primary-text dark:bg-primary/20 dark:text-primary-light",
   "tarjeta-fisica":
-    "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100",
+    "bg-muted text-foreground dark:bg-muted dark:text-foreground",
   "tarjeta-virtual":
-    "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-100",
+    "bg-primary/10 text-primary-text dark:bg-primary/20 dark:text-primary-light",
   multidivisa:
-    "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100",
+    "bg-accent/30 text-accent-foreground dark:bg-accent/25 dark:text-accent",
   crypto:
-    "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-100",
+    "bg-muted text-foreground dark:bg-muted dark:text-foreground",
   "para-freelancers":
-    "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-100",
+    "bg-primary/10 text-primary-text dark:bg-primary/20 dark:text-primary-light",
   "para-empresa":
-    "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-100",
+    "bg-muted text-foreground dark:bg-muted dark:text-foreground",
   "no-residentes":
-    "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-100",
+    "bg-primary/10 text-primary-text dark:bg-primary/20 dark:text-primary-light",
   espanol:
-    "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100",
+    "bg-accent/30 text-accent-foreground dark:bg-accent/25 dark:text-accent",
 };
 
 /* ==============
@@ -109,10 +109,10 @@ function BankCard({ bank, index }: { bank: Bank; index: number }) {
   const isRecommended = !!bank.affiliateUrl;
 
   return (
-    <Card className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-background/95 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/10">
+    <Card className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-background/95 shadow-card transition-all duration-300 hover:border-primary/40 hover:shadow-xl">
       <CardHeader className="pb-3">
         <div className="flex items-start gap-3">
-          <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 p-1 shadow-inner">
+          <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-xl bg-primary/10 p-1">
             <Image
               src={bank.logo}
               alt={`${bank.name} logo`}
@@ -129,14 +129,14 @@ function BankCard({ bank, index }: { bank: Bank; index: number }) {
               </h3>
 
               {isRecommended && (
-                <Badge className="inline-flex items-center gap-1 rounded-full bg-amber-100 text-[10px] font-semibold text-amber-800 dark:bg-amber-900/60 dark:text-amber-100">
+                <Badge className="inline-flex items-center gap-1 rounded-full bg-accent/30 text-[10px] font-semibold text-accent-foreground dark:bg-accent/25 dark:text-accent">
                   <Star className="h-3 w-3" />
                   Recomendado
                 </Badge>
               )}
 
               {isTop3 && (
-                <Badge className="inline-flex items-center gap-1 rounded-full bg-emerald-100 text-[10px] font-semibold text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-100">
+                <Badge className="inline-flex items-center gap-1 rounded-full bg-primary/10 text-[10px] font-semibold text-primary-text dark:bg-primary/20 dark:text-primary-light">
                   <Trophy className="h-3 w-3" />
                   TOP {rank}
                 </Badge>
@@ -163,7 +163,7 @@ function BankCard({ bank, index }: { bank: Bank; index: number }) {
             variant="secondary"
             className={`rounded-full text-[11px] font-medium ${
               categoryColors[bank.category] ??
-              "bg-muted text-foreground dark:bg-slate-800 dark:text-slate-100"
+              "bg-muted text-foreground dark:bg-muted dark:text-foreground"
             }`}
           >
             {bank.category === "neobanco"
@@ -212,7 +212,7 @@ function BankCard({ bank, index }: { bank: Bank; index: number }) {
         <div className="mt-auto space-y-2 pt-5">
           {/* Botón principal */}
           <Link href={detailUrl} className="block">
-            <Button className="w-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-sm font-semibold text-white shadow-sm transition-all hover:brightness-110 group-hover:shadow-md">
+            <Button className="w-full rounded-full text-sm font-semibold transition-all group-hover:shadow-md">
               Ver ficha completa
             </Button>
           </Link>

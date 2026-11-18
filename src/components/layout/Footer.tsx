@@ -92,7 +92,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <LocalizedLink
                     href={l.href}
-                    className="text-primary hover:text-accent transition-colors"
+                    className="text-primary-light hover:text-accent transition-colors"
                   >
                     {l.label}
                   </LocalizedLink>
@@ -110,7 +110,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <LocalizedLink
                     href={l.href}
-                    className="text-primary hover:text-accent transition-colors"
+                    className="text-primary-light hover:text-accent transition-colors"
                   >
                     {l.label}
                   </LocalizedLink>

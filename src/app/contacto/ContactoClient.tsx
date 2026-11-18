@@ -183,14 +183,14 @@ export default function ContactoPage() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto mb-14 max-w-4xl space-y-6 text-center"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+          <div className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
             <MessageCircle className="h-4 w-4" />
             {copy.headerKicker}
           </div>
 
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
             {copy.h1Prefix}{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               {copy.h1Highlight}
             </span>
             .
@@ -206,7 +206,7 @@ export default function ContactoPage() {
             initial={{ opacity: 0, x: -28 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
-            className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft md:p-8"
+            className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Honeypot anti-spam (debe quedar vacío) */}
@@ -274,16 +274,16 @@ export default function ContactoPage() {
                         type="button"
                         onClick={() => setSelectedGoal(goal.value)}
                         className={[
-                          "relative rounded-xl border-2 p-4 text-left transition-colors",
+                          "relative rounded-xl border p-4 text-left transition-colors",
                           isSelected
-                            ? "border-secondary bg-secondary text-secondary-foreground shadow-offset-accent"
+                            ? "border-secondary bg-secondary text-secondary-foreground"
                             : "border-border bg-background hover:border-secondary/35 hover:bg-muted/60",
                         ].join(" ")}
                       >
                         <div className="flex items-center gap-3">
                           <div
                             className={[
-                              "rounded-xl border-2 p-2",
+                              "rounded-xl border p-2",
                               isSelected
                                 ? "border-secondary-foreground/12 bg-secondary-foreground/5 text-accent"
                                 : "border-border bg-muted text-primary",
@@ -324,7 +324,7 @@ export default function ContactoPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="rounded-2xl border-2 border-secondary bg-secondary p-5 text-secondary-foreground shadow-offset-accent"
+                  className="rounded-2xl bg-secondary p-5 text-secondary-foreground"
                 >
                   <div className="flex items-center gap-3">
                     <CheckCircle className="h-7 w-7 text-accent" />
@@ -339,7 +339,7 @@ export default function ContactoPage() {
               ) : null}
 
               {formState === "error" && errorMessage ? (
-                <div className="rounded-2xl border-2 border-destructive bg-destructive/10 p-5 text-sm text-destructive">
+                <div className="rounded-2xl border border-destructive bg-destructive/10 p-5 text-sm text-destructive">
                   {errorMessage}
                 </div>
               ) : null}
@@ -371,8 +371,8 @@ export default function ContactoPage() {
             transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
             className="space-y-6"
           >
-            <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+            <div className="rounded-2xl bg-secondary p-8 text-secondary-foreground">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-light">
                 {copy.asideKicker}
               </p>
               <h3 className="mt-4 text-balance text-2xl font-black text-accent">
@@ -395,12 +395,12 @@ export default function ContactoPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
               <p className="text-sm italic leading-relaxed text-muted-foreground">
                 {copy.testimonial}
               </p>
               <div className="mt-5 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-border bg-muted font-black text-foreground">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-muted font-black text-foreground">
                   M
                 </div>
                 <div>

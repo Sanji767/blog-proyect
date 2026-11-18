@@ -34,7 +34,7 @@ export default function EbooksPageEn() {
   return (
     <section className="py-16 md:py-24">
       <Container className="max-w-5xl">
-        <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft md:p-8">
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             Resources
           </p>
@@ -49,13 +49,13 @@ export default function EbooksPageEn() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/ebooks"
-              className="inline-flex items-center justify-center rounded-xl border-2 border-secondary bg-accent px-6 py-3 text-sm font-black text-accent-foreground shadow-offset-accent"
+              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-black text-accent-foreground"
             >
               Open Spanish resources →
             </Link>
             <Link
               href="/en/contacto"
-              className="inline-flex items-center justify-center rounded-xl border-2 border-border bg-background px-6 py-3 text-sm font-black text-foreground"
+              className="inline-flex items-center justify-center rounded-xl border border-border bg-background px-6 py-3 text-sm font-black text-foreground"
             >
               Contact →
             </Link>

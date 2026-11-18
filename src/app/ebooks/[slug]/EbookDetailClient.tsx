@@ -33,13 +33,13 @@ export default function EbookDetailClient({ ebook }: { ebook: Ebook }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <Card className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent md:p-10">
+          <Card className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground md:p-10">
             <div className="pointer-events-none absolute -top-28 -right-28 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
 
             <div className="relative grid gap-10 md:grid-cols-2 md:items-center">
               <div className="mx-auto w-full max-w-sm">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border-2 border-secondary bg-secondary shadow-soft">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-secondary shadow-soft">
                   <Image
                     src={ebook.image}
                     alt={ebook.title}
@@ -66,7 +66,7 @@ export default function EbookDetailClient({ ebook }: { ebook: Ebook }) {
                 </p>
 
                 {ebook.author ? (
-                  <div className="rounded-2xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-5">
+                  <div className="rounded-2xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-5">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary-text">
                       Autor
                     </p>
@@ -162,7 +162,7 @@ export default function EbookDetailClient({ ebook }: { ebook: Ebook }) {
           </Card>
         ) : null}
 
-        <Card className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-center text-secondary-foreground shadow-soft md:p-10">
+        <Card className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-center text-secondary-foreground shadow-soft md:p-10">
           <div className="pointer-events-none absolute -top-28 -right-28 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
 
           <div className="relative space-y-5">

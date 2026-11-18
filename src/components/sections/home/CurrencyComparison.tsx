@@ -109,14 +109,14 @@ export default function CurrencyComparison() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+            <div className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
               <ArrowRightLeft className="h-3.5 w-3.5" />
               {copy.kicker}
             </div>
 
             <h2 className="text-balance text-3xl font-black tracking-tight md:text-4xl">
               {copy.titlePrefix}{" "}
-              <span className="inline-block border-2 border-secondary bg-background px-3 py-2 text-foreground shadow-offset-accent">
+              <span className="inline-block border border-secondary bg-background px-3 py-2 text-foreground">
                 {copy.titleHighlight}
               </span>
               .
@@ -126,7 +126,7 @@ export default function CurrencyComparison() {
               {copy.desc}
             </p>
 
-            <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
               <div className="space-y-4">
                 <div className="flex items-end justify-between gap-4">
                   <label className="text-sm font-semibold text-foreground">
@@ -172,16 +172,16 @@ export default function CurrencyComparison() {
                     exit={{ opacity: 0, x: -18 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                     className={[
-                      "relative overflow-hidden rounded-2xl border-2 p-6",
+                      "relative overflow-hidden rounded-2xl border p-6",
                       "bg-secondary text-secondary-foreground border-secondary shadow-soft",
-                      isWinner ? "shadow-offset-accent" : "",
+                      isWinner ? "shadow-card" : "",
                     ].join(" ")}
                   >
                     <div className="pointer-events-none absolute -top-28 -right-28 h-56 w-56 rounded-full bg-accent/10 blur-3xl" />
 
                     <div className="relative flex items-center justify-between gap-6">
                       <div className="flex items-center gap-4">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 text-accent">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-secondary-foreground/12 bg-secondary-foreground/5 text-accent">
                           {item.icon ?? item.name[0]}
                         </div>
                         <div>
@@ -210,7 +210,7 @@ export default function CurrencyComparison() {
                     </div>
 
                     {isWinner ? (
-                      <div className="absolute -top-2 -right-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+                      <div className="absolute -top-2 -right-2 rounded-full bg-accent px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-accent-foreground">
                         {copy.best}
                       </div>
                     ) : null}
@@ -219,7 +219,7 @@ export default function CurrencyComparison() {
               })}
             </AnimatePresence>
 
-            <div className="flex gap-3 rounded-2xl border-2 border-border bg-card p-5 text-foreground shadow-soft">
+            <div className="flex gap-3 rounded-2xl border border-border bg-card p-5 text-foreground shadow-soft">
               <Info className="h-5 w-5 shrink-0 text-primary" />
               <p className="text-[11px] leading-relaxed text-muted-foreground">
                 {copy.note}

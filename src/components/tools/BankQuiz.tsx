@@ -128,7 +128,7 @@ export default function BankQuiz() {
   const matchedBank = getMatchedBank();
 
   return (
-    <section className="relative overflow-hidden rounded-3xl border-2 border-border bg-card p-6 md:p-10 text-card-foreground shadow-soft transition-colors">
+    <section className="relative overflow-hidden rounded-xl border border-border bg-card p-6 md:p-10 text-card-foreground shadow-soft transition-colors">
       <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
 
       <header className="text-center max-w-xl mx-auto">
@@ -182,7 +182,7 @@ export default function BankQuiz() {
                       setAnswers((prev) => ({ ...prev, goal: key }));
                       setStep(2);
                     }}
-                    className={`flex items-center justify-between rounded-2xl border-2 p-4 text-left font-bold text-sm transition-all ${
+                    className={`flex items-center justify-between rounded-2xl border p-4 text-left font-bold text-sm transition-all ${
                       answers.goal === key
                         ? "border-primary bg-primary/10 text-primary-text"
                         : "border-border bg-muted/30 text-foreground hover:border-primary/50 hover:bg-muted/60"
@@ -216,7 +216,7 @@ export default function BankQuiz() {
                       setAnswers((prev) => ({ ...prev, iban: key }));
                       setStep(3);
                     }}
-                    className={`flex items-center justify-between rounded-2xl border-2 p-4 text-left font-bold text-sm transition-all ${
+                    className={`flex items-center justify-between rounded-2xl border p-4 text-left font-bold text-sm transition-all ${
                       answers.iban === key
                         ? "border-primary bg-primary/10 text-primary-text"
                         : "border-border bg-muted/30 text-foreground hover:border-primary/50 hover:bg-muted/60"
@@ -250,7 +250,7 @@ export default function BankQuiz() {
                       setAnswers((prev) => ({ ...prev, fee: key }));
                       setStep(4);
                     }}
-                    className={`flex items-center justify-between rounded-2xl border-2 p-4 text-left font-bold text-sm transition-all ${
+                    className={`flex items-center justify-between rounded-2xl border p-4 text-left font-bold text-sm transition-all ${
                       answers.fee === key
                         ? "border-primary bg-primary/10 text-primary-text"
                         : "border-border bg-muted/30 text-foreground hover:border-primary/50 hover:bg-muted/60"
@@ -269,15 +269,15 @@ export default function BankQuiz() {
               key="result"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="rounded-3xl border-2 border-primary/40 bg-muted/20 p-6 md:p-8 shadow-xl text-center space-y-5"
+              className="rounded-xl border border-primary/40 bg-muted/20 p-6 md:p-8 shadow-xl text-center space-y-5"
             >
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border-2 border-emerald-500/30 px-3.5 py-1 text-xs font-black text-emerald-700 dark:text-emerald-300">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/30 px-3.5 py-1 text-xs font-black text-primary-text dark:text-primary-light">
                 <ShieldCheck className="h-4 w-4" />
                 <span>{copy.matchScore}</span>
               </div>
 
               <div className="flex items-center justify-center gap-4">
-                <div className="relative h-16 w-16 shrink-0 rounded-2xl border-2 border-border bg-card p-2 shadow-sm">
+                <div className="relative h-16 w-16 shrink-0 rounded-2xl border border-border bg-card p-2 shadow-sm">
                   <Image
                     src={matchedBank.logo}
                     alt={matchedBank.name}
@@ -314,7 +314,7 @@ export default function BankQuiz() {
                   </a>
                 </Button>
 
-                <Button asChild variant="outline" size="lg" className="flex-1 font-bold border-2">
+                <Button asChild variant="outline" size="lg" className="flex-1 font-bold border">
                   <LocalizedLink href={`/programas/${matchedBank.slug}`}>
                     {copy.viewAnalysis}
                   </LocalizedLink>

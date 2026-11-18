@@ -60,7 +60,7 @@ export default function VlogsPage({ searchParams }: Props) {
 
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
             Vídeos y guías para elegir banco{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               sin perder tiempo
             </span>
             .
@@ -100,7 +100,7 @@ export default function VlogsPage({ searchParams }: Props) {
         </header>
 
         {filtered.length === 0 ? (
-          <div className="rounded-2xl border-2 border-border bg-card p-10 text-center shadow-soft">
+          <div className="rounded-2xl border border-border bg-card p-10 text-center shadow-soft">
             <p className="text-lg font-black">No hay vlogs para este tag.</p>
             <p className="mt-2 text-sm text-muted-foreground">
               Prueba con otro filtro o vuelve a ver todos.

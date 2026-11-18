@@ -77,7 +77,7 @@ export default function Features({ locale = "es" }: { locale?: Locale }) {
         <header className="mx-auto mb-10 max-w-3xl space-y-4 text-center">
           <h2 className="text-balance text-3xl font-black leading-tight md:text-4xl">
             {copy.titlePrefix}{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               {copy.titleHighlight}
             </span>
           </h2>
@@ -90,14 +90,14 @@ export default function Features({ locale = "es" }: { locale?: Locale }) {
           {features.map((item) => (
             <article
               key={item.title}
-              className="rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft"
+              className="rounded-2xl bg-secondary p-7 text-secondary-foreground shadow-soft"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-light">
                 {copy.kicker}
               </p>
 
               <div className="mt-5 flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 text-accent">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-secondary-foreground/12 bg-secondary-foreground/5 text-accent">
                   {item.icon}
                 </div>
                 <div className="min-w-0">

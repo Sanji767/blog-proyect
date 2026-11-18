@@ -40,7 +40,7 @@ export default async function HomeVlogsPreview({ locale = "es" }: { locale?: Loc
             </p>
             <h2 className="text-balance text-3xl font-black tracking-tight md:text-5xl">
               {copy.titlePrefix}{" "}
-              <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+              <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
                 {copy.titleHighlight}
               </span>
             </h2>

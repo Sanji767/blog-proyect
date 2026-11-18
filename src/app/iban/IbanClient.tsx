@@ -282,14 +282,14 @@ export default function IBANPage() {
     <div className="min-h-screen bg-background pb-20 text-foreground">
       <Container className="max-w-7xl py-12">
         <header className="mx-auto mb-14 max-w-3xl space-y-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+          <div className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent-foreground">
             <ShieldCheck className="h-4 w-4" />
             {copy.badge}
           </div>
 
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
             IBAN{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               Scanner
             </span>
           </h1>
@@ -300,14 +300,14 @@ export default function IBANPage() {
         </header>
 
         <div className="mb-10 flex justify-center">
-          <div className="inline-flex items-center gap-1 rounded-2xl border-2 border-border bg-card p-1 shadow-soft">
+          <div className="inline-flex items-center gap-1 rounded-2xl border border-border bg-card p-1 shadow-soft">
             <button
               type="button"
               onClick={() => setIsBulkMode(false)}
               className={cn(
                 "rounded-xl px-6 py-2 text-sm font-semibold transition-colors",
                 !isBulkMode
-                  ? "border-2 border-secondary bg-secondary text-secondary-foreground"
+                  ? "bg-secondary text-secondary-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -319,7 +319,7 @@ export default function IBANPage() {
               className={cn(
                 "rounded-xl px-6 py-2 text-sm font-semibold transition-colors",
                 isBulkMode
-                  ? "border-2 border-secondary bg-secondary text-secondary-foreground"
+                  ? "bg-secondary text-secondary-foreground"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -332,9 +332,9 @@ export default function IBANPage() {
           <div className="space-y-8 lg:col-span-8">
             <section>
               {!isBulkMode ? (
-                <div className="rounded-2xl border-2 border-secondary bg-secondary p-5 text-secondary-foreground shadow-offset-accent">
-                  <div className="flex items-center gap-4 rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 px-5 py-4">
-                    <Search className="h-6 w-6 text-primary" />
+                <div className="rounded-2xl bg-secondary p-5 text-secondary-foreground">
+                  <div className="flex items-center gap-4 rounded-xl border border-secondary-foreground/12 bg-secondary-foreground/5 px-5 py-4">
+                    <Search className="h-6 w-6 text-primary-light" />
                     <input
                       ref={inputRef}
                       value={displayInput}
@@ -346,7 +346,7 @@ export default function IBANPage() {
                       <button
                         type="button"
                         onClick={() => setRawInput("")}
-                        className="rounded-xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 p-2 text-secondary-foreground transition-colors hover:bg-secondary-foreground/10"
+                        className="rounded-xl border border-secondary-foreground/12 bg-secondary-foreground/5 p-2 text-secondary-foreground transition-colors hover:bg-secondary-foreground/10"
                         aria-label={copy.clear}
                       >
                         <X className="h-5 w-5" />
@@ -359,7 +359,7 @@ export default function IBANPage() {
                   value={bulkInput}
                   onChange={(e) => setBulkInput(e.target.value.toUpperCase())}
                   placeholder={copy.bulkPlaceholder}
-                  className="min-h-[16rem] rounded-2xl border-2 border-border bg-card p-6 font-mono text-base shadow-soft md:text-lg"
+                  className="min-h-[16rem] rounded-2xl border border-border bg-card p-6 font-mono text-base shadow-soft md:text-lg"
                 />
               )}
             </section>
@@ -371,7 +371,7 @@ export default function IBANPage() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
-                  className="rounded-2xl border-2 border-destructive bg-destructive/10 p-6 text-sm text-destructive"
+                  className="rounded-2xl border border-destructive bg-destructive/10 p-6 text-sm text-destructive"
                 >
                   {result.error}
                 </motion.div>
@@ -384,10 +384,10 @@ export default function IBANPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="overflow-hidden rounded-2xl border-2 border-border bg-card shadow-soft"
+                  className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft"
                 >
                   <div className="flex flex-wrap items-center gap-8 border-b-2 border-border p-8 md:p-10">
-                    <div className="h-16 w-24 overflow-hidden rounded-xl border-2 border-border bg-muted">
+                    <div className="h-16 w-24 overflow-hidden rounded-xl border border-border bg-muted">
                       <ReactCountryFlag
                         countryCode={result.countryCode}
                         svg
@@ -413,7 +413,7 @@ export default function IBANPage() {
 
                     <div
                       className={cn(
-                        "flex items-center justify-center rounded-2xl border-2 px-6 py-4 text-center shadow-offset-accent",
+                        "flex items-center justify-center rounded-2xl border px-6 py-4 text-center",
                         result.isValid
                           ? "border-secondary bg-accent text-accent-foreground"
                           : "border-secondary bg-destructive text-destructive-foreground"
@@ -447,7 +447,7 @@ export default function IBANPage() {
                       </div>
 
                       <div className="flex items-center justify-end">
-                        <div className="rounded-xl border-2 border-border bg-secondary-foreground p-2 shadow-soft">
+                        <div className="rounded-xl border border-border bg-secondary-foreground p-2 shadow-soft">
                           <QRCodeSVG
                             value={result.cleanValue}
                             size={96}
@@ -463,7 +463,7 @@ export default function IBANPage() {
                       {result.breakdown.map((item) => (
                         <div
                           key={`${item.label}-${item.value}`}
-                          className="rounded-2xl border-2 border-border bg-muted p-4"
+                          className="rounded-2xl border border-border bg-muted p-4"
                         >
                           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                             {item.label}
@@ -510,7 +510,7 @@ export default function IBANPage() {
                 {bulkResults.map((item) => (
                   <div
                     key={item.iban}
-                    className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border-2 border-border bg-card p-5 shadow-soft"
+                    className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-border bg-card p-5 shadow-soft"
                   >
                     <div className="flex items-center gap-3">
                       {item.result.type === "success" ? (
@@ -523,7 +523,7 @@ export default function IBANPage() {
                       {item.result.type === "success" ? (
                         <span
                           className={cn(
-                            "rounded-full border-2 px-3 py-1 text-xs font-black uppercase tracking-[0.18em]",
+                            "rounded-full border px-3 py-1 text-xs font-black uppercase tracking-[0.18em]",
                             item.result.isValid
                               ? "border-secondary bg-accent text-accent-foreground"
                               : "border-secondary bg-destructive text-destructive-foreground"
@@ -544,7 +544,7 @@ export default function IBANPage() {
           </div>
 
           <aside className="space-y-8 lg:col-span-4">
-            <section className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft">
+            <section className="rounded-2xl border border-border bg-card p-6 shadow-soft">
               <div className="mb-5 flex items-center justify-between gap-3">
                 <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                   <Clock className="h-4 w-4" />
@@ -572,7 +572,7 @@ export default function IBANPage() {
                       key={h.id}
                       type="button"
                       onClick={() => setRawInput(h.iban)}
-                      className="flex w-full items-center gap-3 rounded-xl border-2 border-border bg-muted px-4 py-3 text-left transition-colors hover:border-secondary/35 hover:bg-muted/70"
+                      className="flex w-full items-center gap-3 rounded-xl border border-border bg-muted px-4 py-3 text-left transition-colors hover:border-secondary/35 hover:bg-muted/70"
                     >
                       <ReactCountryFlag countryCode={h.result.countryCode} svg />
                       <div className="min-w-0 flex-1">
@@ -593,10 +593,10 @@ export default function IBANPage() {
               </div>
             </section>
 
-            <section className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
+            <section className="group relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground">
               <Zap className="pointer-events-none absolute -right-6 -bottom-6 h-32 w-32 opacity-20 transition-transform duration-500 group-hover:rotate-12" />
 
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-light">
                 {copy.educationTag}
               </p>
               <h3 className="mt-4 text-balance text-2xl font-black text-accent">
@@ -620,7 +620,7 @@ export default function IBANPage() {
         <section className="mt-20">
           <h2 className="mb-10 text-balance text-3xl font-black tracking-tight md:text-5xl">
             {copy.standardsTitle}{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               {copy.standardsAccent}
             </span>
           </h2>
@@ -631,7 +631,7 @@ export default function IBANPage() {
               .map(([code, data]) => (
                 <div
                   key={code}
-                  className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft"
+                  className="rounded-2xl border border-border bg-card p-6 shadow-soft"
                 >
                   <div className="mb-4 flex items-center gap-3">
                     <ReactCountryFlag countryCode={code} svg />
@@ -668,7 +668,7 @@ export default function IBANPage() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
-            className="fixed bottom-8 right-8 z-50 flex items-center gap-3 rounded-2xl border-2 border-secondary bg-secondary px-6 py-4 text-secondary-foreground shadow-offset-accent"
+            className="fixed bottom-8 right-8 z-50 flex items-center gap-3 rounded-2xl bg-secondary px-6 py-4 text-secondary-foreground"
           >
             <Check className="h-5 w-5 text-accent" />
             <span className="text-sm font-semibold">{toast.msg}</span>

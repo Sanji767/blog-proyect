@@ -105,7 +105,7 @@ export default function CookieBanner() {
               {copy.message}{" "}
               <LocalizedLink
                 href="/cookies"
-                className="text-primary underline-offset-4 hover:text-accent hover:underline transition-colors"
+                className="text-primary-light underline-offset-4 hover:text-accent hover:underline transition-colors"
               >
                 {copy.policy}
               </LocalizedLink>
@@ -115,19 +115,19 @@ export default function CookieBanner() {
             <div className="flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={acceptCookies}
-                className="rounded-xl border-2 border-secondary bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-x-1 hover:-translate-y-1 active:translate-y-px shadow-offset-accent"
+                className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform"
               >
                 {copy.accept}
               </button>
               <button
                 onClick={rejectCookies}
-                className="rounded-xl border-2 border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-secondary-foreground/25 hover:text-accent"
+                className="rounded-xl border border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary-light transition-colors hover:border-secondary-foreground/25 hover:text-accent"
               >
                 {copy.reject}
               </button>
               <button
                 onClick={openSettings}
-                className="rounded-xl border-2 border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-secondary-foreground/25 hover:text-accent"
+                className="rounded-xl border border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary-light transition-colors hover:border-secondary-foreground/25 hover:text-accent"
               >
                 {copy.configure}
               </button>
@@ -143,7 +143,7 @@ export default function CookieBanner() {
                 </p>
               </div>
 
-              <div className="flex items-center justify-between gap-4 rounded-xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-4 py-3">
+              <div className="flex items-center justify-between gap-4 rounded-xl border border-secondary-foreground/10 bg-secondary-foreground/5 px-4 py-3">
                 <div>
                   <p className="text-sm font-semibold">{copy.analytics}</p>
                   <p className="text-xs text-secondary-foreground/70">
@@ -173,13 +173,13 @@ export default function CookieBanner() {
                   setShowSettings(false);
                   setVisible(false);
                 }}
-                className="rounded-xl border-2 border-secondary bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-x-1 hover:-translate-y-1 active:translate-y-px shadow-offset-accent"
+                className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform"
               >
                 {copy.save}
               </button>
               <button
                 onClick={() => setShowSettings(false)}
-                className="rounded-xl border-2 border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-secondary-foreground/25 hover:text-accent"
+                className="rounded-xl border border-secondary-foreground/15 px-4 py-2 text-sm font-semibold text-primary-light transition-colors hover:border-secondary-foreground/25 hover:text-accent"
               >
                 {copy.back}
               </button>

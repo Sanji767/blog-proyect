@@ -14,7 +14,7 @@ export function Tooltip({ content, children }: TooltipProps) {
          onMouseLeave={() => setVisible(false)}>
       {children}
       {visible && (
-        <div className="absolute bottom-full mb-2 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-xl border-2 border-border bg-secondary px-3 py-2 text-xs font-medium text-secondary-foreground shadow-soft">
+        <div className="absolute bottom-full mb-2 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-xl border border-border bg-secondary px-3 py-2 text-xs font-medium text-secondary-foreground shadow-soft">
           {content}
         </div>
       )}

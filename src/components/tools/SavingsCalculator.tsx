@@ -17,11 +17,11 @@ type YieldItem = {
 };
 
 const INTEREST_RATES: YieldItem[] = [
-  { slug: "trade-republic", name: "Trade Republic", rate: 3.75, color: "bg-emerald-500", highlight: true },
-  { slug: "n26", name: "N26", rate: 2.80, color: "bg-teal-500" },
-  { slug: "myinvestor", name: "MyInvestor", rate: 2.50, color: "bg-cyan-500" },
-  { slug: "revolut", name: "Revolut", rate: 2.00, color: "bg-blue-500" },
-  { slug: "tradicional", name: "Banco Tradicional", rate: 0.05, color: "bg-slate-400" },
+  { slug: "trade-republic", name: "Trade Republic", rate: 3.75, color: "bg-primary", highlight: true },
+  { slug: "n26", name: "N26", rate: 2.80, color: "bg-primary-accent" },
+  { slug: "myinvestor", name: "MyInvestor", rate: 2.50, color: "bg-primary/60" },
+  { slug: "revolut", name: "Revolut", rate: 2.00, color: "bg-primary/40" },
+  { slug: "tradicional", name: "Banco Tradicional", rate: 0.05, color: "bg-muted-foreground" },
 ];
 
 const UI_COPY: Record<Locale, {
@@ -93,7 +93,7 @@ export default function SavingsCalculator() {
   const topProfit = calculateReturn(topOption.rate).profit;
 
   return (
-    <section className="relative overflow-hidden rounded-3xl border-2 border-border bg-card p-6 md:p-10 text-card-foreground shadow-soft transition-colors">
+    <section className="relative overflow-hidden rounded-xl border border-border bg-card p-6 md:p-10 text-card-foreground shadow-soft transition-colors">
       <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
 
       <header className="max-w-2xl">
@@ -112,7 +112,7 @@ export default function SavingsCalculator() {
       <div className="mt-8 grid gap-8 lg:grid-cols-12">
         {/* Controls Column */}
         <div className="space-y-6 lg:col-span-5">
-          <div className="rounded-2xl border-2 border-border bg-muted/40 p-6 shadow-sm">
+          <div className="rounded-2xl border border-border bg-muted/40 p-6 shadow-sm">
             <div className="flex items-center justify-between gap-4">
               <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 {copy.savingsLabel}
@@ -138,7 +138,7 @@ export default function SavingsCalculator() {
             </div>
           </div>
 
-          <div className="rounded-2xl border-2 border-border bg-muted/40 p-6 shadow-sm">
+          <div className="rounded-2xl border border-border bg-muted/40 p-6 shadow-sm">
             <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {copy.timeframeLabel}
             </label>
@@ -152,7 +152,7 @@ export default function SavingsCalculator() {
                   key={item.val}
                   type="button"
                   onClick={() => setYears(item.val)}
-                  className={`rounded-xl border-2 py-2.5 text-xs font-bold transition-all ${
+                  className={`rounded-xl border py-2.5 text-xs font-bold transition-all ${
                     years === item.val
                       ? "border-primary bg-primary text-primary-foreground shadow-sm"
                       : "border-border bg-card text-foreground/80 hover:border-primary/50 hover:bg-muted"
@@ -165,14 +165,14 @@ export default function SavingsCalculator() {
           </div>
 
           {/* Loss Callout Card */}
-          <div className="relative overflow-hidden rounded-2xl border-2 border-amber-500/40 bg-amber-500/10 p-5 dark:bg-amber-500/15">
+          <div className="relative overflow-hidden rounded-2xl border border-accent/60 bg-accent/10 p-5">
             <div className="flex items-start gap-3">
-              <TrendingUp className="h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" />
+              <TrendingUp className="h-6 w-6 shrink-0 text-accent-foreground" />
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
+                <p className="text-xs font-bold uppercase tracking-wider text-accent-foreground">
                   {copy.traditionalBankLoss}
                 </p>
-                <p className="mt-1 text-2xl font-black text-amber-700 dark:text-amber-300">
+                <p className="mt-1 text-2xl font-black text-primary-text">
                   +{topProfit.toLocaleString()} €
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
@@ -200,9 +200,9 @@ export default function SavingsCalculator() {
               return (
                 <div
                   key={item.slug}
-                  className={`group relative overflow-hidden rounded-2xl border-2 p-4 transition-all ${
+                  className={`group relative overflow-hidden rounded-2xl border p-4 transition-all ${
                     item.highlight
-                      ? "border-emerald-500/50 bg-emerald-500/5 dark:bg-emerald-500/10 shadow-md"
+                      ? "border-primary/50 bg-primary/5 dark:bg-primary/10 shadow-md"
                       : "border-border bg-card hover:border-border/80"
                   }`}
                 >
@@ -213,7 +213,7 @@ export default function SavingsCalculator() {
                         {item.rate}% APY
                       </span>
                       {item.highlight ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-black uppercase text-white shadow-sm">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[10px] font-black uppercase text-primary-foreground shadow-sm">
                           <Award className="h-3 w-3" />
                           {copy.topRecommendation}
                         </span>
@@ -241,12 +241,12 @@ export default function SavingsCalculator() {
                   </div>
 
                   {item.highlight && targetUrl ? (
-                    <div className="mt-3 flex items-center justify-between pt-2 border-t border-emerald-500/20">
-                      <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+                    <div className="mt-3 flex items-center justify-between pt-2 border-t border-primary/20">
+                      <p className="flex items-center gap-1.5 text-xs font-semibold text-primary-text dark:text-primary-light">
                         <CheckCircle2 className="h-4 w-4" />
                         Garantía hasta 100.000 € (FGD Europeo)
                       </p>
-                      <Button asChild size="sm" className="gap-1.5 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white">
+                      <Button asChild size="sm" className="gap-1.5 text-xs font-bold">
                         <a
                           href={targetUrl}
                           data-analytics="affiliate"

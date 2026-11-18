@@ -102,7 +102,7 @@ export default function RankingMethodology({ lastUpdatedLabel, locale = "es" }: 
 
           <h2 className="text-balance text-3xl font-black tracking-tight md:text-5xl">
             {copy.titlePrefix}{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               {copy.titleHighlight}
             </span>
           </h2>
@@ -125,10 +125,10 @@ export default function RankingMethodology({ lastUpdatedLabel, locale = "es" }: 
           {criteria.map((item) => (
             <article
               key={item.title}
-              className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft"
+              className="rounded-2xl border border-border bg-card p-6 shadow-soft"
             >
               <div className="mb-3 inline-flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border-2 border-border bg-muted text-primary">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted text-primary">
                   <item.icon className="h-4 w-4" />
                 </span>
                 <h3 className="text-base font-black tracking-tight md:text-lg">
@@ -143,7 +143,7 @@ export default function RankingMethodology({ lastUpdatedLabel, locale = "es" }: 
         </div>
 
         <div className="flex flex-col items-center gap-4 text-center">
-          <div className="inline-flex items-center gap-2 rounded-2xl border-2 border-border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
+          <div className="inline-flex items-center gap-2 rounded-2xl border border-border bg-muted/30 px-4 py-3 text-xs text-muted-foreground">
             <Info className="h-4 w-4" />
             <p>{copy.note}</p>
           </div>

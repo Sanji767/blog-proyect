@@ -34,11 +34,11 @@ export function LogoEmblem({
       )}
     >
       {/* Outer ambient gradient glow */}
-      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-primary/60 via-accent/40 to-emerald-400/50 opacity-60 blur-md transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-primary/60 via-accent/40 to-primary-accent/50 opacity-60 blur-md transition-opacity duration-500 group-hover:opacity-100" />
 
       {/* Glossy multi-gradient border */}
-      <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-primary via-accent to-emerald-400 p-[1.5px]">
-        <div className="h-full w-full rounded-[10px] bg-gradient-to-br from-[#2c1642] via-[#1c0f2a] to-[#12081d]" />
+      <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-primary via-accent to-primary-accent p-[1.5px]">
+        <div className="h-full w-full rounded-[10px] bg-gradient-to-br from-[#163300] via-[#0f2600] to-[#0a1a00]" />
       </div>
 
       {/* SVG Vector Monogram */}
@@ -49,34 +49,34 @@ export function LogoEmblem({
         className="relative z-10 h-full w-full p-1.5 transition-transform duration-300 ease-out group-hover:scale-105"
       >
         <defs>
-          <linearGradient id="logo-f-cyan" x1="16" y1="13" x2="38" y2="47" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#67e8f9" />
-            <stop offset="50%" stopColor="#2fb7d1" />
-            <stop offset="100%" stopColor="#0284c7" />
+          <linearGradient id="logo-f-green" x1="16" y1="13" x2="38" y2="47" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#A5D6A7" />
+            <stop offset="50%" stopColor="#66BB6A" />
+            <stop offset="100%" stopColor="#2E7D32" />
           </linearGradient>
           <linearGradient id="logo-arrow-gold" x1="27" y1="46" x2="52" y2="16" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#fef08a" />
             <stop offset="50%" stopColor="#f8c44c" />
-            <stop offset="100%" stopColor="#f97316" />
+            <stop offset="100%" stopColor="#eab308" />
           </linearGradient>
         </defs>
 
         {/* F Vertical Pillar */}
         <path
           d="M16 16.5C16 14.567 17.567 13 19.5 13H21.5C23.433 13 25 14.567 25 16.5V47.5C25 49.433 23.433 51 21.5 51H19.5C17.567 51 16 49.433 16 47.5V16.5Z"
-          fill="url(#logo-f-cyan)"
+          fill="url(#logo-f-green)"
         />
 
         {/* F Top Bar */}
         <path
           d="M21 13H38C39.933 13 41.5 14.567 41.5 16.5V17.5C41.5 19.433 39.933 21 38 21H21V13Z"
-          fill="url(#logo-f-cyan)"
+          fill="url(#logo-f-green)"
         />
 
         {/* F Middle Bar */}
         <path
           d="M21 27.5H32.5C34.433 27.5 36 29.067 36 31V31.5C36 33.433 34.433 35 32.5 35H21V27.5Z"
-          fill="url(#logo-f-cyan)"
+          fill="url(#logo-f-green)"
         />
 
         {/* Dynamic Financial Growth Trendline & Arrow */}
@@ -141,7 +141,7 @@ export default function Logo({
             >
               Finanzas
             </span>
-            <span className="relative inline-flex items-center justify-center rounded-md bg-gradient-to-r from-primary to-cyan-400 px-1.5 py-0.5 text-xs font-black tracking-wider text-secondary shadow-sm">
+            <span className="relative inline-flex items-center justify-center rounded-md bg-primary px-1.5 py-0.5 text-xs font-black tracking-wider text-primary-foreground shadow-sm">
               EU
             </span>
           </div>
@@ -150,7 +150,7 @@ export default function Logo({
             <p
               className={cn(
                 "mt-1 text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.22em] transition-colors",
-                isInverse ? "text-primary/90" : "text-muted-foreground"
+                isInverse ? "text-primary-light/90" : "text-muted-foreground"
               )}
             >
               {tagline}

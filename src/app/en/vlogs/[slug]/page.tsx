@@ -29,7 +29,7 @@ export default function VlogPageEn({ params }: { params: { slug: string } }) {
     <>
       <section className="py-10 md:py-14">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="rounded-2xl border-2 border-border bg-card p-5 text-sm text-muted-foreground shadow-soft">
+          <div className="rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground shadow-soft">
             <p className="font-semibold text-foreground">Spanish version</p>
             <p className="mt-1">
               This vlog is currently available in Spanish:{" "}

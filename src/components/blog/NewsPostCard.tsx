@@ -49,7 +49,7 @@ export default function NewsPostCard({
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, delay: index * 0.05, ease: "easeOut" }}
       whileHover={{ y: -6 }}
-      className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent"
+      className="group relative overflow-hidden rounded-2xl bg-secondary text-secondary-foreground shadow-soft transition-shadow"
     >
       <div className="pointer-events-none absolute -top-28 -right-28 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
 
@@ -58,7 +58,7 @@ export default function NewsPostCard({
         className="block p-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
       >
         <div className="flex items-center justify-between gap-4 text-xs">
-          <p className="font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="font-semibold uppercase tracking-[0.22em] text-primary-light">
             {categoryLabel}
           </p>
           <time dateTime={post.date} className="text-secondary-foreground/75">

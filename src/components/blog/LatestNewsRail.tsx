@@ -67,7 +67,7 @@ export default function LatestNewsRail({
             <button
               type="button"
               onClick={() => scrollByAmount(-1)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-border bg-card text-foreground shadow-soft transition-colors hover:bg-muted"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card text-foreground shadow-soft transition-colors hover:bg-muted"
               aria-label={copy.prev}
             >
               <ArrowLeft className="h-5 w-5" />
@@ -75,7 +75,7 @@ export default function LatestNewsRail({
             <button
               type="button"
               onClick={() => scrollByAmount(1)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-border bg-card text-foreground shadow-soft transition-colors hover:bg-muted"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card text-foreground shadow-soft transition-colors hover:bg-muted"
               aria-label={copy.next}
             >
               <ArrowRight className="h-5 w-5" />

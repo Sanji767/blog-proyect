@@ -55,8 +55,7 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
     >
       <Link
         href={`/blog/${post.slug}`}
-        className={`block rounded-3xl border border-border/50 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:border-primary/20
-          p-6 bg-gradient-to-br from-white to-gray-50 dark:from-black/80 dark:to-gray-900`}
+        className={`block rounded-xl border border-border/50 bg-card p-6 shadow-sm hover:shadow-md transition-shadow duration-300 hover:border-primary/20`}
       >
         {!isCompact && (
           <div className="relative mb-5 aspect-[16/9] overflow-hidden rounded-2xl border border-border/40 bg-muted/40">
@@ -69,7 +68,7 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
                 className="object-cover"
               />
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-background to-emerald-400/10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-background to-primary/10" />
             )}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/0 via-black/0 to-black/20 dark:to-black/40" />
           </div>
@@ -84,7 +83,7 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
             </span>
           )}
           {isHot && (
-            <span className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 text-xs font-black text-secondary-foreground">
+            <span className="flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-black text-primary-text">
               <Flame className="h-3 w-3" />
               TENDENCIA
             </span>

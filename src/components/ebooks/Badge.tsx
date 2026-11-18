@@ -6,8 +6,8 @@ interface Props {
 export default function Badge({ children, variant = "default" }: Props) {
   const styles =
     variant === "free"
-      ? "border-2 border-secondary bg-accent text-accent-foreground"
-      : "border-2 border-secondary-foreground/10 bg-secondary-foreground/5 text-secondary-foreground/80";
+      ? "bg-accent text-accent-foreground"
+      : "border border-secondary-foreground/10 bg-secondary-foreground/5 text-secondary-foreground/80";
 
   return (
     <span

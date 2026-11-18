@@ -167,7 +167,7 @@ export default function FaqPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center space-y-6"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent md:text-sm">
+          <div className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-accent-foreground md:text-sm">
             <MessageCircle className="h-4 w-4" />
             Guía práctica para dudas reales (sin humo)
           </div>
@@ -253,7 +253,7 @@ export default function FaqPage() {
                         }
                         className="w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 rounded-2xl"
                       >
-                        <div className="rounded-2xl border-2 border-border/50 bg-card/80 p-6 transition-all hover:border-primary/60 hover:shadow-xl group-hover:bg-card">
+                        <div className="rounded-2xl border border-border/50 bg-card/80 p-6 transition-all hover:border-primary/60 hover:shadow-xl group-hover:bg-card">
                           <div className="flex items-start justify-between gap-4">
                             <h3 className="text-base md:text-lg font-semibold text-foreground pr-6">
                               {item.question}
@@ -295,13 +295,13 @@ export default function FaqPage() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary text-secondary-foreground shadow-offset-accent"
+          className="relative overflow-hidden rounded-2xl bg-secondary text-secondary-foreground"
         >
           <div className="p-8 md:p-12 lg:p-16 text-center space-y-8">
             <div className="pointer-events-none absolute -top-28 -right-28 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
             <div className="flex justify-center">
-              <div className="rounded-2xl border-2 border-secondary-foreground/12 bg-secondary-foreground/5 p-6">
+              <div className="rounded-2xl border border-secondary-foreground/12 bg-secondary-foreground/5 p-6">
                 <MessageCircle className="h-12 w-12 md:h-16 md:w-16 text-accent" />
               </div>
             </div>
@@ -324,7 +324,7 @@ export default function FaqPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/contacto"
-                className="inline-flex items-center gap-3 rounded-xl border-2 border-secondary bg-accent px-8 py-4 text-base font-semibold text-accent-foreground shadow-offset-accent transition-transform active:translate-y-px md:py-5 md:text-lg"
+                className="inline-flex items-center gap-3 rounded-xl bg-accent px-8 py-4 text-base font-semibold text-accent-foreground transition-transform md:py-5 md:text-lg"
               >
                 Analiza mi caso
                 <ArrowRight className="h-5 w-5 md:h-6 md:w-6" />
@@ -332,7 +332,7 @@ export default function FaqPage() {
 
               <Link
                 href="/"
-                className="inline-flex items-center gap-3 rounded-xl border-2 border-secondary-foreground/20 bg-secondary-foreground/5 px-8 py-4 text-base font-semibold text-secondary-foreground transition-colors hover:border-secondary-foreground/35 hover:bg-secondary-foreground/10 md:py-5 md:text-lg"
+                className="inline-flex items-center gap-3 rounded-xl border border-secondary-foreground/20 bg-secondary-foreground/5 px-8 py-4 text-base font-semibold text-secondary-foreground transition-colors hover:border-secondary-foreground/35 hover:bg-secondary-foreground/10 md:py-5 md:text-lg"
               >
                 Ver bancos recomendados
                 <Sparkles className="h-5 w-5 md:h-6 md:w-6" />

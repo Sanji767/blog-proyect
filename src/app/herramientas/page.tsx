@@ -158,7 +158,7 @@ export default function HerramientasPage() {
           </p>
           <h1 className="text-balance text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
             Calculadoras y utilidades para decidir con{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               criterio
             </span>
             .
@@ -196,7 +196,7 @@ export default function HerramientasPage() {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+                className="group relative overflow-hidden rounded-2xl bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
               >
                 <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-accent/10 blur-3xl" />
                 <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
@@ -212,7 +212,7 @@ export default function HerramientasPage() {
                   {tool.desc}
                 </p>
                 <div className="relative mt-6">
-                  <span className="inline-flex items-center rounded-full border-2 border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 text-[11px] font-semibold text-secondary-foreground/80">
+                  <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 text-[11px] font-semibold text-secondary-foreground/80">
                     {tool.meta}
                   </span>
                 </div>
@@ -246,7 +246,7 @@ export default function HerramientasPage() {
                         </p>
                       </div>
                       <div className="flex items-center px-2 md:justify-end md:px-4">
-                        <span className="inline-flex items-center rounded-full border-2 border-border bg-background/60 px-3 py-1 text-xs font-semibold text-muted-foreground transition-colors group-hover:border-secondary/40 group-hover:text-foreground">
+                        <span className="inline-flex items-center rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-semibold text-muted-foreground transition-colors group-hover:border-secondary/40 group-hover:text-foreground">
                           {tool.meta}
                         </span>
                       </div>

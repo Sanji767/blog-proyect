@@ -143,12 +143,12 @@ export default function TableOfContents({
   return (
     <nav
       className={cn(
-        "not-prose rounded-2xl border-2 border-secondary bg-secondary p-5 text-secondary-foreground shadow-soft",
+        "not-prose rounded-2xl bg-secondary p-5 text-secondary-foreground shadow-soft",
         className
       )}
       aria-label={ariaLabel}
     >
-      <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-primary">
+      <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-primary-light">
         <List className="h-4 w-4 text-accent" />
         {resolvedTitle}
       </div>
@@ -171,8 +171,8 @@ export default function TableOfContents({
                 className={[
                   "group flex items-start gap-3 rounded-xl px-3 py-2 transition-colors",
                   isActive
-                    ? "border-2 border-secondary bg-accent text-accent-foreground"
-                    : "border-2 border-transparent text-secondary-foreground/75 hover:border-secondary-foreground/10 hover:bg-secondary-foreground/5 hover:text-secondary-foreground",
+                    ? "bg-accent text-accent-foreground"
+                    : "border border-transparent text-secondary-foreground/75 hover:border-secondary-foreground/10 hover:bg-secondary-foreground/5 hover:text-secondary-foreground",
                 ].join(" ")}
               >
                 <span

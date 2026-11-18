@@ -76,7 +76,7 @@ export default function Hero() {
             className="text-balance text-4xl font-black leading-[1.02] tracking-tight md:text-6xl"
           >
             {copy.h1Prefix}{" "}
-            <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+            <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
               {copy.h1Highlight}
             </span>
             .
@@ -115,8 +115,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
           className="lg:col-span-5"
         >
-          <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <div className="rounded-2xl bg-secondary p-8 text-secondary-foreground">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-light">
               {copy.asideKicker}
             </p>
             <h2 className="mt-4 text-balance text-2xl font-black leading-tight md:text-3xl">

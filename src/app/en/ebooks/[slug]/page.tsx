@@ -57,7 +57,7 @@ export default function EbookDetailPageEn({ params }: { params: { slug: string }
   return (
     <section className="py-16 md:py-24">
       <Container className="max-w-5xl">
-        <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft md:p-8">
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             Resource
           </p>
@@ -72,7 +72,7 @@ export default function EbookDetailPageEn({ params }: { params: { slug: string }
           <div className="mt-6">
             <Link
               href={esPath}
-              className="inline-flex items-center justify-center rounded-xl border-2 border-secondary bg-accent px-6 py-3 text-sm font-black text-accent-foreground shadow-offset-accent"
+              className="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 text-sm font-black text-accent-foreground"
             >
               Open Spanish version →
             </Link>

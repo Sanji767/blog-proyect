@@ -108,7 +108,7 @@ export default function VentajasPage() {
 
             <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
               Ventajas reales de los bancos digitales en{" "}
-              <span className="inline-block border-2 border-secondary bg-accent px-3 py-2 text-accent-foreground shadow-offset-accent">
+              <span className="inline-block bg-accent px-3 py-2 text-accent-foreground">
                 Europa
               </span>
               .
@@ -124,11 +124,11 @@ export default function VentajasPage() {
             {ventajas.map((v) => (
               <Card
                 key={v.title}
-                className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent"
+                className="group relative overflow-hidden rounded-2xl bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow"
               >
                 <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-accent/10 blur-3xl" />
 
-                <div className="relative mb-5 flex h-12 w-12 items-center justify-center rounded-xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 text-primary">
+                <div className="relative mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-secondary-foreground/10 bg-secondary-foreground/5 text-primary-light">
                   {v.icon}
                 </div>
 
@@ -140,7 +140,7 @@ export default function VentajasPage() {
                   {v.desc}
                 </p>
 
-                <div className="relative mt-5 inline-flex w-fit items-center rounded-full border-2 border-secondary bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-accent-foreground shadow-offset-accent">
+                <div className="relative mt-5 inline-flex w-fit items-center rounded-full bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-accent-foreground">
                   {v.stat}
                 </div>
               </Card>
@@ -158,7 +158,7 @@ export default function VentajasPage() {
             ))}
           </section>
 
-          <Card className="relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-soft md:p-12">
+          <Card className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground shadow-soft md:p-12">
             <div className="pointer-events-none absolute -top-32 -right-32 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
 
             <h2 className="relative text-center text-2xl font-black tracking-tight text-accent md:text-4xl">
@@ -168,7 +168,7 @@ export default function VentajasPage() {
             <div className="relative mt-10 grid gap-8 md:grid-cols-3">
               {pasos.map((s) => (
                 <div key={s.step} className="text-center">
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border-2 border-secondary bg-accent text-base font-black text-accent-foreground shadow-offset-accent">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-base font-black text-accent-foreground">
                     {s.step}
                   </div>
                   <h3 className="text-lg font-black tracking-tight">
