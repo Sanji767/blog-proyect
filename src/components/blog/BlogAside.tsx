@@ -53,7 +53,7 @@ export default function BlogAside({
             <div className="mt-5 grid gap-3">
               <Link
                 href="/comparativa"
-                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-primary/80 px-5 py-3 text-sm font-black text-white shadow-lg hover:shadow-xl transition"
+                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-primary/80 px-5 py-3 text-sm font-black text-primary-foreground shadow-lg hover:shadow-xl transition"
               >
                 Ver comparativa
               </Link>
@@ -98,7 +98,7 @@ export default function BlogAside({
             <Link
               key={tag.slug}
               href={`/blog/tag/${tag.slug}`}
-              className="rounded-full bg-primary/10 px-4 py-2 text-xs font-medium text-primary hover:bg-primary/20 transition"
+              className="rounded-full bg-primary/10 px-4 py-2 text-xs font-medium text-primary-text hover:bg-primary/20 transition"
             >
               #{tag.title} ({tag.count})
             </Link>
@@ -106,7 +106,7 @@ export default function BlogAside({
         </div>
       </section>
 
-      <div className="rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-8 text-white shadow-xl">
+      <div className="rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-8 text-primary-foreground shadow-xl">
         <h3 className="text-xl font-bold mb-3">
           ¿Necesitas ayuda personalizada?
         </h3>
@@ -115,7 +115,7 @@ export default function BlogAside({
         </p>
         <Link
           href="/contacto"
-          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-primary shadow-lg hover:scale-105 transition"
+          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-primary-text shadow-lg hover:scale-105 transition"
         >
           Hablar conmigo gratis
         </Link>

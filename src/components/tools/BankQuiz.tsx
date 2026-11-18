@@ -132,8 +132,8 @@ export default function BankQuiz() {
       <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
 
       <header className="text-center max-w-xl mx-auto">
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary uppercase tracking-wider">
-          <Sparkles className="h-3.5 w-3.5 text-primary" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary-text uppercase tracking-wider">
+          <Sparkles className="h-3.5 w-3.5 text-primary-text" />
           <span>{copy.badge}</span>
         </div>
         <h2 className="mt-3 text-2xl font-black md:text-3xl tracking-tight text-foreground">
@@ -184,7 +184,7 @@ export default function BankQuiz() {
                     }}
                     className={`flex items-center justify-between rounded-2xl border-2 p-4 text-left font-bold text-sm transition-all ${
                       answers.goal === key
-                        ? "border-primary bg-primary/10 text-primary"
+                        ? "border-primary bg-primary/10 text-primary-text"
                         : "border-border bg-muted/30 text-foreground hover:border-primary/50 hover:bg-muted/60"
                     }`}
                   >
@@ -218,7 +218,7 @@ export default function BankQuiz() {
                     }}
                     className={`flex items-center justify-between rounded-2xl border-2 p-4 text-left font-bold text-sm transition-all ${
                       answers.iban === key
-                        ? "border-primary bg-primary/10 text-primary"
+                        ? "border-primary bg-primary/10 text-primary-text"
                         : "border-border bg-muted/30 text-foreground hover:border-primary/50 hover:bg-muted/60"
                     }`}
                   >
@@ -252,7 +252,7 @@ export default function BankQuiz() {
                     }}
                     className={`flex items-center justify-between rounded-2xl border-2 p-4 text-left font-bold text-sm transition-all ${
                       answers.fee === key
-                        ? "border-primary bg-primary/10 text-primary"
+                        ? "border-primary bg-primary/10 text-primary-text"
                         : "border-border bg-muted/30 text-foreground hover:border-primary/50 hover:bg-muted/60"
                     }`}
                   >

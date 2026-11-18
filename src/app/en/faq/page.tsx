@@ -94,7 +94,7 @@ export default function FaqPageEn() {
 
       <Container className="max-w-5xl space-y-12">
         <header className="space-y-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             FAQ
           </p>
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">
@@ -125,7 +125,7 @@ export default function FaqPageEn() {
         </div>
 
         <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-center text-secondary-foreground shadow-offset-accent">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             Next step
           </p>
           <h2 className="mt-4 text-balance text-2xl font-black text-accent md:text-3xl">

@@ -38,7 +38,7 @@ export default async function BlogSidebar() {
             <Link
               key={tag.slug}
               href={`/blog/tag/${tag.slug}`}
-              className="rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold text-primary transition hover:bg-primary/20"
+              className="rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold text-primary-text transition hover:bg-primary/20"
             >
               #{tag.title} ({tag.count})
             </Link>
@@ -47,14 +47,14 @@ export default async function BlogSidebar() {
       </section>
 
       {/* CTA bonito */}
-      <div className="rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-8 text-center text-white shadow-xl">
+      <div className="rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-8 text-center text-primary-foreground shadow-xl">
         <h3 className="text-xl font-bold mb-3">¿No encuentras lo que buscas?</h3>
         <p className="mb-6 opacity-90">
           Dime qué tema te interesa y escribo un artículo personalizado.
         </p>
         <Link
           href="/contacto"
-          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-primary shadow-lg hover:scale-105 transition"
+          className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-primary-text shadow-lg hover:scale-105 transition"
         >
           Pídeme un artículo
         </Link>

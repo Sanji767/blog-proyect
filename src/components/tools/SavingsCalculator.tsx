@@ -97,8 +97,8 @@ export default function SavingsCalculator() {
       <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
 
       <header className="max-w-2xl">
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary uppercase tracking-wider">
-          <Sparkles className="h-3.5 w-3.5 text-primary" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary-text uppercase tracking-wider">
+          <Sparkles className="h-3.5 w-3.5 text-primary-text" />
           <span>Herramienta Interactiva</span>
         </div>
         <h2 className="mt-3 text-2xl font-black md:text-3xl tracking-tight text-foreground">

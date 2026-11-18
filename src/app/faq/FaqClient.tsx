@@ -196,7 +196,7 @@ export default function FaqPage() {
               className="rounded-2xl border border-border/60 bg-card/80 p-5 flex flex-col gap-2 shadow-sm"
             >
               <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-primary/10 text-primary-text">
                   {fact.icon}
                 </span>
                 {fact.label}
@@ -220,7 +220,7 @@ export default function FaqPage() {
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="rounded-2xl bg-primary/10 p-4 text-primary">
+                  <div className="rounded-2xl bg-primary/10 p-4 text-primary-text">
                     {group.icon}
                   </div>
                   <h2 className="text-2xl md:text-3xl font-bold">{group.title}</h2>

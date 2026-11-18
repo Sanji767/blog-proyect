@@ -151,7 +151,7 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
         />
 
         <header className="space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-text">
             <ShieldCheck className="h-4 w-4" /> Head to Head Comparison (2026)
           </div>
 

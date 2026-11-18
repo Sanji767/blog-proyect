@@ -20,6 +20,7 @@
   --primary: 47 183 209; /* cian */
   --primary-foreground: 28 15 42;
   --primary-accent: 23 166 191;
+  --primary-text: 11 107 133; /* teal oscuro: cian legible sobre fondo claro (5.8:1) */
 
   --secondary: 43 23 58; /* ink */
   --secondary-foreground: 251 250 247;
@@ -69,6 +70,7 @@
   --primary: 57 198 221;
   --primary-foreground: 15 7 23;
   --primary-accent: 42 176 199;
+  --primary-text: 127 227 245; /* cian claro: legible sobre fondo oscuro */
 
   --secondary: 26 15 36;
   --secondary-foreground: 247 242 255;
@@ -291,7 +293,7 @@ details > summary::-webkit-details-marker {
 .prose {
   --tw-prose-body: rgb(var(--foreground));
   --tw-prose-headings: rgb(var(--foreground));
-  --tw-prose-links: rgb(var(--primary));
+  --tw-prose-links: rgb(var(--primary-text));
   --tw-prose-bold: rgb(var(--foreground));
   --tw-prose-counters: rgb(var(--muted-foreground));
   --tw-prose-bullets: rgb(var(--muted-foreground));
@@ -369,7 +371,7 @@ details > summary::-webkit-details-marker {
    ========================================= */
 
 .prose a[href] {
-  color: rgb(var(--primary));
+  color: rgb(var(--primary-text));
   font-weight: 650;
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -377,7 +379,8 @@ details > summary::-webkit-details-marker {
   transition: color 0.15s ease;
 }
 .prose a[href]:hover {
-  color: rgb(var(--primary-accent));
+  color: rgb(var(--primary-text));
+  text-decoration-thickness: 2px;
 }
 
 /* Autolink headings: no subrayado ni color de enlace */

@@ -35,7 +35,7 @@ const variants: Record<ButtonVariant, string> = {
     "rounded-xl border-transparent bg-transparent text-foreground hover:bg-muted",
   destructive:
     "rounded-xl border-secondary bg-destructive text-destructive-foreground shadow-offset-accent hover:-translate-x-1 hover:-translate-y-1",
-  link: "border-transparent bg-transparent p-0 text-primary underline-offset-4 hover:underline",
+  link: "border-transparent bg-transparent p-0 text-primary-text underline-offset-4 hover:underline",
 };
 
 const sizes: Record<ButtonSize, string> = {

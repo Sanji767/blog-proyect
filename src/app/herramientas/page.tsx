@@ -153,7 +153,7 @@ export default function HerramientasPage() {
 
       <Container className="space-y-14">
         <header className="space-y-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             Herramientas
           </p>
           <h1 className="text-balance text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
@@ -199,7 +199,7 @@ export default function HerramientasPage() {
                 className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft transition-shadow hover:shadow-offset-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
               >
                 <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-accent/10 blur-3xl" />
-                <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
                   Destacada
                 </p>
                 <h2 className="relative mt-5 text-balance text-2xl font-black leading-tight text-accent md:text-3xl">

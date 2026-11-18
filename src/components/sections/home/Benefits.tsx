@@ -82,7 +82,7 @@ export default function Benefits() {
     <section className="border-t border-border bg-background py-16 md:py-24">
       <Container>
         <div className="mx-auto mb-12 max-w-3xl space-y-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             {copy.kicker}
           </p>
 

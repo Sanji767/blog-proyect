@@ -400,7 +400,7 @@ export default async function BlogPostPage({
       <LeadCaptureInline source={`blog:${post.slug}`} />
 
       <section className="mt-14 overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent md:p-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
           Herramientas
         </p>
         <h2 className="mt-4 text-balance text-2xl font-black tracking-tight text-accent md:text-3xl">

@@ -59,7 +59,7 @@ export default function HomeHowItWorks({ locale = "es" }: { locale?: Locale }) {
     <section className="border-t border-border bg-background py-16 md:py-24">
       <Container>
         <header className="mx-auto mb-10 max-w-3xl space-y-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             {copy.kicker}
           </p>
 

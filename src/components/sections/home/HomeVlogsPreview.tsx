@@ -35,7 +35,7 @@ export default async function HomeVlogsPreview({ locale = "es" }: { locale?: Loc
       <Container>
         <header className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
               {copy.kicker}
             </p>
             <h2 className="text-balance text-3xl font-black tracking-tight md:text-5xl">

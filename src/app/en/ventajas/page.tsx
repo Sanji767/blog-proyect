@@ -115,7 +115,7 @@ export default function VentajasPageEn() {
       <section className="py-16 md:py-24">
         <Container className="space-y-14">
           <header className="mx-auto max-w-4xl space-y-5 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
               Updated guide · {LAST_UPDATE}
             </p>
 

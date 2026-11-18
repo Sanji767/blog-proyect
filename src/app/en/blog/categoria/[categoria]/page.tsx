@@ -113,7 +113,7 @@ export default async function CategoryPageEn({ params }: Props) {
       />
 
       <header className="space-y-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
           <Link
             href={withLocale("/blog", locale)}
             className="underline-offset-4 hover:underline"

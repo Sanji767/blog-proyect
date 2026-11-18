@@ -88,7 +88,7 @@ export default async function BlogPage() {
       />
 
       <header className="space-y-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
           Blog
         </p>
 

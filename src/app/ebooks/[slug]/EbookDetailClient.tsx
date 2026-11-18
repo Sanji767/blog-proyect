@@ -67,7 +67,7 @@ export default function EbookDetailClient({ ebook }: { ebook: Ebook }) {
 
                 {ebook.author ? (
                   <div className="rounded-2xl border-2 border-secondary-foreground/10 bg-secondary-foreground/5 p-5">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary-text">
                       Autor
                     </p>
                     <p className="mt-3 font-semibold">{ebook.author.name}</p>

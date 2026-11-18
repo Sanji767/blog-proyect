@@ -231,7 +231,7 @@ export default function ProgramaPageEn({
         {/* HERO */}
         <header className="grid items-start gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)]">
           <div className="space-y-6">
-            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary-text">
               <span>Reviewed by FinanzasEU Editorial Team</span>
               {hasAffiliate && (
                 <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-foreground">

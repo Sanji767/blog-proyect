@@ -249,7 +249,7 @@ export default function ProgramaPage({
 
         {status === "draft" ? (
           <section className="rounded-2xl border-2 border-secondary bg-secondary p-6 text-secondary-foreground shadow-offset-accent">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-primary">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-primary-text">
               En revisión
             </p>
             <p className="mt-3 text-sm leading-relaxed text-secondary-foreground/80">
@@ -282,7 +282,7 @@ export default function ProgramaPage({
           {/* Columna izquierda */}
           <div className="space-y-6">
             {/* Etiquetas superiores */}
-            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary-text">
               <span>Banco analizado por FinanzasEU</span>
               {hasAffiliate && (
                 <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-foreground">

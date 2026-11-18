@@ -59,7 +59,7 @@ export default function SobrePage() {
 
       <Container className="max-w-5xl space-y-12">
         <header className="space-y-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             Sobre
           </p>
           <h1 className="text-balance text-4xl font-black tracking-tight md:text-6xl">

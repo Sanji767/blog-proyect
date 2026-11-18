@@ -92,7 +92,7 @@ export default function Features({ locale = "es" }: { locale?: Locale }) {
               key={item.title}
               className="rounded-2xl border-2 border-secondary bg-secondary p-7 text-secondary-foreground shadow-soft"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
                 {copy.kicker}
               </p>
 

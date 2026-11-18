@@ -54,7 +54,7 @@ export default function VlogsPage({ searchParams }: Props) {
     <section className="py-16 md:py-24">
       <Container className="space-y-12">
         <header className="mx-auto max-w-4xl space-y-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             Vlogs
           </p>
 

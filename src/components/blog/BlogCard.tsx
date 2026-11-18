@@ -78,19 +78,19 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
         {/* Badges */}
         <div className="flex flex-wrap gap-2 mb-3">
           {isNew && (
-            <span className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-3.5 py-1.5 text-xs font-black text-white animate-pulse">
+            <span className="flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-black text-accent-foreground animate-pulse">
               <Flame className="h-3.5 w-3.5" />
               NUEVO
             </span>
           )}
           {isHot && (
-            <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 px-3 py-1.5 text-xs font-black text-white">
+            <span className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 text-xs font-black text-secondary-foreground">
               <Flame className="h-3 w-3" />
               TENDENCIA
             </span>
           )}
           {isFeatured && (
-            <span className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-1.5 text-xs font-black text-white">
+            <span className="flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-xs font-black text-primary-foreground">
               <Sparkles className="h-4 w-4" />
               DESTACADO
             </span>
@@ -139,7 +139,7 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
             {post.tags?.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary hover:bg-primary/20 transition"
+                className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-bold text-primary-text hover:bg-primary/20 transition"
               >
                 #{tag}
               </span>

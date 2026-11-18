@@ -79,7 +79,7 @@ export default function HomeBanksPreview() {
       <Container>
         <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
               {copy.kicker}
             </p>
             <h2 className="text-balance text-3xl font-black tracking-tight md:text-5xl">
@@ -157,7 +157,7 @@ export default function HomeBanksPreview() {
                           />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
                             {copy.top} #{index + 1}
                           </p>
                           <h3 className="mt-2 text-2xl font-black leading-tight text-accent">

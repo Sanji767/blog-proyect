@@ -146,7 +146,7 @@ export default function VlogPage({ params }: { params: { slug: string } }) {
                     <Link
                       key={t}
                       href={`/vlogs?tag=${encodeURIComponent(t)}`}
-                      className="rounded-full bg-primary/10 px-4 py-2 text-xs font-bold text-primary hover:bg-primary/20 transition"
+                      className="rounded-full bg-primary/10 px-4 py-2 text-xs font-bold text-primary-text hover:bg-primary/20 transition"
                     >
                       #{t}
                     </Link>

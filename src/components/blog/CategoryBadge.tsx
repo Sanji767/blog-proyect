@@ -13,7 +13,7 @@ export default function CategoryBadge({ slug }: { slug: string }) {
   return (
     <Link
       href={`/blog/categoria/${encodeURIComponent(categorySlug)}`}
-      className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary"
+      className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary-text"
     >
       {humanizeSlug(categorySlug)}
     </Link>

@@ -111,7 +111,7 @@ export default function InflacionPageEn() {
 
       <Container className="space-y-14">
         <header className="space-y-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             <Link
               href={withLocale("/herramientas", locale)}
               className="underline-offset-4 hover:underline"

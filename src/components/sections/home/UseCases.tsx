@@ -194,7 +194,7 @@ export default function UseCases() {
 
             <div className="lg:col-span-7">
               <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
                   {copy.recommendation}
                 </p>
 

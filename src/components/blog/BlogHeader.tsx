@@ -12,7 +12,7 @@ export default function BlogHeader({
 }) {
   return (
     <header className="space-y-4 text-center">
-      <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+      <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary-text">
         Blog financiero Europa
       </div>
       <h1 className="text-3xl md:text-5xl font-black tracking-tight">

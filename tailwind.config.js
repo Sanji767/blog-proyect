@@ -60,6 +60,7 @@ const config: Config = {
           foreground: "rgb(var(--destructive-foreground) / <alpha-value>)",
         },
         "primary-accent": "rgb(var(--primary-accent) / <alpha-value>)",
+        "primary-text": "rgb(var(--primary-text) / <alpha-value>)",
         "foreground-accent": "rgb(var(--foreground-accent) / <alpha-value>)",
         "hero-background": "rgb(var(--hero-background) / <alpha-value>)",
       },

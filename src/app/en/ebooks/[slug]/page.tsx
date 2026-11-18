@@ -58,7 +58,7 @@ export default function EbookDetailPageEn({ params }: { params: { slug: string }
     <section className="py-16 md:py-24">
       <Container className="max-w-5xl">
         <div className="rounded-2xl border-2 border-border bg-card p-6 shadow-soft md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             Resource
           </p>
           <h1 className="mt-4 text-balance text-3xl font-black tracking-tight md:text-5xl">

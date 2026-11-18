@@ -66,7 +66,7 @@ export default function BancosPageEn() {
     <section className="py-16 md:py-24">
       <Container className="space-y-12">
         <header className="space-y-5 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
             2026 ranking · Recommended banks in Europe
           </p>
 
