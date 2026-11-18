@@ -27,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/herramientas/objetivo-ahorro",
     "/herramientas/regla-4",
     "/herramientas/tae",
+    "/herramientas/hipoteca",
     "/blog",
     "/ebooks",
     "/vlogs",

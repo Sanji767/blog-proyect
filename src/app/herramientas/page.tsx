@@ -7,7 +7,7 @@ import { SITE_URL, toJsonLd } from "@/lib/seo";
 
 const TITLE = "Herramientas financieras | FinanzasEU";
 const DESCRIPTION =
-  "Herramientas gratuitas para decidir con criterio: IBAN scanner, comparativa de bancos y calculadoras (interés compuesto, inflación, TAE, objetivo de ahorro).";
+  "Herramientas gratuitas para decidir con criterio: IBAN scanner, comparativa de bancos y calculadoras (hipoteca, interés compuesto, inflación, TAE, objetivo de ahorro).";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -60,6 +60,14 @@ const tools: Tool[] = [
     meta: "Desde TIN + capitalización",
     desc: "Convierte TIN a TAE y estima interés anual. Incluye comisión fija opcional y enlace para compartir.",
     category: "Banca",
+  },
+  {
+    href: "/herramientas/hipoteca",
+    label: "Calculadora de hipoteca",
+    meta: "Euríbor + diferencial + revisión",
+    desc: "Calcula tu cuota mensual con tipo variable o fijo, y simula cuánto cambiará en la próxima revisión del euríbor.",
+    category: "Banca",
+    featured: true,
   },
   {
     href: "/herramientas/interes-compuesto",

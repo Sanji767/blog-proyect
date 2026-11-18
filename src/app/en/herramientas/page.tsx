@@ -8,7 +8,7 @@ import { SITE_URL, toJsonLd } from "@/lib/seo";
 
 const TITLE = "Financial tools | FinanzasEU";
 const DESCRIPTION =
-  "Free tools to decide with clarity: IBAN scanner, bank comparison and calculators (compound interest, inflation, APR/APY, savings goal).";
+  "Free tools to decide with clarity: IBAN scanner, bank comparison and calculators (mortgage, compound interest, inflation, APR/APY, savings goal).";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -61,6 +61,14 @@ const tools: Tool[] = [
     meta: "From nominal rate + compounding",
     desc: "Convert nominal rate to effective annual rate and estimate yearly interest. Includes optional fixed fee and share link.",
     category: "Banking",
+  },
+  {
+    href: "/herramientas/hipoteca",
+    label: "Mortgage calculator",
+    meta: "Euribor + spread + reset",
+    desc: "Work out your monthly payment with a variable or fixed rate, and simulate how it changes at the next Euribor reset.",
+    category: "Banking",
+    featured: true,
   },
   {
     href: "/herramientas/interes-compuesto",
