@@ -157,7 +157,7 @@ export default function HomeBanksPreview() {
                           />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
+                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
                             {copy.top} #{index + 1}
                           </p>
                           <h3 className="mt-2 text-2xl font-black leading-tight text-accent">

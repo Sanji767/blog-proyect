@@ -106,7 +106,7 @@ export default function LeadCaptureInline({
         className,
       )}
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
         {copy.kicker}
       </p>
       <h2 className="mt-4 text-balance text-2xl font-black tracking-tight text-accent md:text-3xl">

@@ -195,7 +195,7 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
                   <LocalizedLink href={`/programas/${b.slug}`}>View full review</LocalizedLink>
                 </Button>
                 {b.affiliateUrl && (
-                  <Button asChild size="sm" variant="outline" className="flex-1 font-bold">
+                  <Button asChild size="sm" variant="outline" className="flex-1 font-bold border-secondary-foreground/25 text-secondary-foreground hover:border-secondary-foreground/60 hover:bg-secondary-foreground/10">
                     <a href={b.affiliateUrl} target="_blank" rel="noreferrer noopener sponsored">
                       Official site <ExternalLink className="ml-1 h-3.5 w-3.5" />
                     </a>

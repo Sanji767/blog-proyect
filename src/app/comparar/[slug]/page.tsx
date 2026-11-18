@@ -138,7 +138,7 @@ export default async function ComparisonPage({ params }: PageProps) {
                 <LocalizedLink href={`/programas/${b.slug}`}>Ver ficha completa</LocalizedLink>
               </Button>
               {b.affiliateUrl && (
-                <Button asChild size="sm" variant="outline" className="flex-1">
+                <Button asChild size="sm" variant="outline" className="flex-1 border-secondary-foreground/25 text-secondary-foreground hover:border-secondary-foreground/60 hover:bg-secondary-foreground/10">
                   <a href={b.affiliateUrl} target="_blank" rel="noreferrer noopener sponsored">
                     Web oficial <ExternalLink className="ml-1 h-3.5 w-3.5" />
                   </a>

@@ -58,7 +58,7 @@ export default function NewsPostCard({
         className="block p-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
       >
         <div className="flex items-center justify-between gap-4 text-xs">
-          <p className="font-semibold uppercase tracking-[0.22em] text-primary-text">
+          <p className="font-semibold uppercase tracking-[0.22em] text-primary">
             {categoryLabel}
           </p>
           <time dateTime={post.date} className="text-secondary-foreground/75">

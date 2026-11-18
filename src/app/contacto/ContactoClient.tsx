@@ -372,7 +372,7 @@ export default function ContactoPage() {
             className="space-y-6"
           >
             <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
                 {copy.asideKicker}
               </p>
               <h3 className="mt-4 text-balance text-2xl font-black text-accent">

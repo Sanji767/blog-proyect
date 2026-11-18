@@ -167,6 +167,18 @@ h6 {
   color: rgb(var(--foreground));
 }
 
+/* Headings inside dark surfaces use the surface's light text: the base rule
+   above sets dark foreground, which is invisible on dark cards. Headings
+   with an explicit text color (accent, secondary, primary, muted) keep it. */
+.bg-secondary :is(h1, h2, h3, h4, h5, h6):not([class*="text-accent"]):not([class*="text-secondary"]):not([class*="text-primary"]):not([class*="text-muted"]) {
+  color: rgb(var(--secondary-foreground));
+}
+
+/* Muted text is also unreadable on dark surfaces; use the surface tone. */
+.bg-secondary .text-muted-foreground {
+  color: rgb(var(--secondary-foreground) / 0.7);
+}
+
 p {
   line-height: 1.7;
 }

@@ -596,7 +596,7 @@ export default function IBANPage() {
             <section className="group relative overflow-hidden rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
               <Zap className="pointer-events-none absolute -right-6 -bottom-6 h-32 w-32 opacity-20 transition-transform duration-500 group-hover:rotate-12" />
 
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
                 {copy.educationTag}
               </p>
               <h3 className="mt-4 text-balance text-2xl font-black text-accent">

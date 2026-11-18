@@ -148,7 +148,7 @@ export default function TableOfContents({
       )}
       aria-label={ariaLabel}
     >
-      <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-primary-text">
+      <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-primary">
         <List className="h-4 w-4 text-accent" />
         {resolvedTitle}
       </div>

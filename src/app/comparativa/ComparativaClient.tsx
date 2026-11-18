@@ -398,7 +398,7 @@ export default function ComparativaPage() {
                 <Link href="#comparativa">🏆 Ver ranking TOP 3</Link>
               </Button>
 
-              <Button asChild size="sm" variant="outline" className="rounded-full">
+              <Button asChild size="sm" variant="outline" className="rounded-full border-secondary-foreground/25 text-secondary-foreground hover:border-secondary-foreground/60 hover:bg-secondary-foreground/10">
                 <Link href="/bancos">Ver todos los bancos</Link>
               </Button>
 

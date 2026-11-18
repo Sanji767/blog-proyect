@@ -116,7 +116,7 @@ export default function Hero() {
           className="lg:col-span-5"
         >
           <div className="rounded-2xl border-2 border-secondary bg-secondary p-8 text-secondary-foreground shadow-offset-accent">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary-text">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
               {copy.asideKicker}
             </p>
             <h2 className="mt-4 text-balance text-2xl font-black leading-tight md:text-3xl">
@@ -145,7 +145,7 @@ export default function Hero() {
                   <ArrowRight className="h-4 w-4" />
                 </LocalizedLink>
               </Button>
-              <Button asChild size="sm" variant="outline" className="w-full flex-1">
+              <Button asChild size="sm" variant="outline" className="w-full flex-1 border-secondary-foreground/25 text-secondary-foreground hover:border-secondary-foreground/60 hover:bg-secondary-foreground/10">
                 <LocalizedLink href="/blog">{copy.asideSecondary}</LocalizedLink>
               </Button>
             </div>

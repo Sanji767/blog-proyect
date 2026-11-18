@@ -282,7 +282,7 @@ export default function ProgramaPage({
           {/* Columna izquierda */}
           <div className="space-y-6">
             {/* Etiquetas superiores */}
-            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary-text">
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-medium text-primary">
               <span>Banco analizado por FinanzasEU</span>
               {hasAffiliate && (
                 <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-foreground">

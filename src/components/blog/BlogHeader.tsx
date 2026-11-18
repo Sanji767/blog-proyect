@@ -25,7 +25,7 @@ export default function BlogHeader({
       <div className="flex flex-wrap justify-center gap-3 text-xs text-muted-foreground">
         <span>{total} artículos</span>
         <span>•</span>
-        <Link href="/comparativa" className="hover:underline text-primary">
+        <Link href="/comparativa" className="hover:underline text-primary-text">
           Ver comparativa de bancos
         </Link>
       </div>
