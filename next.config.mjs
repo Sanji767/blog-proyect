@@ -97,22 +97,23 @@ const nextConfig = {
       },
     ];
 
+    // Cuando varias reglas coinciden, gana la ÚLTIMA para la misma cabecera:
+    // la regla general va PRIMERO y la de /studio DESPUÉS, así /studio
+    // recibe cspStudio y el resto cspPublic (verificado con curl tras el
+    // despliegue: con el orden inverso, /studio recibía la CSP pública).
     return [
+      {
+        source: "/(.*)",
+        headers: [
+          ...common,
+          { key: "Content-Security-Policy", value: cspPublic },
+        ],
+      },
       {
         source: "/studio/:path*",
         headers: [
           ...common,
           { key: "Content-Security-Policy", value: cspStudio },
-        ],
-      },
-      {
-        // La regla general va DESPUÉS: si dos reglas coinciden, gana la última
-        // para la misma cabecera. Verificar con curl tras el despliegue que
-        // /studio recibe cspStudio y el resto cspPublic.
-        source: "/(.*)",
-        headers: [
-          ...common,
-          { key: "Content-Security-Policy", value: cspPublic },
         ],
       },
     ];
