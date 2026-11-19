@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { getClientIp, isRateLimited } from "@/lib/rateLimit";
+
 export const runtime = "nodejs";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
@@ -30,6 +32,13 @@ export async function POST(request: Request) {
     payload = (await request.json()) as LeadPayload;
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  if (isRateLimited(getClientIp(request))) {
+    return NextResponse.json(
+      { error: "Demasiadas peticiones. Inténtalo más tarde." },
+      { status: 429 },
+    );
   }
 
   const honeypot = String(payload.website ?? "").trim();

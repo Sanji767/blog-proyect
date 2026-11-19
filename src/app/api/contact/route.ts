@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { getClientIp, isRateLimited } from "@/lib/rateLimit";
+
 export const runtime = "nodejs";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
@@ -34,6 +36,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
+  if (isRateLimited(getClientIp(request))) {
+    return NextResponse.json(
+      { error: "Demasiadas peticiones. Inténtalo más tarde." },
+      { status: 429 },
+    );
+  }
+
   const honeypot = String(payload.website ?? "").trim();
   if (honeypot) {
     return NextResponse.json({ ok: true });
@@ -59,6 +68,13 @@ export async function POST(request: Request) {
   if (message.length > 8000) {
     return NextResponse.json(
       { error: "El mensaje es demasiado largo" },
+      { status: 400 },
+    );
+  }
+
+  if (name.length > 100) {
+    return NextResponse.json(
+      { error: "El nombre es demasiado largo" },
       { status: 400 },
     );
   }
