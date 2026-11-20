@@ -1,3 +1,15 @@
+// src/components/leads/LeadCaptureInline.tsx
+//
+// Article-inline subscribe form (audit finding A16).
+//
+// CHANGED in this draft:
+// - Posts to /api/subscribe (Resend Audience) instead of /api/lead (owner
+//   email only), so article signups join the same newsletter list as the
+//   footer/homepage forms. /api/lead is left untouched and becomes unused.
+// - The "1–2 emails/mes" promise is softened to honest copy: no cadence is
+//   promised until a real one exists.
+// - Success copy is honest about how the subscription was stored
+//   (API returns stored: "audience" | "email").
 "use client";
 
 import { useState } from "react";
@@ -9,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 type FormState = "idle" | "submitting" | "success" | "error";
+type StoredVia = "audience" | "email" | null;
 
 type Props = {
   source?: string;
@@ -19,11 +32,13 @@ const COPY = {
   es: {
     kicker: "Actualizaciones",
     title: "Recibe avisos cuando actualicemos rankings y guías",
-    desc: "Sin spam. 1–2 emails/mes. Te puedes dar de baja cuando quieras.",
+    desc: "Sin spam. Solo cuando publiquemos algo nuevo. Podrás darte de baja desde cualquier correo que recibas.",
     placeholder: "Tu email",
     cta: "Apuntarme",
     submitting: "Enviando…",
-    success: "¡Listo! Te avisaremos cuando publiquemos actualizaciones.",
+    successAudience: "¡Listo! Te avisaremos cuando publiquemos actualizaciones.",
+    successEmail:
+      "Recibido. Te hemos apuntado y te avisaremos cuando publiquemos novedades.",
     invalidEmail: "Email inválido.",
     genericError: "No se pudo enviar. Inténtalo de nuevo.",
     privacyPrefix: "Al enviar, aceptas nuestra",
@@ -32,11 +47,13 @@ const COPY = {
   en: {
     kicker: "Updates",
     title: "Get notified when we update rankings and guides",
-    desc: "No spam. 1–2 emails/month. Unsubscribe anytime.",
+    desc: "No spam. Only when we publish something new. You can unsubscribe from any email you receive.",
     placeholder: "Your email",
     cta: "Notify me",
     submitting: "Sending…",
-    success: "You're in. We’ll email you when we publish updates.",
+    successAudience: "You're in. We’ll email you when we publish updates.",
+    successEmail:
+      "Got it — we've noted your email and will let you know when we publish updates.",
     invalidEmail: "Invalid email.",
     genericError: "Could not send. Please try again.",
     privacyPrefix: "By submitting, you agree to our",
@@ -58,6 +75,7 @@ export default function LeadCaptureInline({
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
   const [state, setState] = useState<FormState>("idle");
+  const [storedVia, setStoredVia] = useState<StoredVia>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -74,14 +92,14 @@ export default function LeadCaptureInline({
     setState("submitting");
 
     try {
-      const response = await fetch("/api/lead", {
+      const response = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: trimmed, locale, source, website }),
       });
 
       const result = (await response.json().catch(() => null)) as
-        | { ok?: boolean; error?: string }
+        | { ok?: boolean; stored?: string; error?: string }
         | null;
 
       if (!response.ok) {
@@ -90,6 +108,9 @@ export default function LeadCaptureInline({
         return;
       }
 
+      // Honest success: report how the subscription was actually stored.
+      // (Honeypot responses carry no `stored` field; treat as audience.)
+      setStoredVia(result?.stored === "email" ? "email" : "audience");
       setState("success");
       setEmail("");
       setWebsite("");
@@ -98,6 +119,9 @@ export default function LeadCaptureInline({
       setError(copy.genericError);
     }
   }
+
+  const successMessage =
+    storedVia === "email" ? copy.successEmail : copy.successAudience;
 
   return (
     <section
@@ -125,6 +149,7 @@ export default function LeadCaptureInline({
           className="hidden"
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
+          aria-hidden="true"
         />
 
         <Input
@@ -148,7 +173,7 @@ export default function LeadCaptureInline({
       </form>
 
       {state === "success" ? (
-        <p className="mt-4 text-sm text-secondary-foreground/85">{copy.success}</p>
+        <p className="mt-4 text-sm text-secondary-foreground/85">{successMessage}</p>
       ) : null}
 
       {state === "error" && error ? (

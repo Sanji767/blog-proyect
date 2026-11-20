@@ -9,6 +9,7 @@ import Container from "@/components/layout/Container";
 import LanguageSwitch from "@/components/i18n/LanguageSwitch";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import SearchBox from "@/components/search/SearchBox";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import Logo from "@/components/ui/logo";
 import { stripLocaleFromPathname } from "@/lib/i18n";
@@ -99,6 +100,7 @@ export default function Header() {
               </LocalizedLink>
             );
           })}
+          <SearchBox className="w-52 xl:w-64" />
           <Suspense fallback={null}>
             <LanguageSwitch />
           </Suspense>
@@ -127,6 +129,7 @@ export default function Header() {
         <div className="lg:hidden border-t-2 border-secondary-foreground/10">
           <div className="mx-auto max-w-7xl px-6 py-6">
             <nav className="grid gap-3" aria-label={copy.mobileNav}>
+              <SearchBox onNavigate={() => setMobileOpen(false)} />
               {navItems.map((item) => {
                 const isActive = activeHref === item.href;
                 return (

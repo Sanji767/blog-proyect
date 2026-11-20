@@ -4,6 +4,7 @@
 import Container from "@/components/layout/Container";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import NewsletterForm from "@/components/leads/NewsletterForm";
 import Logo from "@/components/ui/logo";
 
 const siteName = "FinanzasEU";
@@ -83,6 +84,9 @@ export default function Footer() {
             <p className="max-w-md text-sm leading-relaxed text-secondary-foreground/75">
               {content.copy.blurb}
             </p>
+            <div className="pt-2">
+              <NewsletterForm variant="footer" source="footer" />
+            </div>
           </div>
 
           <div className="md:col-span-3">

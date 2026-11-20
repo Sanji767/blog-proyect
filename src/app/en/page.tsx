@@ -18,6 +18,7 @@ import TrustStrip from "@/components/sections/home/TrustStrip";
 import UseCases from "@/components/sections/home/UseCases";
 import SavingsCalculator from "@/components/tools/SavingsCalculator";
 import BankQuiz from "@/components/tools/BankQuiz";
+import NewsletterForm from "@/components/leads/NewsletterForm";
 import { Button } from "@/components/ui/button";
 import Reveal from "@/components/ui/Reveal";
 import { banks } from "@/lib/banks";
@@ -228,6 +229,15 @@ export default function HomePageEn() {
       </Reveal>
       <Reveal>
         <HomeFaqPreview locale={locale} />
+      </Reveal>
+
+      {/* 7.5 Newsletter (A16) */}
+      <Reveal>
+        <section className="border-t border-border py-16 md:py-20">
+          <Container>
+            <NewsletterForm variant="section" source="home:en" />
+          </Container>
+        </section>
       </Reveal>
 
       {/* 8. Conversion */}
