@@ -3,7 +3,7 @@ title: "How to Protect Your Bank Account from Phishing and Mobile Scams (2026 Gu
 description: "Learn how to spot phone spoofing (vishing), SMS scams (smishing), and secure your digital accounts with 2FA and biometrics."
 author: "FinanzasEU Team"
 category: "Banking Security"
-date: "2026-03-08"
+date: "2026-11-20"
 featured: true
 ---
 
@@ -13,9 +13,23 @@ Digital banking security is more critical than ever. In 2026, cybercriminals rel
 
 In this guide, we break down how these sophisticated scams operate, your legal rights under European payment regulations (PSD2), and essential security settings to protect your money.
 
+## The Scale of the Problem
+
+Payment fraud in the European Economic Area [reached €4.2 billion in 2024, up from €3.5 billion in 2023](https://www.ecb.europa.eu/press/pr/date/2025/html/ecb.pr251215~e133d9d683.en.html), according to the joint EBA-ECB report on payment fraud published in December 2025. The breakdown shows where the danger actually sits:
+
+| Payment type | Fraud losses, 2024 | Change vs 2023 | Who bore the loss |
+| :--- | :--- | :--- | :--- |
+| Credit transfers | €2.2 billion | +16% | Users bore ~85% |
+| Card payments | €1.329 billion | +29% | Users bore ~38% |
+| Other (direct debits, e-money, ATM) | ~€0.35 billion | +26% | Mixed |
+
+The most important number in that table is the 85%. When fraudsters trick you into *authorising a transfer yourself* — the classic "safe account" scam — the loss falls on you in the vast majority of cases, because the payment was technically authorised. Card fraud is different: issuers absorb around 62% of card losses under existing consumer protections. That asymmetry is exactly why scammers work so hard to get you to make a transfer rather than hand over a card number.
+
+Strong Customer Authentication (SCA) — the two-factor approval you do in your banking app — is working: the EBA-ECB report confirms it has reduced fraud levels since its introduction in 2020. Card fraud was [17 times higher when the payment recipient was outside the EEA](https://www.ecb.europa.eu/press/pr/date/2025/html/ecb.pr251215~e133d9d683.en.html), where SCA is not legally required. Fraudsters have adapted by targeting the human instead of the system: if they can get you to approve a payment yourself, SCA cannot save you.
+
 ---
 
-## 🚨 The Top 3 Dangerous Banking Scams in 2026
+## The Top 3 Dangerous Banking Scams in 2026
 
 ### 1. Vishing + Caller ID Spoofing
 You receive a phone call appearing from your bank's official phone number. A caller claiming to be a fraud prevention agent states that *"an unauthorized transaction of €2,500 is currently taking place from your account"*.
@@ -24,16 +38,70 @@ To cancel the transaction, the scammer asks you to read back a **6-digit SMS ver
 
 > **THE REALITY:** The scammer is initiating a fraudulent transaction from your banking app. Providing the SMS code or transferring funds to their holding account hands your money directly to the criminal.
 
----
+In 2026, AI voice cloning has made this worse: scammers can now clone a voice from a few seconds of audio found online, so a call that sounds exactly like your bank's agent — or even a family member — proves nothing. Caller ID proves nothing either; spoofing a bank's number takes minutes. The only verification that counts is hanging up and calling the number on your card or in your banking app.
 
 ### 2. Smishing (SMS Spoofing)
 An SMS arrives inside your bank's legitimate SMS message history stating: *"Your account has been locked due to suspicious activity. Log in immediately at [fake link] to verify your identity"*. Clicking the link leads to a replica site capturing your login credentials.
 
+The message appearing in the same thread as your bank's genuine messages is what makes smishing so effective — your phone groups messages by sender name, and scammers can spoof that name. A link in an SMS from "your bank" is therefore not evidence of anything. Real banks do send SMS messages, but they do not ask you to log in via a link in one. If an SMS worries you, open your banking app directly — never through the link — and check there.
+
+### 3. Authorised Push Payment (APP) Fraud — the "Safe Account" Scam
+This is the scam behind the 85% figure. The fraudster, posing as your bank's fraud team or the police, convinces you that your money is at risk and that the only way to protect it is to transfer it to a "safe account" — which is theirs. Variants include fake investment opportunities, fake invoice redirection (a "supplier" emails new bank details), and romance scams that end with a transfer request.
+
+Because you authorised the transfer, your bank's fraud protections are much weaker than for card fraud. Under the EU's Instant Payments Regulation, banks must now offer Verification of Payee — a check that the account name matches the IBAN before you send money — which helps catch invoice-redirection fraud. But no technical check can stop you sending money to a scammer you believe is your bank. The defence is behavioural: your bank will never ask you to move money to another account. Ever.
+
 ---
 
-## 🛡️ The 4 Golden Rules of Banking Security
+## Your Rights Under PSD2: What the Bank Must Do
+
+European law gives you strong rights when a payment is genuinely unauthorised — and much weaker ones when you authorised it yourself. Know the difference.
+
+- **Unauthorised payments:** under [PSD2 (Directive (EU) 2015/2366), Article 74](https://ec.europa.eu/newsroom/fisma/items/615072/en), your liability for losses from a lost, stolen or misappropriated payment instrument is capped at **€50** — down from €150 under the original directive. The cap does not apply if you acted fraudulently or with gross negligence (for example, sharing your PIN or SMS codes), in which case you bear all the losses. Report the fraud as soon as you discover it: you have up to 13 months to notify your bank, but the sooner the better.
+- **Refunds:** for unauthorised payments, the bank must refund you by the end of the next business day after you report it, according to the [Bundesbank's summary of PSD2](https://www.bundesbank.de/en/tasks/payment-systems/psd2/psd2-775954).
+- **Authorised payments you were tricked into making:** these are not "unauthorised" in the legal sense, and the €50 cap does not apply. Your bank may still try to recover the funds — especially if the receiving bank cooperates — but recovery is not guaranteed, and speed is everything: report it within minutes, not days.
+- **PSD3 is coming:** the next revision of the payment services rules is in progress and is expected to strengthen refund rights for APP fraud victims, including clearer liability rules. Until it applies, prevention is your only reliable protection.
+
+---
+
+## The 4 Golden Rules of Banking Security
 
 1. **Your bank will NEVER ask for passwords or SMS codes over the phone.**
 2. **NEVER transfer funds to a "safe account" or holding account.**
 3. **Enable biometric authentication (FaceID / Fingerprint)** for all transaction approvals inside your official app.
 4. **When in doubt, hang up and call back directly** using the number listed on your debit card or official app.
+
+## Lock Down Your Accounts: A 15-Minute Checklist
+
+Beyond the golden rules, these settings materially reduce your risk:
+
+- **Turn on transaction notifications for every payment.** Instant alerts mean you spot an unauthorised charge within seconds, not at the end of the month. Every major digital bank offers them free.
+- **Set card limits in the app.** Cap online spending, ATM withdrawals and contactless payments at levels that match your real usage. A low online limit turns a stolen card number into a small problem.
+- **Use virtual cards for online shopping.** A disposable or replaceable virtual card means your real card number never touches a merchant's database. Our guide to the [best disposable virtual cards](/en/blog/best-disposable-virtual-cards-2026) compares Revolut's free single-use cards, Wise's replaceable digital cards and N26's Space-linked cards.
+- **Freeze cards you are not using.** A frozen card cannot be charged. Freeze your physical card when travelling with only your phone, and freeze virtual cards between purchases.
+- **Use a unique password and a password manager.** Credential-stuffing — trying passwords leaked from one site against your bank — is one of the cheapest attacks there is. A unique, generated password for your banking app removes it entirely.
+- **Keep your phone's lock screen secure.** Your banking app is only as secure as your phone. A strong passcode plus biometrics, and remote-wipe enabled, are non-negotiable.
+- **Never bank on public Wi-Fi without a VPN.** Better still, use mobile data for banking. Public networks are a classic interception point.
+
+## What to Do If You Have Been Scammed
+
+1. **Freeze everything immediately** in your banking app — cards, then the account if the app allows it.
+2. **Call your bank's fraud line** using the number on your card, not any number from a message or call. Report the fraud and ask for the payment to be recalled.
+3. **Change your passwords** for the bank and for the email account linked to it, from a clean device.
+4. **Report to the police** and get a reference number — your bank may ask for it.
+5. **Report the scam** to your national consumer authority or cyber-fraud reporting service. It helps investigators track the network, even if your own money is not recovered.
+6. **Check your credit report** in the following weeks for accounts opened in your name.
+
+## FAQ
+
+**My bank called me — how do I know it is real?**
+You cannot know from the call itself. Hang up, wait a minute, and call the number on your card or in the app. A real bank employee will never object to this; a scammer will pressure you to stay on the line.
+
+**I shared an SMS code with someone. What now?**
+Treat it as an emergency: freeze your cards in the app immediately and call your bank's fraud line. The code was almost certainly used to authorise a transaction or reset a password, and minutes matter.
+
+**Are contactless payments safe?**
+Yes, broadly. Contactless fraud is a small share of the total — remote (online) card payments account for about 83% of card fraud by value, despite being only 28% of card payment value. Your phone's wallet is safer than a physical card because it uses tokenisation and requires biometric approval.
+
+*Related guides: [Best Disposable Virtual Cards for Secure Online Shopping (2026)](/en/blog/best-disposable-virtual-cards-2026) · [How to Choose a Bank in Europe](/en/blog/choose-a-bank-in-europe) · [Best Digital Banks in Europe (2026)](/en/blog/best-digital-banks-europe-2026)*
+
+*Sources: EBA-ECB ([2025 report on payment fraud](https://www.ecb.europa.eu/press/pr/date/2025/html/ecb.pr251215~e133d9d683.en.html), data for 2024); Ecommerce Views ([strong customer authentication: what the fraud data shows](https://ecommerceviews.com/strong-customer-authentication-fraud-data/)); European Commission ([PSD2 consumer rights](https://ec.europa.eu/newsroom/fisma/items/615072/en)); Deutsche Bundesbank ([PSD2](https://www.bundesbank.de/en/tasks/payment-systems/psd2/psd2-775954)); EBA ([Q&A on Article 74 PSD2](https://eba.europa.eu/single-rule-book-qa/qna/view/publicId/2021_6305)). Checked 20 November 2026.*
