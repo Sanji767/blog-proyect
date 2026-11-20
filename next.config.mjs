@@ -49,11 +49,13 @@ const nextConfig = {
     // (GA, YouTube nocookie en vlogs, imágenes de Sanity, fuentes propias).
     // 'unsafe-inline' en scripts es obligatorio: next-themes y Next.js
     // inyectan scripts inline; sin él, el sitio se rompería.
+    // cdn.jsdelivr.net: react-country-flag (página /iban) carga los SVG
+    // de las banderas desde cdn.jsdelivr.net/gh/lipis/flag-icons.
     const cspPublic = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https://cdn.sanity.io https://www.google-analytics.com",
+      "img-src 'self' data: https://cdn.sanity.io https://www.google-analytics.com https://cdn.jsdelivr.net",
       "font-src 'self'",
       "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
       "frame-src https://www.youtube-nocookie.com",

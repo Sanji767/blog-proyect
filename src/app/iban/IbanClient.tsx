@@ -638,24 +638,28 @@ export default function IBANPage() {
                     <span className="font-semibold">{data.country}</span>
                   </div>
 
-                  <div className="flex items-end justify-between gap-3">
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-                        {copy.length}
-                      </p>
-                      <p className="mt-2 text-3xl font-black text-primary">
-                        {data.length}
-                      </p>
-                    </div>
-
-                      <button
-                        type="button"
-                        onClick={() => setRawInput(data.example)}
-                        className="text-xs font-semibold text-primary underline-offset-4 hover:underline"
-                      >
-                      {copy.example}
-                    </button>
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                      {copy.length}
+                    </p>
+                    <p className="mt-2 text-3xl font-black text-primary">
+                      {data.length}
+                    </p>
                   </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setRawInput(data.example)}
+                    className="mt-4 block w-full text-left"
+                    title={copy.example}
+                  >
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                      {copy.example}
+                    </span>
+                    <span className="mt-1 block break-all font-mono text-xs font-medium text-primary underline-offset-4 hover:underline">
+                      {data.example}
+                    </span>
+                  </button>
                 </div>
               ))}
           </div>
