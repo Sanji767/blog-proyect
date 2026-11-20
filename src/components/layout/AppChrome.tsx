@@ -6,6 +6,7 @@ import { MotionConfig } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import LanguagePrompt from "@/components/LanguagePrompt";
 import StickyPromo from "@/components/layout/StickyPromo";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 
@@ -25,6 +26,7 @@ export default function AppChrome({ children }: { children: React.ReactNode }) {
         <Footer />
         <StickyPromo />
         <CookieBanner />
+        <LanguagePrompt />
       </LocaleProvider>
     </MotionConfig>
   );
