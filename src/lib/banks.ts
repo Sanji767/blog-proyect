@@ -108,7 +108,7 @@ export interface Bank {
 
 export const DOMAIN = "https://finanzaseu.com";
 
-const DEFAULT_LAST_UPDATED = "2026-03-07";
+const DEFAULT_LAST_UPDATED = "2026-11-20";
 
 type DraftBankSeed = Pick<
   Bank,
@@ -269,14 +269,14 @@ export const banks: Bank[] = [
     slug: "revolut",
     name: "Revolut",
     shortName: "Revolut",
-    tagline: "Cuenta multidivisa líder con IBAN LT y app top en 2025",
+    tagline: "Cuenta multidivisa líder con IBAN ES, Bizum y app de referencia",
     description:
-      "Neobanco con licencia europea y más de 45M usuarios. Cambio al tipo real, tarjetas virtuales desechables, inversión en acciones y cripto, y una de las mejores apps bancarias.",
+      "Neobanco con licencia europea y más de 70M de clientes en todo el mundo. Cuenta con IBAN español, cambio al tipo real, hasta 20 tarjetas virtuales y 1 desechable, inversión en acciones y cripto, y una de las mejores apps bancarias.",
 
     country: "Lituania",
     headquarters: "Vilna",
-    ibanCountry: "Lituania",
-    ibanPrefix: "LT",
+    ibanCountry: "España",
+    ibanPrefix: "ES",
 
     category: "cuenta-multidivisa",
     tags: [
@@ -289,7 +289,7 @@ export const banks: Bank[] = [
       "para-freelancers",
       "soporte-24-7",
       "espanol",
-      "iban-lt",
+      "iban-es",
     ],
 
     logo: "/logos/revolut.svg",
@@ -316,21 +316,22 @@ export const banks: Bank[] = [
       monthly: "0 € (plan Estándar)",
       setup: "Gratis",
       inactivity: "Ninguna",
-      atmEU: "Gratis hasta 200 €/mes",
-      atmInternational: "Gratis hasta 1.000 €/mes",
-      fxRate: "Tipo interbancario (0% markup laborables)",
+      atmEU: "Gratis hasta 200 €/mes o 5 retiradas",
+      atmInternational: "Gratis hasta 200 €/mes o 5 retiradas (mismo límite global)",
+      fxRate: "Tipo interbancario; gratis hasta 1.000 €/mes lun–vie (Estándar), +1% en fin de semana",
     },
 
     cardType: "Visa o Mastercard",
 
     keyPros: [
-      "Cambio de divisa sin comisiones en días laborables",
-      "Tarjetas virtuales ilimitadas y desechables",
+      "Cambio de divisa sin comisiones hasta 1.000 €/mes en días laborables (Estándar)",
+      "Hasta 20 tarjetas virtuales y 1 tarjeta desechable de un solo uso",
       "Cuenta multidivisa con +25 monedas",
+      "Cuenta Remunerada desde 1,15% TAE en el plan Estándar",
       "App completa con analíticas y control de gastos",
     ],
     keyCons: [
-      "IBAN LT: algunas empresas antiguas aún ponen pegas",
+      "El plan Estándar limita el cambio gratis a 1.000 €/mes y cobra un 1% en fin de semana",
       "El soporte puede saturarse en horas punta",
     ],
     idealFor: "Viajeros, freelancers, nómadas digitales y compras online",
@@ -347,16 +348,16 @@ export const banks: Bank[] = [
     ],
 
     rating: {
-      trustpilot: 4.3,
+      trustpilot: 4.7,
       appStore: 4.8,
       googlePlay: 4.7,
-      totalReviews: 250000,
+      totalReviews: 495000,
     },
 
     compliance: {
       license: "Licencia bancaria lituana",
-      depositGuarantee: "100.000 € (Fondo lituano, SEPA)",
-      regulatedBy: ["Banco de Lituania", "BCE"],
+      depositGuarantee: "100.000 € (Fondo de Garantía de Depósitos lituano)",
+      regulatedBy: ["Banco de Lituania", "BCE", "Banco de España"],
     },
 
     website: "https://www.revolut.com/es-ES/",
@@ -365,14 +366,14 @@ export const banks: Bank[] = [
       "https://play.google.com/store/apps/details?id=com.revolut.revolut&hl=es",
 
     seo: {
-      metaTitle: "Revolut España 2025: comisiones, IBAN LT y opinión real",
+      metaTitle: "Revolut España 2026: comisiones, IBAN ES y opinión real",
       metaDescription:
-        "Revolut en España 2025: cuenta gratis con IBAN LT, tarjetas físicas/virtuales, cambio real y app potente. Pros, contras y para quién merece la pena.",
+        "Revolut en España 2026: cuenta gratis con IBAN ES, tarjetas físicas/virtuales, cambio real y app potente. Pros, contras y para quién merece la pena.",
       slug: "revolut",
       canonicalUrl: `${DOMAIN}/programas/revolut`,
       keywords: [
-        "revolut españa 2025",
-        "revolut iban lituano LT",
+        "revolut españa 2026",
+        "revolut iban español ES",
         "cuenta revolut gratis",
         "revolut comisiones cambio divisa",
         "tarjeta revolut virtual desechable",
@@ -383,7 +384,7 @@ export const banks: Bank[] = [
       openGraphImage: "/og/revolut.webp",
     },
 
-    _lastUpdated: "2025-11-20",
+    _lastUpdated: "2026-11-20",
     _priority: 1,
     _status: "published",
   },
@@ -391,21 +392,21 @@ export const banks: Bank[] = [
   {
     slug: "n26",
     name: "N26",
-    tagline: "Banco alemán con IBAN DE, cuenta gratis y seguro BaFin",
+    tagline: "Banco alemán con IBAN ES, cuenta gratis y seguro BaFin",
     description:
-      "Banco 100% digital con licencia alemana. IBAN DE para todos los clientes, app sencilla, pagos móviles y depósitos protegidos hasta 100.000 €.",
+      "Banco 100% digital con licencia alemana y más de 8M de clientes. IBAN español, app sencilla, Bizum, pagos móviles y depósitos protegidos hasta 100.000 €.",
 
     country: "Alemania",
     headquarters: "Berlín",
-    ibanCountry: "Alemania",
-    ibanPrefix: "DE",
+    ibanCountry: "España",
+    ibanPrefix: "ES",
 
     category: "neobanco",
     tags: [
       "sin-comisiones",
       "tarjeta-fisica",
       "no-residentes",
-      "iban-de",
+      "iban-es",
       "seguro-depositos",
       "espanol",
     ],
@@ -423,50 +424,50 @@ export const banks: Bank[] = [
     },
 
     fees: {
-      monthly: "0 €",
+      monthly: "0 € (plan Estándar)",
       setup: "Gratis",
       inactivity: "Ninguna",
-      atmEU: "3 retiradas gratis/mes",
-      atmInternational: "1,7%",
-      fxRate: "Tipo Mastercard",
+      atmEU: "Gratis e ilimitadas en euros en España",
+      atmInternational: "1,7% (Estándar/Smart); gratis con Go y Metal",
+      fxRate: "Tipo Mastercard, sin comisión en pagos con tarjeta",
     },
 
     cardType: "Mastercard",
 
     keyPros: [
-      "IBAN DE aceptado en nóminas y domiciliaciones",
+      "IBAN ES aceptado en nóminas, domiciliaciones y Bizum",
       "Cuenta sin cuota mensual",
       "Seguro de depósitos alemán (100.000 €)",
       "App directa y fácil de usar",
     ],
     keyCons: [
       "Solo permite operar en euros",
-      "Retiradas gratis limitadas según plan",
+      "Cuenta de ahorro al 0,50% TAE en Estándar (1,30% solo con Metal)",
     ],
     idealFor: "Cuenta principal en euros y nómina",
 
     requirements: ["DNI/NIE", "Residir en país admitido"],
     acceptedCountries: ["España", "Alemania", "Francia", "Italia", "+10 países UE"],
 
-    rating: { trustpilot: 3.9, appStore: 4.7, googlePlay: 4.6 },
+    rating: { trustpilot: 4.2, appStore: 4.7, googlePlay: 4.6 },
 
     compliance: {
       license: "Licencia bancaria alemana (BaFin)",
-      depositGuarantee: "100.000 €",
+      depositGuarantee: "100.000 € (Fondo de Garantía de Depósitos alemán)",
       regulatedBy: ["BaFin", "BCE"],
     },
 
     website: "https://n26.com/es-es/",
 
     seo: {
-      metaTitle: "N26 España 2025: IBAN DE, cuenta gratis y condiciones",
+      metaTitle: "N26 España 2026: IBAN ES, cuenta gratis y condiciones",
       metaDescription:
-        "N26 en España 2025: cuenta online sin comisiones con IBAN alemán DE, tarjeta Mastercard y depósitos protegidos. Ventajas, límites y opinión.",
+        "N26 en España 2026: cuenta online sin comisiones con IBAN español ES, tarjeta Mastercard y depósitos protegidos. Ventajas, límites y opinión.",
       slug: "n26",
       canonicalUrl: `${DOMAIN}/programas/n26`,
       keywords: [
-        "n26 españa 2025",
-        "n26 iban alemán DE",
+        "n26 españa 2026",
+        "n26 iban español ES",
         "cuenta n26 gratis",
         "n26 nómina españa",
         "tarjeta n26 mastercard",
@@ -476,7 +477,7 @@ export const banks: Bank[] = [
       openGraphImage: "/og/n26.webp",
     },
 
-    _lastUpdated: "2025-11-20",
+    _lastUpdated: "2026-11-20",
     _priority: 2,
     _status: "published",
   },
@@ -500,7 +501,7 @@ export const banks: Bank[] = [
     heroImage: "/logos/wise-hero.webp",
     cardImage: "/logos/wise.svg",
 
-    currencies: ["EUR", "USD", "GBP", "AUD", "CAD", "+50 más"],
+    currencies: ["EUR", "USD", "GBP", "AUD", "CAD", "+35 más"],
 
     support: {
       languages: ["Español", "Inglés", "+15"],
@@ -512,18 +513,19 @@ export const banks: Bank[] = [
       monthly: "Gratis",
       setup: "Gratis",
       inactivity: "Ninguna",
-      atmEU: "2 retiradas gratis/mes hasta 200 €",
-      atmInternational: "1,75% + 0,50€",
+      atmEU: "Gratis hasta 250 €/mes",
+      atmInternational: "2,69% sobre el importe que supere los 250 €/mes",
       fxRate: "Tipo medio de mercado",
     },
 
-    cardType: "Mastercard",
+    cardType: "Visa o Mastercard",
 
     keyPros: [
       "Comisiones muy bajas en transferencias",
       "Tipo de cambio real sin margen oculto",
-      "Datos bancarios locales en 10 países",
+      "Datos bancarios locales en más de 10 divisas",
       "Muy útil para cobrar y pagar en varias divisas",
+      "Wise Interest: ~2,30% en EUR (variable, capital en riesgo)",
     ],
     keyCons: [
       "No es un banco completo para nómina",
@@ -534,24 +536,24 @@ export const banks: Bank[] = [
     requirements: ["DNI o pasaporte"],
     acceptedCountries: ["La mayoría del mundo (excepto países restringidos)"],
 
-    rating: { trustpilot: 4.6 },
+    rating: { trustpilot: 4.3 },
 
     compliance: {
       license: "Entidad de Dinero Electrónico (EMI)",
-      depositGuarantee: "Fondos salvaguardados",
+      depositGuarantee: "Fondos salvaguardados (sin garantía de depósitos)",
       regulatedBy: ["NBB Bélgica", "FCA Reino Unido"],
     },
 
     website: "https://wise.com/es/",
 
     seo: {
-      metaTitle: "Wise España 2025: comisiones, IBAN BE y cuenta multidivisa",
+      metaTitle: "Wise España 2026: comisiones, IBAN BE y cuenta multidivisa",
       metaDescription:
-        "Wise 2025 en España: cuenta multidivisa gratis con IBAN belga BE, cambio real y transferencias baratas. Pros, contras y para quién es ideal.",
+        "Wise 2026 en España: cuenta multidivisa gratis con IBAN belga BE, cambio real y transferencias baratas. Pros, contras y para quién es ideal.",
       slug: "wise",
       canonicalUrl: `${DOMAIN}/programas/wise`,
       keywords: [
-        "wise españa 2025",
+        "wise españa 2026",
         "wise iban belga BE",
         "cuenta wise multidivisa",
         "wise comisiones transferencias",
@@ -562,7 +564,7 @@ export const banks: Bank[] = [
       openGraphImage: "/og/wise.webp",
     },
 
-    _lastUpdated: "2025-11-20",
+    _lastUpdated: "2026-11-20",
     _priority: 3,
     _status: "published",
   },
@@ -572,7 +574,7 @@ export const banks: Bank[] = [
     name: "Bunq",
     tagline: "Banco holandés con IBAN NL y subcuentas para autónomos",
     description:
-      "Banco digital neerlandés con licencia completa. Permite subcuentas con IBAN propio, automatizaciones y herramientas para gestionar gastos personales o de empresa.",
+      "Banco digital neerlandés con licencia completa y plan gratuito. Permite subcuentas con IBAN propio, automatizaciones y herramientas para gestionar gastos personales o de empresa.",
 
     country: "Países Bajos",
     headquarters: "Ámsterdam",
@@ -586,7 +588,7 @@ export const banks: Bank[] = [
     heroImage: "/logos/bunq-hero.webp",
     cardImage: "/logos/bunq.svg",
 
-    currencies: ["EUR"],
+    currencies: ["EUR", "USD", "GBP"],
 
     support: {
       languages: ["Inglés", "Holandés", "Alemán", "Francés"],
@@ -595,23 +597,23 @@ export const banks: Bank[] = [
     },
 
     fees: {
-      monthly: "desde 2,99 €/mes",
+      monthly: "0 € (plan Free)",
       setup: "Gratis",
       inactivity: "Ninguna",
-      atmEU: "Según plan",
-      atmInternational: "Según plan",
-      fxRate: "Tipo Mastercard",
+      atmEU: "Free: 2,99 €/retirada; Core: 0,99 € (5 primeras); Pro/Elite: 6 gratis/mes",
+      atmInternational: "Igual que en la UE; +0,5% si hay conversión de divisa",
+      fxRate: "Tipo Mastercard real + 0,5% (Free: hasta 1.000 €/año, luego 1,5%)",
     },
 
     cardType: "Mastercard",
 
     keyPros: [
-      "Hasta 25 subcuentas con IBAN (según plan)",
+      "Hasta 25 cuentas con IBAN propio (3 en Free, 5 en Core)",
       "Automatizaciones y reglas inteligentes",
       "Ideal para separar gastos y presupuestos",
     ],
     keyCons: [
-      "No tiene plan completamente gratis",
+      "Cajeros de pago en los planes Free y Core (2,99 € / 0,99 € por retirada)",
       "App y soporte principalmente en inglés",
     ],
     idealFor: "Autónomos, PYMEs y gestión por subcuentas",
@@ -619,34 +621,34 @@ export const banks: Bank[] = [
     requirements: ["DNI/NIE", "Residir en UE"],
     acceptedCountries: ["Toda la UE"],
 
-    rating: { trustpilot: 4.1 },
+    rating: { trustpilot: 3.7 },
 
     compliance: {
       license: "Licencia bancaria neerlandesa",
-      depositGuarantee: "100.000 €",
+      depositGuarantee: "100.000 € (Fondo de Garantía holandés, DNB)",
       regulatedBy: ["DNB", "BCE"],
     },
 
     website: "https://www.bunq.com/es-es",
 
     seo: {
-      metaTitle: "Bunq España 2025: precio, IBAN NL y subcuentas",
+      metaTitle: "Bunq España 2026: precio, IBAN NL y subcuentas",
       metaDescription:
-        "Bunq en España 2025: banco holandés con IBAN NL, subcuentas con IBAN propio y automatizaciones. Precios, ventajas y opinión.",
+        "Bunq en España 2026: banco holandés con IBAN NL, subcuentas con IBAN propio y automatizaciones. Precios, ventajas y opinión.",
       slug: "bunq",
       canonicalUrl: `${DOMAIN}/programas/bunq`,
       keywords: [
-        "bunq españa 2025",
+        "bunq españa 2026",
         "bunq iban holandés NL",
         "bunq subcuentas con iban",
         "bunq para autónomos",
-        "bunq precios 2025",
+        "bunq precios 2026",
         "bunq opiniones",
       ],
       openGraphImage: "/og/bunq.webp",
     },
 
-    _lastUpdated: "2025-11-20",
+    _lastUpdated: "2026-11-20",
     _priority: 4,
     _status: "published",
   },
@@ -661,7 +663,7 @@ export const banks: Bank[] = [
     description:
       "Banco tradicional español con presencia internacional. Ofrece cuentas, tarjetas y servicios para particulares y empresas; las condiciones varían según el producto.",
     country: "España",
-    headquarters: "Madrid",
+    headquarters: "Santander",
     ibanCountry: "España",
     ibanPrefix: "ES",
     category: "tradicional",
@@ -812,7 +814,7 @@ export const banks: Bank[] = [
     logo: "/logos/ing.svg",
     tagline: "Banco europeo con cuenta en España (IBAN ES) y operativa online",
     description:
-      "Banco europeo con operativa online en España. Oferta de cuentas y tarjetas orientada a gestión digital; condiciones y comisiones dependen del plan.",
+      "Sucursal en España de ING Bank N.V. (Países Bajos), con operativa online. Oferta de cuentas y tarjetas orientada a gestión digital; los depósitos están cubiertos por el sistema de garantía neerlandés (DNB) hasta 100.000 €. Condiciones y comisiones dependen del plan.",
     country: "España",
     headquarters: "Madrid",
     ibanCountry: "España",
@@ -833,9 +835,9 @@ export const banks: Bank[] = [
     keyCons: ["Condiciones variables", "Oferta multidivisa limitada"],
     idealFor: "Cuenta diaria en España con gestión online",
     compliance: {
-      license: "Banco (licencia europea)",
-      depositGuarantee: "Hasta 100.000 € (según esquema aplicable)",
-      regulatedBy: ["BCE", "Regulador local"],
+      license: "Sucursal en España de ING Bank N.V. (Países Bajos)",
+      depositGuarantee: "Hasta 100.000 € (sistema de garantía de depósitos de Países Bajos, DNB)",
+      regulatedBy: ["BCE", "De Nederlandsche Bank (DNB)", "Banco de España"],
     },
     _priority: 24,
     _status: "published",
@@ -855,6 +857,11 @@ export const banks: Bank[] = [
     category: "tradicional",
     tags: ["tarjeta-fisica", "espanol", "iban-es", "seguro-depositos"],
     website: "https://www.bancsabadell.com",
+    compliance: {
+      license: "Banco (licencia española)",
+      depositGuarantee: "Hasta 100.000 € (FGD España)",
+      regulatedBy: ["Banco de España", "BCE"],
+    },
     _priority: 900,
   }),
 
@@ -871,6 +878,11 @@ export const banks: Bank[] = [
     category: "tradicional",
     tags: ["tarjeta-fisica", "espanol", "iban-es", "seguro-depositos"],
     website: "https://www.bankinter.com",
+    compliance: {
+      license: "Banco (licencia española)",
+      depositGuarantee: "Hasta 100.000 € (FGD España)",
+      regulatedBy: ["Banco de España", "BCE"],
+    },
     _priority: 901,
   }),
 
@@ -881,12 +893,17 @@ export const banks: Bank[] = [
     logo: "/logos/abanca.svg",
     tagline: "Banco español con IBAN ES y presencia fuerte en el noroeste",
     country: "España",
-    headquarters: "A Coruña",
+    headquarters: "Betanzos (A Coruña)",
     ibanCountry: "España",
     ibanPrefix: "ES",
     category: "tradicional",
     tags: ["tarjeta-fisica", "espanol", "iban-es", "seguro-depositos"],
     website: "https://www.abanca.com",
+    compliance: {
+      license: "Banco (licencia española)",
+      depositGuarantee: "Hasta 100.000 € (FGD España)",
+      regulatedBy: ["Banco de España", "BCE"],
+    },
     _priority: 902,
   }),
 
@@ -903,6 +920,11 @@ export const banks: Bank[] = [
     category: "tradicional",
     tags: ["tarjeta-fisica", "espanol", "iban-es", "seguro-depositos"],
     website: "https://www.unicajabanco.es",
+    compliance: {
+      license: "Banco (licencia española)",
+      depositGuarantee: "Hasta 100.000 € (FGD España)",
+      regulatedBy: ["Banco de España", "BCE"],
+    },
     _priority: 903,
   }),
 
@@ -919,6 +941,11 @@ export const banks: Bank[] = [
     category: "tradicional",
     tags: ["tarjeta-fisica", "espanol", "iban-es", "seguro-depositos"],
     website: "https://www.cajamar.es",
+    compliance: {
+      license: "Cooperativa de crédito (licencia española)",
+      depositGuarantee: "Hasta 100.000 € (FGD España)",
+      regulatedBy: ["Banco de España", "BCE"],
+    },
     _priority: 904,
   }),
 
@@ -935,6 +962,11 @@ export const banks: Bank[] = [
     category: "tradicional",
     tags: ["tarjeta-fisica", "espanol", "iban-es", "seguro-depositos"],
     website: "https://www.bancamarch.es",
+    compliance: {
+      license: "Banco (licencia española)",
+      depositGuarantee: "Hasta 100.000 € (FGD España)",
+      regulatedBy: ["Banco de España", "BCE"],
+    },
     _priority: 905,
   }),
 
@@ -943,15 +975,18 @@ export const banks: Bank[] = [
     name: "EVO Banco",
     shortName: "EVO",
     logo: "/logos/evo.svg",
-    tagline: "Banco digital en España con IBAN ES (según disponibilidad)",
+    tagline: "Marca integrada en Bankinter desde 2025: ya no admite altas nuevas",
+    description:
+      "EVO Banco fue absorbido por Bankinter en abril de 2025 y dejó de operar como entidad independiente. Sus clientes pasaron a operar con Bankinter; ya no se pueden abrir cuentas nuevas bajo la marca EVO.",
     country: "España",
     headquarters: "Madrid",
     ibanCountry: "España",
     ibanPrefix: "ES",
     category: "neobanco",
-    tags: ["tarjeta-fisica", "espanol", "iban-es", "seguro-depositos"],
-    website: "https://www.evobanco.com",
+    tags: ["tarjeta-fisica", "espanol", "iban-es"],
+    website: "https://www.bankinter.com",
     _priority: 906,
+    _status: "draft",
   }),
 
   createDraftBank({
@@ -959,21 +994,28 @@ export const banks: Bank[] = [
     name: "MyInvestor",
     shortName: "MyInvestor",
     logo: "/logos/myinvestor.svg",
-    tagline: "Plataforma fintech con cuenta e inversión (según producto)",
+    tagline: "Neobanco español con IBAN ES, cuenta remunerada e inversión",
+    description:
+      "Neobanco español especializado en inversión, respaldado por Grupo Andbank, El Corte Inglés Seguros y AXA. Ofrece cuenta remunerada, depósitos, fondos y carteras automatizadas; la remuneración y las condiciones dependen del producto y del momento.",
     country: "España",
     headquarters: "Madrid",
     ibanCountry: "España",
     ibanPrefix: "ES",
-    category: "fintech",
-    tags: ["espanol", "iban-es"],
+    category: "neobanco",
+    tags: ["espanol", "iban-es", "seguro-depositos"],
     website: "https://myinvestor.es",
     keyPros: [
       "Enfoque en inversión y ahorro",
       "Operativa online",
       "Alternativa para usuarios que invierten a largo plazo",
     ],
-    keyCons: ["No es un banco tradicional", "Condiciones dependen del producto"],
+    keyCons: ["Sin oficinas físicas", "Condiciones dependen del producto"],
     idealFor: "Ahorro e inversión con enfoque digital",
+    compliance: {
+      license: "Banco (licencia española)",
+      depositGuarantee: "Hasta 100.000 € (FGD España)",
+      regulatedBy: ["Banco de España", "CNMV"],
+    },
     _priority: 920,
   }),
 
@@ -986,10 +1028,10 @@ export const banks: Bank[] = [
     tagline: "Cuenta para empresa/autónomos con herramientas de gestión",
     country: "Francia",
     headquarters: "París",
-    ibanCountry: "Francia",
-    ibanPrefix: "FR",
+    ibanCountry: "España",
+    ibanPrefix: "ES",
     category: "fintech",
-    tags: ["para-empresa"],
+    tags: ["para-empresa", "iban-es"],
     website: "https://qonto.com",
     keyPros: [
       "Herramientas de facturación y gastos",
@@ -999,8 +1041,8 @@ export const banks: Bank[] = [
     keyCons: ["No es una cuenta personal", "Precio según plan"],
     idealFor: "Autónomos y pymes que quieren orden contable",
     fees: {
-      monthly: "Desde X €/mes (según plan)",
-      setup: "Según plan",
+      monthly: "0 € (plan Starter); desde 9 €/mes (sin IVA)",
+      setup: "0 €",
       inactivity: "Según plan",
       atmEU: "Según plan",
       atmInternational: "Según plan",
@@ -1015,13 +1057,15 @@ export const banks: Bank[] = [
     name: "Trade Republic",
     shortName: "Trade Republic",
     logo: "/logos/trade-republic.svg",
-    tagline: "Fintech alemana para ahorro/inversión con operativa digital",
+    tagline: "Banco alemán con cuenta remunerada, inversión y tarjeta en una sola app",
+    description:
+      "Banco alemán con licencia completa (BaFin) y sucursal en España, con IBAN español y Bizum. Remunera el efectivo al tipo del BCE (2,50%; nuevos clientes 4% hasta 20.000 € hasta el 1 de marzo de 2027). Planes de ahorro en ETF sin comisiones, órdenes a 1 € y tarjeta con 1% de Saveback.",
     country: "Alemania",
     headquarters: "Berlín",
-    ibanCountry: "Alemania",
-    ibanPrefix: "DE",
+    ibanCountry: "España",
+    ibanPrefix: "ES",
     category: "fintech",
-    tags: ["iban-de", "sin-comisiones"],
+    tags: ["iban-es", "sin-comisiones"],
     website: "https://traderepublic.com",
     keyPros: [
       "Enfoque en inversión y ahorro",
@@ -1029,19 +1073,24 @@ export const banks: Bank[] = [
       "Costes competitivos (según producto)",
     ],
     keyCons: [
-      "No es un banco tradicional para operativa diaria",
+      "Sin oficinas físicas",
       "Condiciones pueden cambiar por país",
     ],
     idealFor: "Inversores principiantes que buscan simplicidad",
     fees: {
-      monthly: "0 € (según producto)",
+      monthly: "0 €",
       setup: "Gratis",
-      inactivity: "Ninguna (según producto)",
+      inactivity: "Ninguna",
       atmEU: "Según tarjeta/condiciones",
       atmInternational: "Según tarjeta/condiciones",
       fxRate: "Según entidad",
     },
-    acceptedCountries: ["UE (según disponibilidad)"],
+    acceptedCountries: ["España", "Alemania", "Francia", "Italia", "Países Bajos", "Austria", "Bélgica", "Irlanda", "Portugal", "Finlandia", "Grecia", "Estonia", "Letonia", "Lituania", "Luxemburgo", "Eslovaquia", "Eslovenia", "Polonia"],
+    compliance: {
+      license: "Banco (licencia alemana, BaFin)",
+      depositGuarantee: "Hasta 100.000 € (efectivo en bancos asociados)",
+      regulatedBy: ["BaFin", "BCE"],
+    },
     _priority: 931,
   }),
 
@@ -1221,14 +1270,14 @@ export const banks: Bank[] = [
     name: "Erste Bank",
     shortName: "Erste",
     logo: "/logos/erste-bank.svg",
-    tagline: "Banco austriaco con foco minorista en Europa Central",
+    tagline: "Banco austriaco con foco minorista",
     country: "Austria",
     headquarters: "Viena",
     ibanCountry: "Austria",
     ibanPrefix: "AT",
     category: "tradicional",
     tags: ["tarjeta-fisica", "seguro-depositos"],
-    website: "https://www.erstegroup.com",
+    website: "https://www.erstebank.at",
     acceptedCountries: ["Austria", "UE (según producto)"],
     _priority: 990,
   }),
@@ -1245,7 +1294,7 @@ export const banks: Bank[] = [
     ibanPrefix: "AT",
     category: "tradicional",
     tags: ["tarjeta-fisica", "seguro-depositos"],
-    website: "https://www.rbinternational.com",
+    website: "https://www.raiffeisen.at",
     acceptedCountries: ["Austria", "UE (según entidad)"],
     _priority: 991,
   }),
@@ -1264,6 +1313,11 @@ export const banks: Bank[] = [
     tags: ["tarjeta-fisica"],
     website: "https://www.ubs.com",
     acceptedCountries: ["Suiza", "UE (según producto)"],
+    compliance: {
+      license: "Consulta la licencia en la web oficial",
+      depositGuarantee: "Hasta 100.000 CHF (esisuisse)",
+      regulatedBy: ["FINMA"],
+    },
     _priority: 992,
   }),
 
@@ -1298,6 +1352,11 @@ export const banks: Bank[] = [
     tags: ["tarjeta-fisica", "seguro-depositos"],
     website: "https://danskebank.com",
     acceptedCountries: ["Dinamarca", "UE (según producto)"],
+    compliance: {
+      license: "Consulta la licencia en la web oficial",
+      depositGuarantee: "Hasta 100.000 € (Garantiformuen)",
+      regulatedBy: ["Finanstilsynet"],
+    },
     _priority: 994,
   }),
 
@@ -1330,7 +1389,7 @@ export const banks: Bank[] = [
     ibanPrefix: "PT",
     category: "tradicional",
     tags: ["tarjeta-fisica", "seguro-depositos"],
-    website: "https://ind.millenniumbcp.pt",
+    website: "https://www.millenniumbcp.pt",
     acceptedCountries: ["Portugal", "UE (según producto)"],
     _priority: 996,
   }),
@@ -1340,15 +1399,18 @@ export const banks: Bank[] = [
     name: "Triodos Bank",
     shortName: "Triodos",
     logo: "/logos/triodos.svg",
-    tagline: "Banco con enfoque en finanzas sostenibles (según país)",
+    tagline: "Banco ético con sucursal en España: cuentas con IBAN ES",
     country: "Países Bajos",
     headquarters: "Driebergen-Rijsenburg",
     ibanCountry: "Países Bajos",
     ibanPrefix: "NL",
     category: "tradicional",
-    tags: ["tarjeta-fisica", "seguro-depositos", "iban-nl"],
+    tags: ["tarjeta-fisica", "seguro-depositos", "iban-nl", "iban-es", "espanol"],
     website: "https://www.triodos.com",
-    acceptedCountries: ["UE (según país)"],
+    acceptedCountries: ["España", "Países Bajos", "UE (según país)"],
+    seo: {
+      metaTitle: "Triodos Bank España: comisiones, IBAN ES y opiniones (2026) | FinanzasEU",
+    },
     _priority: 997,
   }),
 
@@ -1358,11 +1420,11 @@ export const banks: Bank[] = [
     shortName: "Trading 212",
     logo: "/logos/trading212.svg",
     tagline: "Cuenta con remuneración diaria en efectivo e inversión sin comisiones",
-    description: "Plataforma fintech británica y europea con licencia FCA y CySEC. Intereses diarios sobre saldo no invertido (5,1% APY en GBP, 3,8% en EUR) y tarjeta de débito con cashback.",
+    description: "Plataforma de inversión británica y europea con licencia FCA, CySEC y BaFin. Intereses diarios sobre el saldo no invertido (2,3% TAE en EUR, 4% en GBP; variable) y tarjeta de débito Mastercard sin comisión de cambio de divisa.",
     country: "Reino Unido / Chipre",
     headquarters: "Londres",
-    ibanCountry: "Reino Unido / Alemania",
-    ibanPrefix: "GB",
+    ibanCountry: "No aplica",
+    ibanPrefix: "—",
     category: "fintech",
     tags: ["sin-comisiones", "multidivisa", "crypto", "tarjeta-virtual", "tarjeta-fisica"],
     website: "https://www.trading212.com",
@@ -1371,11 +1433,20 @@ export const banks: Bank[] = [
       monthly: "0 €",
       setup: "0 €",
       inactivity: "0 €",
-      atmEU: "Gratis hasta 200 €/mes",
-      atmInternational: "1,5%",
+      atmEU: "Gratis hasta 400 €/mes",
+      atmInternational: "1% (por encima de 400 €/mes)",
       fxRate: "0,15%",
     },
-    rating: { trustpilot: 4.6, totalReviews: 32000 },
+    rating: { trustpilot: 4.6, totalReviews: 108700 },
+    compliance: {
+      license: "Broker (FCA, CySEC, BaFin)",
+      depositGuarantee: "Compensación al inversor hasta 20.000 € (ICF)",
+      regulatedBy: ["FCA", "CySEC", "BaFin"],
+    },
+    seo: {
+      metaTitle: "Trading 212: comisiones, intereses y opiniones (2026) | FinanzasEU",
+      keywords: ["Trading 212 opiniones", "Trading 212 comisiones", "Trading 212 intereses", "Trading 212 tarjeta"],
+    },
     _priority: 15,
   }),
 
@@ -1385,13 +1456,13 @@ export const banks: Bank[] = [
     shortName: "Freedom24",
     logo: "/logos/freedom24.svg",
     tagline: "Broker europeo cotizado en NASDAQ con cuenta D de alta rentabilidad",
-    description: "Plataforma de inversión y ahorros regulada por CySEC. Ofrece la Cuenta D acumulativa con interés diario hasta 5,3% anual en EUR y 7,9% en USD.",
+    description: "Plataforma de inversión y ahorro regulada por CySEC. Ofrece la Cuenta D acumulativa con interés diario (2,42% anual en EUR y 3,92% en USD, variable según euríbor y SOFR) y depósitos a plazo con tipos superiores.",
     country: "Chipre",
-    headquarters: "Lassani",
+    headquarters: "Limasol",
     ibanCountry: "Chipre",
     ibanPrefix: "CY",
     category: "fintech",
-    tags: ["multidivisa", "seguro-depositos"],
+    tags: ["multidivisa"],
     website: "https://freedom24.com",
     acceptedCountries: ["España", "Unión Europea"],
     fees: {
@@ -1402,7 +1473,11 @@ export const banks: Bank[] = [
       atmInternational: "No aplica",
       fxRate: "Mercado real",
     },
-    rating: { trustpilot: 4.5, totalReviews: 12000 },
+    compliance: {
+      license: "Broker (CySEC, licencia 275/15)",
+      depositGuarantee: "Compensación al inversor hasta 20.000 € (ICF)",
+      regulatedBy: ["CySEC"],
+    },
     _priority: 18,
   }),
 
@@ -1411,25 +1486,34 @@ export const banks: Bank[] = [
     name: "Plum App",
     shortName: "Plum",
     logo: "/logos/plum.svg",
-    tagline: "App inteligente de ahorro automático, bolsillo con interés y tarjeta",
-    description: "Aplicación financiera que automatiza el ahorro mediante IA, permite invertir en fondos indexados y ofrece bolsillos de dinero con intereses.",
+    tagline: "App inteligente de ahorro automático y bolsillos con interés",
+    description: "Aplicación financiera que automatiza el ahorro mediante IA, permite invertir en acciones, ETF y criptomonedas, y ofrece Plum Interest, un fondo del mercado monetario con hasta un 1,12% anual en el plan gratuito (variable según el plan).",
     country: "Reino Unido / Grecia",
     headquarters: "Londres",
-    ibanCountry: "Francia / Bélgica",
-    ibanPrefix: "FR",
-    category: "neobanco",
-    tags: ["sin-comisiones", "tarjeta-virtual", "tarjeta-fisica"],
+    ibanCountry: "No aplica",
+    ibanPrefix: "—",
+    category: "fintech",
+    tags: ["sin-comisiones"],
     website: "https://withplum.com",
-    acceptedCountries: ["España", "Francia", "Irlanda", "Reino Unido"],
+    acceptedCountries: ["España", "Francia", "Irlanda", "Reino Unido", "Portugal", "Italia", "Bélgica", "Países Bajos", "Grecia", "Chipre"],
     fees: {
-      monthly: "0 € (Plan básico)",
+      monthly: "0 € (plan Basic); planes de pago desde 3,99 €/mes",
       setup: "0 €",
       inactivity: "0 €",
-      atmEU: "Gratis en zona euro",
-      atmInternational: "2%",
-      fxRate: "Visa estándar",
+      atmEU: "No aplica",
+      atmInternational: "No aplica",
+      fxRate: "No aplica",
     },
-    rating: { trustpilot: 4.4, totalReviews: 15000 },
+    rating: { trustpilot: 4.1, totalReviews: 9900 },
+    compliance: {
+      license: "Entidad de dinero electrónico (FCA)",
+      depositGuarantee: "Fondos salvaguardados (sin garantía de depósitos)",
+      regulatedBy: ["FCA"],
+    },
+    seo: {
+      metaTitle: "Plum App: ahorro automático, intereses y opiniones (2026) | FinanzasEU",
+      keywords: ["Plum opiniones", "Plum ahorro automático", "Plum intereses", "Plum app España"],
+    },
     _priority: 22,
   }),
 
@@ -1439,13 +1523,13 @@ export const banks: Bank[] = [
     shortName: "Klarna",
     logo: "/logos/klarna.svg",
     tagline: "Cuenta de ahorro flexible y gestión de compras inteligentes",
-    description: "Banco sueco que ofrece cuentas de saldo diario con interés competitivo, cashback en compras y opciones de pago flexibles.",
+    description: "Banco sueco con cuenta Flex al 2,22% TAE (variable, sin mínimo ni comisiones), tarjeta Visa, cashback en compras y opciones de pago flexibles.",
     country: "Suecia",
     headquarters: "Estocolmo",
-    ibanCountry: "Alemania / Suecia",
-    ibanPrefix: "DE",
+    ibanCountry: "Suecia",
+    ibanPrefix: "SE",
     category: "neobanco",
-    tags: ["sin-comisiones", "iban-de", "seguro-depositos"],
+    tags: ["sin-comisiones", "seguro-depositos"],
     website: "https://www.klarna.com",
     acceptedCountries: ["España", "Alemania", "Suecia", "Unión Europea"],
     fees: {
@@ -1456,7 +1540,12 @@ export const banks: Bank[] = [
       atmInternational: "No aplica",
       fxRate: "Sin comisión",
     },
-    rating: { trustpilot: 4.2, totalReviews: 180000 },
+    rating: { trustpilot: 4.5, totalReviews: 633500 },
+    compliance: {
+      license: "Banco (licencia sueca)",
+      depositGuarantee: "Hasta 1.150.000 SEK (~103.800 €, sistema sueco)",
+      regulatedBy: ["Finansinspektionen"],
+    },
     _priority: 25,
   }),
 
@@ -1466,10 +1555,10 @@ export const banks: Bank[] = [
     shortName: "SumUp",
     logo: "/logos/sumup.svg",
     tagline: "Cuenta de empresa y autónomos con tarjeta de débito y cobro TPV",
-    description: "Solución integral para autónomos y pequeñas empresas. Incluye IBAN europeo, tarjeta MasterCard de empresa sin coste mensual y pagos inmediatos.",
-    country: "Reino Unido / Alemania",
-    headquarters: "Londres",
-    ibanCountry: "Irlanda / Alemania",
+    description: "Solución integral para autónomos y pequeñas empresas: cuenta con IBAN europeo, tarjeta Mastercard de empresa sin coste mensual, cobro con TPV y pagos inmediatos. La cuenta personal SumUp Pay añade cashback del 5% en comercios SumUp, 2% en supermercados y 0,5% en el resto.",
+    country: "Alemania",
+    headquarters: "Berlín",
+    ibanCountry: "Irlanda / Lituania",
     ibanPrefix: "IE",
     category: "fintech",
     tags: ["para-freelancers", "para-empresa", "sin-comisiones", "tarjeta-fisica"],
@@ -1483,7 +1572,12 @@ export const banks: Bank[] = [
       atmInternational: "2%",
       fxRate: "Mastercard estándar",
     },
-    rating: { trustpilot: 4.5, totalReviews: 45000 },
+    rating: { trustpilot: 4.2, totalReviews: 61500 },
+    compliance: {
+      license: "Entidad de dinero electrónico",
+      depositGuarantee: "Fondos salvaguardados (sin garantía de depósitos)",
+      regulatedBy: ["Banco de Lituania", "Banco Central de Irlanda"],
+    },
     _priority: 28,
   }),
 ];
