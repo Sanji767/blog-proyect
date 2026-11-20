@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, FileText, ShieldCheck, Users } from "lucide-r
 import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
 import { withLocale } from "@/lib/i18n";
-import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE_URL, SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About FinanzasEU (who we are and methodology)",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: SITE_NAME,
-    images: [{ url: `${SITE_URL}/og-escalada.png` }],
+    images: [{ url: DEFAULT_OG_IMAGE_URL }],
   },
 };
 

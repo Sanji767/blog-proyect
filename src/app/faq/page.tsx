@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import FaqClient from "./FaqClient";
-import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const TITLE = `FAQ (preguntas frecuentes) | ${SITE_NAME}`;
 const DESCRIPTION =
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_ES",
     siteName: SITE_NAME,
-    images: [{ url: `${SITE_URL}/og-escalada.png` }],
+    images: [{ url: DEFAULT_OG_IMAGE_URL }],
   },
 };
 

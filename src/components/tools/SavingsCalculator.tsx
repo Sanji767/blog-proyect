@@ -14,13 +14,60 @@ type YieldItem = {
   rate: number;
   color: string;
   highlight?: boolean;
+  /** Honesty note: the condition behind the single rate shown. */
+  note?: { es: string; en: string };
 };
 
+// Date the rates below were last verified against each provider's official
+// terms. Rates are variable — update this const (and the numbers) monthly.
+const RATES_AS_OF = "2026-11-20";
+
+// Rates verified 2026-11-20 against official sources (see CHANGES.md).
+// Single number per bank = the unconditional rate a new free-plan customer
+// actually earns on the bulk of the balance; promos/tiers live in `note`.
+// Order matters: index 0 is the "top option" (highest rate, highlighted).
 const INTEREST_RATES: YieldItem[] = [
-  { slug: "trade-republic", name: "Trade Republic", rate: 3.75, color: "bg-primary", highlight: true },
-  { slug: "n26", name: "N26", rate: 2.80, color: "bg-primary-accent" },
-  { slug: "myinvestor", name: "MyInvestor", rate: 2.50, color: "bg-primary/60" },
-  { slug: "revolut", name: "Revolut", rate: 2.00, color: "bg-primary/40" },
+  {
+    slug: "trade-republic",
+    name: "Trade Republic",
+    rate: 2.5,
+    color: "bg-primary",
+    highlight: true,
+    note: {
+      es: "Tipo estándar sin límite de saldo. Nuevos clientes: 4% hasta 20.000 € hasta el 1 mar 2027.",
+      en: "Standard rate, no balance cap. New clients: 4% up to €20,000 until 1 Mar 2027.",
+    },
+  },
+  {
+    slug: "revolut",
+    name: "Revolut",
+    rate: 1.25,
+    color: "bg-primary/40",
+    note: {
+      es: "2,50% hasta 2.500 € y 1,25% por encima (plan Standard, Países Bajos).",
+      en: "2.50% up to €2,500, 1.25% above (Standard plan, Netherlands).",
+    },
+  },
+  {
+    slug: "n26",
+    name: "N26",
+    rate: 0.5,
+    color: "bg-primary-accent",
+    note: {
+      es: "Planes Standard, Smart y Go en España. 1,30% TAE con Metal (16,90 €/mes).",
+      en: "Standard, Smart and Go plans in Spain. 1.30% APR with Metal (€16.90/mo).",
+    },
+  },
+  {
+    slug: "myinvestor",
+    name: "MyInvestor",
+    rate: 0.3,
+    color: "bg-primary/60",
+    note: {
+      es: "Tipo sin condiciones desde el 7.º mes. 2,50% TAE los 6 primeros meses para nuevos clientes.",
+      en: "No-conditions rate from month 7. 2.50% APR for the first 6 months for new clients.",
+    },
+  },
   { slug: "tradicional", name: "Banco Tradicional", rate: 0.05, color: "bg-muted-foreground" },
 ];
 
@@ -38,6 +85,7 @@ const UI_COPY: Record<Locale, {
   openAccount: string;
   traditionalBankLoss: string;
   topRecommendation: string;
+  ratesAsOf: (date: string) => string;
 }> = {
   es: {
     title: "Calculadora de Rentabilidad de Ahorro",
@@ -53,6 +101,8 @@ const UI_COPY: Record<Locale, {
     openAccount: "Abrir cuenta remunerada",
     traditionalBankLoss: "Estás dejando de ganar hasta",
     topRecommendation: "Mejor opción",
+    ratesAsOf: (date) =>
+      `Tipos verificados el ${date}. Los tipos son variables y pueden cambiar; verifica siempre el tipo vigente en la web oficial de cada entidad.`,
   },
   en: {
     title: "Savings Yield Calculator",
@@ -68,12 +118,19 @@ const UI_COPY: Record<Locale, {
     openAccount: "Open high-yield account",
     traditionalBankLoss: "You are missing out on up to",
     topRecommendation: "Best Value",
+    ratesAsOf: (date) =>
+      `Rates verified on ${date}. Rates are variable and may change; always check the current rate on each provider's official website.`,
   },
 };
 
 export default function SavingsCalculator() {
   const { locale } = useLocale();
   const copy = UI_COPY[locale];
+
+  const ratesAsOfLabel = new Date(`${RATES_AS_OF}T00:00:00Z`).toLocaleDateString(
+    locale === "en" ? "en-US" : "es-ES",
+    { year: "numeric", month: "long", day: "numeric" },
+  );
 
   const [amount, setAmount] = useState<number>(5000);
   const [years, setYears] = useState<number>(1);
@@ -106,6 +163,9 @@ export default function SavingsCalculator() {
         </h2>
         <p className="mt-2 text-sm md:text-base leading-relaxed text-muted-foreground">
           {copy.subtitle}
+        </p>
+        <p className="mt-2 text-xs text-muted-foreground">
+          {copy.ratesAsOf(ratesAsOfLabel)}
         </p>
       </header>
 
@@ -229,6 +289,12 @@ export default function SavingsCalculator() {
                       </span>
                     </div>
                   </div>
+
+                  {item.note ? (
+                    <p className="mt-1.5 text-[11px] leading-snug text-muted-foreground">
+                      {item.note[locale]}
+                    </p>
+                  ) : null}
 
                   {/* Progress Bar */}
                   <div className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-muted">

@@ -25,8 +25,10 @@ export default function GoogleAnalyticsLoader({ gaId }: { gaId: string }) {
 
   useEffect(() => {
     const sync = () => {
-      // Activo por defecto salvo que el usuario haya rechazado explícitamente (false)
-      const consentEnabled = readAnalyticsConsent() !== false;
+      // Opt-in (GDPR/ePrivacy): GA4 solo se activa tras consentimiento
+      // explícito (true). En la primera visita el consentimiento es null y
+      // GA NO carga ni fija cookies.
+      const consentEnabled = readAnalyticsConsent() === true;
       (window as Record<string, unknown>)[`ga-disable-${gaId}`] = !consentEnabled;
       setEnabled(consentEnabled);
     };

@@ -1,7 +1,11 @@
 export const SITE_URL = "https://finanzaseu.com";
 export const SITE_NAME = "FinanzasEU";
-export const SITE_LOGO_URL = `${SITE_URL}/logo.png`;
-export const DEFAULT_OG_IMAGE_URL = `${SITE_URL}/og-escalada.png`;
+// Real logo file: public/images/logo.png (1024x1024). The old /logo.png 404'd.
+export const SITE_LOGO_URL = `${SITE_URL}/images/logo.png`;
+// Real generic finance image: public/images/blog/savings_interest_chart.jpg
+// (1376x768). The old /og-escalada.png 404'd. A dedicated 1200x630 branded
+// OG image would be better long-term; this fixes the broken share image now.
+export const DEFAULT_OG_IMAGE_URL = `${SITE_URL}/images/blog/savings_interest_chart.jpg`;
 
 export function toAbsoluteUrl(value: string, baseUrl: string = SITE_URL): string {
   if (value.startsWith("http://") || value.startsWith("https://")) return value;

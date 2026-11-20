@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 
 import Container from "@/components/layout/Container";
 import { ebooks } from "@/lib/ebooks-data";
-import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export function generateMetadata({
   params,
@@ -43,7 +43,7 @@ export function generateMetadata({
       type: "website",
       locale: "en_US",
       siteName: SITE_NAME,
-      images: [{ url: `${SITE_URL}/og-escalada.png` }],
+      images: [{ url: DEFAULT_OG_IMAGE_URL }],
     },
   };
 }

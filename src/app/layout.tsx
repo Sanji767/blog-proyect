@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 import GoogleAnalyticsLoader from "@/components/analytics/GoogleAnalyticsLoader";
 import AppChrome from "@/components/layout/AppChrome";
-import { toJsonLd } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE_URL, SITE_LOGO_URL, toJsonLd } from "@/lib/seo";
 
 import "./globals.css";
 
@@ -53,21 +53,19 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-escalada.png",
-        width: 1200,
-        height: 630,
+        url: DEFAULT_OG_IMAGE_URL,
+        width: 1376,
+        height: 768,
         alt: "Comparativa de bancos digitales",
       },
     ],
   },
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Comparativa de bancos digitales (2026)",
-    description:
-      "Guía independiente: comisiones, IBAN, requisitos y enlaces oficiales. Actualizado en 2026.",
-    images: ["/og-escalada.png"],
-  },
+  // NOTE (A8): no `twitter:` block here on purpose. X/Twitter cards fall back
+  // to the per-page openGraph tags, which are correct on every page. A root
+  // twitter block would stamp the homepage ES title/description on every
+  // article (including EN ones). The two homepages (src/app/page.tsx and
+  // src/app/en/page.tsx) keep their own page-specific twitter blocks.
 
   robots: {
     index: true,
@@ -114,7 +112,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${inter.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground`}
       >
-        {/* Google Analytics (GA4): se carga solo tras aceptar cookies */}
+        {/* Google Analytics (GA4): opt-in — solo se carga si el usuario acepta las cookies de analítica */}
         {gaId ? (
           <Suspense fallback={null}>
             <GoogleAnalyticsLoader gaId={gaId} />
@@ -140,7 +138,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "FinanzasEU",
               url: "https://finanzaseu.com",
-              logo: "https://finanzaseu.com/logo.png",
+              logo: SITE_LOGO_URL,
             }),
           }}
         />

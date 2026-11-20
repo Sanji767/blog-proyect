@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import Container from "@/components/layout/Container";
-import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const TITLE = `Ebooks & courses | ${SITE_NAME}`;
 const DESCRIPTION =
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: SITE_NAME,
-    images: [{ url: `${SITE_URL}/og-escalada.png` }],
+    images: [{ url: DEFAULT_OG_IMAGE_URL }],
   },
 };
 

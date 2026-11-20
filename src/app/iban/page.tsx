@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import IbanClient from "./IbanClient";
-import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE_URL, SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
 const TITLE = "IBAN Scanner SEPA (gratis) | FinanzasEU";
 const DESCRIPTION =
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_ES",
     siteName: SITE_NAME,
-    images: [{ url: `${SITE_URL}/og-escalada.png` }],
+    images: [{ url: DEFAULT_OG_IMAGE_URL }],
   },
 };
 

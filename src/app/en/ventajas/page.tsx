@@ -16,7 +16,7 @@ import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { withLocale } from "@/lib/i18n";
-import { SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Benefits of digital banks in Europe | FinanzasEU",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: SITE_NAME,
-    images: [{ url: `${SITE_URL}/og-escalada.png` }],
+    images: [{ url: DEFAULT_OG_IMAGE_URL }],
   },
 };
 

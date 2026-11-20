@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import Container from "@/components/layout/Container";
+import { DEFAULT_OG_IMAGE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Blog de bancos digitales, IBAN y comisiones (2026) | FinanzasEU",
@@ -17,9 +18,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-escalada.png",
-        width: 1200,
-        height: 630,
+        url: DEFAULT_OG_IMAGE_URL,
+        width: 1376,
+        height: 768,
         alt: "Blog FinanzasEU",
       },
     ],
