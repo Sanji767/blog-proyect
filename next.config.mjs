@@ -44,6 +44,18 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 
+  // Redirecciones 301 de fusiones de contenido (auditoría 2026-11-20).
+  // La guía gemela de cuentas para adolescentes se fusionó en la canónica.
+  async redirects() {
+    return [
+      {
+        source: "/blog/cuentas-bancarias-menores-adolescentes-2026",
+        destination: "/blog/cuentas-bancarias-adolescentes-2026",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     // CSP para el sitio público: hecha a medida de lo que realmente carga
     // (GA, YouTube nocookie en vlogs, imágenes de Sanity, fuentes propias).

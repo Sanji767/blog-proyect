@@ -1,14 +1,13 @@
 ---
 title: "Wise Opiniones 2025: Análisis Real, Comisiones, IBAN y Si Merece la Pena"
 description: "Opiniones honestas de Wise en 2025 tras un año de uso real: seguridad, comisiones transparentes, cuenta multidivisa, IBAN BE, límites y comparativa con Revolut. Guía definitiva para viajeros, freelancers y expatriados."
-date: 2025-11-22
+date: 2026-11-20
 category: analisis
 tags: ["wise opiniones", "wise 2025", "cuenta multidivisa", "transferencias internacionales", "iban belga", "neobancos europa", "wise vs revolut"]
 slug: wise-opiniones
 image: /images/blogs/wise-opiniones/wise-opiniones.png
 featured: true
 readingTime: "13 min"
-canonicalUrl: "https://finanzaseu.com/blog/2025/wise-opiniones"
 openGraph:
   type: article
   title: "Wise Opiniones 2025: ¿Es Seguro y Vale la Pena?"
@@ -99,13 +98,12 @@ Precios oficiales: [wise.com/pricing](https://wise.com/pricing)
 - +50 divisas disponibles
 
 ### Tarjeta Wise
-- coste único de emisión (≈ **14 €**)  
-- **2 retiradas gratis/mes** + hasta **200 €**  
+- coste único de emisión (**7 €**)
+- **retiradas gratis hasta 250 €/mes** en cajeros
 - luego pequeñas comisiones transparentes
 
 ### Intereses
-Wise ha ido ampliando cuentas remuneradas en UE.  
-En euros suele moverse entre **2,5% y 4%** según país y producto disponible.
+Wise ofrece intereses sobre el saldo en euros a través de Wise Interest, un fondo monetario (no un depósito): en noviembre de 2026 rondaba el **2,30 %** anual, variable y con el capital en riesgo.
 
 > No es la cuenta con más interés del mercado, pero sí una de las más limpias.
 
@@ -156,7 +154,7 @@ Para evitar que la tabla desborde en desktop, aquí va una comparación **compac
 | Transferencias | Más baratas | Buenas |
 | Cuenta diaria | Correcta | Más completa |
 | Multidivisa | Top 1 | Top 2 |
-| IBAN en España | BE | LT (antes ES) |
+| IBAN en España | BE | ES (las cuentas antiguas con LT se están migrando) |
 | Comisiones | Ultra claras | Más complejas |
 
 **Conclusión editorial:**
