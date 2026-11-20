@@ -391,6 +391,7 @@ export default function IBANPage() {
                       <ReactCountryFlag
                         countryCode={result.countryCode}
                         svg
+                        cdnUrl="/flags/4x3/"
                         style={{
                           width: "100%",
                           height: "100%",
@@ -514,7 +515,7 @@ export default function IBANPage() {
                   >
                     <div className="flex items-center gap-3">
                       {item.result.type === "success" ? (
-                        <ReactCountryFlag countryCode={item.result.countryCode} svg />
+                        <ReactCountryFlag countryCode={item.result.countryCode} svg cdnUrl="/flags/4x3/" />
                       ) : null}
                       <span className="font-mono text-sm">{item.iban}</span>
                     </div>
@@ -574,7 +575,7 @@ export default function IBANPage() {
                       onClick={() => setRawInput(h.iban)}
                       className="flex w-full items-center gap-3 rounded-xl border border-border bg-muted px-4 py-3 text-left transition-colors hover:border-secondary/35 hover:bg-muted/70"
                     >
-                      <ReactCountryFlag countryCode={h.result.countryCode} svg />
+                      <ReactCountryFlag countryCode={h.result.countryCode} svg cdnUrl="/flags/4x3/" />
                       <div className="min-w-0 flex-1">
                         <p className="truncate font-mono text-[10px] text-muted-foreground">
                           {h.formatted}
@@ -634,7 +635,7 @@ export default function IBANPage() {
                   className="rounded-2xl border border-border bg-card p-6 shadow-soft"
                 >
                   <div className="mb-4 flex items-center gap-3">
-                    <ReactCountryFlag countryCode={code} svg />
+                    <ReactCountryFlag countryCode={code} svg cdnUrl="/flags/4x3/" />
                     <span className="font-semibold">{data.country}</span>
                   </div>
 
