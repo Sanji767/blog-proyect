@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { MotionConfig } from "framer-motion";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -17,12 +18,14 @@ export default function AppChrome({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <LocaleProvider>
-      <Header />
-      <main className="pt-20 md:pt-24">{children}</main>
-      <Footer />
-      <StickyPromo />
-      <CookieBanner />
-    </LocaleProvider>
+    <MotionConfig reducedMotion="user">
+      <LocaleProvider>
+        <Header />
+        <main className="pt-20 md:pt-24">{children}</main>
+        <Footer />
+        <StickyPromo />
+        <CookieBanner />
+      </LocaleProvider>
+    </MotionConfig>
   );
 }

@@ -107,6 +107,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Respetar "reducir movimiento": sin animaciones ni transiciones CSS para
+   quien lo tenga activado en su sistema (framer-motion se encarga de lo
+   suyo con MotionConfig reducedMotion="user" en AppChrome). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   min-height: 100vh;
   background-color: rgb(var(--background));
@@ -164,6 +180,25 @@ h6 {
   font-weight: 700;
   letter-spacing: -0.02em;
   color: rgb(var(--foreground));
+}
+
+/* Escala display (estilo Wise/Revolut): titulares grandes con tracking
+   negativo progresivo y altura de línea ajustada. Los componentes con
+   clases Tailwind propias (font-black, tracking-tight...) mantienen
+   preferencia; esto fija la base para títulos sin clases. */
+h1 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+h2 {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+h3 {
+  letter-spacing: -0.015em;
+  line-height: 1.2;
 }
 
 /* Headings inside dark surfaces use the surface's light text: the base rule
@@ -311,12 +346,13 @@ details > summary::-webkit-details-marker {
 .prose p {
   margin-top: 1.1em;
   margin-bottom: 1.1em;
+  line-height: 1.8;
 }
 
 /* Lead paragraph (primera línea del artículo) */
 .prose > p:first-child {
-  font-size: 1.15em;
-  line-height: 1.75;
+  font-size: 1.2em;
+  line-height: 1.7;
   color: rgb(var(--foreground-accent));
 }
 .dark .prose > p:first-child {
@@ -327,12 +363,16 @@ details > summary::-webkit-details-marker {
 .prose h2 {
   margin-top: 2.2em;
   margin-bottom: 0.8em;
-  font-size: 1.6em;
+  font-size: 1.75em;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 .prose h3 {
   margin-top: 1.6em;
   margin-bottom: 0.6em;
-  font-size: 1.25em;
+  font-size: 1.35em;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
 }
 
 /* Listas limpias */
@@ -340,6 +380,7 @@ details > summary::-webkit-details-marker {
 .prose ol li {
   margin-top: 0.35em;
   margin-bottom: 0.35em;
+  line-height: 1.75;
 }
 
 /* =========================================

@@ -81,6 +81,7 @@ export default async function BlogPostPageEn({ params }: { params: { slug: strin
     month: "long",
     day: "numeric",
   });
+  const authorLabel = (post.author ?? "").trim() || "FinanzasEU Team";
 
   const markdownContent =
     typeof post.content === "string" ? stripLeadingMarkdownH1(post.content) : null;
@@ -89,8 +90,17 @@ export default async function BlogPostPageEn({ params }: { params: { slug: strin
     <article className="space-y-12">
       <header className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-          {formattedDate}
+          Updated {formattedDate}
           {post.readingTime ? <span> · {post.readingTime}</span> : null}
+        </p>
+        <p className="text-sm text-muted-foreground">
+          By{" "}
+          <Link
+            href="/en/sobre"
+            className="font-semibold text-foreground underline-offset-4 hover:underline"
+          >
+            {authorLabel}
+          </Link>
         </p>
         <h1 className="text-balance text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
           {post.title}

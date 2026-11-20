@@ -121,7 +121,7 @@ export default function SobrePageEn() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-border bg-card p-8 shadow-soft md:p-10">
+        <section id="metodologia" className="scroll-mt-28 rounded-2xl border border-border bg-card p-8 shadow-soft md:p-10">
           <h2 className="text-2xl font-black tracking-tight">Methodology (summary)</h2>
           <ul className="mt-5 grid gap-3 text-sm text-muted-foreground md:grid-cols-2">
             <li className="flex gap-3">

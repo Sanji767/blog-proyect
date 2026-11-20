@@ -19,7 +19,10 @@ import UseCases from "@/components/sections/home/UseCases";
 import SavingsCalculator from "@/components/tools/SavingsCalculator";
 import BankQuiz from "@/components/tools/BankQuiz";
 import { Button } from "@/components/ui/button";
+import Reveal from "@/components/ui/Reveal";
 import { banks } from "@/lib/banks";
+import { getLocalPostCount } from "@/lib/blog";
+import { TOOLS } from "@/lib/tools";
 import { withLocale } from "@/lib/i18n";
 import { formatIsoYmdToEnDate } from "@/lib/seo";
 
@@ -69,22 +72,41 @@ export default function HomePageEn() {
 
   const locale = "en" as const;
 
+  // Real trust-bar numbers, counted from the repo/data (never invented):
+  // banks in the dataset, free tools, and guides/articles rounded down
+  // to the decade (shown with a "+" suffix).
+  const trustStats = {
+    banks: banks.length,
+    tools: TOOLS.length,
+    articlesBase:
+      Math.floor(
+        (getLocalPostCount("es") + getLocalPostCount("en")) / 10,
+      ) * 10,
+  };
+
   return (
     <>
       {/* 1. First impression */}
       <Hero />
 
       {/* 2. Trust / authority */}
-      <TrustStrip locale={locale} />
+      <TrustStrip locale={locale} stats={trustStats} />
 
       {/* 3. Features + segmentation */}
-      <Features locale={locale} />
-      <UseCases />
+      <Reveal>
+        <Features locale={locale} />
+      </Reveal>
+      <Reveal>
+        <UseCases />
+      </Reveal>
 
       {/* 3.1 Methodology */}
-      <RankingMethodology locale={locale} lastUpdatedLabel={lastUpdatedLabel} />
+      <Reveal>
+        <RankingMethodology locale={locale} lastUpdatedLabel={lastUpdatedLabel} />
+      </Reveal>
 
       {/* 4. Tool: IBAN validator */}
+      <Reveal>
       <section className="border-t border-border bg-muted/30 py-16 md:py-24">
         <Container>
           <div className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground md:p-12">
@@ -164,35 +186,54 @@ export default function HomePageEn() {
           </div>
         </Container>
       </section>
+      </Reveal>
 
       {/* 5. Bank selection */}
-      <HomeBanksPreview />
+      <Reveal>
+        <HomeBanksPreview />
+      </Reveal>
 
       {/* 5.1 Interactive Savings Calculator */}
+      <Reveal>
       <section className="py-12 border-t border-border">
         <Container>
           <SavingsCalculator />
         </Container>
       </section>
+      </Reveal>
 
       {/* 5.2 Smart Bank Recommender Quiz */}
+      <Reveal>
       <section className="py-12 border-t border-border bg-muted/20">
         <Container>
           <BankQuiz />
         </Container>
       </section>
+      </Reveal>
 
       {/* 6. Value */}
-      <Benefits />
-      <CurrencyComparison />
+      <Reveal>
+        <Benefits />
+      </Reveal>
+      <Reveal>
+        <CurrencyComparison />
+      </Reveal>
 
       {/* 7. Content + FAQ */}
-      <HomeHowItWorks locale={locale} />
-      <HomeVlogsPreview locale={locale} />
-      <HomeFaqPreview locale={locale} />
+      <Reveal>
+        <HomeHowItWorks locale={locale} />
+      </Reveal>
+      <Reveal>
+        <HomeVlogsPreview locale={locale} />
+      </Reveal>
+      <Reveal>
+        <HomeFaqPreview locale={locale} />
+      </Reveal>
 
       {/* 8. Conversion */}
-      <CtaSection locale={locale} />
+      <Reveal>
+        <CtaSection locale={locale} />
+      </Reveal>
     </>
   );
 }

@@ -179,6 +179,12 @@ function readLocalPosts(locale: Locale): BlogPost[] {
 
 const getLocalPosts = cache((locale: Locale) => readLocalPosts(locale));
 
+/** Number of local MDX posts for a locale (filesystem only, no network).
+ * Used for honest on-page stats (e.g. the homepage trust bar). */
+export function getLocalPostCount(locale: Locale = DEFAULT_LOCALE): number {
+  return getLocalPosts(locale).length;
+}
+
 function toPreview(post: BlogPost): BlogPostPreview {
   const { content, ...rest } = post;
   void content;

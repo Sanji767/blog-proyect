@@ -20,6 +20,7 @@ const LINKS_BY_LOCALE = {
     ],
     legal: [
       { label: "Sobre", href: "/sobre" },
+      { label: "Metodología", href: "/sobre#metodologia" },
       { label: "Aviso de afiliados", href: "/aviso-afiliados" },
       { label: "Privacidad", href: "/privacidad" },
       { label: "Términos", href: "/terminos" },
@@ -45,6 +46,7 @@ const LINKS_BY_LOCALE = {
     ],
     legal: [
       { label: "About", href: "/sobre" },
+      { label: "Methodology", href: "/sobre#metodologia" },
       { label: "Affiliate disclosure", href: "/aviso-afiliados" },
       { label: "Privacy", href: "/privacidad" },
       { label: "Terms", href: "/terminos" },

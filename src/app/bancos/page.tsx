@@ -79,6 +79,13 @@ export default function BancosPage() {
                 className="underline underline-offset-4"
               >
                 Transparencia (afiliados)
+              </Link>{" "}
+              ·{" "}
+              <Link
+                href="/sobre#metodologia"
+                className="underline underline-offset-4"
+              >
+                Metodología
               </Link>
             </p>
           ) : null}
@@ -133,10 +140,10 @@ export default function BancosPage() {
         </section>
 
         <p className="mx-auto max-w-3xl text-center text-xs text-muted-foreground md:text-sm">
-          La información sobre comisiones, requisitos y países admitidos puede
-          cambiar. Revisa siempre los detalles en la web oficial antes de abrir
-          tu cuenta. Algunos enlaces pueden ser de afiliados; esto no afecta a
-          nuestro análisis.
+          Comisiones, IBAN y requisitos verificados en las webs oficiales de
+          cada banco. La información puede cambiar: revisa siempre los detalles
+          en la web oficial antes de abrir tu cuenta. Algunos enlaces pueden ser
+          de afiliados; esto no afecta a nuestro análisis.
         </p>
       </Container>
     </section>

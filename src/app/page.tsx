@@ -19,7 +19,10 @@ import UseCases from "@/components/sections/home/UseCases";
 import SavingsCalculator from "@/components/tools/SavingsCalculator";
 import BankQuiz from "@/components/tools/BankQuiz";
 import { Button } from "@/components/ui/button";
+import Reveal from "@/components/ui/Reveal";
 import { banks } from "@/lib/banks";
+import { getLocalPostCount } from "@/lib/blog";
+import { TOOLS } from "@/lib/tools";
 import { formatIsoYmdToEsDate } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -67,22 +70,41 @@ export default function HomePage() {
 
   const lastUpdatedLabel = formatIsoYmdToEsDate(latestBankUpdate);
 
+  // Real trust-bar numbers, counted from the repo/data (never invented):
+  // banks in the dataset, free tools, and guides/articles rounded down
+  // to the decade (shown with a "+" suffix).
+  const trustStats = {
+    banks: banks.length,
+    tools: TOOLS.length,
+    articlesBase:
+      Math.floor(
+        (getLocalPostCount("es") + getLocalPostCount("en")) / 10,
+      ) * 10,
+  };
+
   return (
     <>
       {/* 1. Impacto inicial */}
       <Hero />
 
       {/* 2. Autoridad inmediata */}
-      <TrustStrip />
+      <TrustStrip stats={trustStats} />
 
       {/* 3. Características y segmentación */}
-      <Features />
-      <UseCases />
+      <Reveal>
+        <Features />
+      </Reveal>
+      <Reveal>
+        <UseCases />
+      </Reveal>
 
       {/* 3.1 Metodología y transparencia */}
-      <RankingMethodology lastUpdatedLabel={lastUpdatedLabel} />
+      <Reveal>
+        <RankingMethodology lastUpdatedLabel={lastUpdatedLabel} />
+      </Reveal>
 
       {/* 4. Herramienta: Validador IBAN */}
+      <Reveal>
       <section className="border-t border-border bg-muted/30 py-16 md:py-24">
         <Container>
           <div className="relative overflow-hidden rounded-2xl bg-secondary p-8 text-secondary-foreground md:p-12">
@@ -160,35 +182,54 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+      </Reveal>
 
       {/* 5. Selección de bancos */}
-      <HomeBanksPreview />
+      <Reveal>
+        <HomeBanksPreview />
+      </Reveal>
 
       {/* 5.1 Calculadora Interactiva de Rendimiento de Ahorros */}
+      <Reveal>
       <section className="py-12 border-t border-border">
         <Container>
           <SavingsCalculator />
         </Container>
       </section>
+      </Reveal>
 
       {/* 5.2 Recomendador Inteligente / IBAN Matchmaker Quiz */}
+      <Reveal>
       <section className="py-12 border-t border-border bg-muted/20">
         <Container>
           <BankQuiz />
         </Container>
       </section>
+      </Reveal>
 
       {/* 6. Valor */}
-      <Benefits />
-      <CurrencyComparison />
+      <Reveal>
+        <Benefits />
+      </Reveal>
+      <Reveal>
+        <CurrencyComparison />
+      </Reveal>
 
       {/* 7. Contenido + FAQ */}
-      <HomeHowItWorks />
-      <HomeVlogsPreview />
-      <HomeFaqPreview />
+      <Reveal>
+        <HomeHowItWorks />
+      </Reveal>
+      <Reveal>
+        <HomeVlogsPreview />
+      </Reveal>
+      <Reveal>
+        <HomeFaqPreview />
+      </Reveal>
 
       {/* 8. Conversión */}
-      <CtaSection />
+      <Reveal>
+        <CtaSection />
+      </Reveal>
     </>
   );
 }

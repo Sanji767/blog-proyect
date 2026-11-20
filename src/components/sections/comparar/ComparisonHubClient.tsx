@@ -68,6 +68,8 @@ const UI_COPY: Record<Locale, {
   popularTitle: string;
   versus: string;
   viewComparison: string;
+  methodology: string;
+  disclosure: string;
 }> = {
   es: {
     badge: "Comparador Cara a Cara",
@@ -81,6 +83,8 @@ const UI_COPY: Record<Locale, {
     popularTitle: "Comparativas más populares en Google",
     versus: "VS",
     viewComparison: "Ver duelo completo →",
+    methodology: "Metodología",
+    disclosure: "Aviso de afiliados",
   },
   en: {
     badge: "Head-to-Head Comparisons",
@@ -94,6 +98,8 @@ const UI_COPY: Record<Locale, {
     popularTitle: "Top Searched Bank Duels",
     versus: "VS",
     viewComparison: "View full duel →",
+    methodology: "Methodology",
+    disclosure: "Affiliate disclosure",
   },
 };
 
@@ -117,15 +123,24 @@ export default function ComparisonHubClient() {
   return (
     <div className="space-y-12 md:space-y-16">
       <header className="text-center max-w-2xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-bold text-accent uppercase tracking-wider">
-          <Scale className="h-3.5 w-3.5 text-accent" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary-text uppercase tracking-wider">
+          <Scale className="h-3.5 w-3.5 text-primary-text" />
           <span>{copy.badge}</span>
         </div>
-        <h1 className="text-3xl md:text-5xl font-black tracking-tight text-accent">
+        <h1 className="text-3xl md:text-5xl font-black tracking-tight text-foreground">
           {copy.title}
         </h1>
-        <p className="text-sm md:text-base leading-relaxed text-secondary-foreground/80">
+        <p className="text-sm md:text-base leading-relaxed text-muted-foreground">
           {copy.subtitle}
+        </p>
+        <p className="text-xs text-muted-foreground">
+          <LocalizedLink href="/sobre#metodologia" className="font-semibold text-primary-text underline-offset-4 hover:underline">
+            {copy.methodology}
+          </LocalizedLink>
+          {" · "}
+          <LocalizedLink href="/aviso-afiliados" className="font-semibold text-primary-text underline-offset-4 hover:underline">
+            {copy.disclosure}
+          </LocalizedLink>
         </p>
       </header>
 
@@ -193,8 +208,8 @@ export default function ComparisonHubClient() {
       {/* Popular Duels Grid */}
       <section className="space-y-6">
         <div className="flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-accent" />
-          <h2 className="text-xl md:text-2xl font-black tracking-tight text-accent">
+          <Sparkles className="h-5 w-5 text-primary" />
+          <h2 className="text-xl md:text-2xl font-black tracking-tight text-foreground">
             {copy.popularTitle}
           </h2>
         </div>

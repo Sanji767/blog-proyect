@@ -82,6 +82,13 @@ export default function BancosPageEn() {
                 className="underline underline-offset-4"
               >
                 Disclosure (affiliate links)
+              </Link>{" "}
+              ·{" "}
+              <Link
+                href={withLocale("/sobre#metodologia", locale)}
+                className="underline underline-offset-4"
+              >
+                Methodology
               </Link>
             </p>
           ) : null}
@@ -136,9 +143,10 @@ export default function BancosPageEn() {
         </section>
 
         <p className="mx-auto max-w-3xl text-center text-xs text-muted-foreground md:text-sm">
-          Fees, requirements and supported countries can change. Always check
-          the official website before opening an account. Some links may be
-          affiliate links; this doesn’t affect the analysis.
+          Fees, IBAN details and requirements verified on each bank’s official
+          website. Information can change: always check the official website
+          before opening an account. Some links may be affiliate links; this
+          doesn’t affect the analysis.
         </p>
       </Container>
     </section>

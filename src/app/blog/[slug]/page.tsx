@@ -285,7 +285,7 @@ export default async function BlogPostPage({
                 dateTime={post.date}
                 className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80"
               >
-                {formattedDate}
+                Actualizado {formattedDate}
               </time>
 
               {post.readingTime ? (

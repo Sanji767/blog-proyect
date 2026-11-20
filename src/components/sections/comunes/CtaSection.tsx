@@ -13,6 +13,7 @@ const COPY = {
     desc: "Empieza por la comparativa y quédate con 1–3 opciones claras según tu situación real: viajes, remoto, nómina o empresa.",
     ctaPrimary: "Ver ranking de bancos",
     ctaSecondary: "Escribirnos",
+    howWeMakeMoney: "¿Cómo ganamos dinero?",
     bullets: [
       "✔ Transparencia: explicamos opciones",
       "✔ Enfoque práctico para vivir y trabajar en Europa",
@@ -25,6 +26,7 @@ const COPY = {
     desc: "Start with the comparison and narrow it down to 1–3 clear options based on your real situation: travel, remote work, salary or business.",
     ctaPrimary: "See bank ranking",
     ctaSecondary: "Contact us",
+    howWeMakeMoney: "How do we make money?",
     bullets: [
       "✔ Transparency: we explain trade-offs",
       "✔ Practical focus for living and working in Europe",
@@ -75,6 +77,15 @@ export default function CtaSection({ locale = "es" }: { locale?: Locale }) {
             </Link>
           </Button>
         </div>
+
+        <p className="text-xs text-secondary-foreground/70">
+          <Link
+            href={withLocale("/aviso-afiliados", locale)}
+            className="font-semibold text-primary-light underline-offset-4 hover:underline"
+          >
+            {copy.howWeMakeMoney}
+          </Link>
+        </p>
 
         <div className="mx-auto grid max-w-3xl grid-cols-1 gap-2 text-[11px] text-secondary-foreground/80 sm:grid-cols-3">
           {copy.bullets.map((text) => (
