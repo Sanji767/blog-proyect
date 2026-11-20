@@ -1,6 +1,7 @@
 // src/app/blog/tag/[tag]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import BlogExplore from "@/components/blog/BlogExplore";
 import NewsPostCard from "@/components/blog/NewsPostCard";
@@ -32,7 +33,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
   const tags = await getTags();
   const tag = tags.find((t) => t.slug === tagSlug);
-  const label = tag?.title ?? tagSlug;
+
+  // C4: una etiqueta desconocida es un 404, no una página vacía indexable
+  // con canonical propio.
+  if (!tag) {
+    return {
+      title: "Etiqueta no encontrada | FinanzasEU",
+      robots: { index: false, follow: true },
+    };
+  }
+
+  const label = tag.title;
 
   return {
     title: `#${label} | Blog FinanzasEU`,
@@ -47,7 +58,13 @@ export default async function TagPage({ params }: Props) {
   const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
   const tags = await getTags();
   const tag = tags.find((t) => t.slug === tagSlug);
-  const label = tag?.title ?? tagSlug;
+
+  // C4: etiquetas desconocidas devuelven 404 (antes: 200 indexable con
+  // "No hay artículos"). getTags() se deriva de los artículos, así que
+  // una etiqueta conocida siempre tiene al menos un artículo.
+  if (!tag) notFound();
+
+  const label = tag.title;
 
   const posts = await getPostsByTag(tagSlug);
 

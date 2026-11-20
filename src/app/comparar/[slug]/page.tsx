@@ -9,6 +9,7 @@ import Container from "@/components/layout/Container";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { Button } from "@/components/ui/button";
 import { banks, Bank } from "@/lib/banks";
+import { isCuratedComparisonSlug } from "@/lib/curatedComparisons";
 import { SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
 interface PageProps {
@@ -52,6 +53,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
+    // C5: solo los 28 pares curados son indexables. Las páginas en orden
+    // inverso (n26-vs-revolut) y los pares fuera del conjunto curado
+    // siguen siendo visitables, pero con noindex para que salgan del
+    // índice y no diluyan el rastreo. Se eligió noindex (y no 301 al
+    // orden canónico) porque es reversible, no rompe enlaces compartidos
+    // y Google elimina las URLs noindex del índice igualmente.
+    ...(isCuratedComparisonSlug(slug)
+      ? {}
+      : { robots: { index: false, follow: true } }),
     alternates: {
       canonical: `/comparar/${slug}`,
     },

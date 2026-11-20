@@ -1,6 +1,7 @@
 // src/app/en/blog/categoria/[categoria]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import BlogExplore from "@/components/blog/BlogExplore";
 import NewsPostCard from "@/components/blog/NewsPostCard";
@@ -34,7 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const categories = await getCategories("en");
   const cat = categories.find((c) => c.slug === categoria);
 
-  if (!cat) return { title: "Category not found | FinanzasEU" };
+  if (!cat)
+    return {
+      title: "Category not found | FinanzasEU",
+      robots: { index: false, follow: true },
+    };
 
   return {
     title: `${cat.title} | FinanzasEU Blog`,
@@ -51,13 +56,9 @@ export default async function CategoryPageEn({ params }: Props) {
   const categories = await getCategories(locale);
   const cat = categories.find((c) => c.slug === categoria);
 
-  if (!cat) {
-    return (
-      <div className="py-16 text-center">
-        <p className="text-base text-muted-foreground">Category not found.</p>
-      </div>
-    );
-  }
+  // C4: unknown categories return 404 (previously: indexable 200 with an
+  // inline "Category not found." message).
+  if (!cat) notFound();
 
   const posts = await getPostsByCategory(categoria, locale);
 

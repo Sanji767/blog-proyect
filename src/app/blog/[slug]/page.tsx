@@ -1,4 +1,10 @@
 // src/app/blog/[slug]/page.tsx
+//
+// OJO (C4): no añadir nunca un loading.tsx a src/app/blog/. Un loading.tsx
+// envuelve esta página en un Suspense boundary y Next.js sirve el shell con
+// HTTP 200 antes de que el notFound() de abajo se ejecute, convirtiendo
+// cada slug inexistente en un soft-404 (200 + UI de "no encontrado").
+// La plantilla EN no tiene loading.tsx y devuelve un 404 real.
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,7 +61,13 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
-  if (!post) return { title: "Artículo no encontrado | FinanzasEU" };
+  if (!post)
+    return {
+      title: "Artículo no encontrado | FinanzasEU",
+      // Cinturón y tirantes: el componente llama a notFound() (404 real),
+      // pero si la metadata llegara a renderizarse, que no sea indexable.
+      robots: { index: false, follow: true },
+    };
 
   const canonicalPath = `/blog/${post.slug}`;
   const ogImage = post.coverImage ?? post.image;

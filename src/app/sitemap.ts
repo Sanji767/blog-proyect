@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { banks } from "@/lib/banks";
 import { getAllPostPreviews, getCategories, getTags } from "@/lib/blog";
+import { CURATED_COMPARISON_SLUGS } from "@/lib/curatedComparisons";
 import { ebooks } from "@/lib/ebooks-data";
 import { type Locale, withLocale } from "@/lib/i18n";
 import { vlogPreviews } from "@/lib/vlogs";
@@ -204,22 +205,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }),
   );
 
-  const activeBanksList = banks.filter((b) => b._status !== "draft");
-  for (let i = 0; i < activeBanksList.length; i++) {
-    for (let j = i + 1; j < activeBanksList.length; j++) {
-      const slug = `${activeBanksList[i].slug}-vs-${activeBanksList[j].slug}`;
-      const esPath = `/comparar/${slug}`;
-      const enPath = `/en/comparar/${slug}`;
-      const alternates = {
-        languages: {
-          es: toUrl(esPath),
-          en: toUrl(enPath),
-        },
-      } satisfies NonNullable<MetadataRoute.Sitemap[number]["alternates"]>;
+  // C5: only the 28 curated pairs go in the sitemap (was: all 820
+  // unordered pairs × 2 locales = 1.640 comparar URLs). The remaining
+  // pairs still exist for visitors but are noindex (see [slug] templates).
+  for (const slug of CURATED_COMPARISON_SLUGS) {
+    const esPath = `/comparar/${slug}`;
+    const enPath = `/en/comparar/${slug}`;
+    const alternates = {
+      languages: {
+        es: toUrl(esPath),
+        en: toUrl(enPath),
+      },
+    } satisfies NonNullable<MetadataRoute.Sitemap[number]["alternates"]>;
 
-      urls.push({ url: toUrl(esPath), lastModified: now, alternates });
-      urls.push({ url: toUrl(enPath), lastModified: now, alternates });
-    }
+    urls.push({ url: toUrl(esPath), lastModified: now, alternates });
+    urls.push({ url: toUrl(enPath), lastModified: now, alternates });
   }
 
   urls.push(
