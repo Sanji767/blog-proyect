@@ -45,11 +45,12 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const post = await getPostBySlug(params.slug, locale);
   if (!post) {
     // A4: ES-only Sanity articles no longer serve under /en/, so they land
@@ -113,7 +114,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPageEn({ params }: { params: { slug: string } }) {
+export default async function BlogPostPageEn(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const post = await getPostBySlug(params.slug, locale);
 
   if (!post) {

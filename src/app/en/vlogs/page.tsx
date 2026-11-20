@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams?: {
+  searchParams?: Promise<{
     tag?: string | string[];
-  };
+  }>;
 };
 
 export default function VlogsPageEn(props: Props) {

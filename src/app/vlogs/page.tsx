@@ -17,12 +17,13 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams?: {
+  searchParams?: Promise<{
     tag?: string | string[];
-  };
+  }>;
 };
 
-export default function VlogsPage({ searchParams }: Props) {
+export default async function VlogsPage(props: Props) {
+  const searchParams = await props.searchParams;
   const rawTag = Array.isArray(searchParams?.tag)
     ? searchParams?.tag[0]
     : searchParams?.tag;

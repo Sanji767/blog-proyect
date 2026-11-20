@@ -11,20 +11,23 @@ export function generateStaticParams(): Array<{ slug: string }> {
 
 export async function generateMetadata(
   args: {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
   },
 ): Promise<Metadata> {
+  // `args` carries params as a Promise; generateMetadataEs awaits it
+  // internally (same shape), so passing it through is correct.
   const meta = await generateMetadataEs(args);
   return {
     ...meta,
     robots: { index: false, follow: true },
     alternates: {
-      canonical: meta?.alternates?.canonical ?? `/vlogs/${args.params.slug}`,
+      canonical: meta?.alternates?.canonical ?? `/vlogs/${(await args.params).slug}`,
     },
   };
 }
 
-export default function VlogPageEn({ params }: { params: { slug: string } }) {
+export default async function VlogPageEn(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   return (
     <>
       <section className="py-10 md:py-14">

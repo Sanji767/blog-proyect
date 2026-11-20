@@ -20,11 +20,11 @@ const nextConfig = {
 
   // Windows: some environments block child_process IPC, which breaks Next's build worker.
   // Disabling it keeps the build in a single process (slower, but reliable).
+  // Next 15 upgrade (2026-11-20): dropped `workerThreads` and
+  // `staticWorkerRequestDeduping` here — both were Windows-only workarounds
+  // and are not recognized options in Next 15; Vercel builds never needed them.
   experimental: {
     webpackBuildWorker: false,
-    workerThreads: true,
-    // Avoid passing undefined IPC env vars to static workers (Windows + workerThreads).
-    staticWorkerRequestDeduping: true,
   },
 
   // Opcional: mejora compatibilidad con algunos paquetes

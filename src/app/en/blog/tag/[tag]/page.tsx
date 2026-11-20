@@ -16,9 +16,9 @@ import {
 } from "@/lib/seo";
 
 type Props = {
-  params: {
+  params: Promise<{
     tag: string;
-  };
+  }>;
 };
 
 export const dynamic = "force-dynamic";
@@ -30,7 +30,8 @@ export async function generateStaticParams(): Promise<Array<{ tag: string }>> {
   return tags.map((t) => ({ tag: t.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
   const tags = await getTags("en");
   const tag = tags.find((t) => t.slug === tagSlug);
@@ -55,7 +56,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function TagPageEn({ params }: Props) {
+export default async function TagPageEn(props: Props) {
+  const params = await props.params;
   const locale = "en" as const;
   const tagSlug = decodeURIComponent(params.tag).toLowerCase().trim();
   const tags = await getTags(locale);

@@ -64,11 +64,12 @@ export function generateStaticParams() {
 /* -----------------------------------------
    2) Metadata dinámica por banco (SEO)
 ------------------------------------------ */
-export function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Metadata {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const bank = banks.find((b) => b.slug === params.slug);
 
   if (!bank) {
@@ -106,11 +107,12 @@ export function generateMetadata({
 /* -----------------------------------------
    3) Página principal
 ------------------------------------------ */
-export default function ProgramaPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function ProgramaPage(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+) {
+  const params = await props.params;
   const bank = banks.find((b) => b.slug === params.slug);
 
   if (!bank) return notFound();

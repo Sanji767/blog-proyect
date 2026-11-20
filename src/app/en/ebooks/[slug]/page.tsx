@@ -6,11 +6,12 @@ import Container from "@/components/layout/Container";
 import { ebooks } from "@/lib/ebooks-data";
 import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo";
 
-export function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Metadata {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const ebook = ebooks.find((e) => e.id === params.slug);
 
   if (!ebook) {
@@ -48,7 +49,8 @@ export function generateMetadata({
   };
 }
 
-export default function EbookDetailPageEn({ params }: { params: { slug: string } }) {
+export default async function EbookDetailPageEn(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const ebook = ebooks.find((e) => e.id === params.slug);
   if (!ebook) notFound();
 

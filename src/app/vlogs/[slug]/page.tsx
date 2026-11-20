@@ -62,11 +62,12 @@ export function generateStaticParams(): Array<{ slug: string }> {
   return vlogs.map((v) => ({ slug: v.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const vlog = getVlogBySlug(params.slug);
   if (!vlog) return { title: "Vlog no encontrado | FinanzasEU" };
 
@@ -86,7 +87,8 @@ export async function generateMetadata({
   };
 }
 
-export default function VlogPage({ params }: { params: { slug: string } }) {
+export default async function VlogPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const vlog = getVlogBySlug(params.slug);
   if (!vlog) notFound();
 

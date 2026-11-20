@@ -15,9 +15,9 @@ import {
 } from "@/lib/seo";
 
 type Props = {
-  params: {
+  params: Promise<{
     categoria: string;
-  };
+  }>;
 };
 
 export const dynamic = "force-dynamic";
@@ -29,7 +29,8 @@ export async function generateStaticParams(): Promise<Array<{ categoria: string 
   return categories.map((cat) => ({ categoria: cat.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   const categoria = decodeURIComponent(params.categoria).toLowerCase().trim();
   const categories = await getCategories();
   const cat = categories.find((c) => c.slug === categoria);
@@ -49,7 +50,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CategoryPage({ params }: Props) {
+export default async function CategoryPage(props: Props) {
+  const params = await props.params;
   const categoria = decodeURIComponent(params.categoria).toLowerCase().trim();
   const categories = await getCategories();
   const cat = categories.find((c) => c.slug === categoria);
