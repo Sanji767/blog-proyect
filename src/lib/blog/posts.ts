@@ -3,23 +3,8 @@
 import type { BlogPost } from "./types";
 
 const posts: BlogPost[] = [
-  {
-    slug: "mejores-bancos-digitales-europa-2025",
-    title: "Los 4 mejores bancos digitales de Europa en 2025",
-    description: "Guía clara y práctica de los bancos digitales más interesantes de Europa en 2025: N26, Revolut, Wise y Bunq.",
-    date: "2025-11-16",
-    excerpt: "Comparativa actualizada 2025: N26 vs Revolut vs Wise vs Bunq – comisiones, IBAN español, tarjetas, cripto y seguridad.",
-    coverImage: "/images/blog/bancos-europa-2025.jpg",
-    image: "/images/blog/bancos-europa-2025.jpg",
-    tags: ["bancos", "europa", "comparativa", "n26", "revolut", "wise", "bunq"],
-    readingTime: "15 min",           // ← present here, but type is now optional → ok
-    youtubeId: "dQw4w9WgXcQ",
-    views: 28491,
-    featured: true,
-    content: `# Los 4 mejores bancos digitales de Europa en 2025\n\n...`,
-    category: "Bancos",
-    author: "FinWise Team",
-  },
+  // (vacío a propósito: la única entrada, la guía 2025 de bancos digitales,
+  // se eliminó el 21 nov 2026 junto con su MDX; la guía vigente es la de 2026)
   // Add other posts with the same required/optional fields
 ];
 

@@ -53,6 +53,11 @@ const nextConfig = {
         destination: "/blog/cuentas-bancarias-adolescentes-2026",
         permanent: true,
       },
+      {
+        source: "/blog/mejores-bancos-digitales-europa-2025",
+        destination: "/blog/los-mejores-bancos-digitales-en-europa-en-2026",
+        permanent: true,
+      },
     ];
   },
 
