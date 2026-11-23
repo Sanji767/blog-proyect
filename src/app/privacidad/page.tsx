@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidad | FinanzasEU",
+  title: "Política de Privacidad",
   description:
     "Información sobre privacidad en FinanzasEU: qué datos se recogen, para qué se usan y cómo protegemos tu información.",
   alternates: {

@@ -15,7 +15,7 @@ import {
 } from "@/lib/seo";
 
 const BLOG_PAGE_TITLE =
-  "Blog FinanzasEU — guías prácticas de bancos, IBAN y comisiones (2026)";
+  "Blog — guías de bancos, IBAN y comisiones (2026)";
 const BLOG_PAGE_DESCRIPTION =
   "Comparativas honestas, opiniones reales y trucos para ahorrar con Revolut, Wise, N26 y más.";
 

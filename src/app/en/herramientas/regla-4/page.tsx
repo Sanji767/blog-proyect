@@ -6,7 +6,7 @@ import FourPercentRuleCalculator from "@/components/tools/FourPercentRuleCalcula
 import { withLocale } from "@/lib/i18n";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "4% rule calculator (FIRE) | FinanzasEU";
+const TITLE = "4% rule calculator (FIRE)";
 const DESCRIPTION =
   "Estimate the target portfolio needed to sustain an annual spend based on the 4% rule (safe withdrawal rate). Includes a share link.";
 

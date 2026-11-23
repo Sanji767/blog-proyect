@@ -16,7 +16,7 @@ export async function generateMetadata(
 
   if (!ebook) {
     return {
-      title: `Resource not found | ${SITE_NAME}`,
+      title: `Resource not found`,
       description: "We couldn't find the resource you were looking for.",
       robots: { index: false, follow: true },
     };
@@ -25,7 +25,7 @@ export async function generateMetadata(
   const canonicalPath = `/en/ebooks/${encodeURIComponent(ebook.id)}`;
 
   return {
-    title: `Resource | ${SITE_NAME}`,
+    title: `Resource`,
     description:
       "This resource is being translated. For now it’s available in Spanish.",
     robots: { index: false, follow: true },
@@ -37,7 +37,7 @@ export async function generateMetadata(
       },
     },
     openGraph: {
-      title: `Resource | ${SITE_NAME}`,
+      title: `Resource`,
       description:
         "This resource is being translated. For now it’s available in Spanish.",
       url: `${SITE_URL}${canonicalPath}`,

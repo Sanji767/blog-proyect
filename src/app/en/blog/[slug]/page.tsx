@@ -60,7 +60,7 @@ export async function generateMetadata(
     const postEs = await getPostBySlug(params.slug, "es");
     if (postEs) {
       return {
-        title: "Available in Spanish | FinanzasEU",
+        title: "Available in Spanish",
         description: `This article is currently available in Spanish: ${postEs.title}`,
         alternates: {
           canonical: `/blog/${postEs.slug}`,
@@ -69,7 +69,7 @@ export async function generateMetadata(
       };
     }
     return {
-      title: "Article not found | FinanzasEU",
+      title: "Article not found",
       robots: { index: false, follow: true },
     };
   }
@@ -79,13 +79,14 @@ export async function generateMetadata(
   const canonicalPath = `/en/blog/${post.slug}`;
   const ogImage = post.coverImage ?? post.image;
   const publishedTime = toIsoDate(post.date);
+  const modifiedTime = toIsoDate(post.lastReviewed) ?? publishedTime;
   const description =
     (post.description ?? "").trim() ||
     (post.excerpt ?? "").trim() ||
     "FinanzasEU article";
 
   return {
-    title: `${post.title} | FinanzasEU`,
+    title: post.title,
     description,
     alternates: {
       canonical: canonicalPath,
@@ -97,7 +98,7 @@ export async function generateMetadata(
       url: canonicalPath,
       locale: "en_US",
       publishedTime,
-      modifiedTime: publishedTime,
+      modifiedTime,
       images: ogImage
         ? [
             {
@@ -110,7 +111,6 @@ export async function generateMetadata(
             },
           ],
     },
-    keywords: post.tags,
   };
 }
 
@@ -140,11 +140,24 @@ export default async function BlogPostPageEn(props: { params: Promise<{ slug: st
   }
 
   const publishedDate = new Date(post.date);
-  const formattedDate = publishedDate.toLocaleDateString("en-US", {
+  const formattedPublished = publishedDate.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+  const reviewedDate = post.lastReviewed ? new Date(post.lastReviewed) : null;
+  const formattedReviewed =
+    reviewedDate && !Number.isNaN(reviewedDate.getTime())
+      ? reviewedDate.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      : null;
+  const showReviewed =
+    Boolean(formattedReviewed) &&
+    reviewedDate !== null &&
+    reviewedDate.getTime() !== publishedDate.getTime();
   const authorLabel = (post.author ?? "").trim() || "FinanzasEU Team";
 
   const markdownContent =
@@ -167,6 +180,7 @@ export default async function BlogPostPageEn(props: { params: Promise<{ slug: st
     : DEFAULT_OG_IMAGE_URL;
 
   const publishedIso = toIsoDate(post.date);
+  const modifiedIso = toIsoDate(post.lastReviewed) ?? publishedIso;
   const description =
     (post.description ?? "").trim() || (post.excerpt ?? "").trim() || undefined;
 
@@ -208,7 +222,7 @@ export default async function BlogPostPageEn(props: { params: Promise<{ slug: st
     description,
     image: [heroImageAbsoluteUrl],
     datePublished: publishedIso,
-    dateModified: publishedIso,
+    dateModified: modifiedIso,
     author: post.author
       ? {
           "@type": "Person",
@@ -282,7 +296,8 @@ export default async function BlogPostPageEn(props: { params: Promise<{ slug: st
       <article className="space-y-12">
         <header className="space-y-4">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Updated {formattedDate}
+            Published {formattedPublished}
+            {showReviewed ? <span> · Updated {formattedReviewed}</span> : null}
             {post.readingTime ? <span> · {post.readingTime}</span> : null}
           </p>
           <p className="text-sm text-muted-foreground">

@@ -79,7 +79,7 @@ export async function generateMetadata(
   const post = await getPostBySlug(params.slug);
   if (!post)
     return {
-      title: "Artículo no encontrado | FinanzasEU",
+      title: "Artículo no encontrado",
       // Cinturón y tirantes: el componente llama a notFound() (404 real),
       // pero si la metadata llegara a renderizarse, que no sea indexable.
       robots: { index: false, follow: true },
@@ -88,13 +88,14 @@ export async function generateMetadata(
   const canonicalPath = `/blog/${post.slug}`;
   const ogImage = post.coverImage ?? post.image;
   const publishedTime = toIsoDate(post.date);
+  const modifiedTime = toIsoDate(post.lastReviewed) ?? publishedTime;
   const description =
     (post.description ?? "").trim() ||
     (post.excerpt ?? "").trim() ||
     "Artículo de FinanzasEU";
 
   return {
-    title: `${post.title} | FinanzasEU`,
+    title: post.title,
     description,
     alternates: {
       canonical: canonicalPath,
@@ -105,7 +106,7 @@ export async function generateMetadata(
       type: "article",
       url: canonicalPath,
       publishedTime,
-      modifiedTime: publishedTime,
+      modifiedTime,
       images: ogImage
         ? [
             {
@@ -118,7 +119,6 @@ export async function generateMetadata(
             },
           ],
     },
-    keywords: post.tags,
   };
 }
 
@@ -135,11 +135,27 @@ export default async function BlogPostPage(
   const authorLabel = (post.author ?? "").trim() || "Equipo editorial";
 
   const publishedDate = new Date(post.date);
-  const formattedDate = publishedDate.toLocaleDateString("es-ES", {
+  const formattedPublished = publishedDate.toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+  const reviewedDate = post.lastReviewed ? new Date(post.lastReviewed) : null;
+  const formattedReviewed =
+    reviewedDate && !Number.isNaN(reviewedDate.getTime())
+      ? reviewedDate.toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      : null;
+  // The chip only shows when the review date actually differs from the
+  // publication date (e.g. hidden for articles published and reviewed the
+  // same day, and for unedited Sanity posts where _updatedAt == _createdAt).
+  const showReviewed =
+    Boolean(formattedReviewed) &&
+    reviewedDate !== null &&
+    reviewedDate.getTime() !== publishedDate.getTime();
 
   const heroImage = post.coverImage ?? post.image;
   const heroImageUrl = heroImage
@@ -152,6 +168,7 @@ export default async function BlogPostPage(
     : DEFAULT_OG_IMAGE_URL;
 
   const publishedIso = toIsoDate(post.date);
+  const modifiedIso = toIsoDate(post.lastReviewed) ?? publishedIso;
   const description =
     (post.description ?? "").trim() || (post.excerpt ?? "").trim() || undefined;
 
@@ -196,7 +213,7 @@ export default async function BlogPostPage(
     description,
     image: [heroImageAbsoluteUrl],
     datePublished: publishedIso,
-    dateModified: publishedIso,
+    dateModified: modifiedIso,
     author: post.author
       ? {
           "@type": "Person",
@@ -314,8 +331,17 @@ export default async function BlogPostPage(
                 dateTime={post.date}
                 className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80"
               >
-                Actualizado {formattedDate}
+                Publicado {formattedPublished}
               </time>
+
+              {showReviewed ? (
+                <time
+                  dateTime={post.lastReviewed}
+                  className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80"
+                >
+                  Revisado el {formattedReviewed}
+                </time>
+              ) : null}
 
               {post.readingTime ? (
                 <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80">

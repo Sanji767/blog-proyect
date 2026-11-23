@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import Container from "@/components/layout/Container";
-import { DEFAULT_OG_IMAGE_URL } from "@/lib/seo";
+import { BLOG_OG_IMAGE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "FinanzasEU Blog — banks, IBAN & fees (2026)",
+  title: "Blog — banks, IBAN & fees (2026)",
   description:
     "Practical guides about digital banks, European IBANs, fees, multi-currency accounts and finance for living or working in Europe. Updated in 2026.",
   openGraph: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: DEFAULT_OG_IMAGE_URL,
+        url: BLOG_OG_IMAGE_URL,
         width: 1376,
         height: 768,
         alt: "FinanzasEU Blog",

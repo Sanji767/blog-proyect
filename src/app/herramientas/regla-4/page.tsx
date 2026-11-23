@@ -5,7 +5,7 @@ import Container from "@/components/layout/Container";
 import FourPercentRuleCalculator from "@/components/tools/FourPercentRuleCalculator";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Calculadora regla del 4% (FIRE) | FinanzasEU";
+const TITLE = "Calculadora regla del 4% (FIRE)";
 const DESCRIPTION =
   "Calcula el capital objetivo aproximado para sostener un gasto anual según la regla del 4% (safe withdrawal rate). Enlace para compartir.";
 

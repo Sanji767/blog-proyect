@@ -64,7 +64,7 @@ export async function generateMetadata(
 
   if (!bank) {
     return {
-      title: "Bank not found | FinanzasEU",
+      title: "Bank not found",
       description: "We couldn't find the requested bank profile.",
     };
   }
@@ -73,7 +73,7 @@ export async function generateMetadata(
   const canonicalPath = `/en/programas/${bank.slug}`;
 
   return {
-    title: `${name} Review – Fees, IBAN & How to Open an Account | FinanzasEU`,
+    title: `${name} Review – Fees, IBAN & How to Open an Account`,
     description: tagline,
     alternates: {
       canonical: canonicalPath,

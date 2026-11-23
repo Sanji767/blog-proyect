@@ -19,7 +19,7 @@ import { withLocale } from "@/lib/i18n";
 import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Benefits of digital banks in Europe | FinanzasEU",
+  title: "Benefits of digital banks in Europe",
   description:
     "Independent analysis of the real benefits of digital banks in Europe: fees, IBAN, safety, multi-currency features and support. Updated in 2026.",
   alternates: {

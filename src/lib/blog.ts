@@ -33,6 +33,7 @@ type SanityPostPreview = Omit<BlogPostPreview, "image"> & {
   category?: string | null;
   tags?: Array<string | null> | null;
   views?: number | null;
+  lastReviewed?: string | null;
 };
 
 type SanityPost = SanityPostPreview & {
@@ -108,6 +109,7 @@ function normalizePreview(post: SanityPostPreview, locale: Locale): BlogPostPrev
     description: post.description ?? "",
     excerpt: post.excerpt ?? post.description ?? "",
     date: post.date ?? new Date().toISOString(),
+    lastReviewed: post.lastReviewed ?? undefined,
     category: normalizeCategory(post.category),
     tags: normalizeTags(post.tags),
     image: post.image ?? undefined,
@@ -204,6 +206,12 @@ function readLocalPosts(locale: Locale): BlogPost[] {
         description: description || derivedExcerpt,
         excerpt: derivedExcerpt,
         date: data.date ?? `${year}-01-01`,
+        lastReviewed:
+          data.lastReviewed instanceof Date
+            ? data.lastReviewed.toISOString().slice(0, 10)
+            : typeof data.lastReviewed === "string"
+              ? data.lastReviewed
+              : undefined,
         category: normalizeCategory(data.category),
         tags: normalizeTags(data.tags),
         image: typeof data.image === "string" ? data.image : undefined,

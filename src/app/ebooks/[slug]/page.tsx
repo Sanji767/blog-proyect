@@ -22,7 +22,7 @@ export async function generateMetadata(
 
   if (!ebook) {
     return {
-      title: `Ebook no encontrado | ${SITE_NAME}`,
+      title: `Ebook no encontrado`,
       description: "No hemos encontrado el ebook o curso que buscabas.",
       robots: { index: false, follow: true },
     };
@@ -31,7 +31,7 @@ export async function generateMetadata(
   const canonicalPath = `/ebooks/${encodeURIComponent(ebook.id)}`;
 
   return {
-    title: `${ebook.title} | ${SITE_NAME}`,
+    title: ebook.title,
     description: ebook.description,
     alternates: { canonical: canonicalPath },
     openGraph: {

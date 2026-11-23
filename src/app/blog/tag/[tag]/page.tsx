@@ -42,7 +42,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     const legacy = LEGACY_TAGS.es[tagSlug];
     if (legacy) permanentRedirect(`/blog/tag/${legacy}`);
     return {
-      title: "Etiqueta no encontrada | FinanzasEU",
+      title: "Etiqueta no encontrada",
       robots: { index: false, follow: true },
     };
   }
@@ -50,7 +50,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const label = tag.title;
 
   return {
-    title: `#${label} | Blog FinanzasEU`,
+    title: `#${label}`,
     description: `Todos los artículos etiquetados con #${label}.`,
     robots: { index: false, follow: true },
     alternates: {

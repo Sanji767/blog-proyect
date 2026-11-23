@@ -6,9 +6,9 @@ import TaeCalculator from "@/components/tools/TaeCalculator";
 import { withLocale } from "@/lib/i18n";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "APR/APY calculator (from nominal rate) | FinanzasEU";
+const TITLE = "APR/APY calculator (from nominal rate)";
 const DESCRIPTION =
-  "Convert a nominal rate to an effective annual rate depending on compounding (monthly, quarterly, yearly) and estimate annual interest. Includes optional fixed fee and a share link.";
+  "Convert a nominal rate to an effective annual rate depending on compounding (monthly, quarterly, yearly) and estimate annual interest.";
 
 export const metadata: Metadata = {
   title: TITLE,

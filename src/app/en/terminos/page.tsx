@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | FinanzasEU",
+  title: "Terms of Use",
   description:
     "Legal terms for using FinanzasEU — an independent informational website about banking and personal finance in Europe.",
   alternates: {

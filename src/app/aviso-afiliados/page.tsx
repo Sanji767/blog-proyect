@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Aviso de Afiliados - FinanzasEU",
+  title: "Aviso de Afiliados",
   description: "Transparencia total: FinanzasEU no gana nada con los enlaces salientes. Explicamos cómo funciona hoy y qué cambiaría si eso cambia.",
   alternates: {
     canonical: "/aviso-afiliados",

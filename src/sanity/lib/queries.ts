@@ -6,6 +6,7 @@ export const postPreviewFields = groq`
   description,
   excerpt,
   "date": coalesce(publishedAt, _createdAt),
+  "lastReviewed": _updatedAt,
   category,
   tags,
   featured,

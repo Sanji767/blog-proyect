@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { vlogPreviews } from "@/lib/vlogs";
 
 export const metadata: Metadata = {
-  title: "Vlogs | FinanzasEU",
+  title: "Vlogs",
   description:
     "Vídeos y guías prácticas sobre banca digital, IBAN, comisiones y vida financiera en Europa.",
   alternates: {

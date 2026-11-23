@@ -6,7 +6,7 @@ import InflationCalculator from "@/components/tools/InflationCalculator";
 import { withLocale } from "@/lib/i18n";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Inflation & purchasing power calculator | FinanzasEU";
+const TITLE = "Inflation & purchasing power calculator";
 const DESCRIPTION =
   "Estimate compounded inflation and purchasing power: how much you’ll need in the future to keep the same value, and how much your money loses today if it doesn’t grow.";
 

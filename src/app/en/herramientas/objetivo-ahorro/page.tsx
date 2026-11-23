@@ -6,7 +6,7 @@ import SavingsGoalCalculator from "@/components/tools/SavingsGoalCalculator";
 import { withLocale } from "@/lib/i18n";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Savings goal calculator (monthly contribution) | FinanzasEU";
+const TITLE = "Savings goal calculator (monthly contribution)";
 const DESCRIPTION =
   "Calculate how much to contribute each month to reach a target in X years with an expected return. Includes yearly table and a share link.";
 

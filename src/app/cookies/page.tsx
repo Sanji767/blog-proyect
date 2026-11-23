@@ -1,7 +1,7 @@
 import CookiePreferences from "@/components/cookies/CookiePreferences";
 
 export const metadata = {
-  title: "Política de Cookies | FinanzasEU",
+  title: "Política de Cookies",
   description:
     "Información sobre el uso de cookies en FinanzasEU: qué son, qué tipos utilizamos y cómo puedes gestionarlas.",
   alternates: {

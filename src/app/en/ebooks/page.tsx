@@ -4,7 +4,7 @@ import Link from "next/link";
 import Container from "@/components/layout/Container";
 import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL } from "@/lib/seo";
 
-const TITLE = `Ebooks & courses | ${SITE_NAME}`;
+const TITLE = `Ebooks & courses`;
 const DESCRIPTION =
   "Guides and courses to make better decisions: saving, investing and banking in Europe.";
 

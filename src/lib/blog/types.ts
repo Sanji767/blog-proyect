@@ -11,6 +11,7 @@ export type BlogPost = {
   coverImage?: string;
   image?: string | StaticImageData;
   date: string;
+  lastReviewed?: string;
   category: string;
   tags: string[];
   readingTime?: string;

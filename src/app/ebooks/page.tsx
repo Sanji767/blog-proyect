@@ -4,7 +4,7 @@ import EbooksClient from "./EbooksClient";
 import { ebooks } from "@/lib/ebooks-data";
 import { DEFAULT_OG_IMAGE_URL, SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = `Ebooks y cursos | ${SITE_NAME}`;
+const TITLE = `Ebooks y cursos`;
 const DESCRIPTION =
   "Biblioteca de guías y cursos para tomar mejores decisiones: ahorro, inversión y banca en Europa.";
 

@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import Container from "@/components/layout/Container";
-import { DEFAULT_OG_IMAGE_URL } from "@/lib/seo";
+import { BLOG_OG_IMAGE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Blog de bancos digitales, IBAN y comisiones (2026) | FinanzasEU",
+  title: "Blog de bancos digitales, IBAN y comisiones (2026)",
   description:
     "Guías prácticas sobre bancos digitales, IBAN europeo, comisiones, multidivisa y finanzas para vivir o trabajar en Europa. Actualizado en 2026.",
   openGraph: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: DEFAULT_OG_IMAGE_URL,
+        url: BLOG_OG_IMAGE_URL,
         width: 1376,
         height: 768,
         alt: "Blog FinanzasEU",

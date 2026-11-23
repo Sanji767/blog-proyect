@@ -74,7 +74,7 @@ export async function generateMetadata(
 
   if (!bank) {
     return {
-      title: "Programa no encontrado | FinanzasEU",
+      title: "Programa no encontrado",
       description:
         "No hemos encontrado el banco o programa que estabas buscando.",
     };
@@ -86,7 +86,7 @@ export async function generateMetadata(
   return {
     title:
       seo?.metaTitle ??
-      `${name} – Opiniones, comisiones y cómo abrir tu cuenta | FinanzasEU`,
+      `${name} – Opiniones, comisiones y cómo abrir tu cuenta`,
     description: seo?.metaDescription ?? tagline,
     robots: isDraft ? { index: false, follow: true } : undefined,
     alternates: seo?.canonicalUrl

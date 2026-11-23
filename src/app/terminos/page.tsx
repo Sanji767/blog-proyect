@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Términos y Condiciones de Uso | FinanzasEU",
+  title: "Términos y Condiciones de Uso",
   description: "Condiciones legales de uso de FinanzasEU – web independiente de información financiera.",
   alternates: {
     canonical: "/terminos",

@@ -153,7 +153,7 @@ function createDraftBank(seed: DraftBankSeed): Bank {
   const seo: Bank["seo"] = {
     metaTitle:
       seed.seo?.metaTitle ??
-      `${seed.name}: comisiones, IBAN ${seed.ibanPrefix} y opiniones (2026) | FinanzasEU`,
+      `${seed.name}: comisiones, IBAN ${seed.ibanPrefix} y opiniones (2026)`,
     metaDescription: seed.seo?.metaDescription ?? seed.tagline,
     slug: seed.slug,
     canonicalUrl,
@@ -1413,7 +1413,7 @@ export const banks: Bank[] = [
     website: "https://www.triodos.com",
     acceptedCountries: ["España", "Países Bajos", "UE (según país)"],
     seo: {
-      metaTitle: "Triodos Bank España: comisiones, IBAN ES y opiniones (2026) | FinanzasEU",
+      metaTitle: "Triodos Bank España: comisiones, IBAN ES y opiniones (2026)",
     },
     _priority: 997,
   }),
@@ -1448,7 +1448,7 @@ export const banks: Bank[] = [
       regulatedBy: ["FCA", "CySEC", "BaFin"],
     },
     seo: {
-      metaTitle: "Trading 212: comisiones, intereses y opiniones (2026) | FinanzasEU",
+      metaTitle: "Trading 212: comisiones, intereses y opiniones (2026)",
       keywords: ["Trading 212 opiniones", "Trading 212 comisiones", "Trading 212 intereses", "Trading 212 tarjeta"],
     },
     _priority: 15,
@@ -1515,7 +1515,7 @@ export const banks: Bank[] = [
       regulatedBy: ["FCA"],
     },
     seo: {
-      metaTitle: "Plum App: ahorro automático, intereses y opiniones (2026) | FinanzasEU",
+      metaTitle: "Plum App: ahorro automático, intereses y opiniones (2026)",
       keywords: ["Plum opiniones", "Plum ahorro automático", "Plum intereses", "Plum app España"],
     },
     _priority: 22,

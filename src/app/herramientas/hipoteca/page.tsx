@@ -5,7 +5,7 @@ import Container from "@/components/layout/Container";
 import MortgageCalculator from "@/components/tools/MortgageCalculator";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Calculadora de hipoteca (euríbor + diferencial) | FinanzasEU";
+const TITLE = "Calculadora de hipoteca (euríbor + diferencial)";
 const DESCRIPTION =
   "Calcula tu cuota mensual con hipoteca variable (euríbor a 12 meses + diferencial) o fija, y simula cuánto cambiará tu cuota en la próxima revisión.";
 

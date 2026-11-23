@@ -6,7 +6,7 @@ import MortgageCalculator from "@/components/tools/MortgageCalculator";
 import { withLocale } from "@/lib/i18n";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Mortgage calculator (Euribor + spread) | FinanzasEU";
+const TITLE = "Mortgage calculator (Euribor + spread)";
 const DESCRIPTION =
   "Work out your monthly mortgage payment with a variable rate (12-month Euribor + spread) or a fixed rate, and simulate how it changes at your next reset.";
 

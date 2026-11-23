@@ -6,7 +6,7 @@ import ExchangeRatesWidget from "@/components/tools/ExchangeRatesWidget";
 import { TOOLS as tools, type Tool } from "@/lib/tools";
 import { SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Herramientas financieras | FinanzasEU";
+const TITLE = "Herramientas financieras";
 const DESCRIPTION =
   "Herramientas gratuitas para decidir con criterio: IBAN scanner, comparativa de bancos y calculadoras (hipoteca, interés compuesto, inflación, TAE, objetivo de ahorro).";
 

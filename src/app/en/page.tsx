@@ -31,15 +31,6 @@ export const metadata: Metadata = {
   title: "Digital bank comparison in Europe (2026) + IBAN validator",
   description:
     "Compare banks with clear criteria (IBAN, fees, requirements) and official links. Includes a SEPA IBAN validator to double-check details before sending money.",
-  keywords: [
-    "bank comparison",
-    "best digital banks",
-    "IBAN validator",
-    "IBAN checker",
-    "SEPA IBAN",
-    "banks in Europe",
-    "no-fee accounts",
-  ],
   alternates: {
     canonical: "/en",
     languages: {

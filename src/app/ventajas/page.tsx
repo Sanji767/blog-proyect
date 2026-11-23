@@ -18,7 +18,7 @@ import { Card } from "@/components/ui/card";
 import { toJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Ventajas de los bancos digitales en Europa | FinanzasEU",
+  title: "Ventajas de los bancos digitales en Europa",
   description:
     "Análisis independiente de las ventajas reales de los bancos digitales en Europa: comisiones, IBAN, seguridad, multidivisa y soporte. Actualizado en 2026.",
   alternates: {

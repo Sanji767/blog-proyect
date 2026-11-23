@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import ContactoClient from "@/app/contacto/ContactoClient";
 import { DEFAULT_OG_IMAGE_URL, SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = `Contact | ${SITE_NAME}`;
+const TITLE = `Contact`;
 const DESCRIPTION =
   "Tell us your situation (travel, freelancer, business, main account) and we’ll point you in the right direction with a clear answer. Free and no fluff.";
 

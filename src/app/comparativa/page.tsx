@@ -3,7 +3,7 @@ import Container from "@/components/layout/Container";
 import ComparisonHubClient from "@/components/sections/comparar/ComparisonHubClient";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Comparativa de bancos en Europa 2026: Duelos Cara a Cara | FinanzasEU";
+const TITLE = "Comparativa de bancos en Europa 2026: Duelos Cara a Cara";
 const DESCRIPTION =
   "Compara Revolut vs Wise, N26 vs Revolut, Trade Republic vs MyInvestor y más. Analiza comisiones, IBAN, rentabilidad y ventajas cara a cara.";
 

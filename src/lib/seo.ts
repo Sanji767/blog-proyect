@@ -6,6 +6,10 @@ export const SITE_LOGO_URL = `${SITE_URL}/images/logo.png`;
 // (1376x768). The old /og-escalada.png 404'd. A dedicated 1200x630 branded
 // OG image would be better long-term; this fixes the broken share image now.
 export const DEFAULT_OG_IMAGE_URL = `${SITE_URL}/images/blog/savings_interest_chart.jpg`;
+// Dedicated OG images (W4, 2026-11-23): /sobre and /blog previously shared
+// the generic default. Both files already exist in public/images/blog/.
+export const SOBRE_OG_IMAGE_URL = `${SITE_URL}/images/blog/bank_security_shield.jpg`;
+export const BLOG_OG_IMAGE_URL = `${SITE_URL}/images/blog/mobile_savings_app.jpg`;
 
 export function toAbsoluteUrl(value: string, baseUrl: string = SITE_URL): string {
   if (value.startsWith("http://") || value.startsWith("https://")) return value;

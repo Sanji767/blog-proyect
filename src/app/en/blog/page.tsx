@@ -16,7 +16,7 @@ import {
 } from "@/lib/seo";
 
 const BLOG_PAGE_TITLE =
-  "FinanzasEU Blog — practical guides on banks, IBAN and fees (2026)";
+  "Blog — practical guides on banks, IBAN and fees (2026)";
 const BLOG_PAGE_DESCRIPTION =
   "Honest comparisons, real-world reviews and practical tips to save money with Revolut, Wise, N26 and more.";
 

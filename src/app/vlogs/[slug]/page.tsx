@@ -69,10 +69,10 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const params = await props.params;
   const vlog = getVlogBySlug(params.slug);
-  if (!vlog) return { title: "Vlog no encontrado | FinanzasEU" };
+  if (!vlog) return { title: "Vlog no encontrado" };
 
   return {
-    title: `${vlog.title} | FinanzasEU`,
+    title: vlog.title,
     description: vlog.description,
     alternates: {
       canonical: `/vlogs/${vlog.slug}`,

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import IbanClient from "./IbanClient";
 import { DEFAULT_OG_IMAGE_URL, SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "IBAN Scanner SEPA (gratis) | FinanzasEU";
+const TITLE = "IBAN Scanner SEPA (gratis)";
 const DESCRIPTION =
   "Valida un IBAN en segundos: longitud, país, SEPA y entidad (cuando aplica). Incluye modo bulk, historial y enlace/QR para compartir.";
 

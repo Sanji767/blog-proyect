@@ -40,13 +40,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     const legacy = LEGACY_CATEGORIES.es[categoria];
     if (legacy) permanentRedirect(`/blog/categoria/${legacy}`);
     return {
-      title: "Categoría no encontrada | FinanzasEU",
+      title: "Categoría no encontrada",
       robots: { index: false, follow: true },
     };
   }
 
   return {
-    title: `${cat.title} | Blog FinanzasEU`,
+    title: cat.title,
     description: `Todos los artículos sobre ${cat.title.toLowerCase()}: guías, opiniones y trucos.`,
     ...(cat.count < 3 ? { robots: { index: false, follow: true } } : {}),
     alternates: {

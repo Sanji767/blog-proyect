@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Affiliate Disclosure | FinanzasEU",
+  title: "Affiliate Disclosure",
   description:
     "Full transparency: FinanzasEU currently earns nothing from outbound links. How it works today, and what would change if that changes.",
   alternates: {

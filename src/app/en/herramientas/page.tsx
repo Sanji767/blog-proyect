@@ -6,7 +6,7 @@ import ExchangeRatesWidget from "@/components/tools/ExchangeRatesWidget";
 import { withLocale } from "@/lib/i18n";
 import { SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Financial tools | FinanzasEU";
+const TITLE = "Financial tools";
 const DESCRIPTION =
   "Free tools to decide with clarity: IBAN scanner, bank comparison and calculators (mortgage, compound interest, inflation, APR/APY, savings goal).";
 

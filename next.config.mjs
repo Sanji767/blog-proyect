@@ -116,6 +116,13 @@ const nextConfig = {
         destination: "/blog/las-mejores-tarjetas-de-credito-con-recompensas-en-2026",
         permanent: true,
       },
+      // Revisión Revolut: contenido verificado en noviembre de 2026, el año
+      // del slug se actualiza de 2025 a 2026 (F-05).
+      {
+        source: "/blog/opiniones-revolut-2025",
+        destination: "/blog/opiniones-revolut-2026",
+        permanent: true,
+      },
     ];
   },
 

@@ -71,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const hasEn = postSlugsEn.has(post.slug);
     urls.push({
       url: toUrl(`/blog/${post.slug}`),
-      lastModified: safeDate(post.date, now),
+      lastModified: safeDate(post.lastReviewed ?? post.date, now),
       alternates: hasEn
         ? {
             languages: {
@@ -87,7 +87,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const hasEs = postSlugsEs.has(post.slug);
     urls.push({
       url: toUrl(`/en/blog/${post.slug}`),
-      lastModified: safeDate(post.date, now),
+      lastModified: safeDate(post.lastReviewed ?? post.date, now),
       alternates: hasEs
         ? {
             languages: {

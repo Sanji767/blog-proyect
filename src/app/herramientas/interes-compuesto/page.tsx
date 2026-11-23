@@ -5,7 +5,7 @@ import Container from "@/components/layout/Container";
 import CompoundInterestCalculator from "@/components/tools/CompoundInterestCalculator";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Calculadora de interés compuesto (con aportaciones) | FinanzasEU";
+const TITLE = "Calculadora de interés compuesto (con aportaciones)";
 const DESCRIPTION =
   "Calcula interés compuesto con aportaciones mensuales y ajuste por inflación. Proyección anual, tabla y enlace para compartir.";
 

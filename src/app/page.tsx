@@ -37,16 +37,6 @@ export const metadata: Metadata = {
       en: "/en",
     },
   },
-  keywords: [
-    "comparador de bancos",
-    "mejor banco",
-    "validar IBAN",
-    "comprobador IBAN",
-    "IBAN España",
-    "bancos sin comisiones",
-    "cuentas bancarias",
-    "SEPA IBAN",
-  ],
   openGraph: {
     title: "Comparativa de bancos en Europa (2026) + validador IBAN",
     description:

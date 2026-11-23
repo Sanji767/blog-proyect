@@ -32,16 +32,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Guía independiente para elegir banco en Europa: comisiones, IBAN europeo, requisitos y enlaces oficiales. Comparativa y herramientas gratis (IBAN scanner). Actualizado en 2026.",
-
-  keywords: [
-    "mejores bancos 2026",
-    "banco con iban europeo",
-    "cuentas sin comisiones",
-    "mejor banco online",
-    "revolut vs n26",
-    "banco europeo españa",
-  ],
+    "Guía independiente para elegir banco en Europa: comisiones, IBAN europeo, requisitos y enlaces oficiales. Comparativa y herramientas gratis.",
 
   openGraph: {
     title: "Comparativa de bancos digitales y validador IBAN (2026)",

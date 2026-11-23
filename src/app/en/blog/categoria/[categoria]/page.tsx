@@ -41,13 +41,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     const legacy = LEGACY_CATEGORIES.en[categoria];
     if (legacy) permanentRedirect(`/en/blog/categoria/${legacy}`);
     return {
-      title: "Category not found | FinanzasEU",
+      title: "Category not found",
       robots: { index: false, follow: true },
     };
   }
 
   return {
-    title: `${cat.title} | FinanzasEU Blog`,
+    title: cat.title,
     description: `All articles about ${cat.title.toLowerCase()}: guides, reviews and practical tips.`,
     ...(cat.count < 3 ? { robots: { index: false, follow: true } } : {}),
     alternates: {

@@ -5,7 +5,7 @@ import Container from "@/components/layout/Container";
 import SavingsGoalCalculator from "@/components/tools/SavingsGoalCalculator";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Calculadora de objetivo de ahorro (aportación mensual) | FinanzasEU";
+const TITLE = "Calculadora de objetivo de ahorro (aportación mensual)";
 const DESCRIPTION =
   "Calcula cuánto aportar al mes para llegar a un objetivo en X años con una rentabilidad esperada. Incluye tabla anual y enlace para compartir.";
 

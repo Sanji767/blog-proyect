@@ -4,7 +4,7 @@ import { ArrowRight, CheckCircle2, FileText, ShieldCheck, Users } from "lucide-r
 
 import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
-import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
+import { SITE_LOGO_URL, SITE_NAME, SITE_URL, SOBRE_OG_IMAGE_URL, toJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Sobre FinanzasEU (quiénes somos y metodología)",
@@ -16,6 +16,23 @@ export const metadata: Metadata = {
       es: "/sobre",
       en: "/en/sobre",
     },
+  },
+  openGraph: {
+    title: "Sobre FinanzasEU (quiénes somos y metodología)",
+    description:
+      "Conoce quién está detrás de FinanzasEU, cómo analizamos bancos y cuentas en Europa y cómo mantenemos la transparencia (afiliados, fuentes oficiales y actualización).",
+    url: `${SITE_URL}/sobre`,
+    type: "website",
+    locale: "es_ES",
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: SOBRE_OG_IMAGE_URL,
+        width: 1376,
+        height: 768,
+        alt: "Sobre FinanzasEU",
+      },
+    ],
   },
 };
 

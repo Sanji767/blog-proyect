@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, FileText, ShieldCheck, Users } from "lucide-r
 import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
 import { withLocale } from "@/lib/i18n";
-import { DEFAULT_OG_IMAGE_URL, SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
+import { SITE_LOGO_URL, SITE_NAME, SITE_URL, SOBRE_OG_IMAGE_URL, toJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About FinanzasEU (who we are and methodology)",
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "About FinanzasEU",
+    title: "About FinanzasEU (who we are and methodology)",
     description:
       "Methodology, transparency and how we analyze banks and accounts in Europe.",
     url: `${SITE_URL}/en/sobre`,
     type: "website",
     locale: "en_US",
     siteName: SITE_NAME,
-    images: [{ url: DEFAULT_OG_IMAGE_URL }],
+    images: [{ url: SOBRE_OG_IMAGE_URL, width: 1376, height: 768, alt: "About FinanzasEU" }],
   },
 };
 

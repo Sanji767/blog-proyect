@@ -3,7 +3,7 @@ import Container from "@/components/layout/Container";
 import ComparisonHubClient from "@/components/sections/comparar/ComparisonHubClient";
 import { SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Bank Comparison Hub 2026: Head-to-Head Duels | FinanzasEU";
+const TITLE = "Bank Comparison Hub 2026: Head-to-Head Duels";
 const DESCRIPTION =
   "Compare Revolut vs Wise, N26 vs Revolut, Trade Republic vs MyInvestor and more. Compare fees, IBANs, yields and card perks side by side.";
 

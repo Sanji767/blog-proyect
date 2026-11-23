@@ -6,7 +6,7 @@ import CompoundInterestCalculator from "@/components/tools/CompoundInterestCalcu
 import { withLocale } from "@/lib/i18n";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Compound interest calculator (with contributions) | FinanzasEU";
+const TITLE = "Compound interest calculator (with contributions)";
 const DESCRIPTION =
   "Calculate compound interest with monthly contributions and inflation adjustment. Includes yearly projection, table and a share link.";
 

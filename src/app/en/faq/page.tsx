@@ -5,7 +5,7 @@ import Container from "@/components/layout/Container";
 import { withLocale } from "@/lib/i18n";
 import { DEFAULT_OG_IMAGE_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = `FAQ | ${SITE_NAME}`;
+const TITLE = `FAQ`;
 const DESCRIPTION =
   "Clear answers about European banks, IBAN/SEPA, fees, safety and opening accounts.";
 

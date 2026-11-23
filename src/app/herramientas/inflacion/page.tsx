@@ -5,7 +5,7 @@ import Container from "@/components/layout/Container";
 import InflationCalculator from "@/components/tools/InflationCalculator";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Calculadora de inflación y poder adquisitivo | FinanzasEU";
+const TITLE = "Calculadora de inflación y poder adquisitivo";
 const DESCRIPTION =
   "Calcula inflación compuesta y poder adquisitivo: cuánto necesitas en el futuro para mantener el mismo valor y cuánto pierde hoy tu dinero.";
 

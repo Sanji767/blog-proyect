@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import CookiePreferences from "@/components/cookies/CookiePreferences";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | FinanzasEU",
+  title: "Cookie Policy",
   description:
     "Information about cookies on FinanzasEU: what they are, which types we use and how you can manage your preferences.",
   alternates: {

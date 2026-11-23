@@ -5,7 +5,7 @@ import Container from "@/components/layout/Container";
 import TaeCalculator from "@/components/tools/TaeCalculator";
 import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
-const TITLE = "Calculadora TAE (desde TIN) | FinanzasEU";
+const TITLE = "Calculadora TAE (desde TIN)";
 const DESCRIPTION =
   "Convierte TIN a TAE según la capitalización (mensual, trimestral, anual) y estima el interés anual. Incluye comisión fija opcional y enlace para compartir.";
 
