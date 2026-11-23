@@ -216,6 +216,8 @@ function readLocalPosts(locale: Locale): BlogPost[] {
         tags: normalizeTags(data.tags),
         image: typeof data.image === "string" ? data.image : undefined,
         coverImage: typeof data.coverImage === "string" ? data.coverImage : undefined,
+        imageCredit: typeof data.imageCredit === "string" ? data.imageCredit : undefined,
+        imageCreditUrl: typeof data.imageCreditUrl === "string" ? data.imageCreditUrl : undefined,
         featured: Boolean(data.featured),
         readingTime: data.readingTime,
         youtubeId: data.youtubeId,

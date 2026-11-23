@@ -10,6 +10,8 @@ export type BlogPost = {
   content: string | PortableTextBlock[];
   coverImage?: string;
   image?: string | StaticImageData;
+  imageCredit?: string; // e.g. "Ken Teegardin / Wikimedia Commons (CC BY-SA 2.0)"
+  imageCreditUrl?: string; // link to the source file page
   date: string;
   lastReviewed?: string;
   category: string;

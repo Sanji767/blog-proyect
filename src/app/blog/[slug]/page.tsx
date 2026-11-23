@@ -390,6 +390,23 @@ export default async function BlogPostPage(
                 className="object-cover"
               />
             </div>
+            {post.imageCredit ? (
+              <figcaption className="mt-2 text-right text-xs text-muted-foreground">
+                Foto:{" "}
+                {post.imageCreditUrl ? (
+                  <a
+                    href={post.imageCreditUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-foreground"
+                  >
+                    {post.imageCredit}
+                  </a>
+                ) : (
+                  post.imageCredit
+                )}
+              </figcaption>
+            ) : null}
           </figure>
         ) : null}
 
