@@ -61,11 +61,14 @@ export const metadata: Metadata = {
     ],
   },
 
-  // NOTE (A8): no `twitter:` block here on purpose. X/Twitter cards fall back
-  // to the per-page openGraph tags, which are correct on every page. A root
-  // twitter block would stamp the homepage ES title/description on every
-  // article (including EN ones). The two homepages (src/app/page.tsx and
-  // src/app/en/page.tsx) keep their own page-specific twitter blocks.
+  // NOTE (A8): only `card` is set here on purpose. X/Twitter titles,
+  // descriptions and images fall back to the per-page openGraph tags, which
+  // are correct on every page; a root title/description would stamp the
+  // homepage ES text on every article (including EN ones). The two homepages
+  // keep their own page-specific twitter blocks.
+  twitter: {
+    card: "summary_large_image",
+  },
 
   robots: {
     index: true,

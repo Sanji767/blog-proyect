@@ -1,7 +1,15 @@
 // src/components/blog/CategoryBadge.tsx
 import Link from "next/link";
 
+const ACCENTED_LABELS: Record<string, string> = {
+  analisis: "Análisis",
+  autonomos: "Autónomos",
+  inversion: "Inversión",
+};
+
 function humanizeSlug(value: string): string {
+  const key = value.trim().toLowerCase();
+  if (ACCENTED_LABELS[key]) return ACCENTED_LABELS[key];
   const normalized = value.trim().replace(/-/g, " ");
   return normalized ? normalized.charAt(0).toUpperCase() + normalized.slice(1) : value;
 }

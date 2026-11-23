@@ -178,7 +178,7 @@ export default function SavingsCalculator() {
                 {copy.savingsLabel}
               </label>
               <span className="text-2xl font-black text-primary">
-                {amount.toLocaleString()} €
+                {amount.toLocaleString("es-ES")} €
               </span>
             </div>
 
@@ -233,7 +233,7 @@ export default function SavingsCalculator() {
                   {copy.traditionalBankLoss}
                 </p>
                 <p className="mt-1 text-2xl font-black text-primary-text">
-                  +{topProfit.toLocaleString()} €
+                  +{topProfit.toLocaleString("es-ES")} €
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   en {years} {years === 1 ? "año" : "años"} por mantener tu dinero inactivo.
@@ -282,7 +282,7 @@ export default function SavingsCalculator() {
 
                     <div className="text-right">
                       <span className="text-base font-black text-foreground">
-                        +{res.profit.toLocaleString()} €
+                        +{res.profit.toLocaleString("es-ES")} €
                       </span>
                       <span className="ml-1 text-[11px] text-muted-foreground">
                         {copy.totalEarnings}

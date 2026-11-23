@@ -78,6 +78,8 @@ export interface Bank {
     appStore?: number;
     googlePlay?: number;
     totalReviews?: number;
+    trustpilotUrl?: string;
+    ratingAsOf?: string; // ISO date the Trustpilot figure was checked
   };
 
   compliance: {
@@ -351,7 +353,9 @@ export const banks: Bank[] = [
       trustpilot: 4.7,
       appStore: 4.8,
       googlePlay: 4.7,
-      totalReviews: 495000,
+      totalReviews: 497321,
+      trustpilotUrl: "https://www.trustpilot.com/review/www.revolut.com",
+      ratingAsOf: "2026-11-23",
     },
 
     compliance: {

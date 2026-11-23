@@ -474,12 +474,36 @@ export default async function ProgramaPage(
                   label="Trustpilot"
                   value={`${rating.trustpilot.toFixed(1)} / 5${
                     rating.totalReviews
-                      ? ` · ${rating.totalReviews.toLocaleString()} opiniones`
+                      ? ` · ${rating.totalReviews.toLocaleString("es-ES")} opiniones`
                       : ""
                   }`}
                 />
               )}
             </dl>
+
+            {rating?.trustpilotUrl && (
+              <p className="mt-2 text-[11px] text-muted-foreground">
+                Fuente:{" "}
+                <a
+                  href={rating.trustpilotUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-foreground"
+                >
+                  Trustpilot
+                </a>
+                {rating.ratingAsOf
+                  ? `, a fecha de ${new Date(
+                      `${rating.ratingAsOf}T12:00:00`
+                    ).toLocaleDateString("es-ES", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}`
+                  : ""}
+                .
+              </p>
+            )}
 
             <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
               <span className="inline-flex items-center gap-1">
@@ -946,11 +970,10 @@ export default async function ProgramaPage(
             </a>
           </div>
           <p className="mt-3 max-w-xl text-[11px] text-muted-foreground">
-            Algunos enlaces de esta página son enlaces de afiliado. Esto
-            significa que FinanzasEU puede recibir una comisión si abres
-            tu cuenta a través de ellos. No pagarás nada extra y esta
-            comisión no afecta a nuestra opinión ni a nuestra valoración
-            del producto.
+            Los enlaces de esta página son enlaces directos a la web
+            oficial de cada entidad: FinanzasEU no recibe ninguna
+            comisión por ellos. Si en el futuro algún enlace generase
+            ingresos, lo indicaremos claramente en esta misma página.
           </p>
         </section>
       </Container>

@@ -36,7 +36,15 @@ import {
   toJsonLd,
 } from "@/lib/seo";
 
+const ACCENTED_LABELS: Record<string, string> = {
+  analisis: "Análisis",
+  autonomos: "Autónomos",
+  inversion: "Inversión",
+};
+
 function humanizeSlug(value: string): string {
+  const key = value.trim().toLowerCase();
+  if (ACCENTED_LABELS[key]) return ACCENTED_LABELS[key];
   const normalized = value.trim().replace(/-/g, " ");
   return normalized
     ? normalized.charAt(0).toUpperCase() + normalized.slice(1)
@@ -315,11 +323,6 @@ export default async function BlogPostPage(
                 {authorLabel}
               </Link>
 
-              {post.views !== undefined ? (
-                <span className="inline-flex items-center rounded-full border border-secondary-foreground/10 bg-secondary-foreground/5 px-3 py-1 font-semibold text-secondary-foreground/80">
-                  {post.views.toLocaleString("es-ES")} vistas
-                </span>
-              ) : null}
             </div>
 
             {post.tags?.length ? (
@@ -395,6 +398,12 @@ export default async function BlogPostPage(
                 <PortableTextRenderer value={post.content} />
               )}
             </div>
+            <p className="mt-10 rounded-xl border border-border/60 bg-muted/40 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+              Contenido informativo: este artículo no constituye asesoramiento
+              financiero. Las condiciones, comisiones y tipos de interés pueden
+              cambiar; verifica siempre la información oficial de cada entidad
+              antes de contratar.
+            </p>
           </div>
 
           {markdownContent ? (

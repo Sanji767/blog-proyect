@@ -4,7 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Clock, Eye, Sparkles, Flame } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Sparkles, Flame } from "lucide-react";
 import type { BlogPostPreview } from "@/lib/blog/types";
 
 type Props = {
@@ -19,7 +19,6 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
 
   // Badges inteligentes
   const isNew = new Date(post.date) > new Date(Date.now() - 3 * 24 * 60 * 60 * 1000); // últimos 3 días
-  const isHot = (post.views || 0) > 25000;
 
   const cover =
     (typeof post.coverImage === "string" ? post.coverImage : undefined) ??
@@ -31,15 +30,6 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
     year: "numeric",
   });
 
-  // Formato de vistas
-  const formatViews = (views: number | undefined): string => {
-    const num = views ?? 0;
-    if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(1)}M`;
-    if (num >= 1_000) return `${Math.round(num / 1_000)}k`;
-    return num.toString();
-  };
-
-  const views = formatViews(post.views);
   const description =
     (post.description ?? "").trim() ||
     (post.excerpt ?? "").trim() ||
@@ -82,12 +72,6 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
               NUEVO
             </span>
           )}
-          {isHot && (
-            <span className="flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-black text-primary-text">
-              <Flame className="h-3 w-3" />
-              TENDENCIA
-            </span>
-          )}
           {isFeatured && (
             <span className="flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-xs font-black text-primary-foreground">
               <Sparkles className="h-4 w-4" />
@@ -108,10 +92,6 @@ export default function BlogCard({ post, variant = "default", index = 0 }: Props
               {post.readingTime}
             </span>
           )}
-          <span className="flex items-center gap-1.5 font-medium">
-            <Eye className="h-3.5 w-3.5" />
-            {views} vistas
-          </span>
         </div>
 
         {/* Título */}

@@ -1,6 +1,6 @@
 // src/components/blog/BlogContent.tsx
 import type { BlogPost } from "@/lib/blog/types";
-import { Calendar, Clock, Eye, User2 } from "lucide-react";
+import { Calendar, Clock, User2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
@@ -49,12 +49,6 @@ export default function BlogContent({ post }: { post: BlogPost }) {
               </span>
             )}
 
-            {typeof post.views === "number" && (
-              <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur">
-                <Eye className="h-3.5 w-3.5" />
-                {post.views.toLocaleString("es-ES")} vistas
-              </span>
-            )}
           </div>
 
           <h1 className="text-3xl font-black tracking-tight leading-[1.05] md:text-5xl">

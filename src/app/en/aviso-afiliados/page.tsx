@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Affiliate Disclosure | FinanzasEU",
   description:
-    "Full transparency: how FinanzasEU makes money and why recommendations remain honest and editorial.",
+    "Full transparency: FinanzasEU currently earns nothing from outbound links. How it works today, and what would change if that changes.",
   alternates: {
     canonical: "/en/aviso-afiliados",
     languages: {
@@ -25,15 +25,17 @@ export default function AffiliateDisclosurePageEn() {
           FinanzasEU aims to be fully transparent.
         </p>
         <p>
-          Some links on this website are affiliate links. This means that if you
-          open an account through them, FinanzasEU may receive a small commission{" "}
-          <strong>at no extra cost to you</strong>.
+          At the moment, <strong>no link on this website is an affiliate
+          link</strong>: links to banks and providers go straight to their
+          official websites, and FinanzasEU receives no commission if you open
+          an account through them.
         </p>
         <p>
-          This helps keep the site free and up to date, but{" "}
-          <strong>it never influences our recommendations</strong>. We only
-          highlight banks and products we genuinely believe are useful and would
-          consider using ourselves.
+          If we add affiliate links in the future, we will say so clearly on
+          every affected page and update this disclosure. Either way,{" "}
+          <strong>no commission will ever influence our recommendations</strong>.
+          We only highlight banks and products we genuinely believe are useful
+          and would consider using ourselves.
         </p>
         <p className="font-bold text-primary">Trust comes first.</p>
       </div>

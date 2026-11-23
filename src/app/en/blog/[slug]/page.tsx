@@ -354,6 +354,11 @@ export default async function BlogPostPageEn(props: { params: Promise<{ slug: st
                 <PortableTextRenderer value={post.content} />
               )}
             </div>
+            <p className="mt-10 rounded-xl border border-border/60 bg-muted/40 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+              Informational content only: this article is not financial advice.
+              Terms, fees and interest rates can change; always check each
+              provider&apos;s official information before signing up.
+            </p>
           </div>
 
           <aside className="hidden lg:block">

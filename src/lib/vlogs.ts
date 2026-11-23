@@ -12,11 +12,11 @@ export type Vlog = {
 
 // === GOD MODE 2025 (todo opcional pero recomendado) ===
   youtubeId?: string;           // para embed y badge "VÍDEO"
-  views?: number;               // visualizaciones reales
+  views?: number;               // no verificado; no se muestra
   featured?: boolean;           // para destacar
   author?: string;              // default: "José María"
   authorAvatar?: string;        // default: "/jose-avatar.jpg"
-  content: string;              // markdown o texto             // visualizaciones reales    // de momento texto plano con mini-marcado (##, •, >, ---)
+  content: string;              // markdown o texto plano con mini-marcado (##, •, >, ---)
 };
 
 /**

@@ -7,7 +7,15 @@ import type { BlogPostPreview } from "@/lib/blog/types";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 
+const ACCENTED_LABELS: Record<string, string> = {
+  analisis: "Análisis",
+  autonomos: "Autónomos",
+  inversion: "Inversión",
+};
+
 function humanizeSlug(value: string): string {
+  const key = value.trim().toLowerCase();
+  if (ACCENTED_LABELS[key]) return ACCENTED_LABELS[key];
   const normalized = value.trim().replace(/-/g, " ");
   return normalized
     ? normalized.charAt(0).toUpperCase() + normalized.slice(1)

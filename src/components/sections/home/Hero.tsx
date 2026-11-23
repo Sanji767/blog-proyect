@@ -19,7 +19,7 @@ const fadeUp = {
 const COPY = {
   es: {
     badge: "Guía 2026 · Europa",
-    h1Prefix: "Elige tu banco en Europa con",
+    h1Prefix: "Comparativa de bancos en Europa para elegir con",
     h1Highlight: "criterio",
     desc: "Comparativas claras de bancos digitales (Revolut, N26, Wise…). Datos, fuentes y recomendaciones directas para decidir sin prisa.",
     ctaPrimary: "Ver ranking",
@@ -37,7 +37,7 @@ const COPY = {
   },
   en: {
     badge: "Guide 2026 · Europe",
-    h1Prefix: "Choose your bank in Europe with",
+    h1Prefix: "Bank comparison in Europe to choose with",
     h1Highlight: "clarity",
     desc: "Clear comparisons of digital banks (Revolut, N26, Wise…). Data, sources and direct recommendations to decide without stress.",
     ctaPrimary: "See ranking",

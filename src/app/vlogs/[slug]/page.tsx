@@ -6,7 +6,7 @@ import Image from "next/image";
 import Container from "@/components/layout/Container";
 import TableOfContents from "@/components/blog/TableOfContents";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, Clock, Eye, PlayCircle } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, PlayCircle } from "lucide-react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkHeadingId from "remark-heading-id";
@@ -132,12 +132,6 @@ export default async function VlogPage(props: { params: Promise<{ slug: string }
                   <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background px-3 py-1.5">
                     <Clock className="h-3.5 w-3.5" />
                     {vlog.readingTime}
-                  </span>
-                )}
-                {typeof vlog.views === "number" && (
-                  <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background px-3 py-1.5">
-                    <Eye className="h-3.5 w-3.5" />
-                    {vlog.views.toLocaleString("es-ES")} vistas
                   </span>
                 )}
               </div>

@@ -290,6 +290,11 @@ export default async function ProgramaPageEn(
                 Official website
               </a>
             </div>
+            <p className="mt-3 max-w-xl text-[11px] text-muted-foreground">
+              The links on this page go straight to each provider&apos;s official
+              website: FinanzasEU earns no commission from them. If that ever
+              changes, we will say so clearly on this page.
+            </p>
           </div>
 
           {/* ASIDE SUMMARY */}
@@ -311,10 +316,34 @@ export default async function ProgramaPageEn(
               {rating?.trustpilot && (
                 <InfoRow
                   label="Trustpilot Score"
-                  value={`${rating.trustpilot.toFixed(1)} / 5 (${rating.totalReviews?.toLocaleString()} reviews)`}
+                  value={`${rating.trustpilot.toFixed(1)} / 5 (${rating.totalReviews?.toLocaleString("en-US")} reviews)`}
                 />
               )}
             </dl>
+
+            {rating?.trustpilotUrl && (
+              <p className="mt-2 text-[11px] text-muted-foreground">
+                Source:{" "}
+                <a
+                  href={rating.trustpilotUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-foreground"
+                >
+                  Trustpilot
+                </a>
+                {rating.ratingAsOf
+                  ? `, as of ${new Date(
+                      `${rating.ratingAsOf}T12:00:00`
+                    ).toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}`
+                  : ""}
+                .
+              </p>
+            )}
 
             <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
               <span className="inline-flex items-center gap-1">

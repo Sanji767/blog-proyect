@@ -10,7 +10,6 @@ import {
   Clock,
   Calendar,
   PlayCircle,
-  Eye,
   Sparkles,
 } from "lucide-react";
 
@@ -45,10 +44,6 @@ export default function VlogCard({
   });
 
   const imageSrc = vlog.image || PLACEHOLDER_IMAGE;
-  const viewsLabel =
-    typeof vlog.views === "number"
-      ? `${vlog.views.toLocaleString("es-ES")} vistas`
-      : null;
 
   const imageSizes = isFeatured
     ? "60vw"
@@ -141,12 +136,6 @@ export default function VlogCard({
             </span>
           ) : null}
 
-          {viewsLabel ? (
-            <span className="flex items-center gap-1.5">
-              <Eye className="h-4 w-4 text-primary" />
-              {viewsLabel}
-            </span>
-          ) : null}
         </div>
 
         <h3
