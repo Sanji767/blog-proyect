@@ -6,7 +6,9 @@ lastReviewed: 2026-11-20
 category: bancos
 tags: ["revolut", "bancos"]
 slug: opiniones-revolut-2026
-image: /images/blogs/mejores-bancos-digitales/revolut-n26-wise.jpg
+image: "/images/blog/opiniones-revolut-2026.jpg"
+imageCredit: "European Commission / Wikimedia Commons (CC BY 4.0)"
+imageCreditUrl: "https://commons.wikimedia.org/wiki/File:P039363-259047.jpg"
 featured: true
 readingTime: "8 min"
 views: 8231

@@ -6,7 +6,7 @@ lastReviewed: 2026-11-20
 category: bancos
 tags: ["wise", "bancos"]
 slug: wise-opiniones
-image: /images/blogs/wise-opiniones/wise-opiniones.png
+image: "/images/blog/wise-opiniones.jpg"
 featured: true
 readingTime: "13 min"
 ---
