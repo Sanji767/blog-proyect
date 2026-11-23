@@ -7,7 +7,7 @@
 // PROBLEM (finding F-07): every user-facing string in `banks` is Spanish
 // (taglines, descriptions, pros/cons, fees, countries, card types...), but
 // the EN surfaces render those fields verbatim:
-//   - /en/programas/[slug]  (tagline, description, country, ibanCountry,
+//   - /en/bancos/[slug]  (tagline, description, country, ibanCountry,
 //     keyPros, keyCons, fees.*, cardType — plus tagline as meta description)
 //   - /en/bancos            (tagline, country, fees.monthly, cardType)
 //   - /en/comparar/[slug]   (keyPros verbatim; taglines via a stale hardcoded

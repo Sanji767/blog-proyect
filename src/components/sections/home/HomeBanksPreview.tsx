@@ -202,7 +202,7 @@ export default function HomeBanksPreview() {
 
                   <div className="relative mt-6 flex flex-col gap-3 sm:flex-row">
                     <Button asChild size="sm" className="flex-1">
-                      <LocalizedLink href={`/programas/${bank.slug}`}>
+                      <LocalizedLink href={`/bancos/${bank.slug}`}>
                         {copy.viewAnalysis}
                       </LocalizedLink>
                     </Button>

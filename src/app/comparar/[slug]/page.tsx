@@ -145,7 +145,7 @@ export default async function ComparisonPage({ params }: PageProps) {
 
             <div className="mt-6 flex gap-3">
               <Button asChild size="sm" className="flex-1">
-                <LocalizedLink href={`/programas/${b.slug}`}>Ver ficha completa</LocalizedLink>
+                <LocalizedLink href={`/bancos/${b.slug}`}>Ver ficha completa</LocalizedLink>
               </Button>
               {b.affiliateUrl && (
                 <Button asChild size="sm" variant="outline" className="flex-1 border-secondary-foreground/25 text-secondary-foreground hover:border-secondary-foreground/60 hover:bg-secondary-foreground/10">

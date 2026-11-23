@@ -171,7 +171,7 @@ function BankCard({ bank: bankEs, locale }: { bank: Bank; locale: "en" }) {
     rating,
   } = bank;
 
-  const detailUrl = withLocale(`/programas/${slug}`, locale);
+  const detailUrl = withLocale(`/bancos/${slug}`, locale);
 
   const hasSpanish = support.spanishSupport;
   const isFree = /gratis|free|0\s*€|€0/i.test(fees.monthly);

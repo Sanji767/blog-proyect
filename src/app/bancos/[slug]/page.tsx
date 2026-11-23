@@ -75,7 +75,7 @@ type BankContent = Bank & {
 };
 
 /* -----------------------------------------
-   1) Rutas estáticas: /programas/revolut, etc.
+   1) Rutas estáticas: /bancos/revolut, etc.
 ------------------------------------------ */
 export function generateStaticParams() {
   return banks.map((bank) => ({
@@ -96,9 +96,9 @@ export async function generateMetadata(
 
   if (!bank) {
     return {
-      title: "Programa no encontrado",
+      title: "Banco no encontrado",
       description:
-        "No hemos encontrado el banco o programa que estabas buscando.",
+        "No hemos encontrado el banco que estabas buscando.",
     };
   }
 
@@ -129,7 +129,7 @@ export async function generateMetadata(
 /* -----------------------------------------
    3) Página principal
 ------------------------------------------ */
-export default async function ProgramaPage(
+export default async function BancoPage(
   props: {
     params: Promise<{ slug: string }>;
   }
@@ -262,7 +262,7 @@ export default async function ProgramaPage(
         "@type": "ListItem",
         position: 3,
         name,
-        item: `${siteUrl}/programas/${params.slug}`,
+        item: `${siteUrl}/bancos/${params.slug}`,
       },
     ],
   };
@@ -967,7 +967,7 @@ export default async function ProgramaPage(
                       {related.tagline}
                     </p>
                     <Link
-                      href={`/programas/${related.slug}`}
+                      href={`/bancos/${related.slug}`}
                       className="mt-auto inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-[11px] font-semibold text-primary-foreground hover:brightness-105"
                     >
                       Ver detalles →

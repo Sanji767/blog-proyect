@@ -263,7 +263,7 @@ export default function UseCases() {
                             size="sm"
                             className="w-full flex-1 gap-2"
                           >
-                            <LocalizedLink href={`/programas/${recommended.slug}`}>
+                            <LocalizedLink href={`/bancos/${recommended.slug}`}>
                               {copy.viewAnalysis}
                               <ArrowRight className="h-4 w-4" />
                             </LocalizedLink>

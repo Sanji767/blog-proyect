@@ -889,7 +889,7 @@ export default function ComparativaPage() {
                     size="sm"
                     className="h-9 flex-1 rounded-full shadow-none hover:translate-x-0 hover:translate-y-0"
                   >
-                    <Link href={`/programas/${bank.slug}`}>Ver detalles</Link>
+                    <Link href={`/bancos/${bank.slug}`}>Ver detalles</Link>
                   </Button>
 
                   {bank.affiliateUrl && (
@@ -1165,7 +1165,7 @@ export default function ComparativaPage() {
                             size="sm"
                             className="w-full rounded-full shadow-none hover:translate-x-0 hover:translate-y-0"
                           >
-                            <Link href={`/programas/${bank.slug}`}>
+                            <Link href={`/bancos/${bank.slug}`}>
                               Ver detalles
                             </Link>
                           </Button>

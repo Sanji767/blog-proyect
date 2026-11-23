@@ -106,7 +106,7 @@ const UI_COPY: Record<Locale, {
 export default function BankCard({ bank, showDirectLink = true }: BankCardProps) {
   const { locale } = useLocale();
   const copy = UI_COPY[locale];
-  const detailUrl = `/programas/${bank.slug}`;
+  const detailUrl = `/bancos/${bank.slug}`;
   const hasAffiliate = Boolean(bank.affiliateUrl);
   const hasSpanish = bank.support.spanishSupport;
   const isFree = /gratis|0\s*(€|\u20ac)/i.test(bank.fees.monthly);

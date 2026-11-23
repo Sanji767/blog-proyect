@@ -148,7 +148,7 @@ type DraftBankSeed = Pick<
 
 function createDraftBank(seed: DraftBankSeed): Bank {
   const canonicalUrl =
-    seed.seo?.canonicalUrl ?? `${DOMAIN}/programas/${seed.slug}`;
+    seed.seo?.canonicalUrl ?? `${DOMAIN}/bancos/${seed.slug}`;
 
   const seo: Bank["seo"] = {
     metaTitle:
@@ -374,7 +374,7 @@ export const banks: Bank[] = [
       metaDescription:
         "Revolut en España 2026: cuenta gratis con IBAN ES, tarjetas físicas/virtuales, cambio real y app potente. Pros, contras y para quién merece la pena.",
       slug: "revolut",
-      canonicalUrl: `${DOMAIN}/programas/revolut`,
+      canonicalUrl: `${DOMAIN}/bancos/revolut`,
       keywords: [
         "revolut españa 2026",
         "revolut iban español ES",
@@ -468,7 +468,7 @@ export const banks: Bank[] = [
       metaDescription:
         "N26 en España 2026: cuenta online sin comisiones con IBAN español ES, tarjeta Mastercard y depósitos protegidos. Ventajas, límites y opinión.",
       slug: "n26",
-      canonicalUrl: `${DOMAIN}/programas/n26`,
+      canonicalUrl: `${DOMAIN}/bancos/n26`,
       keywords: [
         "n26 españa 2026",
         "n26 iban español ES",
@@ -555,7 +555,7 @@ export const banks: Bank[] = [
       metaDescription:
         "Wise 2026 en España: cuenta multidivisa gratis con IBAN belga BE, cambio real y transferencias baratas. Pros, contras y para quién es ideal.",
       slug: "wise",
-      canonicalUrl: `${DOMAIN}/programas/wise`,
+      canonicalUrl: `${DOMAIN}/bancos/wise`,
       keywords: [
         "wise españa 2026",
         "wise iban belga BE",
@@ -640,7 +640,7 @@ export const banks: Bank[] = [
       metaDescription:
         "Bunq en España 2026: banco holandés con IBAN NL, subcuentas con IBAN propio y automatizaciones. Precios, ventajas y opinión.",
       slug: "bunq",
-      canonicalUrl: `${DOMAIN}/programas/bunq`,
+      canonicalUrl: `${DOMAIN}/bancos/bunq`,
       keywords: [
         "bunq españa 2026",
         "bunq iban holandés NL",

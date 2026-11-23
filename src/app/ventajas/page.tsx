@@ -208,7 +208,7 @@ export default function VentajasPage() {
                 variant="outline"
                 className="rounded-full shadow-none hover:translate-x-0 hover:translate-y-0"
               >
-                <Link href="/programas/revolut">Ver Revolut (recomendado)</Link>
+                <Link href="/bancos/revolut">Ver Revolut (recomendado)</Link>
               </Button>
             </div>
             <p className="text-xs text-muted-foreground">

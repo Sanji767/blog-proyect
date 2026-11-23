@@ -103,7 +103,7 @@ export default function BanksGrid() {
  * =============== */
 
 function BankCard({ bank, index }: { bank: Bank; index: number }) {
-  const detailUrl = `/programas/${bank.slug}`;
+  const detailUrl = `/bancos/${bank.slug}`;
   const rank = index + 1;
   const isTop3 = rank <= 3;
   const isRecommended = !!bank.affiliateUrl;

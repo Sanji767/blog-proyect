@@ -317,7 +317,7 @@ export default function BankQuiz() {
                 </Button>
 
                 <Button asChild variant="outline" size="lg" className="flex-1 font-bold border">
-                  <LocalizedLink href={`/programas/${matchedBank.slug}`}>
+                  <LocalizedLink href={`/bancos/${matchedBank.slug}`}>
                     {copy.viewAnalysis}
                   </LocalizedLink>
                 </Button>

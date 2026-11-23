@@ -155,8 +155,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...banks
       .filter((bank) => bank._status !== "draft")
       .flatMap((bank) => {
-        const esPath = `/programas/${bank.slug}`;
-        const enPath = `/en/programas/${bank.slug}`;
+        const esPath = `/bancos/${bank.slug}`;
+        const enPath = `/en/bancos/${bank.slug}`;
         const alternates = {
           languages: {
             es: toUrl(esPath),

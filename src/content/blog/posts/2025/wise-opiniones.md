@@ -15,7 +15,7 @@ readingTime: "13 min"
 ## ¿Es seguro? ¿Conviene en España? ¿Sigue siendo el mejor para divisas?
 
 Wise no es el banco más “completo” del año, pero sí **la herramienta financiera más eficiente para mover dinero entre países**.  
-Si alguna vez has sentido que tu banco te cobra por respirar cada vez que sales de España, Wise suele ser la cura. La [ficha de Wise](/programas/wise) resume sus comisiones, IBAN BE y límites en una sola página.
+Si alguna vez has sentido que tu banco te cobra por respirar cada vez que sales de España, Wise suele ser la cura. La [ficha de Wise](/bancos/wise) resume sus comisiones, IBAN BE y límites en una sola página.
 
 > **Conclusión rápida:**  
 > Wise sigue siendo en 2026 la mejor cuenta multidivisa de Europa por coste real, transparencia y tipo de cambio.
@@ -250,4 +250,4 @@ Depende del país y moneda: desde segundos a 24 horas.
 Cuéntame tu caso y te digo la combinación ideal de bancos para ti:  
 👉 [/contacto](/contacto)
 
-**Te puede interesar:** [Ficha de Wise](/programas/wise) · [Revolut vs Wise](/comparar/revolut-vs-wise) · [N26 vs Wise](/comparar/n26-vs-wise) · [Opiniones Revolut 2026](/blog/opiniones-revolut-2026)
+**Te puede interesar:** [Ficha de Wise](/bancos/wise) · [Revolut vs Wise](/comparar/revolut-vs-wise) · [N26 vs Wise](/comparar/n26-vs-wise) · [Opiniones Revolut 2026](/blog/opiniones-revolut-2026)

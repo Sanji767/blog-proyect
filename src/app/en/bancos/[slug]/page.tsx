@@ -97,7 +97,7 @@ export async function generateMetadata(
   }
 
   const { name, tagline } = bank;
-  const canonicalPath = `/en/programas/${bank.slug}`;
+  const canonicalPath = `/en/bancos/${bank.slug}`;
 
   return {
     title: `${name} Review – Fees, IBAN & How to Open an Account`,
@@ -105,7 +105,7 @@ export async function generateMetadata(
     alternates: {
       canonical: canonicalPath,
       languages: {
-        es: `/programas/${bank.slug}`,
+        es: `/bancos/${bank.slug}`,
         en: canonicalPath,
       },
     },
@@ -116,7 +116,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function ProgramaPageEn(
+export default async function BancoPageEn(
   props: {
     params: Promise<{ slug: string }>;
   }
@@ -243,7 +243,7 @@ export default async function ProgramaPageEn(
         "@type": "ListItem",
         position: 3,
         name,
-        item: `${siteUrl}/en/programas/${params.slug}`,
+        item: `${siteUrl}/en/bancos/${params.slug}`,
       },
     ],
   };

@@ -6,10 +6,10 @@ import Link from "next/link";
 import { memo } from "react";
 
 const featuredBanks = [
-  { name: "Revolut", logo: "/images/logos/revolut.svg", url: "/programas/revolut" },
-  { name: "N26", logo: "/images/logos/n26.svg", url: "/programas/n26" },
-  { name: "Wise", logo: "/images/logos/wise.svg", url: "/programas/wise" },
-  { name: "Bunq", logo: "/images/logos/bunq.svg", url: "/programas/bunq" },
+  { name: "Revolut", logo: "/images/logos/revolut.svg", url: "/bancos/revolut" },
+  { name: "N26", logo: "/images/logos/n26.svg", url: "/bancos/n26" },
+  { name: "Wise", logo: "/images/logos/wise.svg", url: "/bancos/wise" },
+  { name: "Bunq", logo: "/images/logos/bunq.svg", url: "/bancos/bunq" },
 ] as const;
 
 type Props = { onClose: () => void };

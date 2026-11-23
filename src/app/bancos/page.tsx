@@ -166,7 +166,7 @@ function BankCard({ bank }: { bank: Bank }) {
     rating,
   } = bank;
 
-  const detailUrl = `/programas/${slug}`;
+  const detailUrl = `/bancos/${slug}`;
 
   const hasSpanish = support.spanishSupport;
   const isFree = /gratis|0\s*€/i.test(fees.monthly);

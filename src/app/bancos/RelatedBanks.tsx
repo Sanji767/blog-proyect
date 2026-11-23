@@ -1,4 +1,4 @@
-// src/components/programas/RelatedBanks.tsx
+// src/components/bancos/RelatedBanks.tsx
 import BankCard from "@/components/bancos/BankCard";
 import { banks, type Bank } from "@/lib/banks";
 

@@ -440,7 +440,7 @@ export default function ComparisonHubClient() {
                     </td>
                     <td className="px-4 py-3 text-xs">
                       <LocalizedLink
-                        href={`/programas/${row.slug}`}
+                        href={`/bancos/${row.slug}`}
                         className="font-semibold text-primary-text hover:underline"
                       >
                         {copy.colProfile} →
@@ -472,7 +472,7 @@ export default function ComparisonHubClient() {
             {freePlanBanks.map((bank) => (
               <li key={bank.slug}>
                 <LocalizedLink
-                  href={`/programas/${bank.slug}`}
+                  href={`/bancos/${bank.slug}`}
                   className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium hover:border-primary hover:text-primary"
                 >
                   {bank.name} →

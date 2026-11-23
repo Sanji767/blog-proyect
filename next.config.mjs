@@ -48,6 +48,17 @@ const nextConfig = {
   // La guía gemela de cuentas para adolescentes se fusionó en la canónica.
   async redirects() {
     return [
+      // /programas → /bancos migration (2026-11-23): fichas moved to /bancos/<slug>.
+      {
+        source: "/programas/:slug",
+        destination: "/bancos/:slug",
+        permanent: true,
+      },
+      {
+        source: "/en/programas/:slug",
+        destination: "/en/bancos/:slug",
+        permanent: true,
+      },
       {
         source: "/blog/cuentas-bancarias-menores-adolescentes-2026",
         destination: "/blog/cuentas-bancarias-adolescentes-2026",
