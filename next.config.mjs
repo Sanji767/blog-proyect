@@ -58,6 +58,42 @@ const nextConfig = {
         destination: "/blog/los-mejores-bancos-digitales-en-europa-en-2026",
         permanent: true,
       },
+      // Fusiones de duplicados (auditoría SEO 2026-11-23, F-02).
+      {
+        source: "/blog/gua-rpida-sobre-prstamos-personales-y-tasas-de-inters",
+        destination: "/blog/gua-de-prstamos-personales-y-tasas-de-inters",
+        permanent: true,
+      },
+      {
+        source: "/blog/las-mejores-apps-de-finanzas-para-controlar-tus-gastos-fcilmente",
+        destination: "/blog/las-mejores-apps-de-finanzas-personales-para-controlar-gastos",
+        permanent: true,
+      },
+      {
+        source: "/blog/cmo-automatizar-tu-ahorro-mensual-fcilmente",
+        destination: "/blog/cmo-ahorrar-dinero-automticamente-cada-mes",
+        permanent: true,
+      },
+      {
+        source: "/blog/construir-fondo-emergencia-estrategia-2026",
+        destination: "/blog/guia-fondo-emergencia",
+        permanent: true,
+      },
+      {
+        source: "/blog/mejores-brokers-inversion-low-cost-2026",
+        destination: "/blog/comparativa-brokers-low-cost",
+        permanent: true,
+      },
+      {
+        source: "/blog/guerra-cuentas-remuneradas-noviembre-2026",
+        destination: "/blog/mejores-cuentas-remuneradas-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/las-tarjetas-de-crdito-con-las-mejores-recompensas",
+        destination: "/blog/las-mejores-tarjetas-de-crdito-con-recompensas-en-2026",
+        permanent: true,
+      },
     ];
   },
 
