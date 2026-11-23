@@ -44,8 +44,8 @@ const INTEREST_RATES: YieldItem[] = [
     rate: 1.25,
     color: "bg-primary/40",
     note: {
-      es: "2,50% hasta 2.500 € y 1,25% por encima (plan Standard, Países Bajos).",
-      en: "2.50% up to €2,500, 1.25% above (Standard plan, Netherlands).",
+      es: "Países Bajos, plan Standard: 2,50% hasta 2.500 € y 1,25% por encima. En España el plan Standard paga 1,15% TAE.",
+      en: "Netherlands, Standard plan: 2.50% up to €2,500, 1.25% above. In Spain the Standard plan pays 1.15% APR.",
     },
   },
   {

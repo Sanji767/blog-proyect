@@ -271,7 +271,7 @@ export const banks: Bank[] = [
     shortName: "Revolut",
     tagline: "Cuenta multidivisa líder con IBAN ES, Bizum y app de referencia",
     description:
-      "Neobanco con licencia europea y más de 70M de clientes en todo el mundo. Cuenta con IBAN español, cambio al tipo real, hasta 20 tarjetas virtuales y 1 desechable, inversión en acciones y cripto, y una de las mejores apps bancarias.",
+      "Neobanco con licencia europea y más de 80M de clientes en todo el mundo. Cuenta con IBAN español, cambio al tipo real, hasta 20 tarjetas virtuales y 1 desechable, inversión en acciones y cripto, y una de las mejores apps bancarias.",
 
     country: "Lituania",
     headquarters: "Vilna",
@@ -327,7 +327,7 @@ export const banks: Bank[] = [
       "Cambio de divisa sin comisiones hasta 1.000 €/mes en días laborables (Estándar)",
       "Hasta 20 tarjetas virtuales y 1 tarjeta desechable de un solo uso",
       "Cuenta multidivisa con +25 monedas",
-      "Cuenta Remunerada desde 1,15% TAE en el plan Estándar",
+      "Cuenta Remunerada en España desde 1,15% TAE en el plan Estándar",
       "App completa con analíticas y control de gastos",
     ],
     keyCons: [
