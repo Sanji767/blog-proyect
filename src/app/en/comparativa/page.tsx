@@ -5,7 +5,7 @@ import { SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
 const TITLE = "Bank Comparison Hub 2026: Head-to-Head Duels";
 const DESCRIPTION =
-  "Compare Revolut vs Wise, N26 vs Revolut, Trade Republic vs MyInvestor and more. Compare fees, IBANs, yields and card perks side by side.";
+  "High-yield savings ranking 2026 by standard euro rate, plus head-to-head duels: Revolut vs Wise, Revolut vs N26, Revolut vs Trade Republic and more. Compare fees, IBANs and yields side by side.";
 
 export const metadata: Metadata = {
   title: TITLE,

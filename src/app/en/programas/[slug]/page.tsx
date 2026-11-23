@@ -5,6 +5,8 @@ import Link from "next/link";
 import type React from "react";
 
 import { banks, type Bank } from "@/lib/banks";
+import { CURATED_COMPARISON_SLUGS } from "@/lib/curatedComparisons";
+import { getBankEn } from "@/lib/banks-en";
 import Container from "@/components/layout/Container";
 import { formatIsoYmdToEnDate, toJsonLd } from "@/lib/seo";
 
@@ -16,6 +18,30 @@ import {
   Info,
   CheckCircle2,
 } from "lucide-react";
+
+// Review articles (EN) per bank — ficha → article link (F-08).
+const REVIEW_ARTICLES_EN: Record<string, { href: string; title: string }> = {
+  revolut: {
+    href: "/en/blog/revolut-review-2026",
+    title: "Revolut Review 2026: Is It Safe? Fees, Plans & Honest Verdict",
+  },
+  n26: {
+    href: "/en/blog/n26-review-2026",
+    title: "N26 Review 2026: The Free Account That Is Genuinely Free — With Limits",
+  },
+  wise: {
+    href: "/en/blog/wise-review-2026",
+    title: "Wise Review 2026: Fees, Exchange Rates & Is It Worth It?",
+  },
+  bunq: {
+    href: "/en/blog/bunq-review-2026",
+    title: "bunq Review 2026: Best Neobank Savings Rate, With a Catch",
+  },
+  "trade-republic": {
+    href: "/en/blog/trade-republic-review-2026",
+    title: "Trade Republic Review 2026: 4% Interest and €1 Trades",
+  },
+};
 
 type Review = {
   author: string;
@@ -60,7 +86,8 @@ export async function generateMetadata(
   }
 ): Promise<Metadata> {
   const params = await props.params;
-  const bank = banks.find((b) => b.slug === params.slug);
+  const bankEs = banks.find((b) => b.slug === params.slug);
+  const bank = bankEs ? getBankEn(bankEs) : undefined;
 
   if (!bank) {
     return {
@@ -95,7 +122,8 @@ export default async function ProgramaPageEn(
   }
 ) {
   const params = await props.params;
-  const bank = banks.find((b) => b.slug === params.slug);
+  const bankEs = banks.find((b) => b.slug === params.slug);
+  const bank = bankEs ? getBankEn(bankEs) : undefined;
 
   if (!bank) return notFound();
 
@@ -144,8 +172,21 @@ export default async function ProgramaPageEn(
     .filter((b) => b.slug !== bank.slug && b.category === bank.category)
     .slice(0, 3);
 
+  const reviewArticle = REVIEW_ARTICLES_EN[bank.slug];
+  const duelSlugs = CURATED_COMPARISON_SLUGS.filter(
+    (slug) => slug.startsWith(`${bank.slug}-vs-`) || slug.endsWith(`-vs-${bank.slug}`),
+  );
+  const duelLinks = duelSlugs
+    .map((slug) => {
+      const [a, b] = slug.split("-vs-");
+      const other = a === bank.slug ? b : a;
+      const otherBank = banks.find((x) => x.slug === other);
+      return otherBank ? { slug, name: otherBank.name } : null;
+    })
+    .filter((x): x is { slug: string; name: string } => x !== null);
+
   const lastUpdatedLabel = formatIsoYmdToEnDate(lastUpdated);
-  const isFree = /gratis|0\s*(€|\$)/i.test(monthlyFee);
+  const isFree = /gratis|free|0\s*(€|\$)|€0/i.test(monthlyFee);
 
   const defaultOpeningSteps: string[] = [
     "Visit the official website or download the app.",
@@ -432,6 +473,47 @@ export default async function ProgramaPageEn(
             </table>
           </div>
         </section>
+
+        {/* Full review & duels */}
+        {(reviewArticle || duelLinks.length > 0) && (
+          <section className="rounded-xl border border-border bg-background p-6 shadow-sm">
+            <h2 className="mb-3 text-xl font-semibold">
+              Full review & head-to-head duels for {name}
+            </h2>
+            {reviewArticle ? (
+              <p className="mb-4 text-sm text-muted-foreground">
+                This profile covers the key facts. The in-depth review, with
+                plans, limits and a verdict, is{" "}
+                <Link
+                  href={reviewArticle.href}
+                  className="font-semibold text-primary hover:underline"
+                >
+                  {reviewArticle.title}
+                </Link>
+                .
+              </p>
+            ) : null}
+            {duelLinks.length > 0 ? (
+              <>
+                <p className="mb-2 text-sm font-medium">
+                  {name} head-to-head:
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {duelLinks.map((duel) => (
+                    <li key={duel.slug}>
+                      <Link
+                        href={`/en/comparar/${duel.slug}`}
+                        className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium hover:border-primary hover:text-primary"
+                      >
+                        {name} vs {duel.name} →
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+          </section>
+        )}
       </Container>
     </section>
   );
@@ -461,7 +543,9 @@ function formatTagEn(tag: string): string {
     "iban-nl": "Dutch IBAN",
     "iban-de": "German IBAN",
     "iban-lt": "Lithuanian IBAN",
+    "iban-be": "Belgian IBAN",
     "seguro-depositos": "Deposit Protection Guarantee",
+    "soporte-24-7": "24/7 Support",
   };
   return map[tag] ?? tag;
 }

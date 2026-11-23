@@ -5,7 +5,7 @@ import { SITE_LOGO_URL, SITE_NAME, SITE_URL, toJsonLd } from "@/lib/seo";
 
 const TITLE = "Comparativa de bancos en Europa 2026: Duelos Cara a Cara";
 const DESCRIPTION =
-  "Compara Revolut vs Wise, N26 vs Revolut, Trade Republic vs MyInvestor y más. Analiza comisiones, IBAN, rentabilidad y ventajas cara a cara.";
+  "Ranking de cuentas remuneradas 2026 por tipo estándar en euros, y duelos cara a cara: Revolut vs Wise, Revolut vs N26, Revolut vs Trade Republic y más. Compara comisiones, IBAN y rentabilidad.";
 
 export const metadata: Metadata = {
   title: TITLE,

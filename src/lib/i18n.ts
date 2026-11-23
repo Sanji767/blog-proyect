@@ -63,3 +63,22 @@ export function switchLocalePathname(pathname: string, nextLocale: Locale): stri
   const base = stripLocaleFromPathname(pathname || "/");
   return withLocale(base, nextLocale);
 }
+
+// Shared per-locale number formatting (F-07 §1.10): prefer these over bare
+// toLocaleString(), which uses the visitor's browser locale, not the page
+// locale.
+export function intlLocale(locale: Locale): string {
+  return locale === "en" ? "en-US" : "es-ES";
+}
+
+export function formatEur(value: number, locale: Locale): string {
+  return new Intl.NumberFormat(intlLocale(locale), {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0,
+  }).format(value);
+}
+
+export function formatInteger(value: number, locale: Locale): string {
+  return new Intl.NumberFormat(intlLocale(locale)).format(value);
+}

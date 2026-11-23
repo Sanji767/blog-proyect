@@ -28,31 +28,96 @@ const POPULAR_DUELS: Duel[] = [
     winnerSlug: "revolut",
   },
   {
-    slug1: "n26",
-    slug2: "revolut",
+    slug1: "revolut",
+    slug2: "n26",
     tagline: {
-      es: "IBAN alemán vs IBAN lituano: ¿cuál es el mejor neobanco europeo?",
-      en: "German IBAN vs Lithuanian IBAN: Which European neobank wins?",
+      es: "Neobancos europeos frente a frente: ¿cuál es la mejor cuenta principal?",
+      en: "Europe's top neobanks head-to-head: which is the best main account?",
     },
     winnerSlug: "n26",
   },
   {
-    slug1: "trade-republic",
-    slug2: "myinvestor",
+    slug1: "revolut",
+    slug2: "trade-republic",
     tagline: {
-      es: "La batalla del ahorro remunerado e inversión low-cost",
-      en: "The ultimate showdown of high-yield savings & investing",
+      es: "La batalla del ahorro remunerado: neobanco frente a bróker-banco",
+      en: "The high-yield savings showdown: neobank vs broker-bank",
     },
     winnerSlug: "trade-republic",
   },
   {
-    slug1: "bbva",
-    slug2: "santander",
+    slug1: "santander",
+    slug2: "bbva",
     tagline: {
       es: "Comparativa de cuentas digitales de la banca tradicional española",
       en: "Traditional Spanish banking titans face off in digital accounts",
     },
     winnerSlug: "bbva",
+  },
+];
+
+// Savings-rate ranking (F-08/W6). Rates are the STANDARD (non-promo) EUR
+// rates exactly as stated in src/lib/banks.ts. No scores are invented:
+// banks that state no rate in banks.ts cannot appear here. `productType`
+// distinguishes bank savings accounts from broker / money-market cash,
+// because the protection regime differs — keep it honest.
+// Trustpilot is read live from bank.rating at render (never hardcoded),
+// so the table stays in sync with the profiles.
+type RankedBank = {
+  slug: string;
+  rate: string;
+  rateNote: Record<Locale, string>;
+  productType: Record<Locale, string>;
+};
+
+const SAVINGS_RANKING: RankedBank[] = [
+  {
+    slug: "trade-republic",
+    rate: "2.50%",
+    rateNote: { es: "Promo: 4% nuevos clientes hasta 20.000 €, hasta 1 mar 2027", en: "Promo: 4% for new clients up to €20,000 until 1 Mar 2027" },
+    productType: { es: "Efectivo en bróker-banco", en: "Cash at broker-bank" },
+  },
+  {
+    slug: "freedom24",
+    rate: "2.42%",
+    rateNote: { es: "Cuenta D, variable según euríbor", en: "D Account, variable with EURIBOR" },
+    productType: { es: "Efectivo en bróker", en: "Cash at broker" },
+  },
+  {
+    slug: "trading-212",
+    rate: "2.30%",
+    rateNote: { es: "Variable; 4% en GBP", en: "Variable; 4% in GBP" },
+    productType: { es: "Efectivo en bróker", en: "Cash at broker" },
+  },
+  {
+    slug: "wise",
+    rate: "~2.30%",
+    rateNote: { es: "Wise Interest, variable, capital en riesgo", en: "Wise Interest, variable, capital at risk" },
+    productType: { es: "Fondo monetario (EMI)", en: "Money-market fund (EMI)" },
+  },
+  {
+    slug: "klarna",
+    rate: "2.22%",
+    rateNote: { es: "Cuenta Flex, variable", en: "Flex account, variable" },
+    productType: { es: "Cuenta de ahorro bancaria", en: "Bank savings account" },
+  },
+  {
+    slug: "revolut",
+    rate: "1.15%",
+    rateNote: { es: "Plan Estándar en España; planes superiores pagan más", en: "Standard plan in Spain; higher plans pay more" },
+    productType: { es: "Cuenta de ahorro bancaria", en: "Bank savings account" },
+  },
+  {
+    slug: "plum",
+    rate: "1.12%",
+    rateNote: { es: "Hasta 1,12% en el plan gratuito, variable", en: "Up to 1.12% on the free plan, variable" },
+    productType: { es: "Fondo monetario (EMI)", en: "Money-market fund (EMI)" },
+  },
+  {
+    slug: "n26",
+    rate: "0.50%",
+    rateNote: { es: "Plan Estándar; 1,30% con Metal", en: "Standard plan; 1.30% with Metal" },
+    productType: { es: "Cuenta de ahorro bancaria", en: "Bank savings account" },
   },
 ];
 
@@ -70,6 +135,23 @@ const UI_COPY: Record<Locale, {
   viewComparison: string;
   methodology: string;
   disclosure: string;
+  rankingBadge: string;
+  rankingTitle: string;
+  rankingIntro1: string;
+  rankingIntro2: string;
+  rankingIntro3: string;
+  rankingTableTitle: string;
+  colRank: string;
+  colBank: string;
+  colRate: string;
+  colType: string;
+  colTrustpilot: string;
+  colProfile: string;
+  rateAsOf: string;
+  rateFootnote: string;
+  freePlansTitle: string;
+  freePlansIntro: string;
+  methodologyNote: string;
 }> = {
   es: {
     badge: "Comparador Cara a Cara",
@@ -85,6 +167,23 @@ const UI_COPY: Record<Locale, {
     viewComparison: "Ver duelo completo →",
     methodology: "Metodología",
     disclosure: "Aviso de afiliados",
+    rankingBadge: "Ranking de rentabilidad",
+    rankingTitle: "Cuentas que más pagan por tus ahorros (2026)",
+    rankingIntro1: "Ordenamos las cuentas por el tipo estándar que pagan por el dinero en efectivo, en euros y sin promociones. El tipo promocional, cuando existe, aparece aparte y nunca decide el orden: lo que importa es lo que cobras después de que caduca la oferta.",
+    rankingIntro2: "No todos los intereses son iguales. Algunos bancos pagan por el saldo de una cuenta de ahorro normal, con garantía de depósitos hasta 100.000 €. Otros —brókers y apps de ahorro— remuneran el efectivo a través de fondos monetarios o cuentas ómnibus: el tipo puede ser más alto, pero el dinero no tiene la misma protección. La columna «Tipo de producto» lo deja claro en cada fila; el detalle está en la ficha de cada entidad.",
+    rankingIntro3: "Solo 8 de los 42 bancos de nuestro directorio indican un tipo de ahorro en su ficha, así que solo esos 8 pueden entrar en este ranking. Que un banco no aparezca no es una mala nota: es que no publica un tipo comparable. Los tipos son variables y cambian con el BCE; verifica siempre el tipo vigente en la web oficial antes de mover tu dinero.",
+    rankingTableTitle: "Ranking por tipo estándar en euros",
+    colRank: "#",
+    colBank: "Entidad",
+    colRate: "Tipo estándar (EUR)",
+    colType: "Tipo de producto",
+    colTrustpilot: "Trustpilot",
+    colProfile: "Ficha",
+    rateAsOf: "Tipos según las fichas de FinanzasEU (datos actualizados el 20 de noviembre de 2026). Los tipos son variables.",
+    rateFootnote: "Revolut: 1,15 % TAE es el tipo Estándar en España según nuestra ficha; en Países Bajos el mismo plan paga 1,25 %. Los tipos varían por país de residencia.",
+    freePlansTitle: "Cuentas sin cuota mensual",
+    freePlansIntro: "Estas entidades tienen un plan explícitamente gratuito en su ficha — sin cuota mensual en el plan básico. Son 11 de 42; el resto indica «desde 0 € según condiciones» o no detalla la cuota.",
+    methodologyNote: "Cómo ordenamos: por tipo estándar en euros, sin promociones; en caso de empate, primero el tipo exacto frente al aproximado. Sin puntuaciones inventadas: solo datos de nuestras fichas. Metodología completa en ",
   },
   en: {
     badge: "Head-to-Head Comparisons",
@@ -100,6 +199,23 @@ const UI_COPY: Record<Locale, {
     viewComparison: "View full duel →",
     methodology: "Methodology",
     disclosure: "Affiliate disclosure",
+    rankingBadge: "Yield ranking",
+    rankingTitle: "Accounts that pay the most on your savings (2026)",
+    rankingIntro1: "We rank accounts by the standard rate they pay on cash, in euros and excluding promotions. A promo rate, where one exists, is shown separately and never decides the order: what matters is what you earn after the offer ends.",
+    rankingIntro2: "Not all interest is equal. Some banks pay interest on an ordinary savings account, covered by deposit protection up to €100,000. Others — brokers and savings apps — pay interest on cash held through money-market funds or omnibus accounts: the rate can be higher, but the money does not carry the same protection. The “Product type” column makes this clear in each row; the detail is on each bank's profile.",
+    rankingIntro3: "Only 8 of the 42 banks in our directory state a savings rate in their profile, so only those 8 can enter this ranking. A bank missing from the table is not a bad grade — it simply publishes no comparable rate. Rates are variable and move with the ECB; always check the current rate on the official website before moving your money.",
+    rankingTableTitle: "Ranked by standard euro rate",
+    colRank: "#",
+    colBank: "Provider",
+    colRate: "Standard rate (EUR)",
+    colType: "Product type",
+    colTrustpilot: "Trustpilot",
+    colProfile: "Profile",
+    rateAsOf: "Rates as stated in the FinanzasEU bank profiles (data updated 20 November 2026). Rates are variable.",
+    rateFootnote: "Revolut: 1.15% APR is the Standard rate in Spain per our profile; in the Netherlands the same plan pays 1.25%. Rates vary by country of residence.",
+    freePlansTitle: "Accounts with no monthly fee",
+    freePlansIntro: "These providers have an explicitly free plan in their profile — no monthly fee on the basic plan. That's 11 of 42; the rest state “from €0 depending on terms” or give no fee detail.",
+    methodologyNote: "How we rank: by standard euro rate, excluding promotions; on a tie, an exact rate ranks ahead of an approximate one. No invented scores — only data from our profiles. Full methodology in ",
   },
 };
 
@@ -110,6 +226,15 @@ export default function ComparisonHubClient() {
 
   // Sort all banks alphabetically by name for easy selection
   const availableBanks = [...banks].sort((a, b) => a.name.localeCompare(b.name));
+
+  // Banks with an EXPLICITLY free monthly plan in banks.ts. The
+  // createDraftBank() default "Desde 0 € (según condiciones)" is placeholder
+  // text, not a verified free plan, so it is deliberately not counted.
+  const freePlanBanks = availableBanks.filter(
+    (b) =>
+      b._status !== "draft" &&
+      (/^0\s*€/.test(b.fees.monthly) || /^gratis$/i.test(b.fees.monthly.trim())),
+  );
 
   const [bank1, setBank1] = useState<string>("revolut");
   const [bank2, setBank2] = useState<string>("wise");
@@ -256,6 +381,105 @@ export default function ComparisonHubClient() {
               </motion.article>
             );
           })}
+        </div>
+      </section>
+
+      {/* Savings-rate ranking (W6) */}
+      <section className="space-y-6">
+        <div className="space-y-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary-text uppercase tracking-wider">
+            <Trophy className="h-3.5 w-3.5 text-primary-text" />
+            <span>{copy.rankingBadge}</span>
+          </div>
+          <h2 className="text-xl md:text-2xl font-black tracking-tight text-foreground">
+            {copy.rankingTitle}
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">{copy.rankingIntro1}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">{copy.rankingIntro2}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">{copy.rankingIntro3}</p>
+        </div>
+
+        <div className="overflow-x-auto rounded-xl border border-border">
+          <table className="min-w-full text-left text-sm">
+            <caption className="sr-only">{copy.rankingTableTitle}</caption>
+            <thead>
+              <tr className="border-b border-border bg-muted/50 text-xs uppercase text-muted-foreground">
+                <th className="px-4 py-3">{copy.colRank}</th>
+                <th className="px-4 py-3">{copy.colBank}</th>
+                <th className="px-4 py-3">{copy.colRate}</th>
+                <th className="px-4 py-3">{copy.colType}</th>
+                <th className="px-4 py-3">{copy.colTrustpilot}</th>
+                <th className="px-4 py-3">{copy.colProfile}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {SAVINGS_RANKING.map((row, index) => {
+                const bank = availableBanks.find((b) => b.slug === row.slug);
+                if (!bank) return null;
+                return (
+                  <tr key={row.slug} className="border-b border-border/50">
+                    <td className="px-4 py-3 font-black">{index + 1}</td>
+                    <td className="px-4 py-3 font-bold">{bank.name}</td>
+                    <td className="px-4 py-3">
+                      <span className="font-black text-primary">{row.rate}</span>
+                      <span className="block text-[11px] font-normal text-muted-foreground">
+                        {row.rateNote[locale]}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-xs text-muted-foreground">
+                      {row.productType[locale]}
+                    </td>
+                    <td className="px-4 py-3 text-xs">
+                      {bank.rating?.trustpilot
+                        ? `${bank.rating.trustpilot.toFixed(1)} / 5${
+                            bank.rating.totalReviews
+                              ? ` (${bank.rating.totalReviews.toLocaleString(locale === "en" ? "en-US" : "es-ES")})`
+                              : ""
+                          }`
+                        : "—"}
+                    </td>
+                    <td className="px-4 py-3 text-xs">
+                      <LocalizedLink
+                        href={`/programas/${row.slug}`}
+                        className="font-semibold text-primary-text hover:underline"
+                      >
+                        {copy.colProfile} →
+                      </LocalizedLink>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-xs text-muted-foreground">{copy.rateAsOf}</p>
+        <p className="text-xs text-muted-foreground">{copy.rateFootnote}</p>
+        <p className="text-xs text-muted-foreground">
+          {copy.methodologyNote}
+          <LocalizedLink href="/sobre#metodologia" className="font-semibold text-primary-text underline-offset-4 hover:underline">
+            {copy.methodology}
+          </LocalizedLink>
+          .
+        </p>
+
+        <div className="space-y-3 pt-4">
+          <h3 className="text-lg font-black tracking-tight text-foreground">
+            {copy.freePlansTitle}
+          </h3>
+          <p className="text-sm leading-relaxed text-muted-foreground">{copy.freePlansIntro}</p>
+          <ul className="flex flex-wrap gap-2">
+            {freePlanBanks.map((bank) => (
+              <li key={bank.slug}>
+                <LocalizedLink
+                  href={`/programas/${bank.slug}`}
+                  className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium hover:border-primary hover:text-primary"
+                >
+                  {bank.name} →
+                </LocalizedLink>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import type React from "react";
 
 import { banks, type Bank } from "@/lib/banks";
+import { CURATED_COMPARISON_SLUGS } from "@/lib/curatedComparisons";
 import Container from "@/components/layout/Container";
 import { formatIsoYmdToEsDate, toJsonLd } from "@/lib/seo";
 
@@ -16,6 +17,27 @@ import {
   Info,
   CheckCircle2,
 } from "lucide-react";
+
+// Review articles (ES) per bank — ficha → article link (F-08). Only banks
+// with a dedicated review article are listed; bunq has no ES review yet.
+const REVIEW_ARTICLES_ES: Record<string, { href: string; title: string }> = {
+  revolut: {
+    href: "/blog/opiniones-revolut-2026",
+    title: "Opiniones Revolut 2026: ¿Seguro? Cuenta Remunerada y Planes",
+  },
+  wise: {
+    href: "/blog/wise-opiniones",
+    title: "Wise Opiniones 2026: Comisiones, IBAN y Si Merece la Pena",
+  },
+  n26: {
+    href: "/blog/n26-opiniones-2026",
+    title: "N26 opiniones 2026: cuenta gratis, IBAN español y la verdad del 1,7 %",
+  },
+  "trade-republic": {
+    href: "/blog/trade-republic-opiniones-2026",
+    title: "Trade Republic opiniones 2026: 4,07% TAE, bróker a 1 € y letra pequeña",
+  },
+};
 
 /* =========================================
    Tipos extra para el contenido dinámico
@@ -159,6 +181,19 @@ export default async function ProgramaPage(
   const hasAffiliate = Boolean(affiliateUrl);
 
   const relatedBanks = getRelatedBanks(bank as BankContent);
+
+  const reviewArticle = REVIEW_ARTICLES_ES[bank.slug];
+  const duelSlugs = CURATED_COMPARISON_SLUGS.filter(
+    (slug) => slug.startsWith(`${bank.slug}-vs-`) || slug.endsWith(`-vs-${bank.slug}`),
+  );
+  const duelLinks = duelSlugs
+    .map((slug) => {
+      const [a, b] = slug.split("-vs-");
+      const other = a === bank.slug ? b : a;
+      const otherBank = banks.find((x) => x.slug === other);
+      return otherBank ? { slug, name: otherBank.name } : null;
+    })
+    .filter((x): x is { slug: string; name: string } => x !== null);
 
   const logoSrc = logo; // string | StaticImageData
   const heroSrc = heroImage || null;
@@ -941,6 +976,47 @@ export default async function ProgramaPage(
                 );
               })}
             </div>
+          </section>
+        )}
+
+        {/* Análisis completo y duelos */}
+        {(reviewArticle || duelLinks.length > 0) && (
+          <section className="border-t border-border pt-8">
+            <h2 className="mb-3 text-xl font-semibold">
+              Análisis completo y comparativas de {name}
+            </h2>
+            {reviewArticle ? (
+              <p className="mb-4 text-sm text-muted-foreground">
+                Esta ficha resume los datos clave. El análisis a fondo, con
+                planes, límites y veredicto, está en{" "}
+                <Link
+                  href={reviewArticle.href}
+                  className="font-semibold text-primary hover:underline"
+                >
+                  {reviewArticle.title}
+                </Link>
+                .
+              </p>
+            ) : null}
+            {duelLinks.length > 0 ? (
+              <>
+                <p className="mb-2 text-sm font-medium">
+                  {name} cara a cara:
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {duelLinks.map((duel) => (
+                    <li key={duel.slug}>
+                      <Link
+                        href={`/comparar/${duel.slug}`}
+                        className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium hover:border-primary hover:text-primary"
+                      >
+                        {name} vs {duel.name} →
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
           </section>
         )}
 

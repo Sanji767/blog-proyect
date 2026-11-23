@@ -86,6 +86,9 @@ const UI_COPY: Record<Locale, {
   traditionalBankLoss: string;
   topRecommendation: string;
   ratesAsOf: (date: string) => string;
+  badge: string;
+  inactiveFor: (years: number) => string;
+  guaranteeNote: string;
 }> = {
   es: {
     title: "Calculadora de Rentabilidad de Ahorro",
@@ -103,6 +106,10 @@ const UI_COPY: Record<Locale, {
     topRecommendation: "Mejor opción",
     ratesAsOf: (date) =>
       `Tipos verificados el ${date}. Los tipos son variables y pueden cambiar; verifica siempre el tipo vigente en la web oficial de cada entidad.`,
+    badge: "Herramienta Interactiva",
+    inactiveFor: (years) =>
+      `en ${years} ${years === 1 ? "año" : "años"} por mantener tu dinero inactivo.`,
+    guaranteeNote: "Garantía hasta 100.000 € (FGD Europeo)",
   },
   en: {
     title: "Savings Yield Calculator",
@@ -120,6 +127,10 @@ const UI_COPY: Record<Locale, {
     topRecommendation: "Best Value",
     ratesAsOf: (date) =>
       `Rates verified on ${date}. Rates are variable and may change; always check the current rate on each provider's official website.`,
+    badge: "Interactive Tool",
+    inactiveFor: (years) =>
+      `over ${years} ${years === 1 ? "year" : "years"} of leaving your money idle.`,
+    guaranteeNote: "Protected up to €100,000 (European DGS)",
   },
 };
 
@@ -131,6 +142,16 @@ export default function SavingsCalculator() {
     locale === "en" ? "en-US" : "es-ES",
     { year: "numeric", month: "long", day: "numeric" },
   );
+
+  const intlLocale = locale === "en" ? "en-US" : "es-ES";
+  const formatNumber = (value: number) =>
+    new Intl.NumberFormat(intlLocale).format(value);
+  const formatEur = (value: number) =>
+    new Intl.NumberFormat(intlLocale, {
+      style: "currency",
+      currency: "EUR",
+      maximumFractionDigits: 0,
+    }).format(value);
 
   const [amount, setAmount] = useState<number>(5000);
   const [years, setYears] = useState<number>(1);
@@ -156,7 +177,7 @@ export default function SavingsCalculator() {
       <header className="max-w-2xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary-text uppercase tracking-wider">
           <Sparkles className="h-3.5 w-3.5 text-primary-text" />
-          <span>Herramienta Interactiva</span>
+          <span>{copy.badge}</span>
         </div>
         <h2 className="mt-3 text-2xl font-black md:text-3xl tracking-tight text-foreground">
           {copy.title}
@@ -178,7 +199,7 @@ export default function SavingsCalculator() {
                 {copy.savingsLabel}
               </label>
               <span className="text-2xl font-black text-primary">
-                {amount.toLocaleString("es-ES")} €
+                {formatEur(amount)}
               </span>
             </div>
 
@@ -192,9 +213,9 @@ export default function SavingsCalculator() {
               className="mt-4 h-3 w-full cursor-pointer appearance-none rounded-lg bg-muted-foreground/20 accent-primary"
             />
             <div className="mt-2 flex justify-between text-[11px] font-semibold text-muted-foreground">
-              <span>500 €</span>
-              <span>25.000 €</span>
-              <span>50.000 €</span>
+              <span>{formatEur(500)}</span>
+              <span>{formatEur(25000)}</span>
+              <span>{formatEur(50000)}</span>
             </div>
           </div>
 
@@ -233,10 +254,10 @@ export default function SavingsCalculator() {
                   {copy.traditionalBankLoss}
                 </p>
                 <p className="mt-1 text-2xl font-black text-primary-text">
-                  +{topProfit.toLocaleString("es-ES")} €
+                  +{formatEur(topProfit)}
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  en {years} {years === 1 ? "año" : "años"} por mantener tu dinero inactivo.
+                  {copy.inactiveFor(years)}
                 </p>
               </div>
             </div>
@@ -282,7 +303,7 @@ export default function SavingsCalculator() {
 
                     <div className="text-right">
                       <span className="text-base font-black text-foreground">
-                        +{res.profit.toLocaleString("es-ES")} €
+                        +{formatEur(res.profit)}
                       </span>
                       <span className="ml-1 text-[11px] text-muted-foreground">
                         {copy.totalEarnings}
@@ -310,7 +331,7 @@ export default function SavingsCalculator() {
                     <div className="mt-3 flex items-center justify-between pt-2 border-t border-primary/20">
                       <p className="flex items-center gap-1.5 text-xs font-semibold text-primary-text dark:text-primary-light">
                         <CheckCircle2 className="h-4 w-4" />
-                        Garantía hasta 100.000 € (FGD Europeo)
+                        {copy.guaranteeNote}
                       </p>
                       <Button asChild size="sm" className="gap-1.5 text-xs font-bold">
                         <a

@@ -134,7 +134,7 @@ export default async function BlogPage() {
         <>
           <LatestNewsRail
             posts={railPosts}
-            title="Latest News"
+            title="Últimas noticias"
             subtitle="Lecturas recientes, sin tarjetas genéricas ni ruido."
           />
 

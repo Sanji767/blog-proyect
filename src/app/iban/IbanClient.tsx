@@ -32,6 +32,20 @@ import { cn } from "@/lib/utils";
 import { BANK_REGISTRY } from "./BankData";
 import { IBAN_MAP } from "./IBANMap";
 
+// Country display names come from Intl.DisplayNames (no second hardcoded
+// map): IBANMap.ts stays the source of length/SEPA/example data, only the
+// displayed name is localized (F-07 §1.9).
+function countryDisplayName(code: string, locale: "es" | "en"): string {
+  try {
+    return (
+      new Intl.DisplayNames([locale === "en" ? "en" : "es"], { type: "region" }).of(code) ??
+      code
+    );
+  } catch {
+    return code;
+  }
+}
+
 type SuccessResult = {
   type: "success";
   country: string;
@@ -84,7 +98,7 @@ const COPY: Record<Locale, IbanCopy> = {
   },
 };
 
-function validateIBAN(input: string, copy: IbanCopy): ScanResult {
+function validateIBAN(input: string, copy: IbanCopy, locale: Locale): ScanResult {
   const clean = input.replace(/\s/g, "").toUpperCase();
   if (clean.length < 2) return null;
 
@@ -113,7 +127,7 @@ function validateIBAN(input: string, copy: IbanCopy): ScanResult {
   }
 
   const breakdown = [
-    { label: copy.breakdownCountry, value: clean.slice(0, 2), desc: countryData.country },
+    { label: copy.breakdownCountry, value: clean.slice(0, 2), desc: countryDisplayName(prefix, locale) },
     { label: copy.breakdownCheck, value: clean.slice(2, 4) },
     { label: copy.breakdownBank, value: clean.slice(4, 8), desc: bankInfo?.name },
     { label: copy.breakdownBranch, value: clean.slice(8, 12) },
@@ -214,7 +228,7 @@ export default function IBANPage() {
     [rawInput]
   );
 
-  const result = useMemo(() => validateIBAN(rawInput, COPY[locale]), [rawInput, locale]);
+  const result = useMemo(() => validateIBAN(rawInput, COPY[locale], locale), [rawInput, locale]);
 
   const bulkResults = useMemo(() => {
     return bulkInput
@@ -222,7 +236,7 @@ export default function IBANPage() {
       .map((line) => line.trim())
       .filter(Boolean)
       .map((line) => {
-        const res = validateIBAN(line, COPY[locale]);
+        const res = validateIBAN(line, COPY[locale], locale);
         return res ? { iban: line, result: res } : null;
       })
       .filter(
@@ -402,7 +416,7 @@ export default function IBANPage() {
 
                     <div className="min-w-0 flex-1">
                       <h2 className="text-balance text-3xl font-black tracking-tight md:text-4xl">
-                        {result.country}
+                        {countryDisplayName(result.countryCode, locale)}
                       </h2>
                       <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-primary">
                         <Globe className="h-4 w-4" />
@@ -581,7 +595,7 @@ export default function IBANPage() {
                           {h.formatted}
                         </p>
                         <p className="text-sm font-semibold">
-                          {h.result.bankInfo?.name || h.result.country}
+                          {h.result.bankInfo?.name || countryDisplayName(h.result.countryCode, locale)}
                         </p>
                       </div>
                     </button>
@@ -636,7 +650,7 @@ export default function IBANPage() {
                 >
                   <div className="mb-4 flex items-center gap-3">
                     <ReactCountryFlag countryCode={code} svg cdnUrl="/flags/4x3/" />
-                    <span className="font-semibold">{data.country}</span>
+                    <span className="font-semibold">{countryDisplayName(code, locale)}</span>
                   </div>
 
                   <div>

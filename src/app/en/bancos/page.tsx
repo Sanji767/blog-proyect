@@ -7,6 +7,7 @@ import { CreditCard, Globe2, ShieldCheck, Star } from "lucide-react";
 import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
 import { banks, type Bank } from "@/lib/banks";
+import { getBankEn } from "@/lib/banks-en";
 import { withLocale } from "@/lib/i18n";
 import { formatIsoYmdToEnDate } from "@/lib/seo";
 
@@ -121,7 +122,7 @@ export default function BancosPageEn() {
           <Metric
             label="No monthly fee"
             value={freeAccounts.toString()}
-            description="Plans with 0 €/month or free."
+            description="Plans with a €0 monthly fee, or free."
             tone="success"
           />
           <Metric
@@ -153,7 +154,8 @@ export default function BancosPageEn() {
   );
 }
 
-function BankCard({ bank, locale }: { bank: Bank; locale: "en" }) {
+function BankCard({ bank: bankEs, locale }: { bank: Bank; locale: "en" }) {
+  const bank = getBankEn(bankEs);
   const {
     slug,
     name,
@@ -172,7 +174,7 @@ function BankCard({ bank, locale }: { bank: Bank; locale: "en" }) {
   const detailUrl = withLocale(`/programas/${slug}`, locale);
 
   const hasSpanish = support.spanishSupport;
-  const isFree = /gratis|0\s*€/i.test(fees.monthly);
+  const isFree = /gratis|free|0\s*€|€0/i.test(fees.monthly);
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl bg-secondary p-6 text-secondary-foreground shadow-soft transition-shadow">

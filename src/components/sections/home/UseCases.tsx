@@ -11,6 +11,7 @@ import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Button } from "@/components/ui/button";
 import { banks } from "@/lib/banks";
+import { getBankEn } from "@/lib/banks-en";
 import { cn } from "@/lib/utils";
 
 const CASES_BY_LOCALE = {
@@ -119,10 +120,11 @@ export default function UseCases() {
     [active, cases]
   );
 
-  const recommended = useMemo(
-    () => banks.find((b) => b.slug === currentCase.recommendedBank),
-    [currentCase.recommendedBank]
-  );
+  const recommended = useMemo(() => {
+    const found = banks.find((b) => b.slug === currentCase.recommendedBank);
+    if (!found) return undefined;
+    return locale === "en" ? getBankEn(found) : found;
+  }, [currentCase.recommendedBank, locale]);
 
   return (
     <section className="py-16 md:py-24">
@@ -250,13 +252,7 @@ export default function UseCases() {
                               {copy.monthlyFee}
                             </p>
                             <p className="mt-2 font-semibold">
-                              {locale === "en"
-                                ? recommended.fees.monthly
-                                    .replace(/gratis/gi, "Free")
-                                    .replace(/0\s*€/g, "Free (€0)")
-                                    .replace(/Desde 0\s*€/gi, "From €0")
-                                    .replace(/según condiciones/gi, "depending on plan")
-                                : recommended.fees.monthly}
+                              {recommended.fees.monthly}
                             </p>
                           </div>
                         </div>

@@ -11,6 +11,7 @@ import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Button } from "@/components/ui/button";
 import { banks, BankFeatureTag } from "@/lib/banks";
+import { getBankEn } from "@/lib/banks-en";
 
 type FilterFilter = "todos" | "iban-es" | "sin-comisiones" | "multidivisa";
 
@@ -34,6 +35,7 @@ const COPY = {
       multidivisa: "✈️ Multi-divisa",
     },
     noResults: "No hay bancos que coincidan con este filtro en la vista destacada.",
+    filterLabel: "Filtrar:",
   },
   en: {
     kicker: "Ranking 2026",
@@ -54,6 +56,7 @@ const COPY = {
       multidivisa: "✈️ Multi-currency",
     },
     noResults: "No banks match this filter in the highlighted section.",
+    filterLabel: "Filter:",
   },
 } as const;
 
@@ -64,7 +67,8 @@ export default function HomeBanksPreview() {
 
   const allActiveBanks = [...banks]
     .filter((b) => b._status !== "draft")
-    .sort((a, b) => (a._priority ?? 999) - (b._priority ?? 999));
+    .sort((a, b) => (a._priority ?? 999) - (b._priority ?? 999))
+    .map((b) => (locale === "en" ? getBankEn(b) : b));
 
   const filteredBanks = allActiveBanks.filter((bank) => {
     if (activeFilter === "todos") return true;
@@ -104,7 +108,7 @@ export default function HomeBanksPreview() {
         {/* Pestañas de Filtros Interactivos */}
         <div className="mt-8 flex flex-wrap items-center gap-2">
           <div className="mr-2 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            <Filter className="h-3.5 w-3.5" /> Filtrar:
+            <Filter className="h-3.5 w-3.5" /> {copy.filterLabel}
           </div>
           {(["todos", "iban-es", "sin-comisiones", "multidivisa"] as FilterFilter[]).map((filterKey) => {
             const isActive = activeFilter === filterKey;
@@ -190,13 +194,7 @@ export default function HomeBanksPreview() {
                           {copy.monthlyFee}
                         </p>
                         <p className="mt-2 font-semibold">
-                          {locale === "en"
-                            ? bank.fees.monthly
-                                .replace(/gratis/gi, "Free")
-                                .replace(/0\s*€/g, "Free (€0)")
-                                .replace(/Desde 0\s*€/gi, "From €0")
-                                .replace(/según condiciones/gi, "depending on plan")
-                            : bank.fees.monthly}
+                          {bank.fees.monthly}
                         </p>
                       </div>
                     </div>

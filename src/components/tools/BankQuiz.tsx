@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { banks, Bank } from "@/lib/banks";
+import { getBankEn } from "@/lib/banks-en";
 import type { Locale } from "@/lib/i18n";
 
 type Answers = {
@@ -125,7 +126,8 @@ export default function BankQuiz() {
     return scored[0]?.bank ?? candidates[0];
   };
 
-  const matchedBank = getMatchedBank();
+  const matchedBankEs = getMatchedBank();
+  const matchedBank = locale === "en" ? getBankEn(matchedBankEs) : matchedBankEs;
 
   return (
     <section className="relative overflow-hidden rounded-xl border border-border bg-card p-6 md:p-10 text-card-foreground shadow-soft transition-colors">

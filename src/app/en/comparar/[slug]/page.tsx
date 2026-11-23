@@ -7,6 +7,7 @@ import Container from "@/components/layout/Container";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { Button } from "@/components/ui/button";
 import { banks, Bank } from "@/lib/banks";
+import { getBankEn } from "@/lib/banks-en";
 import { isCuratedComparisonSlug } from "@/lib/curatedComparisons";
 import { SITE_URL, toJsonLd } from "@/lib/seo";
 
@@ -76,69 +77,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function translateCountry(country: string): string {
-  const map: Record<string, string> = {
-    "Bélgica": "Belgium",
-    "Francia": "France",
-    "Alemania": "Germany",
-    "España": "Spain",
-    "Reino Unido": "United Kingdom",
-    "Chipre": "Cyprus",
-    "Suecia": "Sweden",
-    "Países Bajos": "Netherlands",
-    "Finlandia": "Finland",
-    "Suiza": "Switzerland",
-    "Portugal": "Portugal",
-    "Dinamarca": "Denmark",
-  };
-  return map[country] ?? country;
-}
-
-function translateFee(fee: string): string {
-  return fee
-    .replace(/gratis/gi, "Free")
-    .replace(/0\s*€/g, "Free (€0)")
-    .replace(/Desde 0\s*€/gi, "From €0")
-    .replace(/según condiciones/gi, "depending on plan")
-    .replace(/según red\/condiciones/gi, "Varies by network");
-}
-
-function translateTagline(bank: Bank): string {
-  const map: Record<string, string> = {
-    revolut: "Leading multi-currency account with LT IBAN and top-rated app",
-    n26: "German neobank with DE IBAN, zero monthly fees & smart sub-accounts",
-    wise: "Low-cost international transfer account with mid-market FX rates & BE IBAN",
-    "trade-republic": "3.75% APY high-yield savings account & commission-free trading",
-    myinvestor: "Spanish investment neobank with high-yield savings & ES IBAN",
-    bunq: "Sustainable Dutch neobank with multiple European IBANs",
-    openbank: "Digital bank backed by Santander with ES IBAN & zero fees",
-    bbva: "Online account backed by BBVA with zero commissions & ES IBAN",
-    santander: "Online digital checking account from Banco Santander",
-    qonto: "Business & freelancer banking with expense management tools",
-    "trading-212": "High-yield cash interest account (up to 5.1% APY) & free stock investing",
-    freedom24: "NASDAQ-listed European broker with daily interest D Account",
-    plum: "Smart automated savings app, interest pockets & debit card",
-    klarna: "Flexible savings account & smart shopping card from Sweden",
-    sumup: "Business checking account with free card & POS card reader",
-  };
-  return map[bank.slug] ?? bank.tagline;
-}
-
-function translateDeposit(guarantee: string): string {
-  if (/100\.000/i.test(guarantee)) return "Protected up to €100,000 (DGS)";
-  return "EU Regulated Protection";
-}
-
 export default async function EnglishComparisonPage({ params }: PageProps) {
   const { slug } = await params;
   const parsed = parseComparisonSlug(slug);
   if (!parsed) notFound();
 
   const [b1Slug, b2Slug] = parsed;
-  const b1 = banks.find((b) => b.slug === b1Slug);
-  const b2 = banks.find((b) => b.slug === b2Slug);
+  const b1Es = banks.find((b) => b.slug === b1Slug);
+  const b2Es = banks.find((b) => b.slug === b2Slug);
 
-  if (!b1 || !b2) notFound();
+  if (!b1Es || !b2Es) notFound();
+
+  const b1 = getBankEn(b1Es);
+  const b2 = getBankEn(b2Es);
 
   const pageUrl = `${SITE_URL}/en/comparar/${slug}`;
 
@@ -188,15 +139,15 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
                   </div>
                   <div>
                     <h2 className="text-2xl font-black text-accent">{b.name}</h2>
-                    <p className="text-xs text-muted-foreground">{translateCountry(b.country)} • IBAN {b.ibanPrefix}</p>
+                    <p className="text-xs text-muted-foreground">{b.country} • IBAN {b.ibanPrefix}</p>
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm leading-relaxed text-secondary-foreground/80">{translateTagline(b)}</p>
+                <p className="mt-4 text-sm leading-relaxed text-secondary-foreground/80">{b.tagline}</p>
 
                 <div className="mt-6 flex items-center justify-between border-t border-border/50 pt-4 text-sm">
                   <span className="font-semibold text-muted-foreground">Monthly fee:</span>
-                  <span className="font-bold text-primary">{translateFee(b.fees.monthly)}</span>
+                  <span className="font-bold text-primary">{b.fees.monthly}</span>
                 </div>
               </div>
 
@@ -232,18 +183,18 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
               <tbody className="divide-y divide-border/50">
                 <tr>
                   <td className="p-4 font-semibold">IBAN Type</td>
-                  <td className="p-4">{b1.ibanPrefix} ({translateCountry(b1.ibanCountry)})</td>
-                  <td className="p-4">{b2.ibanPrefix} ({translateCountry(b2.ibanCountry)})</td>
+                  <td className="p-4">{b1.ibanPrefix} ({b1.ibanCountry})</td>
+                  <td className="p-4">{b2.ibanPrefix} ({b2.ibanCountry})</td>
                 </tr>
                 <tr>
                   <td className="p-4 font-semibold">Monthly fee</td>
-                  <td className="p-4 font-bold text-primary">{translateFee(b1.fees.monthly)}</td>
-                  <td className="p-4 font-bold text-primary">{translateFee(b2.fees.monthly)}</td>
+                  <td className="p-4 font-bold text-primary">{b1.fees.monthly}</td>
+                  <td className="p-4 font-bold text-primary">{b2.fees.monthly}</td>
                 </tr>
                 <tr>
                   <td className="p-4 font-semibold">Deposit Protection</td>
-                  <td className="p-4">{translateDeposit(b1.compliance.depositGuarantee)}</td>
-                  <td className="p-4">{translateDeposit(b2.compliance.depositGuarantee)}</td>
+                  <td className="p-4">{b1.compliance.depositGuarantee}</td>
+                  <td className="p-4">{b2.compliance.depositGuarantee}</td>
                 </tr>
                 <tr>
                   <td className="p-4 font-semibold">Spanish Support</td>
