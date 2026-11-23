@@ -2,8 +2,8 @@
 title: "Wise Opiniones 2025: Análisis Real, Comisiones, IBAN y Si Merece la Pena"
 description: "Opiniones de Wise en 2025 basadas en sus condiciones oficiales: seguridad, comisiones transparentes, cuenta multidivisa, IBAN BE, límites y comparativa con Revolut. Guía para viajeros, freelancers y expatriados."
 date: 2026-11-20
-category: analisis
-tags: ["wise opiniones", "wise 2025", "cuenta multidivisa", "transferencias internacionales", "iban belga", "neobancos europa", "wise vs revolut"]
+category: bancos
+tags: ["wise", "bancos"]
 slug: wise-opiniones
 image: /images/blogs/wise-opiniones/wise-opiniones.png
 featured: true

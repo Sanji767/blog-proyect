@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { banks } from "@/lib/banks";
-import { getAllPostPreviews, getCategories, getTags } from "@/lib/blog";
+import { getAllPostPreviews, getCategories } from "@/lib/blog";
 import { CURATED_COMPARISON_SLUGS } from "@/lib/curatedComparisons";
 import { ebooks } from "@/lib/ebooks-data";
 import { type Locale, withLocale } from "@/lib/i18n";
@@ -99,8 +99,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
-  const categoriesEs = await getCategories("es");
-  const categoriesEn = await getCategories("en");
+  // F-04: only indexable categories (>= 3 articles) go in the sitemap;
+  // thin categories are noindex and excluded.
+  const categoriesEs = (await getCategories("es")).filter(
+    (cat) => cat.count >= 3,
+  );
+  const categoriesEn = (await getCategories("en")).filter(
+    (cat) => cat.count >= 3,
+  );
   const categorySlugsEs = new Set(categoriesEs.map((c) => c.slug));
   const categorySlugsEn = new Set(categoriesEn.map((c) => c.slug));
 
@@ -142,48 +148,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
   );
 
-  const tagsEs = await getTags("es");
-  const tagsEn = await getTags("en");
-  const tagSlugsEs = new Set(tagsEs.map((t) => t.slug));
-  const tagSlugsEn = new Set(tagsEn.map((t) => t.slug));
-
-  urls.push(
-    ...tagsEs.map((tag) => {
-      const hasEn = tagSlugsEn.has(tag.slug);
-      const encoded = encodeURIComponent(tag.slug);
-      return {
-        url: toUrl(`/blog/tag/${encoded}`),
-        lastModified: now,
-        alternates: hasEn
-          ? {
-              languages: {
-                es: toUrl(`/blog/tag/${encoded}`),
-                en: toUrl(`/en/blog/tag/${encoded}`),
-              },
-            }
-          : undefined,
-      };
-    }),
-  );
-
-  urls.push(
-    ...tagsEn.map((tag) => {
-      const hasEs = tagSlugsEs.has(tag.slug);
-      const encoded = encodeURIComponent(tag.slug);
-      return {
-        url: toUrl(`/en/blog/tag/${encoded}`),
-        lastModified: now,
-        alternates: hasEs
-          ? {
-              languages: {
-                es: toUrl(`/blog/tag/${encoded}`),
-                en: toUrl(`/en/blog/tag/${encoded}`),
-              },
-            }
-          : undefined,
-      };
-    }),
-  );
+  // F-04: tag pages are noindex,follow, so they do not belong in the
+  // sitemap. (All tag URLs were removed here.)
 
   urls.push(
     ...banks

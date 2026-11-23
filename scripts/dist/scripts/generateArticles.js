@@ -15,7 +15,7 @@ async function generateBlogPost(topic, year) {
     const content = response.choices[0].message?.content ?? "";
     const titleMatch = content.match(/^#\s*(.+)/m);
     const title = titleMatch ? titleMatch[1].trim() : topic;
-    const slug = title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9\-]/g, "");
+    const slug = title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-").replace(/[^a-z0-9\-]/g, "");
     const date = new Date().toISOString();
     return { title, slug, date, year, category: "general", tags: [], content };
 }

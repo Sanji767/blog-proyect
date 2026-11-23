@@ -1,11 +1,12 @@
 // src/app/en/blog/categoria/[categoria]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import BlogExplore from "@/components/blog/BlogExplore";
 import NewsPostCard from "@/components/blog/NewsPostCard";
 import { getCategories, getPostsByCategory } from "@/lib/blog";
+import { LEGACY_CATEGORIES } from "@/lib/blog/legacyTaxonomy";
 import { withLocale } from "@/lib/i18n";
 import {
   DEFAULT_OG_IMAGE_URL,
@@ -36,15 +37,19 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const categories = await getCategories("en");
   const cat = categories.find((c) => c.slug === categoria);
 
-  if (!cat)
+  if (!cat) {
+    const legacy = LEGACY_CATEGORIES.en[categoria];
+    if (legacy) permanentRedirect(`/en/blog/categoria/${legacy}`);
     return {
       title: "Category not found | FinanzasEU",
       robots: { index: false, follow: true },
     };
+  }
 
   return {
     title: `${cat.title} | FinanzasEU Blog`,
     description: `All articles about ${cat.title.toLowerCase()}: guides, reviews and practical tips.`,
+    ...(cat.count < 3 ? { robots: { index: false, follow: true } } : {}),
     alternates: {
       canonical: `/en/blog/categoria/${encodeURIComponent(categoria)}`,
     },
@@ -59,8 +64,13 @@ export default async function CategoryPageEn(props: Props) {
   const cat = categories.find((c) => c.slug === categoria);
 
   // C4: unknown categories return 404 (previously: indexable 200 with an
-  // inline "Category not found." message).
-  if (!cat) notFound();
+  // inline "Category not found." message). Categories retired in the
+  // taxonomy consolidation (F-04) redirect to their survivor.
+  if (!cat) {
+    const legacy = LEGACY_CATEGORIES.en[categoria];
+    if (legacy) permanentRedirect(`/en/blog/categoria/${legacy}`);
+    notFound();
+  }
 
   const posts = await getPostsByCategory(categoria, locale);
 

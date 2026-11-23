@@ -29,7 +29,18 @@ export default defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: { source: "title", maxLength: 96 },
+      options: {
+        source: "title",
+        maxLength: 96,
+        slugify: (input: string) =>
+          input
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "")
+            .slice(0, 96),
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -61,10 +72,29 @@ export default defineType({
       name: "category",
       title: "Categoría (slug)",
       type: "string",
-      description: "Ej: reviews, entrevistas, noticias.",
+      description: "Una de las categorías consolidadas (ES: finanzas, bancos, cuentas, tarjetas, ahorro, inversion, fiscalidad, vivienda; EN: accounts, banking, cards, savings, investing, taxes, housing).",
+      options: {
+        list: [
+          { title: "Finanzas (ES)", value: "finanzas" },
+          { title: "Bancos (ES)", value: "bancos" },
+          { title: "Cuentas (ES)", value: "cuentas" },
+          { title: "Tarjetas (ES)", value: "tarjetas" },
+          { title: "Ahorro (ES)", value: "ahorro" },
+          { title: "Inversión (ES)", value: "inversion" },
+          { title: "Fiscalidad (ES)", value: "fiscalidad" },
+          { title: "Vivienda (ES)", value: "vivienda" },
+          { title: "Accounts (EN)", value: "accounts" },
+          { title: "Banking (EN)", value: "banking" },
+          { title: "Cards (EN)", value: "cards" },
+          { title: "Savings (EN)", value: "savings" },
+          { title: "Investing (EN)", value: "investing" },
+          { title: "Taxes (EN)", value: "taxes" },
+          { title: "Housing (EN)", value: "housing" },
+        ],
+      },
       validation: (Rule) =>
-        Rule.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).warning(
-          "Usa minúsculas y guiones (slug), ej: entrevistas, album-review.",
+        Rule.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).error(
+          "Usa minúsculas y guiones (slug); elige una categoría de la lista.",
         ),
     }),
     defineField({
@@ -75,13 +105,13 @@ export default defineType({
         defineArrayMember({
           type: "string",
           validation: (Rule) =>
-            Rule.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).warning(
-              "Usa minúsculas y guiones (slug), ej: synthwave, rock-progresivo.",
+            Rule.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).error(
+              "Usa minúsculas y guiones (slug), ej: finanzas-personales.",
             ),
         }),
       ],
       options: { layout: "tags" },
-      description: "Ej: rock, synthwave, festival.",
+      description: "Ej: bancos, finanzas-personales, revolut.",
     }),
     defineField({
       name: "coverImage",

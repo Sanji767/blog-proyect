@@ -61,7 +61,7 @@ const nextConfig = {
       // Fusiones de duplicados (auditoría SEO 2026-11-23, F-02).
       {
         source: "/blog/gua-rpida-sobre-prstamos-personales-y-tasas-de-inters",
-        destination: "/blog/gua-de-prstamos-personales-y-tasas-de-inters",
+        destination: "/blog/guia-de-prestamos-personales-y-tasas-de-interes",
         permanent: true,
       },
       {
@@ -71,7 +71,7 @@ const nextConfig = {
       },
       {
         source: "/blog/cmo-automatizar-tu-ahorro-mensual-fcilmente",
-        destination: "/blog/cmo-ahorrar-dinero-automticamente-cada-mes",
+        destination: "/blog/como-ahorrar-dinero-automaticamente-cada-mes",
         permanent: true,
       },
       {
@@ -91,7 +91,29 @@ const nextConfig = {
       },
       {
         source: "/blog/las-tarjetas-de-crdito-con-las-mejores-recompensas",
-        destination: "/blog/las-mejores-tarjetas-de-crdito-con-recompensas-en-2026",
+        destination: "/blog/las-mejores-tarjetas-de-credito-con-recompensas-en-2026",
+        permanent: true,
+      },
+      // Slugs con letras perdidas por falta de normalización NFD (F-04):
+      // los archivos MDX se renombraron a su forma correcta.
+      {
+        source: "/blog/c-mo-gestionar-tus-finanzas-personales-de-forma-eficiente",
+        destination: "/blog/como-gestionar-tus-finanzas-personales-de-forma-eficiente",
+        permanent: true,
+      },
+      {
+        source: "/blog/cmo-ahorrar-dinero-automticamente-cada-mes",
+        destination: "/blog/como-ahorrar-dinero-automaticamente-cada-mes",
+        permanent: true,
+      },
+      {
+        source: "/blog/gua-de-prstamos-personales-y-tasas-de-inters",
+        destination: "/blog/guia-de-prestamos-personales-y-tasas-de-interes",
+        permanent: true,
+      },
+      {
+        source: "/blog/las-mejores-tarjetas-de-crdito-con-recompensas-en-2026",
+        destination: "/blog/las-mejores-tarjetas-de-credito-con-recompensas-en-2026",
         permanent: true,
       },
     ];

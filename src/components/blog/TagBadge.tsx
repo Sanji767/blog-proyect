@@ -5,6 +5,13 @@ const ACCENTED_LABELS: Record<string, string> = {
   analisis: "Análisis",
   autonomos: "Autónomos",
   inversion: "Inversión",
+  degiro: "DEGIRO",
+  etfs: "ETFs",
+  euribor: "Euríbor",
+  "hacienda-espana": "Hacienda España",
+  irpf: "IRPF",
+  "prestamos-personales": "Préstamos personales",
+  "trade-republic": "Trade Republic",
 };
 
 function humanizeSlug(value: string): string {

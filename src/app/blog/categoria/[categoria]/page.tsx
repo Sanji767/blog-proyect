@@ -1,11 +1,12 @@
 // src/app/blog/categoria/[categoria]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import BlogExplore from "@/components/blog/BlogExplore";
 import NewsPostCard from "@/components/blog/NewsPostCard";
 import { getCategories, getPostsByCategory } from "@/lib/blog";
+import { LEGACY_CATEGORIES } from "@/lib/blog/legacyTaxonomy";
 import {
   DEFAULT_OG_IMAGE_URL,
   SITE_LOGO_URL,
@@ -35,15 +36,19 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const categories = await getCategories();
   const cat = categories.find((c) => c.slug === categoria);
 
-  if (!cat)
+  if (!cat) {
+    const legacy = LEGACY_CATEGORIES.es[categoria];
+    if (legacy) permanentRedirect(`/blog/categoria/${legacy}`);
     return {
       title: "Categoría no encontrada | FinanzasEU",
       robots: { index: false, follow: true },
     };
+  }
 
   return {
     title: `${cat.title} | Blog FinanzasEU`,
     description: `Todos los artículos sobre ${cat.title.toLowerCase()}: guías, opiniones y trucos.`,
+    ...(cat.count < 3 ? { robots: { index: false, follow: true } } : {}),
     alternates: {
       canonical: `/blog/categoria/${encodeURIComponent(categoria)}`,
     },
@@ -57,8 +62,14 @@ export default async function CategoryPage(props: Props) {
   const cat = categories.find((c) => c.slug === categoria);
 
   // C4: categorías desconocidas devuelven 404 (antes: 200 indexable con
-  // un "Categoría no encontrada" renderizado inline).
-  if (!cat) notFound();
+  // un "Categoría no encontrada" renderizado inline). Las categorías
+  // retiradas en la consolidación de taxonomía (F-04) redirigen a su
+  // superviviente.
+  if (!cat) {
+    const legacy = LEGACY_CATEGORIES.es[categoria];
+    if (legacy) permanentRedirect(`/blog/categoria/${legacy}`);
+    notFound();
+  }
 
   const posts = await getPostsByCategory(categoria);
 

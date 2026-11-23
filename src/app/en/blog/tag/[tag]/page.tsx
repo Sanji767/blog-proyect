@@ -1,11 +1,12 @@
 // src/app/en/blog/tag/[tag]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import BlogExplore from "@/components/blog/BlogExplore";
 import NewsPostCard from "@/components/blog/NewsPostCard";
 import { getPostsByTag, getTags } from "@/lib/blog";
+import { LEGACY_TAGS } from "@/lib/blog/legacyTaxonomy";
 import { withLocale } from "@/lib/i18n";
 import {
   DEFAULT_OG_IMAGE_URL,
@@ -39,6 +40,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   // C4: an unknown tag is a 404, not an indexable empty page with its own
   // canonical.
   if (!tag) {
+    const legacy = LEGACY_TAGS.en[tagSlug];
+    if (legacy) permanentRedirect(`/en/blog/tag/${legacy}`);
     return {
       title: "Tag not found | FinanzasEU",
       robots: { index: false, follow: true },
@@ -50,6 +53,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: `#${label} | FinanzasEU Blog`,
     description: `All articles tagged with #${label}.`,
+    robots: { index: false, follow: true },
     alternates: {
       canonical: `/en/blog/tag/${encodeURIComponent(tagSlug)}`,
     },
@@ -65,8 +69,13 @@ export default async function TagPageEn(props: Props) {
 
   // C4: unknown tags return 404 (previously: indexable 200 with
   // "No articles tagged ... yet"). getTags() derives from the articles,
-  // so a known tag always has at least one article.
-  if (!tag) notFound();
+  // so a known tag always has at least one article. Tags retired in the
+  // taxonomy consolidation (F-04) redirect to their survivor.
+  if (!tag) {
+    const legacy = LEGACY_TAGS.en[tagSlug];
+    if (legacy) permanentRedirect(`/en/blog/tag/${legacy}`);
+    notFound();
+  }
 
   const label = tag.title;
 

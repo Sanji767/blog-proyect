@@ -2,8 +2,8 @@
 title: "Opiniones Revolut 2025: ¿Es Seguro? Cuenta Remunerada, Intereses, Planes y Valoración Real"
 description: "Opiniones reales de Revolut en 2025: IBAN español, Bizum, cuenta remunerada hasta 2,27% TAE, planes Estándar, Plus, Premium, Metal y Ultra, comisiones, límites, ventajas, desventajas y análisis completo."
 date: 2026-11-20
-category: analisis
-tags: ["revolut", "opiniones revolut", "revolut 2025", "cuenta remunerada revolut", "intereses revolut", "bancos digitales europa"]
+category: bancos
+tags: ["revolut", "bancos"]
 slug: opiniones-revolut-2025
 image: /images/blogs/revolut-cuenta-remunerada-2025.jpg
 featured: true

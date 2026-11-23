@@ -43,6 +43,13 @@ const ACCENTED_LABELS: Record<string, string> = {
   analisis: "Análisis",
   autonomos: "Autónomos",
   inversion: "Inversión",
+  degiro: "DEGIRO",
+  etfs: "ETFs",
+  euribor: "Euríbor",
+  "hacienda-espana": "Hacienda España",
+  irpf: "IRPF",
+  "prestamos-personales": "Préstamos personales",
+  "trade-republic": "Trade Republic",
 };
 
 function humanizeSlug(value: string): string {
@@ -52,16 +59,45 @@ function humanizeSlug(value: string): string {
   return normalized ? normalized.charAt(0).toUpperCase() + normalized.slice(1) : value;
 }
 
+// Canonical slugify (F-04): NFD + strip diacritics BEFORE filtering, so an
+// accented letter becomes its plain form (ó -> o) instead of a hyphen or
+// disappearing. All taxonomy normalization routes through this.
+export function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+// Display labels for the consolidated category slugs (F-04). Frontmatter
+// holds bare slugs; this map restores the proper accented / English label.
+export const CATEGORY_LABELS: Record<string, Record<Locale, string>> = {
+  finanzas: { es: "Finanzas", en: "Finance" },
+  bancos: { es: "Bancos", en: "Banking" },
+  cuentas: { es: "Cuentas", en: "Accounts" },
+  tarjetas: { es: "Tarjetas", en: "Cards" },
+  ahorro: { es: "Ahorro", en: "Savings" },
+  inversion: { es: "Inversión", en: "Investing" },
+  fiscalidad: { es: "Fiscalidad", en: "Taxes" },
+  vivienda: { es: "Vivienda", en: "Housing" },
+  accounts: { es: "Cuentas", en: "Accounts" },
+  banking: { es: "Bancos", en: "Banking" },
+  cards: { es: "Tarjetas", en: "Cards" },
+  savings: { es: "Ahorro", en: "Savings" },
+  investing: { es: "Inversión", en: "Investing" },
+  taxes: { es: "Fiscalidad", en: "Taxes" },
+  housing: { es: "Vivienda", en: "Housing" },
+};
+
 function normalizeTags(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
-  return value
-    .map((t) => String(t ?? "").toLowerCase().trim())
-    .filter(Boolean);
+  return value.map((t) => slugify(String(t ?? ""))).filter(Boolean);
 }
 
 function normalizeCategory(value: unknown): string {
-  const normalized = String(value ?? "general").toLowerCase().trim();
-  return normalized || "general";
+  return slugify(String(value ?? "")) || "general";
 }
 
 function normalizePreview(post: SanityPostPreview, locale: Locale): BlogPostPreview {
@@ -153,7 +189,10 @@ function readLocalPosts(locale: Locale): BlogPost[] {
       const fileName = path.basename(file, path.extname(file));
       const slug = String(data.slug?.trim() || fileName)
         .toLowerCase()
-        .replace(/\s+/g, "-");
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 
       const description = String(data.description ?? "").trim();
       const excerpt = String(data.excerpt ?? "").trim();
@@ -344,7 +383,7 @@ export const getCategories = cache(async (locale: Locale = DEFAULT_LOCALE): Prom
   return Array.from(map.entries())
     .map(([slug, count]) => ({
       slug,
-      title: humanizeSlug(slug),
+      title: CATEGORY_LABELS[slug]?.[locale] ?? humanizeSlug(slug),
       count,
     }))
     .sort((a, b) => b.count - a.count);
@@ -356,7 +395,7 @@ export const getTags = cache(async (locale: Locale = DEFAULT_LOCALE): Promise<Ta
 
   for (const post of posts) {
     for (const tag of post.tags ?? []) {
-      const tagSlug = String(tag ?? "").toLowerCase().trim();
+      const tagSlug = slugify(String(tag ?? ""));
       if (!tagSlug) continue;
       map.set(tagSlug, (map.get(tagSlug) || 0) + 1);
     }

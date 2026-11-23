@@ -1,11 +1,12 @@
 // src/app/blog/tag/[tag]/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import BlogExplore from "@/components/blog/BlogExplore";
 import NewsPostCard from "@/components/blog/NewsPostCard";
 import { getPostsByTag, getTags } from "@/lib/blog";
+import { LEGACY_TAGS } from "@/lib/blog/legacyTaxonomy";
 import {
   DEFAULT_OG_IMAGE_URL,
   SITE_LOGO_URL,
@@ -38,6 +39,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   // C4: una etiqueta desconocida es un 404, no una página vacía indexable
   // con canonical propio.
   if (!tag) {
+    const legacy = LEGACY_TAGS.es[tagSlug];
+    if (legacy) permanentRedirect(`/blog/tag/${legacy}`);
     return {
       title: "Etiqueta no encontrada | FinanzasEU",
       robots: { index: false, follow: true },
@@ -49,6 +52,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: `#${label} | Blog FinanzasEU`,
     description: `Todos los artículos etiquetados con #${label}.`,
+    robots: { index: false, follow: true },
     alternates: {
       canonical: `/blog/tag/${encodeURIComponent(tagSlug)}`,
     },
@@ -63,8 +67,14 @@ export default async function TagPage(props: Props) {
 
   // C4: etiquetas desconocidas devuelven 404 (antes: 200 indexable con
   // "No hay artículos"). getTags() se deriva de los artículos, así que
-  // una etiqueta conocida siempre tiene al menos un artículo.
-  if (!tag) notFound();
+  // una etiqueta conocida siempre tiene al menos un artículo. Las
+  // etiquetas retiradas en la consolidación de taxonomía (F-04)
+  // redirigen a su superviviente.
+  if (!tag) {
+    const legacy = LEGACY_TAGS.es[tagSlug];
+    if (legacy) permanentRedirect(`/blog/tag/${legacy}`);
+    notFound();
+  }
 
   const label = tag.title;
 
