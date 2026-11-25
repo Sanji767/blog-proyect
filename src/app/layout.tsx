@@ -73,6 +73,12 @@ export const metadata: Metadata = {
     canonical: "https://finanzaseu.com",
   },
 
+  // Pinterest domain verification (added 25 Nov 2026 for the FinanzasEU
+  // Pinterest business account claim).
+  other: {
+    "p:domain_verify": "6091eac9d53861e533bbe985c2e6ca7b",
+  },
+
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
