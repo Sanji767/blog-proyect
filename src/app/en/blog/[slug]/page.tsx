@@ -355,8 +355,8 @@ export default async function BlogPostPageEn(props: { params: Promise<{ slug: st
           <div className="min-w-0">
             {markdownContent ? (
               <div className="lg:hidden">
-                <details className="rounded-2xl border border-border bg-card p-5 shadow-soft">
-                  <summary className="cursor-pointer text-sm font-semibold">
+                <details className="rounded-2xl bg-secondary p-5 text-secondary-foreground shadow-soft">
+                  <summary className="cursor-pointer text-sm font-black uppercase tracking-[0.22em] text-primary-light">
                     Table of contents
                   </summary>
                   <div className="mt-4">
