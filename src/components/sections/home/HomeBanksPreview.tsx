@@ -10,7 +10,7 @@ import Container from "@/components/layout/Container";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Button } from "@/components/ui/button";
-import { banks, BankFeatureTag } from "@/lib/banks";
+import { banks, formatIbanPrefixes, getIbanPrefixes, BankFeatureTag } from "@/lib/banks";
 import { getBankEn } from "@/lib/banks-en";
 
 type FilterFilter = "todos" | "iban-es" | "sin-comisiones" | "multidivisa";
@@ -186,7 +186,9 @@ export default function HomeBanksPreview() {
                         </p>
                         <p className="mt-2 font-semibold flex items-center gap-1.5">
                           <CheckCircle2 className="h-3.5 w-3.5 text-primary-light" />
-                          {bank.ibanPrefix} ({bank.ibanCountry})
+                          {getIbanPrefixes(bank).length > 1
+                            ? formatIbanPrefixes(bank, 99)
+                            : `${bank.ibanPrefix} (${bank.ibanCountry})`}
                         </p>
                       </div>
                       <div className="rounded-xl border border-secondary-foreground/10 bg-secondary-foreground/5 p-4">

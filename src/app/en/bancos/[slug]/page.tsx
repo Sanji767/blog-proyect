@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 
-import { banks, type Bank } from "@/lib/banks";
+import { banks, ibanDisplayLabel, type Bank } from "@/lib/banks";
 import { CURATED_COMPARISON_SLUGS } from "@/lib/curatedComparisons";
 import { getBankEn } from "@/lib/banks-en";
 import Container from "@/components/layout/Container";
@@ -291,7 +291,7 @@ export default async function BancoPageEn(
                 <h1 className="text-3xl font-bold md:text-4xl">{name}</h1>
                 <p className="text-xs text-muted-foreground">
                   {country}
-                  {ibanCountry ? ` · IBAN ${ibanCountry}` : ""}
+                  {ibanDisplayLabel(bank) ? ` · IBAN ${ibanDisplayLabel(bank)}` : ""}
                 </p>
               </div>
             </div>
@@ -353,7 +353,7 @@ export default async function BancoPageEn(
               <InfoRow label="Monthly Fee" value={monthlyFee} />
               <InfoRow label="Card Type" value={cardType} />
               <InfoRow label="ATM Limits" value={atmWithdrawals} />
-              <InfoRow label="Country / IBAN" value={`${country}${ibanCountry ? ` · IBAN ${ibanCountry}` : ""}`} />
+              <InfoRow label="Country / IBAN" value={`${country}${ibanDisplayLabel(bank, 99) ? ` · IBAN ${ibanDisplayLabel(bank, 99)}` : ""}`} />
               {rating?.trustpilot && (
                 <InfoRow
                   label="Trustpilot Score"

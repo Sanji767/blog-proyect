@@ -6,7 +6,7 @@ import { CreditCard, Globe2, ShieldCheck, Star } from "lucide-react";
 
 import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
-import { banks, type Bank } from "@/lib/banks";
+import { banks, formatIbanPrefixes, type Bank } from "@/lib/banks";
 import { getBankEn } from "@/lib/banks-en";
 import { withLocale } from "@/lib/i18n";
 import { formatIsoYmdToEnDate } from "@/lib/seo";
@@ -205,7 +205,7 @@ function BankCard({ bank: bankEs, locale }: { bank: Bank; locale: "en" }) {
           <p className="mt-1 text-xs text-secondary-foreground/70">
             {country}
             {bank.ibanPrefix ? (
-              <span className="opacity-80"> · IBAN {bank.ibanPrefix}</span>
+              <span className="opacity-80"> · IBAN {formatIbanPrefixes(bank)}</span>
             ) : null}
           </p>
         </div>

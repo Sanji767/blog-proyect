@@ -7,7 +7,7 @@ import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { type Bank } from "@/lib/banks";
+import { formatIbanPrefixes, type Bank } from "@/lib/banks";
 import type { Locale } from "@/lib/i18n";
 
 type BankCardProps = {
@@ -146,8 +146,8 @@ export default function BankCard({ bank, showDirectLink = true }: BankCardProps)
 
             <p className="mt-1 text-xs text-secondary-foreground/70">
               {bank.country}
-              {bank.ibanPrefix ? (
-                <span className="opacity-80"> · IBAN {bank.ibanPrefix}</span>
+              {formatIbanPrefixes(bank) ? (
+                <span className="opacity-80"> · IBAN {formatIbanPrefixes(bank)}</span>
               ) : null}
             </p>
           </div>

@@ -10,7 +10,7 @@ import Container from "@/components/layout/Container";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { Button } from "@/components/ui/button";
-import { banks } from "@/lib/banks";
+import { banks, formatIbanPrefixes, getIbanPrefixes } from "@/lib/banks";
 import { getBankEn } from "@/lib/banks-en";
 import { cn } from "@/lib/utils";
 
@@ -244,7 +244,9 @@ export default function UseCases() {
                               {copy.iban}
                             </p>
                             <p className="mt-2 font-semibold">
-                              {recommended.ibanPrefix} ({recommended.ibanCountry})
+                              {getIbanPrefixes(recommended).length > 1
+                                ? formatIbanPrefixes(recommended, 99)
+                                : `${recommended.ibanPrefix} (${recommended.ibanCountry})`}
                             </p>
                           </div>
                           <div className="rounded-xl border border-border bg-card p-4">

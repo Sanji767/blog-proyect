@@ -36,6 +36,9 @@ export interface Bank {
   headquarters: string;
   ibanCountry: string;
   ibanPrefix: string;
+  // All local-IBAN country codes when the bank issues IBANs in several
+  // countries (e.g. Revolut). Falls back to [ibanPrefix] when absent.
+  ibanPrefixes?: string[];
 
   category: BankCategory;
   tags: BankFeatureTag[];
@@ -109,6 +112,40 @@ export interface Bank {
 }
 
 export const DOMAIN = "https://finanzaseu.com";
+
+// All local-IBAN country codes for a bank (multi-country banks list every
+// country where residents get a local IBAN; single-country banks fall back
+// to their one prefix).
+export function getIbanPrefixes(
+  bank: Pick<Bank, "ibanPrefix" | "ibanPrefixes">,
+): string[] {
+  if (bank.ibanPrefixes && bank.ibanPrefixes.length > 0) {
+    return bank.ibanPrefixes;
+  }
+  return bank.ibanPrefix && bank.ibanPrefix !== "—" ? [bank.ibanPrefix] : [];
+}
+
+// Compact prefix list for cards: "ES" or "ES · DE · FR · +9".
+export function formatIbanPrefixes(
+  bank: Pick<Bank, "ibanPrefix" | "ibanPrefixes">,
+  max = 3,
+): string {
+  const prefixes = getIbanPrefixes(bank);
+  if (prefixes.length === 0) return "";
+  if (prefixes.length <= max) return prefixes.join(" · ");
+  return `${prefixes.slice(0, max).join(" · ")} · +${prefixes.length - max}`;
+}
+
+// Display label after "IBAN ": the country name for single-IBAN banks
+// (unchanged legacy rendering), the prefix list for multi-IBAN banks.
+export function ibanDisplayLabel(
+  bank: Pick<Bank, "ibanPrefix" | "ibanPrefixes" | "ibanCountry">,
+  max = 3,
+): string {
+  const prefixes = getIbanPrefixes(bank);
+  if (prefixes.length > 1) return formatIbanPrefixes(bank, max);
+  return bank.ibanCountry ?? prefixes[0] ?? "";
+}
 
 const DEFAULT_LAST_UPDATED = "2026-11-20";
 
@@ -216,6 +253,7 @@ function createDraftBank(seed: DraftBankSeed): Bank {
     headquarters: seed.headquarters,
     ibanCountry: seed.ibanCountry,
     ibanPrefix: seed.ibanPrefix,
+    ibanPrefixes: seed.ibanPrefixes,
 
     category: seed.category,
     tags: seed.tags,
@@ -279,6 +317,7 @@ export const banks: Bank[] = [
     headquarters: "Vilna",
     ibanCountry: "España",
     ibanPrefix: "ES",
+    ibanPrefixes: ["ES", "BE", "CH", "DE", "FR", "IE", "IT", "LT", "NL", "PL", "PT", "RO"],
 
     category: "cuenta-multidivisa",
     tags: [
@@ -404,6 +443,7 @@ export const banks: Bank[] = [
     headquarters: "Berlín",
     ibanCountry: "España",
     ibanPrefix: "ES",
+    ibanPrefixes: ["ES", "DE", "FR", "IT"],
 
     category: "neobanco",
     tags: [
@@ -584,6 +624,7 @@ export const banks: Bank[] = [
     headquarters: "Ámsterdam",
     ibanCountry: "Países Bajos",
     ibanPrefix: "NL",
+    ibanPrefixes: ["ES", "BE", "DE", "FR", "IE", "IT", "NL"],
 
     category: "neobanco",
     tags: ["tarjeta-fisica", "para-empresa", "iban-nl"],
@@ -823,6 +864,7 @@ export const banks: Bank[] = [
     headquarters: "Madrid",
     ibanCountry: "España",
     ibanPrefix: "ES",
+    ibanPrefixes: ["ES", "BE", "DE", "IT", "NL", "PL", "RO", "TR"],
     category: "tradicional",
     tags: ["tarjeta-fisica", "espanol", "iban-es", "seguro-depositos"],
     website: "https://www.ing.es",
@@ -1034,6 +1076,7 @@ export const banks: Bank[] = [
     headquarters: "París",
     ibanCountry: "España",
     ibanPrefix: "ES",
+    ibanPrefixes: ["ES", "DE", "FR", "IT", "NL"],
     category: "fintech",
     tags: ["para-empresa", "iban-es"],
     website: "https://qonto.com",
@@ -1068,6 +1111,7 @@ export const banks: Bank[] = [
     headquarters: "Berlín",
     ibanCountry: "España",
     ibanPrefix: "ES",
+    ibanPrefixes: ["ES", "DE", "FR", "IT", "PL"],
     category: "fintech",
     tags: ["iban-es", "sin-comisiones"],
     website: "https://traderepublic.com",
@@ -1408,6 +1452,7 @@ export const banks: Bank[] = [
     headquarters: "Driebergen-Rijsenburg",
     ibanCountry: "Países Bajos",
     ibanPrefix: "NL",
+    ibanPrefixes: ["NL", "ES"],
     category: "tradicional",
     tags: ["tarjeta-fisica", "seguro-depositos", "iban-nl", "iban-es", "espanol"],
     website: "https://www.triodos.com",
@@ -1532,6 +1577,7 @@ export const banks: Bank[] = [
     headquarters: "Estocolmo",
     ibanCountry: "Suecia",
     ibanPrefix: "SE",
+    ibanPrefixes: ["SE", "DE"],
     category: "neobanco",
     tags: ["sin-comisiones", "seguro-depositos"],
     website: "https://www.klarna.com",
@@ -1564,6 +1610,7 @@ export const banks: Bank[] = [
     headquarters: "Berlín",
     ibanCountry: "Irlanda / Lituania",
     ibanPrefix: "IE",
+    ibanPrefixes: ["IE", "IT"],
     category: "fintech",
     tags: ["para-freelancers", "para-empresa", "sin-comisiones", "tarjeta-fisica"],
     website: "https://sumup.com",

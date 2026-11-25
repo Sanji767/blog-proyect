@@ -6,7 +6,7 @@ import { CreditCard, Globe2, ShieldCheck, Star } from "lucide-react";
 
 import Container from "@/components/layout/Container";
 import { Button } from "@/components/ui/button";
-import { banks, type Bank } from "@/lib/banks";
+import { banks, formatIbanPrefixes, type Bank } from "@/lib/banks";
 import { formatIsoYmdToEsDate } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -200,7 +200,7 @@ function BankCard({ bank }: { bank: Bank }) {
           <p className="mt-1 text-xs text-secondary-foreground/70">
             {country}
             {bank.ibanPrefix ? (
-              <span className="opacity-80"> · IBAN {bank.ibanPrefix}</span>
+              <span className="opacity-80"> · IBAN {formatIbanPrefixes(bank)}</span>
             ) : null}
           </p>
         </div>

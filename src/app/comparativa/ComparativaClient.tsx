@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   banks,
+  ibanDisplayLabel,
   type Bank,
   type BankCategory,
   type BankFeatureTag,
@@ -731,7 +732,7 @@ export default function ComparativaPage() {
                       </div>
                       <div>
                         <strong>IBAN:</strong>{" "}
-                        {bank.ibanCountry || bank.country}
+                        {ibanDisplayLabel(bank, 99) || bank.country}
                       </div>
                       <div>
                         <strong>App ES:</strong>{" "}
@@ -823,9 +824,9 @@ export default function ComparativaPage() {
                     </p>
                     <p className="text-xs font-semibold">
                       {bank.country}
-                      {bank.ibanCountry && (
+                      {ibanDisplayLabel(bank) && (
                         <span className="ml-1 text-[11px] text-secondary-foreground/60">
-                          · IBAN {bank.ibanCountry}
+                          · IBAN {ibanDisplayLabel(bank)}
                         </span>
                       )}
                     </p>
@@ -1101,9 +1102,9 @@ export default function ComparativaPage() {
                           <span className="font-medium">
                             {bank.country}
                           </span>
-                          {bank.ibanCountry && (
+                          {ibanDisplayLabel(bank) && (
                             <p className="text-xs text-muted-foreground">
-                              IBAN {bank.ibanCountry}
+                              IBAN {ibanDisplayLabel(bank)}
                             </p>
                           )}
                         </div>

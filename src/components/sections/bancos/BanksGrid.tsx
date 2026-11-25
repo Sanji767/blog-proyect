@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Trophy, Star } from "lucide-react";
-import { banks, type Bank } from "@/lib/banks";
+import { banks, ibanDisplayLabel, type Bank } from "@/lib/banks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -145,7 +145,7 @@ function BankCard({ bank, index }: { bank: Bank; index: number }) {
 
             <p className="text-[11px] text-muted-foreground">
               {bank.country}
-              {bank.ibanCountry && ` · IBAN ${bank.ibanCountry}`}
+              {ibanDisplayLabel(bank) && ` · IBAN ${ibanDisplayLabel(bank)}`}
             </p>
           </div>
         </div>

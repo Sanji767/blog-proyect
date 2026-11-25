@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
 
-import { banks, type Bank } from "@/lib/banks";
+import { banks, ibanDisplayLabel, type Bank } from "@/lib/banks";
 import { CURATED_COMPARISON_SLUGS } from "@/lib/curatedComparisons";
 import Container from "@/components/layout/Container";
 import { formatIsoYmdToEsDate, toJsonLd } from "@/lib/seo";
@@ -345,7 +345,7 @@ export default async function BancoPage(
                 </h1>
                 <p className="text-xs text-muted-foreground">
                   {country}
-                  {ibanCountry ? ` · IBAN ${ibanCountry}` : ""}
+                  {ibanDisplayLabel(bank) ? ` · IBAN ${ibanDisplayLabel(bank)}` : ""}
                 </p>
               </div>
             </div>
@@ -493,7 +493,7 @@ export default async function BancoPage(
               <InfoRow
                 label="País / IBAN"
                 value={`${country}${
-                  ibanCountry ? ` · IBAN ${ibanCountry}` : ""
+                  ibanDisplayLabel(bank, 99) ? ` · IBAN ${ibanDisplayLabel(bank, 99)}` : ""
                 }`}
               />
               <InfoRow
@@ -957,8 +957,8 @@ export default async function BancoPage(
                         </h3>
                         <p className="text-[11px] text-muted-foreground">
                           {related.country}
-                          {related.ibanCountry
-                            ? ` · IBAN ${related.ibanCountry}`
+                          {ibanDisplayLabel(related)
+                            ? ` · IBAN ${ibanDisplayLabel(related)}`
                             : ""}
                         </p>
                       </div>

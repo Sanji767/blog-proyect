@@ -6,7 +6,7 @@ import { Check, X, ArrowRight, ShieldCheck, ExternalLink } from "lucide-react";
 import Container from "@/components/layout/Container";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { Button } from "@/components/ui/button";
-import { banks, Bank } from "@/lib/banks";
+import { banks, formatIbanPrefixes, getIbanPrefixes, Bank } from "@/lib/banks";
 import { getBankEn } from "@/lib/banks-en";
 import { isCuratedComparisonSlug } from "@/lib/curatedComparisons";
 import { SITE_URL, toJsonLd } from "@/lib/seo";
@@ -139,7 +139,7 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
                   </div>
                   <div>
                     <h2 className="text-2xl font-black text-accent">{b.name}</h2>
-                    <p className="text-xs text-muted-foreground">{b.country} • IBAN {b.ibanPrefix}</p>
+                    <p className="text-xs text-muted-foreground">{b.country} • IBAN {formatIbanPrefixes(b)}</p>
                   </div>
                 </div>
 
@@ -183,8 +183,8 @@ export default async function EnglishComparisonPage({ params }: PageProps) {
               <tbody className="divide-y divide-border/50">
                 <tr>
                   <td className="p-4 font-semibold">IBAN Type</td>
-                  <td className="p-4">{b1.ibanPrefix} ({b1.ibanCountry})</td>
-                  <td className="p-4">{b2.ibanPrefix} ({b2.ibanCountry})</td>
+                  <td className="p-4">{getIbanPrefixes(b1).length > 1 ? formatIbanPrefixes(b1, 99) : `${b1.ibanPrefix} (${b1.ibanCountry})`}</td>
+                  <td className="p-4">{getIbanPrefixes(b2).length > 1 ? formatIbanPrefixes(b2, 99) : `${b2.ibanPrefix} (${b2.ibanCountry})`}</td>
                 </tr>
                 <tr>
                   <td className="p-4 font-semibold">Monthly fee</td>

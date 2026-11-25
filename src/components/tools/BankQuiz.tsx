@@ -7,7 +7,7 @@ import { Sparkles, Check, RotateCcw, ExternalLink, ShieldCheck, ArrowRight } fro
 import { Button } from "@/components/ui/button";
 import LocalizedLink from "@/components/i18n/LocalizedLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { banks, Bank } from "@/lib/banks";
+import { banks, formatIbanPrefixes, Bank } from "@/lib/banks";
 import { getBankEn } from "@/lib/banks-en";
 import type { Locale } from "@/lib/i18n";
 
@@ -293,7 +293,7 @@ export default function BankQuiz() {
                     {matchedBank.name}
                   </h3>
                   <p className="text-xs text-muted-foreground">
-                    {matchedBank.country} · IBAN {matchedBank.ibanPrefix}
+                    {matchedBank.country} · IBAN {formatIbanPrefixes(matchedBank)}
                   </p>
                 </div>
               </div>

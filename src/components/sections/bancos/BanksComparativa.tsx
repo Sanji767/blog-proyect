@@ -1,7 +1,7 @@
 // src/components/sections/bancos/BanksComparativa.tsx
 "use client";
 
-import { banks, type Bank } from "@/lib/banks";
+import { banks, ibanDisplayLabel, type Bank } from "@/lib/banks";
 import { Trophy, Star, CheckCircle2 } from "lucide-react";
 
 // Helpers
@@ -130,8 +130,8 @@ export default function BanksComparativa() {
                           {bank.country}
                         </p>
                         <p className="text-muted-foreground">
-                          {bank.ibanCountry
-                            ? `IBAN ${bank.ibanCountry}`
+                          {ibanDisplayLabel(bank, 99)
+                            ? `IBAN ${ibanDisplayLabel(bank, 99)}`
                             : "Sin IBAN propio"}
                         </p>
                       </div>
