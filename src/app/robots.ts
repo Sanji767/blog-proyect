@@ -8,6 +8,6 @@ export default function robots() {
       allow: "/",
       disallow: "/studio",
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/news-sitemap.xml`],
   };
 }
