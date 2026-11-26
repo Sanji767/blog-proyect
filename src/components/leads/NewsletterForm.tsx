@@ -221,6 +221,7 @@ export default function NewsletterForm({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder={copy.placeholder}
+          aria-label={copy.placeholder}
           className="h-11 bg-secondary-foreground/5 text-secondary-foreground placeholder:text-secondary-foreground/60"
         />
 
