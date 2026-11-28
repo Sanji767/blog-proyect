@@ -134,6 +134,29 @@ const nextConfig = {
         destination: "/blog/opiniones-revolut-2026",
         permanent: true,
       },
+      // Artículos eliminados sin redirección (detectados en Search Console
+      // 2026-11-28: "Not found (404)"). Se redirigen a su equivalente vivo
+      // más cercano para recuperar cualquier enlace o visita antigua.
+      {
+        source: "/blog/bancos-vs-neobancos",
+        destination: "/blog/los-mejores-bancos-digitales-en-europa-en-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/guia-phishing-bancario",
+        destination: "/blog/guia-seguridad-bancaria-phishing-2026",
+        permanent: true,
+      },
+      {
+        source: "/blog/inversiones-sencillas-para-principiantes",
+        destination: "/blog/guia-inversion-principiantes",
+        permanent: true,
+      },
+      {
+        source: "/blog/inversiones-sencillas-para-principiantes-en-2026",
+        destination: "/blog/guia-inversion-principiantes",
+        permanent: true,
+      },
     ];
   },
 
